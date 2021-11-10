@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Oxygen:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/acoustic_guitar_128px.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/acoustic_guitar_32px.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/acoustic_guitar_16px.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/uploads/acoustic_guitar.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本讲将会在二叉树结构的基础上在介绍另外三种特殊的结构：堆、哈夫曼树和集合，快来学习吧！">
+<meta name="keywords" content="ZJU_DS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ZJU_DS_05-树（下）">
+<meta property="og:url" content="http://bachzart.github.io/2020/05/03/ZJU-DS-05-树（下）/index.html">
+<meta property="og:site_name" content="bachzart&#39;s Blog">
+<meta property="og:description" content="本讲将会在二叉树结构的基础上在介绍另外三种特殊的结构：堆、哈夫曼树和集合，快来学习吧！">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-09-20T13:30:44.492Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ZJU_DS_05-树（下）">
+<meta name="twitter:description" content="本讲将会在二叉树结构的基础上在介绍另外三种特殊的结构：堆、哈夫曼树和集合，快来学习吧！">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="bachzart's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://bachzart.github.io/2020/05/03/ZJU-DS-05-树（下）/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>ZJU_DS_05-树（下） | bachzart's Blog</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3eb545f7f54637f67ed532005e0261f7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">bachzart's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">40</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">23</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">21</span></a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/bachzart" class="github-corner" title="Follow me on GitHub :)" aria-label="Follow me on GitHub :)" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2020/05/03/ZJU-DS-05-树（下）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="I've been in my mind, it's such a fine line.">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">ZJU_DS_05-树（下）
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-05-03 17:50:43" itemprop="dateCreated datePublished" datetime="2020-05-03T17:50:43+08:00">2020-05-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-09-20 21:30:44" itemprop="dateModified" datetime="2020-09-20T21:30:44+08:00">2020-09-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/Data-Structures-and-Algorithms/" itemprop="url" rel="index"><span itemprop="name">Data Structures and Algorithms</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2020/05/03/ZJU-DS-05-树（下）/" class="leancloud_visitors" data-flag-title="ZJU_DS_05-树（下）">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">18k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2:31</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本讲将会在二叉树结构的基础上在介绍另外三种特殊的结构：堆、哈夫曼树和集合，快来学习吧！</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="Heap"><a href="#Heap" class="headerlink" title="Heap"></a>Heap</h1><p>在了解对之前先来考虑一下“优先队列”的问题。</p>
+<p>所谓<strong>优先队列</strong>，即取出元素的顺序是依照元素的<strong>优先权（关键字）</strong>大小，而不是元素进入队列的先后顺序，可以用数组、链表、有序数组、有序链表、树等来实现。</p>
+<p>如果使用平衡二叉树来实现，插入不难实现，但是删除操作会存在一个问题，那就是，多次删除操作后，树的两边会变得不均衡，如果在来旋转调整就会降低效率，于是考虑让最大值称为根结点（大根堆），每次删除只需要删除根结点即可，这样就不会影响树的高度了。<br>堆有两个特性（<strong>满足特性才能称堆，否则不行</strong>）：</p>
+<ul>
+<li><strong>结构性</strong>：用数组表示的<strong>完全二叉树</strong></li>
+<li><strong>有序性</strong>：任一结点的关键字是其子树所有结点的最大值（或最小值）。<ul>
+<li>最大堆（MaxHeap），也称大根堆，根为最大值</li>
+<li>最小堆（MinHeap），也称小根堆，根为最小值</li>
+</ul>
+</li>
+</ul>
+<h2 id="堆的抽象数据类型描述"><a href="#堆的抽象数据类型描述" class="headerlink" title="堆的抽象数据类型描述"></a>堆的抽象数据类型描述</h2><p>类型名称：最大堆（MaxHeap）<br>数据对象集：完全二叉树，每个结点元素值不小于其子结点的元素值<br>操作集：最大堆$H ∈ MaxHeap$，元素$item ∈ ElementType$，主要操作有：</p>
+<ol>
+<li>MaxHeap Create(int MaxSize)，创建一个空的最大堆</li>
+<li>Boolean IsFull(MaxHeap H)，判断最大堆H是否已满</li>
+<li>Insert(MaxHeap H, ElementType item)，将元素item插入最大堆H</li>
+<li>Boolean IsEmpty(MaxHeap H)，判断最大堆H是否为空</li>
+<li>ElementType DeleteMax(MaxHeap H)，返回H中最大元素（高优先级）</li>
+</ol>
+<h2 id="堆的实现"><a href="#堆的实现" class="headerlink" title="堆的实现"></a>堆的实现</h2><p>C 语言下的堆定义可以如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">HeapStruct</span> *<span class="title">MaxHeap</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">HeapStruct</span>&#123;</span></span><br><span class="line">	ElementType *Data;</span><br><span class="line">	<span class="keyword">int</span> Size;</span><br><span class="line">	<span class="keyword">int</span> Capacity;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="最大堆"><a href="#最大堆" class="headerlink" title="最大堆"></a>最大堆</h3><h4 id="初始化（建立空堆）"><a href="#初始化（建立空堆）" class="headerlink" title="初始化（建立空堆）"></a>初始化（建立空堆）</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">MaxHeap <span class="title">Createheap</span><span class="params">(<span class="keyword">int</span> MaxSize)</span> </span>&#123;</span><br><span class="line">	MaxHeap H = (MaxHeap)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct HNode));</span><br><span class="line">	H-&gt;Data = (ElementType*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(ElementType) * (MaxData + <span class="number">1</span>));</span><br><span class="line">	H-&gt;Size = <span class="number">0</span>;</span><br><span class="line">	H-&gt;Capacity = MaxSize;</span><br><span class="line">	H-&gt;Data[<span class="number">0</span>] = MaxData;</span><br><span class="line">	<span class="keyword">return</span> H;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="判断堆满"><a href="#判断堆满" class="headerlink" title="判断堆满"></a>判断堆满</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Isfull</span><span class="params">(MaxHeap H)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> H-&gt;Size == H-&gt;Capacity;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="判断堆空"><a href="#判断堆空" class="headerlink" title="判断堆空"></a>判断堆空</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Isempty</span><span class="params">(MaxHeap H)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> H-&gt;Size == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h4><p>由于堆的实现是基于完全二叉树的思想，插入元素的时候直接放在最后就好，但是要注意此时树的结构符合最大堆的特性。所以需要将子结点与父结点比较，如果子结点比父结点大，就将子结点与父结点互换。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Insert</span><span class="params">(MaxHeap H, ElementType X)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">if</span>(Isfull(H)) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"The heap is full!\n"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		i = ++H-&gt;Size;</span><br><span class="line">		<span class="keyword">for</span>(; H-&gt;Data[i / <span class="number">2</span>] &lt; X; i /= <span class="number">2</span>) &#123;</span><br><span class="line">			H-&gt;Data[i] = H-&gt;Data[i / <span class="number">2</span>];</span><br><span class="line">		&#125;</span><br><span class="line">		H-&gt;Data[i] = X;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><p>对大根堆而言，删除就是删除最大值元素（也就是堆顶）。删除了堆顶后，直接将最后一个元素放到堆顶显然无法保证堆的结构性，所以还需要对此时的堆做调整。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ElementType <span class="title">DeleteMax</span><span class="params">(MaxHeap H)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> parent, child;</span><br><span class="line">	ElementType Maxitem, X;</span><br><span class="line">	<span class="keyword">if</span>(Isempty(H)) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"The heap is empty!\n"</span>);</span><br><span class="line">		<span class="keyword">return</span> ERROR;</span><br><span class="line">	&#125;</span><br><span class="line">	Maxitem = H-&gt;Data[<span class="number">1</span>];</span><br><span class="line">	X = H-&gt;Data[H-&gt;Size--];</span><br><span class="line">	<span class="keyword">for</span>(parent = <span class="number">1</span>; parent * <span class="number">2</span> &lt;= H-&gt;Size; parent = child) &#123;</span><br><span class="line">		child = parent * <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">if</span>((child != H-&gt;Size) &amp;&amp; (H-&gt;Data[child] &lt; H-&gt;Data[child + <span class="number">1</span>])) child++;</span><br><span class="line">		<span class="keyword">if</span>(X &gt;= H-&gt;Data[child]) <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">else</span> H-&gt;Data[parent] = H-&gt;Data[child];</span><br><span class="line">	&#125;</span><br><span class="line">	H-&gt;Data[parent] = X;</span><br><span class="line">	<span class="keyword">return</span> Maxitem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="直接建堆"><a href="#直接建堆" class="headerlink" title="直接建堆"></a>直接建堆</h4><p>上面提到的建堆方法实际上是将元素一个个的插入到堆中，时间复杂度为：$O(NLogN)$。</p>
+<p>可以使用下面的思路来建堆：</p>
+<ol>
+<li>将 N 个元素按输入顺序存入，先满足完全二叉树的特性</li>
+<li>调整各结点位置，以满足最大堆的有序特性。</li>
+</ol>
+<p>子结点无须调整，所以只需依次调整所有叶结点即可，调整的思路与删除结点时调整堆的结构的思路一致。另外，为了使得代码简洁，可以将结点下移的操作独立封装出来，代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Percdown</span><span class="params">(MaxHeap H, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> parent, child;</span><br><span class="line">	ElementType X;</span><br><span class="line">	X = H-&gt;Data[p];</span><br><span class="line">	<span class="keyword">for</span>(parent = p; parent * <span class="number">2</span> &lt;= H-&gt;Size; parent = child) &#123;</span><br><span class="line">		child = parent * <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">if</span>((child != H-&gt;Size) &amp;&amp; (H-&gt;Data[child] &lt; H-&gt;Data[child + <span class="number">1</span>])) child++;</span><br><span class="line">		<span class="keyword">if</span>(X &gt;= H-&gt;Data[child]) <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">else</span> H-&gt;Data[parent] = H-&gt;Data[child];</span><br><span class="line">	&#125;</span><br><span class="line">	H-&gt;Data[parent] = X; </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Buildheap</span><span class="params">(MaxHeap H)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i = H-&gt;Size / <span class="number">2</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">		Percdown(H, i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>尽管从代码上看时间复杂度好像是$O(N^2)$，但实际情况的时间复杂度是$O(NLogN)$。</p>
+<h4 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 1005</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElementType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">HNode</span> *<span class="title">Heap</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">HNode</span>&#123;</span></span><br><span class="line">	ElementType *Data;</span><br><span class="line">	<span class="keyword">int</span> Size;</span><br><span class="line">	<span class="keyword">int</span> Capacity;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> Heap MaxHeap;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxData 1000</span></span><br><span class="line"><span class="function">MaxHeap <span class="title">Createheap</span><span class="params">(<span class="keyword">int</span> MaxSize)</span> </span>&#123;</span><br><span class="line">	MaxHeap H = (MaxHeap)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct HNode));</span><br><span class="line">	H-&gt;Data = (ElementType*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(ElementType) * (MaxData + <span class="number">1</span>));</span><br><span class="line">	H-&gt;Size = <span class="number">0</span>;</span><br><span class="line">	H-&gt;Capacity = MaxSize;</span><br><span class="line">	H-&gt;Data[<span class="number">0</span>] = MaxData;</span><br><span class="line">	<span class="keyword">return</span> H;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Isfull</span><span class="params">(MaxHeap H)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> H-&gt;Size == H-&gt;Capacity;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Insert</span><span class="params">(MaxHeap H, ElementType X)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">if</span>(Isfull(H)) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"The heap is full!\n"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		i = ++H-&gt;Size;</span><br><span class="line">		<span class="keyword">for</span>(; H-&gt;Data[i / <span class="number">2</span>] &lt; X; i /= <span class="number">2</span>) &#123;</span><br><span class="line">			H-&gt;Data[i] = H-&gt;Data[i / <span class="number">2</span>];</span><br><span class="line">		&#125;</span><br><span class="line">		H-&gt;Data[i] = X;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ERROR -1</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Isempty</span><span class="params">(MaxHeap H)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> H-&gt;Size == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ElementType <span class="title">DeleteMax</span><span class="params">(MaxHeap H)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> parent, child;</span><br><span class="line">	ElementType Maxitem, X;</span><br><span class="line">	<span class="keyword">if</span>(Isempty(H)) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"The heap is empty!\n"</span>);</span><br><span class="line">		<span class="keyword">return</span> ERROR;</span><br><span class="line">	&#125;</span><br><span class="line">	Maxitem = H-&gt;Data[<span class="number">1</span>];</span><br><span class="line">	X = H-&gt;Data[H-&gt;Size--];</span><br><span class="line">	<span class="keyword">for</span>(parent = <span class="number">1</span>; parent * <span class="number">2</span> &lt;= H-&gt;Size; parent = child) &#123;</span><br><span class="line">		child = parent * <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">if</span>((child != H-&gt;Size) &amp;&amp; (H-&gt;Data[child] &lt; H-&gt;Data[child + <span class="number">1</span>])) child++;</span><br><span class="line">		<span class="keyword">if</span>(X &gt;= H-&gt;Data[child]) <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">else</span> H-&gt;Data[parent] = H-&gt;Data[child];</span><br><span class="line">	&#125;</span><br><span class="line">	H-&gt;Data[parent] = X;</span><br><span class="line">	<span class="keyword">return</span> Maxitem;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Percdown</span><span class="params">(MaxHeap H, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> parent, child;</span><br><span class="line">	ElementType X;</span><br><span class="line">	X = H-&gt;Data[p];</span><br><span class="line">	<span class="keyword">for</span>(parent = p; parent * <span class="number">2</span> &lt;= H-&gt;Size; parent = child) &#123;</span><br><span class="line">		child = parent * <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">if</span>((child != H-&gt;Size) &amp;&amp; (H-&gt;Data[child] &lt; H-&gt;Data[child + <span class="number">1</span>])) child++;</span><br><span class="line">		<span class="keyword">if</span>(X &gt;= H-&gt;Data[child]) <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">else</span> H-&gt;Data[parent] = H-&gt;Data[child];</span><br><span class="line">	&#125;</span><br><span class="line">	H-&gt;Data[parent] = X; </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Buildheap</span><span class="params">(MaxHeap H)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i = H-&gt;Size / <span class="number">2</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">		Percdown(H, i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Printheap</span><span class="params">(MaxHeap H)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= H-&gt;Size; i++) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d "</span>, H-&gt;Data[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">putchar</span>(<span class="string">'\n'</span>); </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	MaxHeap H = Createheap(<span class="number">10</span>);</span><br><span class="line">	Insert(H, <span class="number">10</span>);</span><br><span class="line">	Insert(H, <span class="number">5</span>);</span><br><span class="line">	Insert(H, <span class="number">20</span>);</span><br><span class="line">	Insert(H, <span class="number">30</span>);</span><br><span class="line">	Insert(H, <span class="number">15</span>);</span><br><span class="line">	Insert(H, <span class="number">18</span>);</span><br><span class="line">	Printheap(H);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="最小堆"><a href="#最小堆" class="headerlink" title="最小堆"></a>最小堆</h3><p>最小堆的结构与最大堆的结构区别只在于根结点值比叶结点都小，本质上还是一棵完全二叉树。所以，最小堆的插入、删除和直接建堆的代码略有差异，但思路都是一致的。</p>
+<h4 id="插入-1"><a href="#插入-1" class="headerlink" title="插入"></a>插入</h4><p>前面介绍最大堆的时候已经知道了，每向堆中插入一个结点就需要调整堆的结构，调整这个操作可以独立封装起来，这样可以使得代码更加简洁。整体代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Percup</span><span class="params">(MinHeap H, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> tmp = H-&gt;Data[index];</span><br><span class="line">	<span class="keyword">for</span>(; H-&gt;Data[index / <span class="number">2</span>] &gt; H-&gt;Data[index] &amp;&amp; index &gt; <span class="number">1</span>; index /= <span class="number">2</span>) &#123;</span><br><span class="line">		H-&gt;Data[index] = H-&gt;Data[index / <span class="number">2</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	H-&gt;Data[index] = tmp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Insert</span><span class="params">(MinHeap H, <span class="keyword">int</span> X)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(Isfull(H)) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"The heap is full!\n"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		H-&gt;Data[++H-&gt;Size] = X;</span><br><span class="line">		Percup(H, H-&gt;Size); </span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="删除-1"><a href="#删除-1" class="headerlink" title="删除"></a>删除</h4><p>注意最小堆中删除操作的 Percdown 函数与最大堆是有区别的，主要在于当叶结点小于根节点时，才需要将根结点下移（而此时最大堆刚好就是合适的位置）。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Percdown</span><span class="params">(MinHeap H, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> tmp = H-&gt;Data[index];</span><br><span class="line">	<span class="keyword">int</span> parent, child;</span><br><span class="line">	<span class="keyword">for</span>(parent = index; parent * <span class="number">2</span> &lt;= H-&gt;Size; parent = child) &#123;</span><br><span class="line">		child = parent * <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">if</span>((child != H-&gt;Size) &amp;&amp; (H-&gt;Data[child] &gt; H-&gt;Data[child + <span class="number">1</span>])) child++;</span><br><span class="line">		<span class="keyword">if</span>(tmp &gt; H-&gt;Data[child]) H-&gt;Data[parent] = H-&gt;Data[child];</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	H-&gt;Data[parent] = tmp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Deletemin</span><span class="params">(MinHeap H)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> Minitem;</span><br><span class="line">	<span class="keyword">if</span>(Isempty(H)) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"The heap is empty!\n"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Minitem = H-&gt;Data[<span class="number">1</span>];</span><br><span class="line">	H-&gt;Data[<span class="number">1</span>] = H-&gt;Data[H-&gt;Size--];</span><br><span class="line">	Percdown(H, <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">return</span> Minitem;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="直接建堆-1"><a href="#直接建堆-1" class="headerlink" title="直接建堆"></a>直接建堆</h4><p>直接建堆的思路一致，不同的只是最小堆的 Percdown 函数与最大堆不同，但是可以发现 Buildheap 这个函数没有变化，这其实就是将 Percdown 独立封装起来的好处。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Percdown</span><span class="params">(MinHeap H, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> tmp = H-&gt;Data[index];</span><br><span class="line">	<span class="keyword">int</span> parent, child;</span><br><span class="line">	<span class="keyword">for</span>(parent = index; parent * <span class="number">2</span> &lt;= H-&gt;Size; parent = child) &#123;</span><br><span class="line">		child = parent * <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">if</span>((child != H-&gt;Size) &amp;&amp; (H-&gt;Data[child] &gt; H-&gt;Data[child + <span class="number">1</span>])) child++;</span><br><span class="line">		<span class="keyword">if</span>(tmp &gt; H-&gt;Data[child]) H-&gt;Data[parent] = H-&gt;Data[child];</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	H-&gt;Data[parent] = tmp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Buildheap</span><span class="params">(MaxHeap H)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i = H-&gt;Size / <span class="number">2</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">		Percdown(H, i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="测试代码-1"><a href="#测试代码-1" class="headerlink" title="测试代码"></a>测试代码</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 1005</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">HNode</span>* <span class="title">Heap</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">HNode</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> *Data;</span><br><span class="line">	<span class="keyword">int</span> Size, Capacity;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> Heap MinHeap;</span><br><span class="line"><span class="function">MinHeap <span class="title">Createheap</span><span class="params">(<span class="keyword">int</span> Maxsize)</span> </span>&#123;</span><br><span class="line">	MinHeap H = (MinHeap)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct HNode));</span><br><span class="line">	H-&gt;Data = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>) * MAXN);</span><br><span class="line">	H-&gt;Size = <span class="number">0</span>;</span><br><span class="line">	H-&gt;Capacity = Maxsize;</span><br><span class="line">	<span class="keyword">return</span> H;</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Isfull</span><span class="params">(MinHeap H)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> H-&gt;Size == H-&gt;Capacity;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Isempty</span><span class="params">(MinHeap H)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> H-&gt;Size == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Percup</span><span class="params">(MinHeap H, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> tmp = H-&gt;Data[index];</span><br><span class="line">	<span class="keyword">for</span>(; H-&gt;Data[index / <span class="number">2</span>] &gt; H-&gt;Data[index] &amp;&amp; index &gt; <span class="number">1</span>; index /= <span class="number">2</span>) &#123;</span><br><span class="line">		H-&gt;Data[index] = H-&gt;Data[index / <span class="number">2</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	H-&gt;Data[index] = tmp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Percdown</span><span class="params">(MinHeap H, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> tmp = H-&gt;Data[index];</span><br><span class="line">	<span class="keyword">int</span> parent, child;</span><br><span class="line">	<span class="keyword">for</span>(parent = index; parent * <span class="number">2</span> &lt;= H-&gt;Size; parent = child) &#123;</span><br><span class="line">		child = parent * <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">if</span>((child != H-&gt;Size) &amp;&amp; (H-&gt;Data[child] &gt; H-&gt;Data[child + <span class="number">1</span>])) child++;</span><br><span class="line">		<span class="keyword">if</span>(tmp &gt; H-&gt;Data[child]) H-&gt;Data[parent] = H-&gt;Data[child];</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	H-&gt;Data[parent] = tmp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Insert</span><span class="params">(MinHeap H, <span class="keyword">int</span> X)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(Isfull(H)) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"The heap is full!\n"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		H-&gt;Data[++H-&gt;Size] = X;</span><br><span class="line">		Percup(H, H-&gt;Size); </span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Deletemin</span><span class="params">(MinHeap H)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> Minitem;</span><br><span class="line">	<span class="keyword">if</span>(Isempty(H)) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"The heap is empty!\n"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Minitem = H-&gt;Data[<span class="number">1</span>];</span><br><span class="line">	H-&gt;Data[<span class="number">1</span>] = H-&gt;Data[H-&gt;Size--];</span><br><span class="line">	Percdown(H, <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">return</span> Minitem;	</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Buildheap</span><span class="params">(MaxHeap H)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i = H-&gt;Size / <span class="number">2</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">		Percdown(H, i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Printheap</span><span class="params">(MinHeap H)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= H-&gt;Size; i++) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d "</span>, H-&gt;Data[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">putchar</span>(<span class="string">'\n'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	MinHeap H = Createheap(<span class="number">5</span>);</span><br><span class="line">	Insert(H, <span class="number">46</span>);</span><br><span class="line">	Insert(H, <span class="number">23</span>);</span><br><span class="line">	Insert(H, <span class="number">26</span>);</span><br><span class="line">	Insert(H, <span class="number">24</span>);</span><br><span class="line">	Insert(H, <span class="number">10</span>);</span><br><span class="line">	Printheap(H);</span><br><span class="line">	Deletemin(H);</span><br><span class="line">	Printheap(H); </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Huffman-Tree"><a href="#Huffman-Tree" class="headerlink" title="Huffman Tree"></a>Huffman Tree</h1><p>编码问题是计算机学科内十分重要的问题，而哈夫曼树就是为了解决编码的问题而产生的。与之类似的问题还有判定树和搜索树如何构造最优的问题，而所谓最优，即是查找树效率最高。</p>
+<p>首先，哈夫曼树是一种很特殊的<strong>二叉树（没错，它是二叉树）</strong>，它有 N 个叶子结点，若<br>该树的带权路径长度（WPL）达到最小，称这样的二叉树为哈夫曼树（Huffman Tree），也叫最优二叉树。</p>
+<p>那么，什么是带权路径长度（WPL，Weighted Path Length of Tree）呢？</p>
+<p>设二叉树有 N 个叶子结点，每个叶子结点带有权值$w_k$，从根结点到每个叶子结点的长度为$l_k$，则每个叶子结点的带权路径长度之和：$WPL = \sum_{k=1}^n w_k l_k$。也就是说，哈夫曼树实际上就是指 WPL 最小的树。</p>
+<h2 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h2><p>构造哈夫曼树的方法也比较简单，每次把权值最小的两棵二叉树合并即可。</p>
+<p>由于每次建树都需要选出权值最小的结点，所以在代码实现过程中，借助最小堆来找出权值最小的结点比较方便快捷。</p>
+<p>这里偷个懒，直接用何头给出的代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> *<span class="title">HuffmanTree</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> Weight;</span><br><span class="line">	HuffmanTree Left, Right;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">HuffmanTree <span class="title">Huffman</span><span class="params">(MinHeap H)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	HuffmanTree T;</span><br><span class="line">	BuildMinHeap(H);</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">1</span>; i &lt; H-&gt;Size; i++) &#123;</span><br><span class="line">		T = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct TreeNode));</span><br><span class="line">		T-&gt;Left = Deletemin(H);</span><br><span class="line">		T-&gt;Right = Deletemin(H);</span><br><span class="line">		T-&gt;Weight = T-&gt;Left-&gt;Weight + T-&gt;Right-&gt;Weight;</span><br><span class="line">		Insert(H, T);</span><br><span class="line">	&#125;</span><br><span class="line">	T = DeleteMin(H); <span class="comment">// insert new root node </span></span><br><span class="line">	<span class="keyword">return</span> T;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>由于哈夫曼树构造方法的特殊性，它具有以下几个特点：</p>
+<ol>
+<li>没有度为 1 的结点</li>
+<li>n 个叶子结点的哈夫曼树共有 $2n-1$ 个结点</li>
+<li>哈夫曼树的任意非叶结点的左右子树交换后仍是哈夫曼树</li>
+<li>对同一组权值${w_1, w_2, w_3, \dots, w_n}$，是存在不同构的两棵哈夫曼树，但注意其 WPL 是一定是一样且最小的</li>
+</ol>
+<p>记好这些特点，算法笔试题可能会遇见。</p>
+<h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><p>如前所言，哈夫曼树的出现是为了解决编码问题，那么具体解决了那些问题呢？</p>
+<p>哈夫曼树解决的编码问题就是避免了在进行不等长编码时的可能会产生的二义性。所谓二义性就是指同一串编码，解释结果会有不同。根据哈夫曼树的结构，如果用字符代表叶结点，左右分支分别代表 0 和 1，用根结点到每个叶结点的路径方向代表每个字符的编码，可以很神器的发现，各种字符编码组合都不会产生二义性。</p>
+<p>此时，对每个字符所编的码也叫做<strong>前缀码（即任何字符的编码都不是另一字符编码的前缀）</strong>。实际上而言，当所有字符都处在叶结点时，就不会产生非前缀码。</p>
+<p>按照哈夫曼树进行的编码，还有一个优点，那就是代价最小，比起<strong>等长编码</strong>要节省了大量的空间。</p>
+<p>这就是哈夫曼树所解决的编码问题。</p>
+<h1 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h1><p>这里集合的概念与数学上集合的概念基本一致，但实际经常用到的集合叫做“并查集”，其实就是集合的并和查两个操作。<br>PS：学完整套课程之后，回过头会发现，集合更像是后面要学的“图”，但其中一些概念又与树联系密切。</p>
+<p>利用静态数组存储集合较为方便，借用一下何头的代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">	ElementType Data;</span><br><span class="line">	<span class="keyword">int</span> Parent;</span><br><span class="line">&#125; SetType;</span><br></pre></td></tr></table></figure></p>
+<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><p>查找某个元素所在的集合，要先找到这个结点的位置，然后在从下往上依次查找根结点，代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Find</span><span class="params">(SetType S[], ElementType X)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; MaxSize &amp;&amp; S[i].Data != X; i++) </span><br><span class="line">	<span class="keyword">if</span>(i &gt;= MaxSize) <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">// not find the element</span></span><br><span class="line">	<span class="keyword">for</span>(; S[i].Parent &gt;= <span class="number">0</span>; i = S[i].Parent);</span><br><span class="line">	<span class="keyword">return</span> i;	<span class="comment">// return the root static pointer</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="并"><a href="#并" class="headerlink" title="并"></a>并</h2><p>两个集合的并运算需要在查找操作的基础上实现，先分别找到两个集合的根结点，再将其中一个根结点的父结点指针设置成另一个根结点的数组下标，假设两个集合内分别有元素 $X_1$ 和 $X_2$，代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Union</span><span class="params">(SetType S[], ElementType X1, ElementType X2)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> Root1, Root2;</span><br><span class="line">	Root1 = Find(S, X1);</span><br><span class="line">	Root2 = Find(S, X2);</span><br><span class="line">	<span class="keyword">if</span>(Root1 != Root2) S[Root2].Parent = Root1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>按照上面的思路，当不断的并入新集合时，可能会产生树不断增高的情况，这样会导致查找的效率降低，一种可行的办法就是将小集合并入大集合。但这样做的效率仍然不高，不过后面姥姥会交给我们<strong>路径压缩</strong>和<strong>按秩归并</strong>的方法。</p>
+<h1 id="Homework"><a href="#Homework" class="headerlink" title="Homework"></a>Homework</h1><h2 id="05-7-堆中的路径"><a href="#05-7-堆中的路径" class="headerlink" title="05-7 堆中的路径"></a>05-7 堆中的路径</h2><p>题目意思很明确，利用题目给定的一串数字建立最小堆，然后对任意给定的下标 i，打印 H[i] 到根结点的路径即可。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">HNode</span>* <span class="title">Heap</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">HNode</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> *Data;</span><br><span class="line">	<span class="keyword">int</span> Size, Capacity;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> Heap MinHeap;</span><br><span class="line"><span class="function">MinHeap <span class="title">initheap</span><span class="params">(<span class="keyword">int</span> Maxsize)</span> </span>&#123;</span><br><span class="line">	MinHeap H = (MinHeap)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct HNode));</span><br><span class="line">	H-&gt;Data = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>) * (Maxsize + <span class="number">1</span>));</span><br><span class="line">	H-&gt;Capacity = Maxsize;</span><br><span class="line">	H-&gt;Size = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> H;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isfull</span><span class="params">(MinHeap H)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> H-&gt;Size == H-&gt;Capacity;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">insert</span><span class="params">(MinHeap H, <span class="keyword">int</span> data)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(isfull(H)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">int</span> i = ++H-&gt;Size;</span><br><span class="line">		<span class="keyword">for</span>(; H-&gt;Data[i / <span class="number">2</span>] &gt; data &amp;&amp; i &gt; <span class="number">1</span>; i /= <span class="number">2</span>) &#123;</span><br><span class="line">			H-&gt;Data[i] = H-&gt;Data[i / <span class="number">2</span>];</span><br><span class="line">		&#125;</span><br><span class="line">		H-&gt;Data[i] = data;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Printpath</span><span class="params">(MinHeap H, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(; index &gt;= <span class="number">1</span>; index /= <span class="number">2</span>) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d"</span>, H-&gt;Data[index]);</span><br><span class="line">		<span class="keyword">if</span>(index != <span class="number">1</span>) <span class="built_in">putchar</span>(<span class="string">' '</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">putchar</span>(<span class="string">'\n'</span>);</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i, n, m, temp;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m);</span><br><span class="line">	MinHeap H = initheap(n);</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;temp);</span><br><span class="line">		insert(H, temp);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;temp);</span><br><span class="line">		Printpath(H, temp);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">samples:</span></span><br><span class="line"><span class="comment">in:</span></span><br><span class="line"><span class="comment">5 3</span></span><br><span class="line"><span class="comment">46 23 26 24 10</span></span><br><span class="line"><span class="comment">5 4 3</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">24 23 10</span></span><br><span class="line"><span class="comment">46 23 10</span></span><br><span class="line"><span class="comment">26 10</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="05-8-File-Transfer"><a href="#05-8-File-Transfer" class="headerlink" title="05-8 File Transfer"></a>05-8 File Transfer</h2><p>这道题与老师上课讲的连网问题很类似，但是要看清楚题目中<code>I C S</code>分别代表的含义。</p>
+<p><code>I</code>代表输入连接，就相当于将两个元素并成一个集合；<code>C</code>代表检查两个元素是否在一个集合；<code>S</code>代表停止测试。</p>
+<p>根据题目的测试样例，我们得现构造集合，然后在判断元素是否在同一个集合内。当然了，一开始所有的元素都是一个独立的集合，只有当“输入连接”后两个元素才算是处于同一个集合。</p>
+<p>明白以上原则后，按照题目要求来进行输出即可。</p>
+<p>另外，姥姥出这道题的目的就是为了给大家介绍路径压缩与按秩归并，不用这两种方法，显然不能 AC。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 10005</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> Set[MAXN];</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> SetType;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(Set S)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; MAXN; i++) &#123;</span><br><span class="line">		S[i] = <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Union</span><span class="params">(Set S, <span class="keyword">int</span> root1, <span class="keyword">int</span> root2)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(S[root1] &lt; S[root2]) &#123;</span><br><span class="line">		S[root1] += S[root2];</span><br><span class="line">		S[root2] = root1;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		S[root2] += S[root1];</span><br><span class="line">		S[root1] = root2;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">SetType <span class="title">Find</span><span class="params">(Set S, <span class="keyword">int</span> elem)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(S[elem] &lt; <span class="number">0</span>) <span class="keyword">return</span> elem;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> S[elem] = Find(S, S[elem]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	Set <span class="built_in">set</span>;</span><br><span class="line">	init(<span class="built_in">set</span>);</span><br><span class="line">	<span class="keyword">int</span> i, n, c1, c2;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%*c"</span>, &amp;n);</span><br><span class="line">	<span class="keyword">char</span> act;</span><br><span class="line">	<span class="keyword">while</span>((act = getchar()) != <span class="string">'S'</span>) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d %d%*c"</span>, &amp;c1, &amp;c2);</span><br><span class="line">		<span class="keyword">int</span> root1, root2;</span><br><span class="line">		root1 = Find(<span class="built_in">set</span>, c1);</span><br><span class="line">		root2 = Find(<span class="built_in">set</span>, c2);</span><br><span class="line">		<span class="keyword">if</span>(act == <span class="string">'C'</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(root1 == root2 &amp;&amp; (root1 &gt; <span class="number">0</span> || root2 &gt; <span class="number">0</span>)) <span class="built_in">printf</span>(<span class="string">"yes\n"</span>);</span><br><span class="line">			<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"no\n"</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span>(act == <span class="string">'I'</span>) &#123;</span><br><span class="line">			Union(<span class="built_in">set</span>, root1, root2);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">set</span>[i] &lt; <span class="number">0</span>) cnt++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(cnt == <span class="number">1</span>) <span class="built_in">printf</span>(<span class="string">"The network is connected.\n"</span>);</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"There are %d components.\n"</span>, cnt);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="按秩归并"><a href="#按秩归并" class="headerlink" title="按秩归并"></a>按秩归并</h3><p>姥姥讲解的按秩归并有两种方法，关键取决于如何理解“秩”，可以将其认为是树高，也可以认为是树结点的个数。但两者有一个共同点，那就是将小规模的树并到大规模的树上。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Union</span><span class="params">(Set S, <span class="keyword">int</span> root1, <span class="keyword">int</span> root2)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(S[root1] &lt; S[root2]) &#123;</span><br><span class="line">		S[root1] += S[root2];</span><br><span class="line">		S[root2] = root1;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		S[root2] += S[root1];</span><br><span class="line">		S[root1] = root2;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="路径压缩"><a href="#路径压缩" class="headerlink" title="路径压缩"></a>路径压缩</h3><p>路径压缩所解决的问题是尽可能的降低树的高度，这样就会使得其查找效率提高。</p>
+<p>在之前介绍的查找操作中，每次需要先找到叶结点在去找根结点，找到了之后并不对集合（也就是查找树）的结构做出优化。但路径压缩借助递归，每找到一个结点，就将它直接挂在根结点的下面，这样当找到目标结点的根结点时，这棵查找树的高度就是 2 了，极大的提高了下次查找时的效率。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">SetType <span class="title">Find</span><span class="params">(Set S, <span class="keyword">int</span> elem)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(S[elem] &lt; <span class="number">0</span>) <span class="keyword">return</span> elem;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> S[elem] = Find(S, S[elem]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="05-9-Huffman-Codes"><a href="#05-9-Huffman-Codes" class="headerlink" title="05-9 Huffman Codes"></a>05-9 Huffman Codes</h2><p>题目大意就是给定字符出现的频率，判断给定的测试样例是否是最优解，但要注意最优解可能并不是由哈夫曼树构成的。</p>
+<p>当初做这个题时，想方设法的偷懒，非常不情愿建哈夫曼树，结果最后还真找到了 AC 的方法。</p>
+<p>虽然不建哈夫曼树，但是 WPL 还是需要计算出来用来判定是否最优的。那么如何计算 WPL 呢？对，继续偷懒，直接用 C++ STL 里面的优先队列（其实就是最小堆），核心思路就是哈夫曼树的 WPL 也等于除了根结点以外，全部结点的权值之和。这种计算方法与老师上课讲的是完全不同了，利用这种思路，可以很简单的计算出一棵哈夫曼树的 WPL，而且还不用建树。</p>
+<p>有了最优解的 WPL 后，只需要在计算出每个样例的 WPL，并比对是否一致即可知道样例是否正确。</p>
+<p>明白以上问题后，基本已经解决这道题目了。不过还有一个地方要注意，对于非前缀码且 WPL 相同的样例，就不是正确结果了。所以，在计算样例的 WPL 后，还需要判断样例中是否有非前缀码的存在，如果有，那就不是正确结果，需判定为 No。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">65</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> hashTable[<span class="number">128</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">issubstr</span><span class="params">(<span class="built_in">string</span> a, <span class="built_in">string</span> b)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> flag = <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; b.length(); i++) &#123;</span><br><span class="line">		<span class="keyword">if</span>(b[i] != a[i]) &#123;</span><br><span class="line">			flag = <span class="literal">false</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> flag;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    priority_queue&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;, greater&lt;<span class="keyword">int</span>&gt; &gt; q;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">char</span> ch;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; ch;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; hashTable[ch];</span><br><span class="line">        q.push(hashTable[ch]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> wpl = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(q.size() &gt; <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> n1, n2, n;</span><br><span class="line">        n1 = q.top();</span><br><span class="line">        q.pop();</span><br><span class="line">        n2 = q.top();</span><br><span class="line">        q.pop();</span><br><span class="line">        n = n1 + n2;</span><br><span class="line">        q.push(n);</span><br><span class="line">        wpl += n;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> m;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; m;</span><br><span class="line">    <span class="keyword">while</span>(m--) &#123;</span><br><span class="line">        <span class="built_in">string</span> codes[maxn];</span><br><span class="line">        <span class="keyword">int</span> wpl_tmp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; ch &gt;&gt; codes[i];</span><br><span class="line">            wpl_tmp += codes[i].length() * hashTable[ch];</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="keyword">bool</span> prefix = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="built_in">string</span> str_tmp = codes[i];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(str_tmp != codes[j] &amp;&amp; issubstr(codes[j], str_tmp)) &#123;</span><br><span class="line">                    prefix = <span class="literal">true</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(prefix) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">bool</span> repetition = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="built_in">string</span> str_tmp = codes[i];</span><br><span class="line">			<span class="keyword">if</span>(str_tmp == codes[i + <span class="number">1</span>]) &#123;</span><br><span class="line">				repetition = <span class="literal">true</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(wpl_tmp == wpl &amp;&amp; !prefix &amp;&amp; !repetition) <span class="built_in">cout</span> &lt;&lt; <span class="string">"Yes\n"</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">"No\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Buy me a coffee ? :)</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="bachzart 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.png" alt="bachzart 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>bachzart</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="http://bachzart.github.io/2020/05/03/ZJU-DS-05-树（下）/" title="ZJU_DS_05-树（下）">http://bachzart.github.io/2020/05/03/ZJU-DS-05-树（下）/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ZJU-DS/" rel="tag"><i class="fa fa-tag"></i> ZJU_DS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/03/PAT-05-01-测试赛/" rel="next" title="PAT_05_01-测试赛">
+                <i class="fa fa-chevron-left"></i> PAT_05_01-测试赛
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/08/26/扒谱记录-秋柳/" rel="prev" title="扒谱记录 - 秋柳">
+                扒谱记录 - 秋柳 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="bachzart">
+            
+              <p class="site-author-name" itemprop="name">bachzart</p>
+              <p class="site-description motion-element" itemprop="description">I've been in my mind, it's such a fine line.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Bachzart" title="GitHub &rarr; https://github.com/Bachzart" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:whistlesilp@gmail.com" title="E-Mail &rarr; mailto:whistlesilp@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitter.im/Bachzart" title="Gitter &rarr; https://gitter.im/Bachzart" rel="noopener" target="_blank"><i class="fa fa-fw fa-github-alt"></i>Gitter</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/about/" title="/about/">About This Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/Book-List/" title="/Book-List/">Book List</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Heap"><span class="nav-number">1.</span> <span class="nav-text">Heap</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#堆的抽象数据类型描述"><span class="nav-number">1.1.</span> <span class="nav-text">堆的抽象数据类型描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆的实现"><span class="nav-number">1.2.</span> <span class="nav-text">堆的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最大堆"><span class="nav-number">1.2.1.</span> <span class="nav-text">最大堆</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化（建立空堆）"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">初始化（建立空堆）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判断堆满"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">判断堆满</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判断堆空"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">判断堆空</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除"><span class="nav-number">1.2.1.5.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#直接建堆"><span class="nav-number">1.2.1.6.</span> <span class="nav-text">直接建堆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试代码"><span class="nav-number">1.2.1.7.</span> <span class="nav-text">测试代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最小堆"><span class="nav-number">1.2.2.</span> <span class="nav-text">最小堆</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#插入-1"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除-1"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#直接建堆-1"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">直接建堆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试代码-1"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">测试代码</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Huffman-Tree"><span class="nav-number">2.</span> <span class="nav-text">Huffman Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#构造"><span class="nav-number">2.1.</span> <span class="nav-text">构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特点"><span class="nav-number">2.2.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编码"><span class="nav-number">2.3.</span> <span class="nav-text">编码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Set"><span class="nav-number">3.</span> <span class="nav-text">Set</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查找"><span class="nav-number">3.1.</span> <span class="nav-text">查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并"><span class="nav-number">3.2.</span> <span class="nav-text">并</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Homework"><span class="nav-number">4.</span> <span class="nav-text">Homework</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#05-7-堆中的路径"><span class="nav-number">4.1.</span> <span class="nav-text">05-7 堆中的路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#05-8-File-Transfer"><span class="nav-number">4.2.</span> <span class="nav-text">05-8 File Transfer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#按秩归并"><span class="nav-number">4.2.1.</span> <span class="nav-text">按秩归并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路径压缩"><span class="nav-number">4.2.2.</span> <span class="nav-text">路径压缩</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#05-9-Huffman-Codes"><span class="nav-number">4.3.</span> <span class="nav-text">05-9 Huffman Codes</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bachzart</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">552k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">76:43</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.0</div>
+
+
+
+  <div class="footer-custom">Hosted by <a href="https://pages.github.com" class="theme-link" rel="noopener" target="_blank">GitHub Pages</a></div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function(i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('复制成功');
+          else $(this).text('复制失败');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function(e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function() {
+          $b.text('复制');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+</body>
+</html>

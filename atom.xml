@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>bachzart&#39;s Blog</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://bachzart.github.io/"/>
+  <updated>2021-11-10T14:52:02.815Z</updated>
+  <id>http://bachzart.github.io/</id>
+  
+  <author>
+    <name>bachzart</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HIT_OS_Basic</title>
+    <link href="http://bachzart.github.io/2021/11/10/HIT-OS-Basic/"/>
+    <id>http://bachzart.github.io/2021/11/10/HIT-OS-Basic/</id>
+    <published>2021-11-10T11:43:41.000Z</published>
+    <updated>2021-11-10T14:52:02.815Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;此系列博文用来记录 MOOC 上自学哈工大操作系统课程（由李治军老师授课）时的笔记。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Operating System" scheme="http://bachzart.github.io/categories/CS/Operating-System/"/>
+    
+    
+      <category term="HIT_OS" scheme="http://bachzart.github.io/tags/HIT-OS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux 零散知识</title>
+    <link href="http://bachzart.github.io/2021/10/19/Linux-%E9%9B%B6%E6%95%A3%E7%9F%A5%E8%AF%86/"/>
+    <id>http://bachzart.github.io/2021/10/19/Linux-零散知识/</id>
+    <published>2021-10-19T03:01:33.000Z</published>
+    <updated>2021-10-24T01:44:21.728Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;记录一些容易忘记且与 Linux 相关的一些实用知识，方便自己查询。&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>料理随记</title>
+    <link href="http://bachzart.github.io/2021/09/07/%E6%96%99%E7%90%86%E9%9A%8F%E8%AE%B0/"/>
+    <id>http://bachzart.github.io/2021/09/07/料理随记/</id>
+    <published>2021-09-07T09:45:46.000Z</published>
+    <updated>2021-09-19T06:54:45.356Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;想不到自己接近一年没有更博后，再次更博的第一篇文章会是这个主题。不过反正也没有人看，权当是自己记录用的也可。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Cooking" scheme="http://bachzart.github.io/categories/Life/Cooking/"/>
+    
+    
+      <category term="Cooking" scheme="http://bachzart.github.io/tags/Cooking/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nand2Tetris_Part1_03</title>
+    <link href="http://bachzart.github.io/2020/09/28/Nand2Tetris-Part1-03/"/>
+    <id>http://bachzart.github.io/2020/09/28/Nand2Tetris-Part1-03/</id>
+    <published>2020-09-28T09:06:46.000Z</published>
+    <updated>2020-09-29T08:40:02.536Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本周的主题是 &lt;strong&gt;Memory&lt;/strong&gt;，先把做好的 ALU 放一边，我们来研究一下和内存（RAM）有关的问题。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Computer Organization" scheme="http://bachzart.github.io/categories/CS/Computer-Organization/"/>
+    
+    
+      <category term="Nand2Tetris" scheme="http://bachzart.github.io/tags/Nand2Tetris/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>扒谱记录 - Homesteaders</title>
+    <link href="http://bachzart.github.io/2020/09/26/%E6%89%92%E8%B0%B1%E8%AE%B0%E5%BD%95-Homesteaders/"/>
+    <id>http://bachzart.github.io/2020/09/26/扒谱记录-Homesteaders/</id>
+    <published>2020-09-26T14:27:13.000Z</published>
+    <updated>2020-09-26T15:12:48.360Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;《Homesteaders》是由 Joanie Madden 用&lt;strong&gt;哨笛&lt;/strong&gt;演奏的一首凯尔特风格的曲子，是一首十分纯净的轻音乐。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Hobby" scheme="http://bachzart.github.io/categories/Life/Hobby/"/>
+    
+    
+      <category term="Music" scheme="http://bachzart.github.io/tags/Music/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nand2Tetris_Part1_02</title>
+    <link href="http://bachzart.github.io/2020/09/21/Nand2Tetris-Part1-02/"/>
+    <id>http://bachzart.github.io/2020/09/21/Nand2Tetris-Part1-02/</id>
+    <published>2020-09-21T15:16:04.000Z</published>
+    <updated>2020-09-28T11:47:42.088Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本周的主题是 &lt;strong&gt;Boolean Arithmetic and the ALU Roadmap&lt;/strong&gt;，旨在介绍如何构建加法器（adder）和算术逻辑单元（Arithmetic Logic Unit，ALU），学习路线依然还是从简单到复杂。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Computer Organization" scheme="http://bachzart.github.io/categories/CS/Computer-Organization/"/>
+    
+    
+      <category term="Nand2Tetris" scheme="http://bachzart.github.io/tags/Nand2Tetris/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nand2Tetri_Part1_01</title>
+    <link href="http://bachzart.github.io/2020/09/20/Nand2Tetris-Part1-01/"/>
+    <id>http://bachzart.github.io/2020/09/20/Nand2Tetris-Part1-01/</id>
+    <published>2020-09-20T12:55:41.000Z</published>
+    <updated>2020-09-28T09:05:15.791Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://www.nand2tetris.org/project01&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Nand2Tetris&lt;/a&gt; 是由希伯来大学的两位教授 Noam Nisan 和 Shimon Schocken 在 Coursera 上开设的在线课程（网络课程）。课程全称叫做：依据基本原理构建现代计算机：从与非门到俄罗斯方块（基于项目的课程），其主要内容与计算机组成原理、操作系统等科目的关联性较大，但课程的受众群体也不止局限于专业人士，且课程的实践性很强，对深入理解理论知识很有帮助。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Computer Organization" scheme="http://bachzart.github.io/categories/CS/Computer-Organization/"/>
+    
+    
+      <category term="Nand2Tetris" scheme="http://bachzart.github.io/tags/Nand2Tetris/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MathJax 语法快速指南</title>
+    <link href="http://bachzart.github.io/2020/09/17/MathJax-%E8%AF%AD%E6%B3%95%E5%BF%AB%E9%80%9F%E6%8C%87%E5%8D%97/"/>
+    <id>http://bachzart.github.io/2020/09/17/MathJax-语法快速指南/</id>
+    <published>2020-09-17T10:28:45.000Z</published>
+    <updated>2020-09-17T14:48:21.391Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;MathJax 是一个 JavaScript 库，可以让你直接用 Latex 语法来书写数学公式，十分方便。&lt;br&gt;想深入了解 MathJax，点击链接：&lt;a href=&quot;https://mathjax-chinese-doc.readthedocs.io/en/latest/mathjax.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;MathJax&lt;/a&gt;，本文旨在整理一些平时写文档时常用的一些语法，便于复查。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Tools" scheme="http://bachzart.github.io/categories/Tools/"/>
+    
+      <category term="MathJax" scheme="http://bachzart.github.io/categories/Tools/MathJax/"/>
+    
+    
+      <category term="MathJax" scheme="http://bachzart.github.io/tags/MathJax/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Markdown 语法快速指南</title>
+    <link href="http://bachzart.github.io/2020/09/16/Markdown-%E8%AF%AD%E6%B3%95%E5%BF%AB%E9%80%9F%E6%8C%87%E5%8D%97/"/>
+    <id>http://bachzart.github.io/2020/09/16/Markdown-语法快速指南/</id>
+    <published>2020-09-16T11:20:53.000Z</published>
+    <updated>2020-09-17T14:48:10.844Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;有关 &lt;a href=&quot;https://baike.baidu.com/item/markdown/3245829?fr=aladdin&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Markdown&lt;/a&gt; 的概念性问题，请点击链接自行查看。本文旨在整理一些平时写文档时常用的一些语法，这样既方便他人查看，也以免自己忘记。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Tools" scheme="http://bachzart.github.io/categories/Tools/"/>
+    
+      <category term="Markdown" scheme="http://bachzart.github.io/categories/Tools/Markdown/"/>
+    
+    
+      <category term="Markdown" scheme="http://bachzart.github.io/tags/Markdown/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ZJU_DS_Summary</title>
+    <link href="http://bachzart.github.io/2020/09/16/ZJU-DS-Summary/"/>
+    <id>http://bachzart.github.io/2020/09/16/ZJU-DS-Summary/</id>
+    <published>2020-09-16T09:02:53.000Z</published>
+    <updated>2020-09-20T13:29:46.942Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;center&gt;课堂笔记全部写完了，总结一下。&lt;/center&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+    
+    
+      <category term="ZJU_DS" scheme="http://bachzart.github.io/tags/ZJU-DS/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ZJU_DS_12-KMP</title>
+    <link href="http://bachzart.github.io/2020/09/15/ZJU-DS-12-KMP/"/>
+    <id>http://bachzart.github.io/2020/09/15/ZJU-DS-12-KMP/</id>
+    <published>2020-09-15T15:54:36.000Z</published>
+    <updated>2020-09-21T06:26:07.613Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;本周主要讲解几道题目，然后再介绍一下 KMP 算法。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+    
+    
+      <category term="ZJU_DS" scheme="http://bachzart.github.io/tags/ZJU-DS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ZJU_DS_11-散列查找</title>
+    <link href="http://bachzart.github.io/2020/09/06/ZJU-DS-11-%E6%95%A3%E5%88%97%E6%9F%A5%E6%89%BE/"/>
+    <id>http://bachzart.github.io/2020/09/06/ZJU-DS-11-散列查找/</id>
+    <published>2020-09-06T02:41:45.000Z</published>
+    <updated>2020-09-20T13:30:17.172Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;本周将介绍散列查找&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+    
+    
+      <category term="ZJU_DS" scheme="http://bachzart.github.io/tags/ZJU-DS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ZJU_DS_10-排序（下）</title>
+    <link href="http://bachzart.github.io/2020/09/05/ZJU-DS-10-%E6%8E%92%E5%BA%8F%EF%BC%88%E4%B8%8B%EF%BC%89/"/>
+    <id>http://bachzart.github.io/2020/09/05/ZJU-DS-10-排序（下）/</id>
+    <published>2020-09-05T08:43:05.000Z</published>
+    <updated>2020-09-20T13:30:23.868Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;本周继续介绍排序算法。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+    
+    
+      <category term="ZJU_DS" scheme="http://bachzart.github.io/tags/ZJU-DS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ZJU_DS_09_排序（上）</title>
+    <link href="http://bachzart.github.io/2020/09/02/ZJU-DS-09-%E6%8E%92%E5%BA%8F%EF%BC%88%E4%B8%8A%EF%BC%89/"/>
+    <id>http://bachzart.github.io/2020/09/02/ZJU-DS-09-排序（上）/</id>
+    <published>2020-09-02T13:03:54.000Z</published>
+    <updated>2020-09-20T13:30:27.606Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;本周将会介绍几种常见的排序算法。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+    
+    
+      <category term="ZJU_DS" scheme="http://bachzart.github.io/tags/ZJU-DS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ZJU_DS_08-图（下）</title>
+    <link href="http://bachzart.github.io/2020/08/31/ZJU-DS-08-%E5%9B%BE%EF%BC%88%E4%B8%8B%EF%BC%89/"/>
+    <id>http://bachzart.github.io/2020/08/31/ZJU-DS-08-图（下）/</id>
+    <published>2020-08-31T04:07:25.000Z</published>
+    <updated>2020-09-20T13:30:32.533Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;这周课程主要介绍了图的另外两个应用：最小生成树和拓扑排序，顺带讲了一下关键路径&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+    
+    
+      <category term="ZJU_DS" scheme="http://bachzart.github.io/tags/ZJU-DS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Prologue（プロローグ - 押尾コータロー）- 翻弹</title>
+    <link href="http://bachzart.github.io/2020/08/29/Prologue%EF%BC%88%E3%83%97%E3%83%AD%E3%83%AD%E3%83%BC%E3%82%B0%20-%20%E6%8A%BC%E5%B0%BE%E3%82%B3%E3%83%BC%E3%82%BF%E3%83%AD%E3%83%BC%EF%BC%89-%20%E7%BF%BB%E5%BC%B9/"/>
+    <id>http://bachzart.github.io/2020/08/29/Prologue（プロローグ - 押尾コータロー）- 翻弹/</id>
+    <published>2020-08-29T08:59:19.000Z</published>
+    <updated>2020-09-17T13:26:36.012Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Prologue（プロローグ - 押尾コータロー）是押尾于 2003 年发行的专辑《Dramatic》中的一首较为简单的指弹曲子。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Hobby" scheme="http://bachzart.github.io/categories/Life/Hobby/"/>
+    
+    
+      <category term="FingerStyle" scheme="http://bachzart.github.io/tags/FingerStyle/"/>
+    
+      <category term="Guitar" scheme="http://bachzart.github.io/tags/Guitar/"/>
+    
+      <category term="Music" scheme="http://bachzart.github.io/tags/Music/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ZJU_DS_07-图（中）</title>
+    <link href="http://bachzart.github.io/2020/08/28/ZJU-DS-07-%E5%9B%BE%EF%BC%88%E4%B8%AD%EF%BC%89/"/>
+    <id>http://bachzart.github.io/2020/08/28/ZJU-DS-07-图（中）/</id>
+    <published>2020-08-28T12:10:40.000Z</published>
+    <updated>2020-09-20T13:30:37.409Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;本周课程主要包括图论中最短路径的问题和有关树的习题课，习题课笔记添加到前面对应题目的所在的文章中了。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+    
+    
+      <category term="ZJU_DS" scheme="http://bachzart.github.io/tags/ZJU-DS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ZJU_DS_06-图（上）</title>
+    <link href="http://bachzart.github.io/2020/08/27/ZJU-DS-06-%E5%9B%BE%EF%BC%88%E4%B8%8A%EF%BC%89/"/>
+    <id>http://bachzart.github.io/2020/08/27/ZJU-DS-06-图（上）/</id>
+    <published>2020-08-27T12:23:26.000Z</published>
+    <updated>2020-09-20T13:30:41.155Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;什么是图？如何表示和实现？图又有那些基本的性质？常见的应用有哪些？&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+    
+    
+      <category term="ZJU_DS" scheme="http://bachzart.github.io/tags/ZJU-DS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>扒谱记录 - 秋柳</title>
+    <link href="http://bachzart.github.io/2020/08/26/%E6%89%92%E8%B0%B1%E8%AE%B0%E5%BD%95-%E7%A7%8B%E6%9F%B3/"/>
+    <id>http://bachzart.github.io/2020/08/26/扒谱记录-秋柳/</id>
+    <published>2020-08-26T01:55:14.000Z</published>
+    <updated>2020-08-28T12:57:45.521Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前段时间，朋友突然给我发了他比较喜欢的民谣 ——《秋柳》。&lt;br&gt;正巧他自己在吹口琴，所以想试着扒扒谱子，结果谱子扒完后，让我给他看看。&lt;br&gt;我转尔一想，直接自己扒了比对算了。&lt;br&gt;不过，网上估计也有对应的简谱。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Hobby" scheme="http://bachzart.github.io/categories/Life/Hobby/"/>
+    
+    
+      <category term="Music" scheme="http://bachzart.github.io/tags/Music/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ZJU_DS_05-树（下）</title>
+    <link href="http://bachzart.github.io/2020/05/03/ZJU-DS-05-%E6%A0%91%EF%BC%88%E4%B8%8B%EF%BC%89/"/>
+    <id>http://bachzart.github.io/2020/05/03/ZJU-DS-05-树（下）/</id>
+    <published>2020-05-03T09:50:43.000Z</published>
+    <updated>2020-09-20T13:30:44.492Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;本讲将会在二叉树结构的基础上在介绍另外三种特殊的结构：堆、哈夫曼树和集合，快来学习吧！&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+    
+    
+      <category term="ZJU_DS" scheme="http://bachzart.github.io/tags/ZJU-DS/"/>
+    
+  </entry>
+  
+</feed>

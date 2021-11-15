@@ -628,9 +628,9 @@
 <p>之所以要改动寄存器 es 的值，是因为 0x10 中断规定了 es:bp 是字符串的首地址（也就是起始位置），也就是说，只有 bp 的值是无法让机器显示字符串的。</p>
 <p><code>info_loop</code>是利用 <code>jmp</code> 指令设置的一个循环，这条指令会让机器一直执行这个循环。如果没有这条指令，机器就会去寻找下一个能启动的设备。</p>
 <p><code>.org</code>也是汇编中的伪指令，它告诉 cpu 下面的语句从地址 510 出开始执行，相比于原本的内核代码，这里舍弃掉了<code>root_dev</code>，所以需要讲地址设置为 510，这样当我们将磁盘引导扇区（共 512 字节）的最后两个字节设置为 0xAA55 时，机器读取到这里就会知道这个扇区是引导扇区了（是如何读的，这里就不解释了）。最后的 <code>boot_flag</code>就是启动标志的字面意思了，可想而知，后面跟的就是 0xAA55。可以猜测一下， 这几行代码应该是后续工作做的准备。</p>
-<p>搞定源码后，就可以开始编译内核运行检查一下运行结果了。以 Linux 为例，进入<code>linux-0.11/boot</code>目录下要编译和链接 bootsect.s 就要执行下面的命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> as86 -0 -a -o bootsect.o bootsect.s</span><br><span class="line"><span class="meta">$</span> ld86 -0 -s -o bootsect bootsect.o</span><br></pre></td></tr></table></figure></p>
+<p>搞定源码后，就可以开始编译内核运行检查一下运行结果了。以 Linux 为例，进入<code>linux-0.11/boot</code>目录下要编译和链接 bootsect.s 就要执行下面的命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> as86 -0 -a -o bootsect.o bootsect.s</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ld86 -0 -s -o bootsect bootsect.o</span></span><br></pre></td></tr></table></figure></p>
 <p>别急着去运行内核，先用<code>ls -l</code>命令检查下编译好的文件的大小。可以发现，bootsect 的文件大小是 544 字节，但是引导程序必须要正好占用一个磁盘扇区，即 512 字节。造成多了 32 个字节的原因是 ld86 产生的是 Minix 可执行文件格式，这样的可执行文件除了文本段、数据段等部分以外，还包括一个 Minix 可执行文件头部，而这个文件的头部正好多了 32 个字节。</p>
-<p>在 linux 下需要将文件大小改为 512 字节，也就是删掉头部，所以需要借助命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> dd bs=1 if=bootsect of=Image skip=32</span><br><span class="line"><span class="meta">$</span> cp ./Image ../Image</span><br></pre></td></tr></table></figure></p>
+<p>在 linux 下需要将文件大小改为 512 字节，也就是删掉头部，所以需要借助命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> dd bs=1 <span class="keyword">if</span>=bootsect of=Image skip=32</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cp ./Image ../Image</span></span><br></pre></td></tr></table></figure></p>
 <p>之后在 oslab 目录下，运行 run 脚本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./run</span><br></pre></td></tr></table></figure></p>
 <p>就可以得到这样的结果：<br><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1787154-20211114-1636900998784" alt="1-2"></p>
 <h2 id="改写-setup-s"><a href="#改写-setup-s" class="headerlink" title="改写 setup.s"></a>改写 setup.s</h2><p>先分析一下要求：</p>
@@ -1083,7 +1083,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">77:20</span>
+    <span title="站点阅读时长">77:23</span>
   
 </div>
 

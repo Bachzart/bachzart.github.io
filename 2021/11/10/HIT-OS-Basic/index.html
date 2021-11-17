@@ -150,7 +150,7 @@
 <meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1787154-20211110-1636552982933">
 <meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1787154-20211114-1636900998784">
 <meta property="og:image" content="https://dn-simplecloud.shiyanlou.com/courses/uid1787154-20211116-1637071009590">
-<meta property="og:updated_time" content="2021-11-16T15:35:46.663Z">
+<meta property="og:updated_time" content="2021-11-17T14:10:27.929Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HIT_OS_Basic">
 <meta name="twitter:description" content="此系列博文用来记录 MOOC 上自学哈工大操作系统课程（由李治军老师授课）时的笔记。">
@@ -300,7 +300,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">42</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">43</span></a>
 
   </li>
         
@@ -488,7 +488,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-11-16 23:35:46" itemprop="dateModified" datetime="2021-11-16T23:35:46+08:00">2021-11-16</time>
+                <time title="修改时间：2021-11-17 22:10:27" itemprop="dateModified" datetime="2021-11-17T22:10:27+08:00">2021-11-17</time>
               
             
           </span>
@@ -647,7 +647,7 @@
 <p>下面我们首先让 setup.s 完成第一个子任务：向屏幕输出“Now we are in SETUP”。这个任务与 bootsect.s 干的事情很类似，事实上，我们还真的就只需要将前面下好的 bootsect.s 抄过来再修改一下就好了，改好后：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">entry _start</span><br><span class="line">_start:</span><br><span class="line">    mov ah,#0x03</span><br><span class="line">    xor bh,bh</span><br><span class="line">    int 0x10</span><br><span class="line">    mov cx,#25</span><br><span class="line">    mov bx,#0x0007</span><br><span class="line">    mov bp,#msg2</span><br><span class="line">    mov ax,cs</span><br><span class="line">    mov es,ax</span><br><span class="line">    mov ax,#0x1301</span><br><span class="line">    int 0x10</span><br><span class="line">inf_loop:</span><br><span class="line">    jmp inf_loop</span><br><span class="line">msg2:</span><br><span class="line">    .byte 13,10</span><br><span class="line">    .ascii &quot;Now we are in SETUP&quot;</span><br><span class="line">    .byte 13,10,13,10</span><br><span class="line">.org 510</span><br><span class="line">boot_flag:</span><br><span class="line">    .word 0xAA55</span><br></pre></td></tr></table></figure></p>
 <p>因为 es 的值在 bootsect.s 已经改过了，所以这里要改回来，直接借助 cs 这个段寄存器。至于为什么能借助 cs 段寄存器达到我们的目的，是因为 cs 是保存微处理器执行代码的内存段，cs（代码段寄存器）持有段的起始位置，也就是我们需要的 0x07c0。这里，也不得不说，怪不得 cpu 里面要搞这么多寄存器的，其实都是用的着的，就是着实难记😓。还有一个需要注意的地方，就是 bootsect.s 已经用过 msg1 这个标识符了，这里需要用 msg2 了。</p>
 <p>在编译 setup.s 之前，还需要做一件事情，那就是让 bootsect.s 读入 setup.s。那么如何读入 setup.s 呢？其实就是使用 0x13 中断，可以发现到目前位置我们都是通过 bios 中断在达到我们想要的结果。现在看来，bios 中断就像是可供使用的一个工具一样（事实上，它本身就是如此）。</p>
-<p>那么跟着老师的思路，我们可以得到修改后的 bootsect.s 的源码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">SETUPLEN=2</span><br><span class="line">SETUPSEG=0x07e0</span><br><span class="line">entry _start</span><br><span class="line">_start:</span><br><span class="line">    mov ah,#0x03</span><br><span class="line">    xor bh,bh</span><br><span class="line">    int 0x10</span><br><span class="line">    mov cx,#29</span><br><span class="line">    mov bx,#0x0007</span><br><span class="line">    mov bp,#msg1</span><br><span class="line">    mov ax,#0x07c0</span><br><span class="line">    mov es,ax</span><br><span class="line">    mov ax,#0x1301</span><br><span class="line">    int 0x10</span><br><span class="line">load_setup:</span><br><span class="line">    mov dx,#0x0000</span><br><span class="line">    mov cx,#0x0002</span><br><span class="line">    mov bx,#0x0200</span><br><span class="line">    mov ax,#0x0200+SETUPLEN</span><br><span class="line">    int 0x13</span><br><span class="line">    jnc ok_load_setup</span><br><span class="line">    mov dx,#0x0000</span><br><span class="line">    mov ax,#0x0000</span><br><span class="line">    int 0x13</span><br><span class="line">    jmp load_setup</span><br><span class="line">ok_load_setup:</span><br><span class="line">    jmpi 0,SETUPSEG</span><br><span class="line">mag1:</span><br><span class="line">    .byte 13,10</span><br><span class="line">    .ascii &quot;color_os is booting ...&quot;</span><br><span class="line">    .byte 13,10,13,10</span><br><span class="line">.org 510</span><br><span class="line">boot_flag:</span><br><span class="line">    .word 0xAA55</span><br></pre></td></tr></table></figure></p>
+<p>那么跟着老师的思路，我们可以得到修改后的 bootsect.s 的源码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">SETUPLEN=2</span><br><span class="line">SETUPSEG=0x07e0</span><br><span class="line">entry _start</span><br><span class="line">_start:</span><br><span class="line">    mov ah,#0x03</span><br><span class="line">    xor bh,bh</span><br><span class="line">    int 0x10</span><br><span class="line">    mov cx,#29</span><br><span class="line">    mov bx,#0x0007</span><br><span class="line">    mov bp,#msg1</span><br><span class="line">    mov ax,#0x07c0</span><br><span class="line">    mov es,ax</span><br><span class="line">    mov ax,#0x1301</span><br><span class="line">    int 0x10</span><br><span class="line">load_setup:</span><br><span class="line">    mov dx,#0x0000</span><br><span class="line">    mov cx,#0x0002</span><br><span class="line">    mov bx,#0x0200</span><br><span class="line">    mov ax,#0x0200+SETUPLEN</span><br><span class="line">    int 0x13</span><br><span class="line">    jnc ok_load_setup</span><br><span class="line">    mov dx,#0x0000</span><br><span class="line">    mov ax,#0x0000</span><br><span class="line">    int 0x13</span><br><span class="line">    jmp load_setup</span><br><span class="line">ok_load_setup:</span><br><span class="line">    jmpi 0,SETUPSEG</span><br><span class="line">msg1:</span><br><span class="line">    .byte 13,10</span><br><span class="line">    .ascii &quot;color_os is booting ...&quot;</span><br><span class="line">    .byte 13,10,13,10</span><br><span class="line">.org 510</span><br><span class="line">boot_flag:</span><br><span class="line">    .word 0xAA55</span><br></pre></td></tr></table></figure></p>
 <p>再来简单解释一下这段代码，0x13 中断对 ah、al、bh、bl、ch 和 cl 的值有要求，所以在调用它之前，要先得到我们想要的值。在 linux-0.11 的 bootsect.s 文件中，SETUPLEN 的值为 4，代表了 4 个扇区，这里我们只读 2 个，所以 SETUPLEN 的值在开头设置为 2。<code>jmp load_setup</code>是在末尾设置的循环，如果载入失败就会从头开始。</p>
 <p>载入成功后，会跳转执行 setup.s。此时，需要先搞清楚 setup.s 在哪里，通过前面调用 0x13 中断可知我们将 setup.s 放在了 0x07c0 的后 2 个扇区。而 bootsect.s 本身占 1 个扇区，所以 SETUPSEG 需要设置为 0x07e0，就是 0x07c0 加了 512 字节（1 个扇区）后的地址，这样就完成了从 bootsect.s 到 setup.s 的跳转。</p>
 <p>源码完成后就可以编译运行检查结果了。但现在有 2 个文件需要编译、链接。如果都手动编译，就太慢了，所以借助 Makefile 是最佳方式。</p>
@@ -659,6 +659,8 @@
 <p>然后再进入到<code>~/oslab/linux-0.11</code>目录下，执行下面的命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make BootImage</span><br><span class="line">../run</span><br></pre></td></tr></table></figure></p>
 <p>就可以得到下面的结果：<br><img src="https://dn-simplecloud.shiyanlou.com/courses/uid1787154-20211116-1637071009590" alt="1-3"></p>
 <p>可以发现这个结果跟之前 bootsect.s 产生的结果是类似的，原因就是因为这里的 setup.s 完全就是复制的 bootsect.s。</p>
+<p>现在，再来解决最后一个任务：利用 setup.s 获取硬件参数，保存并输出到屏幕上，且不再加载内核。</p>
+<!-- sed "s/\\\n/\n/g" setup.txt > setup.s -->
 <!-- 关于这段代码详细的注释，可以参考老师给的书 —《Linux 内核完全注释 V3.0》中 bootsect.s 这个文件的代码注释，讲的很全面。
 
 [（超详细汇编注释）操作系统 哈工大李治军 实验二 操作系统的引导](https://blog.csdn.net/leoabcd12/article/details/119706330) 这篇文章也是不错的参考资料。 -->
@@ -835,7 +837,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">42</span>
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1089,7 +1091,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">560k</span>
+    <span title="站点总字数">561k</span>
   
 
   
@@ -1100,7 +1102,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">77:50</span>
+    <span title="站点阅读时长">77:55</span>
   
 </div>
 

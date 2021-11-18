@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="此文用于记录学习 C++ 过程中遇到的一些知识点。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-11-17T14:37:26.168Z">
+<meta property="og:updated_time" content="2021-11-18T16:06:28.830Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++ 的一些概念">
 <meta name="twitter:description" content="此文用于记录学习 C++ 过程中遇到的一些知识点。">
@@ -467,12 +467,24 @@
                 
               
 
-              <time title="创建时间：2021-11-17 22:17:35 / 修改时间：22:37:26" itemprop="dateCreated datePublished" datetime="2021-11-17T22:17:35+08:00">2021-11-17</time>
+              <time title="创建时间：2021-11-17 22:17:35" itemprop="dateCreated datePublished" datetime="2021-11-17T22:17:35+08:00">2021-11-17</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-11-19 00:06:28" itemprop="dateModified" datetime="2021-11-19T00:06:28+08:00">2021-11-19</time>
               
             
           </span>
@@ -536,7 +548,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">263</span>
+                <span title="本文字数">1.5k</span>
               
 
               
@@ -550,7 +562,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 分钟</span>
+                <span title="阅读时长">12 分钟</span>
               
             </div>
           
@@ -572,7 +584,23 @@
       
         <p>此文用于记录学习 C++ 过程中遇到的一些知识点。<br><a id="more"></a></p>
 <h1 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h1><p>命名空间里面包含了逻辑结构上相互关联的一组类、函数、模板等。命名空间像是一个容器，把某些在逻辑结构上相关的“对象”放在一起并与外界区分。<strong>特别的，命名空间里面的变量名或类名可以和命名空间外的变量名和类名重名。</strong></p>
-<h1 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h1><p>signed、unsigned、short、long 是 C++ 中的修饰符，当 short 和 long 用来修饰 int 时，int 可省略不写，表示短整型数据或长整型数据（也就是说，没有 short 和 long 这种数据类型，它们是修饰符）。</p>
+<h1 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h1><p>signed、unsigned、short、long 是 C++ 中的修饰符，当 short 和 long 用来修饰 int 时，int 可省略不写，表示短整型数据或长整型数据（也就是说，没有 short 和 long 这种数据类型）。</p>
+<h1 id="内存分配"><a href="#内存分配" class="headerlink" title="内存分配"></a>内存分配</h1><p>C++ 程序在运行时，计算机内存被分为程序代码区、全局数据区、堆区、栈区四个部分。</p>
+<h2 id="静态存储区分配"><a href="#静态存储区分配" class="headerlink" title="静态存储区分配"></a>静态存储区分配</h2><p>静态分配方式下的内存在程序编译的时候就已经分配好了且存在于程序的整个运行过程。例如 static 变量，其生命周期随程序的结束而结束，而飞像一般变量随函数或作用域的结束而结束。</p>
+<p>当然，除了 static 变量，还有一种全局对象 static object，也可以存放在静态存储区。</p>
+<h2 id="栈内存分配"><a href="#栈内存分配" class="headerlink" title="栈内存分配"></a>栈内存分配</h2><p>栈内存分配方式下的内存是存在于某作用域的一块空间。例如调用某个函数时，函数内局部变量的存储单元可以在栈上创建，函数执行结束时，这些内存单元会被自动释放。</p>
+<h2 id="堆内存分配"><a href="#堆内存分配" class="headerlink" title="堆内存分配"></a>堆内存分配</h2><p>堆内存分配，也称<strong>动态内存分配</strong>，通常使用 new 和 delete 关键字进行管理。堆内存空间可由用于手动分配和释放，所以其生存周期由用户指定，较为灵活。但频繁的分配、释放大小不同的堆空间会产生内存碎片。</p>
+<h1 id="函数重载"><a href="#函数重载" class="headerlink" title="函数重载"></a>函数重载</h1><p>函数重载指定义一个函数参数类型或参数个数不同的重名函数。当程序执行时，编译器将调用参数类型与函数形参类型一致的函数。</p>
+<h1 id="面向对象程序设计的特点"><a href="#面向对象程序设计的特点" class="headerlink" title="面向对象程序设计的特点"></a>面向对象程序设计的特点</h1><p>这部分内容都是概念性内容，应该算是所有面向对象的程序语言的基本特性。</p>
+<h2 id="抽象"><a href="#抽象" class="headerlink" title="抽象"></a>抽象</h2><p>抽象是指对具体问题或对象进行概括，抽出其公共性质并加以描述的过程。一般情况抽象分为数据抽象和行为抽象，其中数据抽象是指一个对象区别于另一个对象的特征，行为抽象是指某类对象的共同特征。</p>
+<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>封装是指将抽象得到的数据和行为相结合，隐藏对象属性和实现细节且仅对外提供公共访问方式的过程。</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>继承是指通过代码复用在保持原有类特性的基础上对子类进行具体说明的过程，通俗来说继承就是精简重复代码的手段。</p>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>多态是指一段程序能够处理多种类型对象的能力，函数重载就是实现多态的一种手段。在 C++ 中，多态可分为强制多态、重载多态、类型参数化多态和包含多态。</p>
+<h1 id="类"><a href="#类" class="headerlink" title="类"></a>类</h1><p>类一般是由类名、数据成员、函数成员三部分组成。定义类的基本形式为：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">name</span> &#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    外部接口</span><br><span class="line">  <span class="keyword">protected</span>:</span><br><span class="line">    保护性成员</span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    私有成员</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中 public、protected、private 表示访问控制属性，用于控制类成员的访问权限。特别的，没有分配控制属性的默认为 private 私有成员。<br><strong>public 成员可以在类外直接访问；protected 成员可以在子类中访问；private 成员只能被本类的成员函数访问。</strong></p>
+<h2 id="类的成员函数"><a href="#类的成员函数" class="headerlink" title="类的成员函数"></a>类的成员函数</h2><p>成员函数描述了类的行为。成员函数在类中只用说明其函数的返回类型、名字和参数表，而函数的具体实现在类外说明，其基本形式为：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">name</span> &#123;</span></span><br><span class="line">  函数的返回类型 函数名(参数列表)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">返回值类型 类名::函数名(参数列表) &#123;</span><br><span class="line">  函数体</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h1><p>在 C++ 中，对象是某类事物的实例，其声明形式为：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">类名 对象名;</span><br></pre></td></tr></table></figure></p>
+<hr>
 
       
     </div>
@@ -962,7 +990,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#命名空间"><span class="nav-number">1.</span> <span class="nav-text">命名空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修饰符"><span class="nav-number">2.</span> <span class="nav-text">修饰符</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#命名空间"><span class="nav-number">1.</span> <span class="nav-text">命名空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修饰符"><span class="nav-number">2.</span> <span class="nav-text">修饰符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内存分配"><span class="nav-number">3.</span> <span class="nav-text">内存分配</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态存储区分配"><span class="nav-number">3.1.</span> <span class="nav-text">静态存储区分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈内存分配"><span class="nav-number">3.2.</span> <span class="nav-text">栈内存分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆内存分配"><span class="nav-number">3.3.</span> <span class="nav-text">堆内存分配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数重载"><span class="nav-number">4.</span> <span class="nav-text">函数重载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#面向对象程序设计的特点"><span class="nav-number">5.</span> <span class="nav-text">面向对象程序设计的特点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象"><span class="nav-number">5.1.</span> <span class="nav-text">抽象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#封装"><span class="nav-number">5.2.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承"><span class="nav-number">5.3.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多态"><span class="nav-number">5.4.</span> <span class="nav-text">多态</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类"><span class="nav-number">6.</span> <span class="nav-text">类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#类的成员函数"><span class="nav-number">6.1.</span> <span class="nav-text">类的成员函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象"><span class="nav-number">7.</span> <span class="nav-text">对象</span></a></li></ol></div>
             
 
           </div>
@@ -996,7 +1024,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">561k</span>
+    <span title="站点总字数">563k</span>
   
 
   
@@ -1007,7 +1035,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">77:55</span>
+    <span title="站点阅读时长">78:10</span>
   
 </div>
 

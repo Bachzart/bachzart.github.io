@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="此文用来记录在进行 HIT_OS 课程时，遇到的一些跟汇编语言相关的问题（纯汇编小白角度）。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-11-16T15:31:20.538Z">
+<meta property="og:updated_time" content="2021-11-22T15:29:00.908Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HIT_OS 课程下的汇编笔记">
 <meta name="twitter:description" content="此文用来记录在进行 HIT_OS 课程时，遇到的一些跟汇编语言相关的问题（纯汇编小白角度）。">
@@ -484,7 +484,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-11-16 23:31:20" itemprop="dateModified" datetime="2021-11-16T23:31:20+08:00">2021-11-16</time>
+                <time title="修改时间：2021-11-22 23:29:00" itemprop="dateModified" datetime="2021-11-22T23:29:00+08:00">2021-11-22</time>
               
             
           </span>
@@ -548,7 +548,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.6k</span>
+                <span title="本文字数">2.1k</span>
               
 
               
@@ -562,7 +562,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">13 分钟</span>
+                <span title="阅读时长">17 分钟</span>
               
             </div>
           
@@ -604,6 +604,11 @@
 <p>参考文章：<a href="https://blog.csdn.net/bytxl/article/details/48391521" target="_blank" rel="noopener">Intel 80X86寄存器分类介绍</a></p>
 <h1 id="CF"><a href="#CF" class="headerlink" title="CF"></a>CF</h1><p>CF 是汇编中的进位标志位，主要用来反映运算是否产生进位或错位。如果运算结果的最高位产生了一个进位或错位，其值就为 1。与之对应的是两个跳转指令： jc 和 jnc，前者当 CF=1 时，跳转，后者反之。</p>
 <h1 id="jnc"><a href="#jnc" class="headerlink" title="jnc"></a>jnc</h1><p>这条语句的功能有点类似 C 语言中的 goto，但它与 goto 不同的地方在于，它需要有一个进位。换句话说，<code>jnc xxx</code>这条语句之前会有运算，运算的结果会影响 CF 的值。当 CF=0 时，它就会产生与 goto 一样的功能，反之，就跳过这条语句，就是 continue 的功能了。</p>
+<h1 id="lds"><a href="#lds" class="headerlink" title="lds"></a>lds</h1><p>lds 指从存储器取出 32 位地址的指令，格式有：<code>lds oprd1, oprd2</code>，其中，oprd1 为任意一个 16 位的存储器，oprd2 为 32 位的存储器。</p>
+<h1 id><a href="#" class="headerlink" title="[]"></a>[]</h1><p>汇编中的 [] 表示一种间接的取操作数的方式，有点类似于 C 语言中的指针概念，具体参考下面这个回答：<a href="https://zhidao.baidu.com/question/589305818891003645.html" target="_blank" rel="noopener">汇编语言加中括号表示什么？</a></p>
+<h1 id="rep-movsb"><a href="#rep-movsb" class="headerlink" title="rep movsb"></a>rep movsb</h1><p>rep movsb 其实是两个指令，但是一般是联合起来用的，同时在这条指令之前必然要对 cx 这个寄存器的值进行设置，因为 cx 的值代表了重复多少次。具体的细节可以参考这篇文章：<a href="https://blog.csdn.net/wbcuc/article/details/4069097" target="_blank" rel="noopener">汇编中 rep movsb</a></p>
+<h1 id="字、字节、位"><a href="#字、字节、位" class="headerlink" title="字、字节、位"></a>字、字节、位</h1><p>字（word）这个概念应该就是针对 cpu 而言的，不严谨的讲，字可能就是 cpu 一次性能处理的指令长度；而字节（byte）是一个存储概念，位（bit）也算是一个存储概念。比如，对 16 位 cpu 而言 1 个字长就是 2 个字节，16 位。所以，不同型号的 cpu ，其字的大小是不一样的，当然了，这样说可能不太严谨。</p>
+<h1 id="call"><a href="#call" class="headerlink" title="call"></a>call</h1><p>这个指令类似 C 语言中的 goto，但是这个指令执行完子程序后要回来，这是二者的区别。详细参考这个回答：<a href="https://zhidao.baidu.com/question/426793906.html" target="_blank" rel="noopener">汇编语言中的 call 是什么意思</a></p>
 <hr>
       
     </div>
@@ -997,7 +1002,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#entry"><span class="nav-number">1.</span> <span class="nav-text">entry</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mov"><span class="nav-number">2.</span> <span class="nav-text">mov</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xor"><span class="nav-number">3.</span> <span class="nav-text">xor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ax-ah-al"><span class="nav-number">4.</span> <span class="nav-text">ax ah al</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#int"><span class="nav-number">5.</span> <span class="nav-text">int</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基地址与段地址"><span class="nav-number">6.</span> <span class="nav-text">基地址与段地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#汇编中的"><span class="nav-number">7.</span> <span class="nav-text">汇编中的 #</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#汇编中的-1"><span class="nav-number">8.</span> <span class="nav-text">汇编中的 .</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#x86-下的寄存器"><span class="nav-number">9.</span> <span class="nav-text">x86 下的寄存器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CF"><span class="nav-number">10.</span> <span class="nav-text">CF</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jnc"><span class="nav-number">11.</span> <span class="nav-text">jnc</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#entry"><span class="nav-number">1.</span> <span class="nav-text">entry</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mov"><span class="nav-number">2.</span> <span class="nav-text">mov</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xor"><span class="nav-number">3.</span> <span class="nav-text">xor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ax-ah-al"><span class="nav-number">4.</span> <span class="nav-text">ax ah al</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#int"><span class="nav-number">5.</span> <span class="nav-text">int</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基地址与段地址"><span class="nav-number">6.</span> <span class="nav-text">基地址与段地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#汇编中的"><span class="nav-number">7.</span> <span class="nav-text">汇编中的 #</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#汇编中的-1"><span class="nav-number">8.</span> <span class="nav-text">汇编中的 .</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#x86-下的寄存器"><span class="nav-number">9.</span> <span class="nav-text">x86 下的寄存器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CF"><span class="nav-number">10.</span> <span class="nav-text">CF</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jnc"><span class="nav-number">11.</span> <span class="nav-text">jnc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lds"><span class="nav-number">12.</span> <span class="nav-text">lds</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">13.</span> <span class="nav-text">[]</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#rep-movsb"><span class="nav-number">14.</span> <span class="nav-text">rep movsb</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字、字节、位"><span class="nav-number">15.</span> <span class="nav-text">字、字节、位</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#call"><span class="nav-number">16.</span> <span class="nav-text">call</span></a></li></ol></div>
             
 
           </div>
@@ -1042,7 +1047,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">78:16</span>
+    <span title="站点阅读时长">78:22</span>
   
 </div>
 

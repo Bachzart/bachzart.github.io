@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="此文用于记录学习 C++ 过程中遇到的一些知识点。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-11-18T16:06:28.830Z">
+<meta property="og:updated_time" content="2021-11-19T16:15:06.622Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++ 的一些概念">
 <meta name="twitter:description" content="此文用于记录学习 C++ 过程中遇到的一些知识点。">
@@ -484,7 +484,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-11-19 00:06:28" itemprop="dateModified" datetime="2021-11-19T00:06:28+08:00">2021-11-19</time>
+                <time title="修改时间：2021-11-20 00:15:06" itemprop="dateModified" datetime="2021-11-20T00:15:06+08:00">2021-11-20</time>
               
             
           </span>
@@ -548,7 +548,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.5k</span>
+                <span title="本文字数">1.6k</span>
               
 
               
@@ -562,7 +562,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">12 分钟</span>
+                <span title="阅读时长">13 分钟</span>
               
             </div>
           
@@ -600,6 +600,12 @@
 <p>其中 public、protected、private 表示访问控制属性，用于控制类成员的访问权限。特别的，没有分配控制属性的默认为 private 私有成员。<br><strong>public 成员可以在类外直接访问；protected 成员可以在子类中访问；private 成员只能被本类的成员函数访问。</strong></p>
 <h2 id="类的成员函数"><a href="#类的成员函数" class="headerlink" title="类的成员函数"></a>类的成员函数</h2><p>成员函数描述了类的行为。成员函数在类中只用说明其函数的返回类型、名字和参数表，而函数的具体实现在类外说明，其基本形式为：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">name</span> &#123;</span></span><br><span class="line">  函数的返回类型 函数名(参数列表)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">返回值类型 类名::函数名(参数列表) &#123;</span><br><span class="line">  函数体</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h1 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h1><p>在 C++ 中，对象是某类事物的实例，其声明形式为：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">类名 对象名;</span><br></pre></td></tr></table></figure></p>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><p>引用与指针主要有三个区别：</p>
+<ol>
+<li>可以通过<code>*p = 0</code>或者<code>*p = NULL</code>来描述一个空指针，但不存在空引用。</li>
+<li>指针可在任何时间进行初始化操作，而引用只能定义时进行初始化操作。</li>
+<li>指针变量指向内存的一个存储单元，而引用只不过是原变量的一个别名而已。</li>
+</ol>
 <hr>
 
       
@@ -990,7 +996,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#命名空间"><span class="nav-number">1.</span> <span class="nav-text">命名空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修饰符"><span class="nav-number">2.</span> <span class="nav-text">修饰符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内存分配"><span class="nav-number">3.</span> <span class="nav-text">内存分配</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态存储区分配"><span class="nav-number">3.1.</span> <span class="nav-text">静态存储区分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈内存分配"><span class="nav-number">3.2.</span> <span class="nav-text">栈内存分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆内存分配"><span class="nav-number">3.3.</span> <span class="nav-text">堆内存分配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数重载"><span class="nav-number">4.</span> <span class="nav-text">函数重载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#面向对象程序设计的特点"><span class="nav-number">5.</span> <span class="nav-text">面向对象程序设计的特点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象"><span class="nav-number">5.1.</span> <span class="nav-text">抽象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#封装"><span class="nav-number">5.2.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承"><span class="nav-number">5.3.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多态"><span class="nav-number">5.4.</span> <span class="nav-text">多态</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类"><span class="nav-number">6.</span> <span class="nav-text">类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#类的成员函数"><span class="nav-number">6.1.</span> <span class="nav-text">类的成员函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象"><span class="nav-number">7.</span> <span class="nav-text">对象</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#命名空间"><span class="nav-number">1.</span> <span class="nav-text">命名空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修饰符"><span class="nav-number">2.</span> <span class="nav-text">修饰符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内存分配"><span class="nav-number">3.</span> <span class="nav-text">内存分配</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态存储区分配"><span class="nav-number">3.1.</span> <span class="nav-text">静态存储区分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈内存分配"><span class="nav-number">3.2.</span> <span class="nav-text">栈内存分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆内存分配"><span class="nav-number">3.3.</span> <span class="nav-text">堆内存分配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数重载"><span class="nav-number">4.</span> <span class="nav-text">函数重载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#面向对象程序设计的特点"><span class="nav-number">5.</span> <span class="nav-text">面向对象程序设计的特点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象"><span class="nav-number">5.1.</span> <span class="nav-text">抽象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#封装"><span class="nav-number">5.2.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承"><span class="nav-number">5.3.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多态"><span class="nav-number">5.4.</span> <span class="nav-text">多态</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类"><span class="nav-number">6.</span> <span class="nav-text">类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#类的成员函数"><span class="nav-number">6.1.</span> <span class="nav-text">类的成员函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象"><span class="nav-number">7.</span> <span class="nav-text">对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引用"><span class="nav-number">8.</span> <span class="nav-text">引用</span></a></li></ol></div>
             
 
           </div>
@@ -1035,7 +1041,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">78:16</span>
+    <span title="站点阅读时长">78:22</span>
   
 </div>
 

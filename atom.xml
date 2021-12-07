@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2021-11-19T16:15:06.622Z</updated>
+  <updated>2021-12-07T15:44:17.642Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>两件小事</title>
+    <link href="http://bachzart.github.io/2021/12/07/%E4%B8%A4%E4%BB%B6%E5%B0%8F%E4%BA%8B/"/>
+    <id>http://bachzart.github.io/2021/12/07/两件小事/</id>
+    <published>2021-12-07T15:03:54.000Z</published>
+    <updated>2021-12-07T15:44:17.642Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天发生了两件小事，都与水相关。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
+    
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
+    
+  </entry>
   
   <entry>
     <title>C++ 的一些概念</title>
@@ -445,30 +467,6 @@
       <category term="Guitar" scheme="http://bachzart.github.io/tags/Guitar/"/>
     
       <category term="Music" scheme="http://bachzart.github.io/tags/Music/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ZJU_DS_07-图（中）</title>
-    <link href="http://bachzart.github.io/2020/08/28/ZJU-DS-07-%E5%9B%BE%EF%BC%88%E4%B8%AD%EF%BC%89/"/>
-    <id>http://bachzart.github.io/2020/08/28/ZJU-DS-07-图（中）/</id>
-    <published>2020-08-28T12:10:40.000Z</published>
-    <updated>2020-09-20T13:30:37.409Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;本周课程主要包括图论中最短路径的问题和有关树的习题课，习题课笔记添加到前面对应题目的所在的文章中了。&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
-    
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
-    
-    
-      <category term="ZJU_DS" scheme="http://bachzart.github.io/tags/ZJU-DS/"/>
     
   </entry>
   

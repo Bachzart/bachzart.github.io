@@ -295,7 +295,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">43</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">44</span></a>
 
   </li>
         
@@ -407,6 +407,236 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2019/03/19/Brocade-VDX-VCS配置方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="I've been in my mind, it's such a fine line.">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/19/Brocade-VDX-VCS配置方法/" class="post-title-link" itemprop="url">Brocade VDX VCS配置方法</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-19 16:44:00" itemprop="dateCreated datePublished" datetime="2019-03-19T16:44:00+08:00">2019-03-19</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-09-20 21:36:24" itemprop="dateModified" datetime="2020-09-20T21:36:24+08:00">2020-09-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/Network/" itemprop="url" rel="index"><span itemprop="name">Network</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/03/19/Brocade-VDX-VCS配置方法/" class="leancloud_visitors" data-flag-title="Brocade VDX VCS配置方法">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">13 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p><code>VCS</code>全称叫做VCS矩阵部署模式，是将多台VDX系列任意型号的物理交换机设备通过万兆或者40G任意拓扑互联形成一个矩阵，进行统一配置、管理、监控(套话)。<br>注意：</p>
+<ul>
+<li>只能用10G或者40G链路实现，也就是说只能用物理接口（<del>port-channgel可以试试</del>）去实现，但是好在可以使用多条10G链路，且流量是负载均衡的。</li>
+<li>所有物理交换机的软件(就是系统版本)必须一致</li>
+<li>需手动设定VCS集群的IP号码，集群唯一的编号，从1-8192</li>
+<li>需手动设定VCS集群内部物理交换机rbridge-id编号，，该编号唯一，从1-239</li>
+<li>部署完VCS配置后会清空物理交换机内部已有的配置
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/19/Brocade-VDX-VCS配置方法/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </li></ul></div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1132,7 +1362,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1369,7 +1599,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">566k</span>
+    <span title="站点总字数">567k</span>
   
 
   
@@ -1380,7 +1610,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">78:33</span>
+    <span title="站点阅读时长">78:42</span>
   
 </div>
 
@@ -1867,6 +2097,8 @@
 
   
   
+    
+      
     
       
         

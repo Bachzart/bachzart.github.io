@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2021-12-08T15:29:58.588Z</updated>
+  <updated>2022-03-14T09:35:36.138Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++_string 容器的常见用法</title>
+    <link href="http://bachzart.github.io/2022/03/14/C-string-%E5%AE%B9%E5%99%A8%E7%9A%84%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/"/>
+    <id>http://bachzart.github.io/2022/03/14/C-string-容器的常见用法/</id>
+    <published>2022-03-14T03:18:09.000Z</published>
+    <updated>2022-03-14T09:35:36.138Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;C++ 提供了两种类型的字符串表示形式：C 语言类型和引入的 string 类。在某些场景下，使用新的 string 类来处理字符串十分方便，这里介绍一下其常见的用法。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
+    
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
+    
+      <category term="string" scheme="http://bachzart.github.io/tags/string/"/>
+    
+      <category term="STL" scheme="http://bachzart.github.io/tags/STL/"/>
+    
+  </entry>
   
   <entry>
     <title>两件小事</title>
@@ -439,34 +465,6 @@
     
     
       <category term="ZJU_DS" scheme="http://bachzart.github.io/tags/ZJU-DS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Prologue（プロローグ - 押尾コータロー）- 翻弹</title>
-    <link href="http://bachzart.github.io/2020/08/29/Prologue%EF%BC%88%E3%83%97%E3%83%AD%E3%83%AD%E3%83%BC%E3%82%B0%20-%20%E6%8A%BC%E5%B0%BE%E3%82%B3%E3%83%BC%E3%82%BF%E3%83%AD%E3%83%BC%EF%BC%89-%20%E7%BF%BB%E5%BC%B9/"/>
-    <id>http://bachzart.github.io/2020/08/29/Prologue（プロローグ - 押尾コータロー）- 翻弹/</id>
-    <published>2020-08-29T08:59:19.000Z</published>
-    <updated>2020-09-17T13:26:36.012Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;Prologue（プロローグ - 押尾コータロー）是押尾于 2003 年发行的专辑《Dramatic》中的一首较为简单的指弹曲子。&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
-    
-      <category term="Hobby" scheme="http://bachzart.github.io/categories/Life/Hobby/"/>
-    
-    
-      <category term="FingerStyle" scheme="http://bachzart.github.io/tags/FingerStyle/"/>
-    
-      <category term="Guitar" scheme="http://bachzart.github.io/tags/Guitar/"/>
-    
-      <category term="Music" scheme="http://bachzart.github.io/tags/Music/"/>
     
   </entry>
   

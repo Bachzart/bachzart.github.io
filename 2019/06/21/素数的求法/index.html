@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="定义介绍如何求素数之前，首先得明白素数是什么？所谓素数（也叫质数），是指大于1，且只能被1和其本身整除的数（此定义与合数的定义相对）。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-20T13:31:15.932Z">
+<meta property="og:updated_time" content="2022-03-14T10:49:15.784Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="素数的求法">
 <meta name="twitter:description" content="定义介绍如何求素数之前，首先得明白素数是什么？所谓素数（也叫质数），是指大于1，且只能被1和其本身整除的数（此定义与合数的定义相对）。">
@@ -296,7 +296,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">44</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">45</span></a>
 
   </li>
         
@@ -334,7 +334,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">23</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">25</span></a>
 
   </li>
 
@@ -484,7 +484,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-09-20 21:31:15" itemprop="dateModified" datetime="2020-09-20T21:31:15+08:00">2020-09-20</time>
+                <time title="修改时间：2022-03-14 18:49:15" itemprop="dateModified" datetime="2022-03-14T18:49:15+08:00">2022-03-14</time>
               
             
           </span>
@@ -562,7 +562,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">29 分钟</span>
+                <span title="阅读时长">30 分钟</span>
               
             </div>
           
@@ -589,13 +589,13 @@
 <h1 id="结合数学知识的优化"><a href="#结合数学知识的优化" class="headerlink" title="结合数学知识的优化"></a>结合数学知识的优化</h1><p>在理解了简便求法之后，来稍微思考一下，偶数能被2整除，所以肯定不是素数，如果一开始先判断<code>number</code>是不是偶数，然后在从 3 开始判断<code>number</code>是否能被奇数整除，如此一来，整个循环次数就是$(n - 3) / 2 + 1$（奇数每次增加<code>2</code>，所以分母为<code>2</code>）了，当$n$较大的时候，这个值是趋近于$n / 2$的。接着来改写一下代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Is_Prime</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">if</span>(number &lt;= <span class="number">1</span> || (number % <span class="number">2</span> == <span class="number">0</span> &amp;&amp; number != <span class="number">2</span>)) &#123;</span><br><span class="line">        flag = <span class="literal">false</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">3</span>; i &lt; number; i += <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span>(number % i == <span class="number">0</span>) &#123;</span><br><span class="line">                flag = <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> flag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>相比简便求法，将总体时间缩短了一半，时间复杂度是$O(n/2)$。</p>
 <p>实际上，循环区间可以缩减为$[3, \sqrt{number})$（此处的数学证明就不多说了😁，可以简单想一下，一个数$n$，对于$x &lt;= n$，如果$n$能整除$x$，则$n$也一定能整除$n/x$，这两个数中必定有一个大于等于$\sqrt{n}$），具体如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Is_Prime</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">if</span>(number &lt;= <span class="number">1</span> || (number % <span class="number">2</span> == <span class="number">0</span> &amp;&amp; number != <span class="number">2</span>)) &#123;</span><br><span class="line">        flag = <span class="literal">false</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">3</span>; i * i &lt; number; i += <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span>(number % i == <span class="number">0</span>) &#123;</span><br><span class="line">                flag = <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> flag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>上述代码块中用<code>i * i</code>来代表平方根的写法较为常见，这样此算法的时间复杂度就为$O(\sqrt{n})$。</p>
+<p>上述代码块中用<code>i * i</code>来代表平方根的写法较为常见，这样此算法的时间复杂度就为$O(\sqrt{n})$。<br>但是，<code>i * i</code>这种写法，会溢出，最好就使用<code>sqrt</code>函数。</p>
 <h1 id="转换思路"><a href="#转换思路" class="headerlink" title="转换思路"></a>转换思路</h1><p>按照之前的做法，无论<code>i</code>的值是素数还是合数，都对<code>number</code>进行了整除的运算。实际上，判断<code>number</code>是否为素数，只需要在<code>i</code>的值为素数的情况下，判断<code>number</code>是否能被<code>i</code>整除即可，若能整除则不是素数，反之则是。<br>在进行上述计算的过程中，需要提前准备一张素数表来帮助计算，具体如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Is_Prime</span><span class="params">(<span class="keyword">int</span> number, <span class="keyword">int</span> Prime[], <span class="keyword">int</span> NumOfPrime)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; NumOfPrime; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(a % Prime[i] == <span class="number">0</span>) &#123;</span><br><span class="line">            flag = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> flag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>在计算的数据较大的情况下，无法直接给定素数表，需要边判断边更新，这样会消耗掉一定的时间，所以上述算法的实际时间复杂度$O(n) ∈ (\sqrt{n}, n/2)$，但此法很适合需要构造素数表并求和的场景。</p>
 <p>紧接着刚才的思路，以2为例，在判断出其为素数后，其倍数$4、6、8、10...$就是非素数了，那么一次性将这些数字标记为非素数，也可以提高效率，这就是<strong>“筛选法”构造素数表</strong>，具体如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> IsPrime[NumOfPrime];</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">2</span>; i &lt; NumOfPrime; i++) &#123;</span><br><span class="line">    IsPrime[NumOfPrime] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Get_Prime</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x, i;</span><br><span class="line">    <span class="keyword">for</span>(x = <span class="number">2</span>; x &lt; MaxNum; x++) &#123;</span><br><span class="line">        <span class="keyword">if</span>( IsPrime[x] ) &#123;</span><br><span class="line">            <span class="keyword">for</span>(i = <span class="number">2</span>; i * x &lt; MaxNum; i++) &#123;</span><br><span class="line">                IsPrime[i*x] = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>尽管分析代码，粗略可得此算法时间的复杂度为$O(n * loglog{n})$，之所以是这个时间复杂度，是因为一次性计算出了$[0, MaxNum)$这个区间内的所有素数，此算法实际效果较好，对于需要构造素数表的情况很方便。</p>
+<p>粗略分析代码，可知此算法时间的复杂度为$O(n * loglog{n})$，之所以是这个时间复杂度，是因为一次性计算出了$[0, MaxNum)$这个区间内的所有素数，此算法实际效果较好，对于需要构造素数表的情况很方便。</p>
 <h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><p>上面介绍的“筛选法”，其实是古希腊数学家埃拉托色尼（Eratosthenes，274 B.C ~ 194 B.C）提出的一种筛选法，也称埃氏筛法。<br>实际上，结合利用素数表来判断素数的思路，对于合数而言，如果其只要被其最小质因子整除，即可判断其不是素数。那么去掉这部分重复计算的过程，不就可以提高效率了吗？<br>以16为例，在埃氏筛法中，$x = 2$时，筛选掉了$4、6、8、10...$，当$x = 3$时，又重复计算了$6、12...$等数。接着来修改下代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> Number[MaxNum];</span><br><span class="line"><span class="built_in">memset</span>(Number, <span class="literal">true</span>, <span class="keyword">sizeof</span>(Number));</span><br><span class="line"><span class="keyword">int</span> Prime[MaxNum], count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">2</span>; i &lt; MaxNum; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span>( Number[i] ) &#123;</span><br><span class="line">        Prime[count++] = i;</span><br><span class="line">        <span class="keyword">for</span>(j = <span class="number">1</span>; j &lt;= num &amp;&amp; i * Prime[j] &lt;= n; j++) &#123;</span><br><span class="line">            Number[i * Prime[j]] = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">if</span>(i % Prime[j] == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>上述代码的时间复杂度为$O(n)$（计算过程暂不深究），所以此种筛法也叫线性筛法，不过提升效率的代价就是多余的空间开销了，一般而言的优化都是这样的思路。</p>
+<p>上述代码的时间复杂度为$O(n)$（计算过程暂不深究），所以此种筛法也叫线性筛法，不过提升效率的代价就是多余的空间开销了，一般而言的优化都是用空间换时间这样的思路。</p>
 <hr>
       
     </div>
@@ -769,7 +769,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -891,7 +891,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">21</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1023,7 +1027,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">704k</span>
+    <span title="站点总字数">718k</span>
   
 
   
@@ -1034,7 +1038,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">97:47</span>
+    <span title="站点阅读时长">99:46</span>
   
 </div>
 

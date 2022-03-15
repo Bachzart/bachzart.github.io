@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="C++ 提供了两种类型的字符串表示形式：C 语言类型和引入的 string 类。在某些场景下，使用新的 string 类来处理字符串十分方便，这里介绍一下其常见的用法。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-03-14T09:35:36.138Z">
+<meta property="og:updated_time" content="2022-03-15T05:18:10.130Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++_string 容器的常见用法">
 <meta name="twitter:description" content="C++ 提供了两种类型的字符串表示形式：C 语言类型和引入的 string 类。在某些场景下，使用新的 string 类来处理字符串十分方便，这里介绍一下其常见的用法。">
@@ -467,12 +467,24 @@
                 
               
 
-              <time title="创建时间：2022-03-14 11:18:09 / 修改时间：17:35:36" itemprop="dateCreated datePublished" datetime="2022-03-14T11:18:09+08:00">2022-03-14</time>
+              <time title="创建时间：2022-03-14 11:18:09" itemprop="dateCreated datePublished" datetime="2022-03-14T11:18:09+08:00">2022-03-14</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-03-15 13:18:10" itemprop="dateModified" datetime="2022-03-15T13:18:10+08:00">2022-03-15</time>
               
             
           </span>
@@ -511,17 +523,6 @@
 
           
           
-            <span id="/2022/03/14/C-string-容器的常见用法/" class="leancloud_visitors" data-flag-title="C++_string 容器的常见用法">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
 
           
 
@@ -536,7 +537,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">6.1k</span>
+                <span title="本文字数">6.5k</span>
               
 
               
@@ -550,7 +551,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">51 分钟</span>
+                <span title="阅读时长">54 分钟</span>
               
             </div>
           
@@ -601,6 +602,8 @@
 <h2 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h2><p>replace 用来替换子串，基本用法：<code>str.replace(pos, len, str2)</code>或<code>str.replace(it1, it2, str2)</code>。第一种写法是把 str 从第 pos 个位置开始、长度为 len 的子串替换为 str2；第二种写法是把 str 的迭代器 [it1, it2) 范围的子串替换为 str2，如：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> str = <span class="string">"Maybe you will turn around."</span>;</span><br><span class="line">    <span class="built_in">string</span> str2 = <span class="string">"will not"</span>;</span><br><span class="line">    <span class="built_in">string</span> str3 = <span class="string">"surely"</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; str.replace(<span class="number">10</span>, <span class="number">4</span>, str2) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; str.replace(str.begin(), str.begin() + <span class="number">5</span>, str3) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* out:</span></span><br><span class="line"><span class="comment">Maybe you will not turn around.</span></span><br><span class="line"><span class="comment">surely you will not turn around.</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="to-string"><a href="#to-string" class="headerlink" title="to_string"></a>to_string</h2><p>to_string 用来将数值转化为字符串，基本用法：<code>string num = to_string(1234213)</code>，如：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> str = to_string(<span class="number">1234567</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    str = to_string(<span class="number">1.223563333</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* out:</span></span><br><span class="line"><span class="comment">1234567</span></span><br><span class="line"><span class="comment">1.223563</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
 <p>这个函数，处理某些问题时，可能有奇效。<br>参考链接：<a href="https://blog.csdn.net/u010455041/article/details/50097251" target="_blank" rel="noopener">c++ to_String()</a></p>
+<h2 id="append"><a href="#append" class="headerlink" title="append"></a>append</h2><p>append 函数用来向字符串末尾添加字符或另一个字符串，基本用法：<code>str.append(5, &#39;+&#39;)</code>或<code>str1.append(str2)</code>，如：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> str1 = <span class="string">"abcd"</span>, str2 = <span class="string">"efgh"</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; str1.append(<span class="number">5</span>, <span class="string">'+'</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; str1.append(str2) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* out:</span></span><br><span class="line"><span class="comment">abcd+++++</span></span><br><span class="line"><span class="comment">abcd+++++efgh</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<p>参考链接：<a href="https://blog.csdn.net/liuweiyuxiang/article/details/83687452" target="_blank" rel="noopener">C++中string append函数的使用与字符串拼接</a></p>
 
       
     </div>
@@ -998,7 +1001,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#访问"><span class="nav-number">2.</span> <span class="nav-text">访问</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#通过下标访问"><span class="nav-number">2.1.</span> <span class="nav-text">通过下标访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过迭代器访问"><span class="nav-number">2.2.</span> <span class="nav-text">通过迭代器访问</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#操作符"><span class="nav-number">3.</span> <span class="nav-text">操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#operator"><span class="nav-number">3.1.</span> <span class="nav-text">operator +=</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#compare-operator"><span class="nav-number">3.2.</span> <span class="nav-text">compare operator</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用函数"><span class="nav-number">4.</span> <span class="nav-text">常用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#length-size"><span class="nav-number">4.1.</span> <span class="nav-text">length/size</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#insert"><span class="nav-number">4.2.</span> <span class="nav-text">insert</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串中插入字符串"><span class="nav-number">4.2.1.</span> <span class="nav-text">字符串中插入字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串中插入多个字符"><span class="nav-number">4.2.2.</span> <span class="nav-text">字符串中插入多个字符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#erase"><span class="nav-number">4.3.</span> <span class="nav-text">erase</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#删除单个字符"><span class="nav-number">4.3.1.</span> <span class="nav-text">删除单个字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除一个区间内的字符"><span class="nav-number">4.3.2.</span> <span class="nav-text">删除一个区间内的字符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clear"><span class="nav-number">4.4.</span> <span class="nav-text">clear</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#substr"><span class="nav-number">4.5.</span> <span class="nav-text">substr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find"><span class="nav-number">4.6.</span> <span class="nav-text">find</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replace"><span class="nav-number">4.7.</span> <span class="nav-text">replace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#to-string"><span class="nav-number">4.8.</span> <span class="nav-text">to_string</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#访问"><span class="nav-number">2.</span> <span class="nav-text">访问</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#通过下标访问"><span class="nav-number">2.1.</span> <span class="nav-text">通过下标访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过迭代器访问"><span class="nav-number">2.2.</span> <span class="nav-text">通过迭代器访问</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#操作符"><span class="nav-number">3.</span> <span class="nav-text">操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#operator"><span class="nav-number">3.1.</span> <span class="nav-text">operator +=</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#compare-operator"><span class="nav-number">3.2.</span> <span class="nav-text">compare operator</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用函数"><span class="nav-number">4.</span> <span class="nav-text">常用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#length-size"><span class="nav-number">4.1.</span> <span class="nav-text">length/size</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#insert"><span class="nav-number">4.2.</span> <span class="nav-text">insert</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串中插入字符串"><span class="nav-number">4.2.1.</span> <span class="nav-text">字符串中插入字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串中插入多个字符"><span class="nav-number">4.2.2.</span> <span class="nav-text">字符串中插入多个字符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#erase"><span class="nav-number">4.3.</span> <span class="nav-text">erase</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#删除单个字符"><span class="nav-number">4.3.1.</span> <span class="nav-text">删除单个字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除一个区间内的字符"><span class="nav-number">4.3.2.</span> <span class="nav-text">删除一个区间内的字符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clear"><span class="nav-number">4.4.</span> <span class="nav-text">clear</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#substr"><span class="nav-number">4.5.</span> <span class="nav-text">substr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find"><span class="nav-number">4.6.</span> <span class="nav-text">find</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replace"><span class="nav-number">4.7.</span> <span class="nav-text">replace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#to-string"><span class="nav-number">4.8.</span> <span class="nav-text">to_string</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#append"><span class="nav-number">4.9.</span> <span class="nav-text">append</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1032,7 +1035,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">718k</span>
+    <span title="站点总字数">724k</span>
   
 
   
@@ -1043,53 +1046,19 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">99:46</span>
+    <span title="站点阅读时长">100:35</span>
   
 </div>
 
 
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动</div>
 
 
 
-  <span class="post-meta-divider">|</span>
 
 
-
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.0</div>
-
-
-
-  <div class="footer-custom">Hosted by <a href="https://pages.github.com" class="theme-link" rel="noopener" target="_blank">GitHub Pages</a></div>
 
 
         
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="post-meta-item-icon">
-      <i class="fa fa-user"></i>
-    </span>
-    <span class="site-uv" title="总访客量">
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-    </span>
-  
-
-  
-    <span class="post-meta-divider">|</span>
-  
-
-  
-    <span class="post-meta-item-icon">
-      <i class="fa fa-eye"></i>
-    </span>
-    <span class="site-pv" title="总访问量">
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-    </span>
-  
-</div>
-
 
 
 

@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="Intro从入门到入土系列之 PAT 甲级 题库快乐🤣启动。长期更新ing~">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-02-26T16:17:25.289Z">
+<meta property="og:updated_time" content="2022-03-17T15:19:18.957Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PAT (Advanced Level) Practice">
 <meta name="twitter:description" content="Intro从入门到入土系列之 PAT 甲级 题库快乐🤣启动。长期更新ing~">
@@ -296,7 +296,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">45</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">46</span></a>
 
   </li>
         
@@ -334,7 +334,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">25</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">27</span></a>
 
   </li>
 
@@ -484,7 +484,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2022-02-27 00:17:25" itemprop="dateModified" datetime="2022-02-27T00:17:25+08:00">2022-02-27</time>
+                <time title="修改时间：2022-03-17 23:19:18" itemprop="dateModified" datetime="2022-03-17T23:19:18+08:00">2022-03-17</time>
               
             
           </span>
@@ -764,7 +764,8 @@
 <h2 id="Code-44"><a href="#Code-44" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">10000</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> str1[MAXN], str2[MAXN];</span><br><span class="line">    fgets(str1, MAXN, <span class="built_in">stdin</span>);</span><br><span class="line">    fgets(str2, MAXN, <span class="built_in">stdin</span>);</span><br><span class="line">    <span class="keyword">int</span> times[<span class="number">128</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">char</span> *p = str2;</span><br><span class="line">    <span class="keyword">while</span>(*p != <span class="string">'\0'</span>) &#123;</span><br><span class="line">        times[*p++] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    p = str1;</span><br><span class="line">    <span class="keyword">while</span>(*p != <span class="string">'\0'</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!times[*p]) &#123;</span><br><span class="line">            <span class="built_in">putchar</span>(*p);</span><br><span class="line">        &#125;</span><br><span class="line">        p++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="1051-Pop-Sequence"><a href="#1051-Pop-Sequence" class="headerlink" title="1051 Pop Sequence"></a>1051 Pop Sequence</h1><h2 id="Analysis-45"><a href="#Analysis-45" class="headerlink" title="Analysis"></a>Analysis</h2><p>题目大意是给定一个栈的容量、出战序列长度和可能的出栈序列，判断在当前栈的长度下，出栈序列是否合法，若是，输出<code>YES</code>，反之，输出<code>NO</code>。</p>
 <p>按照题目的要求模拟栈的操作即可，使用 C++ 的<code>stack</code>容器可以很方便的完成这个需求。</p>
-<h2 id="Code-45"><a href="#Code-45" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1010</span>;</span><br><span class="line"><span class="keyword">int</span> arr[maxn] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"><span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m, n, t;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>, &amp;m, &amp;n, &amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--) &#123;</span><br><span class="line">        <span class="keyword">while</span>(!st.empty()) &#123;	<span class="comment">//clear stack</span></span><br><span class="line">            st.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> current = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            st.push(i);</span><br><span class="line">            <span class="keyword">if</span>(st.size() &gt; m) &#123;</span><br><span class="line">                flag = <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(!st.empty() &amp;&amp; st.top() == arr[current]) &#123;</span><br><span class="line">                st.pop();</span><br><span class="line">                current++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(st.empty() == <span class="literal">true</span> &amp;&amp; flag == <span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"YES\n"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"NO\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意每次判断要让栈清空，不然会影响判断。不过与其反复清空栈，不如直接新建一个。</p>
+<h2 id="Code-45"><a href="#Code-45" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1000</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> seq[maxn] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m, k, tmp;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; m &gt;&gt; n &gt;&gt; k;</span><br><span class="line">    <span class="keyword">while</span>(k--) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; seq[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            st.push(i);</span><br><span class="line">            <span class="keyword">if</span>(st.size() &gt; m) &#123;</span><br><span class="line">                flag = <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(!st.empty() &amp;&amp; st.top() == seq[index]) &#123;</span><br><span class="line">                st.pop();</span><br><span class="line">                index++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(st.empty() &amp;&amp; flag) <span class="built_in">cout</span> &lt;&lt; <span class="string">"YES"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">"NO"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="1052-Linked-List-Sorting"><a href="#1052-Linked-List-Sorting" class="headerlink" title="1052 Linked List Sorting"></a>1052 Linked List Sorting</h1><h2 id="Analysis-46"><a href="#Analysis-46" class="headerlink" title="Analysis"></a>Analysis</h2><p>题目背景是属于链表的应用，实际是模拟链表的操作，使用静态链表模拟较为方便。</p>
 <p>静态链表需要借助散列的概念，借助结构数组，使用题目给定的地址对应数组的下标，可以较为方便的存储结点值和下一个元素的地址。</p>
 <p>题目要求的排序可以使用<code>sort</code>函数来完成，此时要注意由于题目可能会输入无效结点，所以需要增加一个<code>flag</code>来判断是否属于无效结点，这样<code>sort</code>函数才能将有效结点按序排好，并将无效结点排在最后一个有效结点的后面。</p>
@@ -1085,7 +1086,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">46</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1211,7 +1212,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1343,7 +1348,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">724k</span>
+    <span title="站点总字数">726k</span>
   
 
   
@@ -1354,7 +1359,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">100:35</span>
+    <span title="站点阅读时长">100:47</span>
   
 </div>
 

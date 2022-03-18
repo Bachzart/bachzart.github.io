@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2022-03-16T15:28:56.030Z</updated>
+  <updated>2022-03-18T14:16:18.212Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++_stack&amp;queue容器的基本用法</title>
+    <link href="http://bachzart.github.io/2022/03/18/C-stack-queue%E5%AE%B9%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/"/>
+    <id>http://bachzart.github.io/2022/03/18/C-stack-queue容器的基本用法/</id>
+    <published>2022-03-18T13:37:48.000Z</published>
+    <updated>2022-03-18T14:16:18.212Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文只介绍 stack 和 queue 的一些常见用法，不着重讨论如何实现的问题。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
+    
+    
+      <category term="STL" scheme="http://bachzart.github.io/tags/STL/"/>
+    
+      <category term="stack" scheme="http://bachzart.github.io/tags/stack/"/>
+    
+      <category term="queue" scheme="http://bachzart.github.io/tags/queue/"/>
+    
+  </entry>
   
   <entry>
     <title>C++_string 容器的常见用法</title>
@@ -34,11 +60,11 @@
       <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
     
     
+      <category term="STL" scheme="http://bachzart.github.io/tags/STL/"/>
+    
       <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
     
       <category term="string" scheme="http://bachzart.github.io/tags/string/"/>
-    
-      <category term="STL" scheme="http://bachzart.github.io/tags/STL/"/>
     
   </entry>
   
@@ -431,30 +457,6 @@
     
       &lt;blockquote&gt;
 &lt;p&gt;本周将会介绍几种常见的排序算法。&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
-    
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
-    
-    
-      <category term="ZJU_DS" scheme="http://bachzart.github.io/tags/ZJU-DS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ZJU_DS_08-图（下）</title>
-    <link href="http://bachzart.github.io/2020/08/31/ZJU-DS-08-%E5%9B%BE%EF%BC%88%E4%B8%8B%EF%BC%89/"/>
-    <id>http://bachzart.github.io/2020/08/31/ZJU-DS-08-图（下）/</id>
-    <published>2020-08-31T04:07:25.000Z</published>
-    <updated>2020-09-20T13:30:32.533Z</updated>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;这周课程主要介绍了图的另外两个应用：最小生成树和拓扑排序，顺带讲了一下关键路径&lt;/p&gt;
 &lt;/blockquote&gt;
     
     </summary>

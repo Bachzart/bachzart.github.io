@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[剑指 Offer（第二版）刷题记录]]></title>
+    <url>%2F2022%2F03%2F20%2F%E5%89%91%E6%8C%87-Offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95%2F</url>
+    <content type="text"><![CDATA[原来就看到很多人都在刷这本书，最近有时间，也来做一下这本书上的题。题目来源于 Leetcode。 慢慢刷吧，看看需要多久能刷完。开始日期：2022-3-20。 废话不多说，直接看题目。 03. 数组中重复的数字 LCOFAnalysis这个题有点意思，不同水平的人给的解法应该都不一样。题目的要求很简单，只要找出重复的元素即可，所以，在这一点上根据不同的要求，应该有很多不同的做法。作为开头的第一道题，先偷懒，直接哈希，完事算了，以后再来想其他的思路吧😂。 Code1234567891011121314class Solution &#123;public: int findRepeatNumber(vector&lt;int&gt;&amp; nums) &#123; int n = nums.size(), i; int times[100000] = &#123;0&#125;; for(i = 0; i &lt; n; i++) &#123; times[nums[i]]++; &#125; for(i = 0; i &lt; n; i++) &#123; if(times[i] &gt; 1) break; &#125; return i; &#125;&#125;; 05. 替换空格Analysis这个题一开始想省事，直接用 string 的 replace 函数进行替换，结果发现自己用的不太熟悉...摸索了一会才算是弄出来，结果提交上去内存消耗，竟然比直接新建一个 string 更大...可想而知，replace 可能新建了一个更大的 string 用来返回。不过倒是又巩固了一下 replace 的用法... Codeversion 11234567891011class Solution &#123;public: string replaceSpace(string s) &#123; string ret; for(int i = 0; i &lt; s.length(); i++) &#123; if(s[i] == ' ') ret += "%20"; else ret += s[i]; &#125; return ret; &#125;&#125;; version 212345678910class Solution &#123;public: string replaceSpace(string s) &#123; string ret; for(int i = 0; i &lt; s.length(); i++) &#123; if(s[i] == ' ') s.replace(i, 1, "%20"); &#125; return s; &#125;&#125;;]]></content>
+      <categories>
+        <category>CS</category>
+        <category>Data Structures and Algorithms</category>
+      </categories>
+      <tags>
+        <tag>剑指 Offer</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[C++_stack&queue容器的基本用法]]></title>
     <url>%2F2022%2F03%2F18%2FC-stack-queue%E5%AE%B9%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95%2F</url>
     <content type="text"><![CDATA[本文只介绍 stack 和 queue 的一些常见用法，不着重讨论如何实现的问题。 intro与其他 STL 容器一样，使用 stack 与 queue，需要分别引入头文件 stack 和 queue。 stack栈（stack）是一种后进先出（FILO）的数据结构。就好比放盘子一样，在不将叠放好的盘子全部举起的情况下，只能先依次拿最上面的盘子使用（这个比方可能不太恰当）。栈的声明比较简单，直接：1stack&lt;int&gt; st; 其中，int可以换成其他数据类型、结构体或容器。接下来，在看一下与栈相关的函数。 emptyempty 用来判断栈是否为空，空就返回true，否则就返回false，如：1234567891011121314#include &lt;iostream&gt;#include &lt;stack&gt;using namespace std;int main() &#123; stack&lt;char&gt; st; if(st.empty()) cout &lt;&lt; "emtpy"; else cout &lt;&lt; "no"; return 0;&#125;/*out:empty*/ poppop 用来弹出栈顶元素，如：1st.pop(); pushpush 用来将元素压入栈内，如：1st.push(); sizesize 用来返回栈内元素的个数，如：12345678910111213141516#include &lt;iostream&gt;#include &lt;stack&gt;using namespace std;int main() &#123; stack&lt;int&gt; st; st.push(1); st.push(2); st.push(3); cout &lt;&lt; st.size(); return 0;&#125;/*out:3*/ toptop 用来返回栈顶元素，如：12345678910111213141516#include &lt;iostream&gt;#include &lt;stack&gt;using namespace std;int main() &#123; stack&lt;int&gt; st; st.push(1); st.push(2); st.push(3); int a = st.top(); cout &lt;&lt; a; return 0;&#125;/*out:3 注意使用前先判断栈不空，不然会产生未知错误。 queue这里介绍的队列（queue）只是一种先进先出（FIFO）的数据结构。就跟生活中的排队是一回事，前排的人先通过。队列的声明与栈一样，如：1queue&lt;int&gt; q; 其中，int可以换成其他数据类型、结构体或容器。接下来，在看一下与队列相关的函数。 emptyempty 用来判断队列是否为空，空就返回true，否则就返回false，用法与栈一致。 pushpush 用来将元素压入队内，如：12queue&lt;int&gt; q;q.push(1); front/backfront 和 back 分别用来返回队首与队尾元素，如：1234queue&lt;int&gt; q;q.push(1);int a = q.front();int b = q.back(); poppop 用来弹出队首元素，如：123queue&lt;int&gt; q;q.push(1);q.pop(); sizesize 用来返回队列内元素的个数，用法与栈一致。]]></content>
@@ -23,9 +35,9 @@
         <category>C/C++</category>
       </categories>
       <tags>
-        <tag>STL</tag>
         <tag>C/C++</tag>
         <tag>string</tag>
+        <tag>STL</tag>
       </tags>
   </entry>
   <entry>

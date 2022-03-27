@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2022-03-26T07:32:51.946Z</updated>
+  <updated>2022-03-27T10:21:50.620Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode_14 天算法入门_day5</title>
+    <link href="http://bachzart.github.io/2022/03/27/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day5/"/>
+    <id>http://bachzart.github.io/2022/03/27/Leetcode-14-天算法入门-day5/</id>
+    <published>2022-03-27T08:41:59.000Z</published>
+    <updated>2022-03-27T10:21:50.620Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;还是 two pointers 啊。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+    
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+      <category term="two pointers" scheme="http://bachzart.github.io/tags/two-pointers/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode_14 天算法入门_day4</title>
@@ -200,11 +224,11 @@
       <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
     
     
+      <category term="STL" scheme="http://bachzart.github.io/tags/STL/"/>
+    
       <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
     
       <category term="string" scheme="http://bachzart.github.io/tags/string/"/>
-    
-      <category term="STL" scheme="http://bachzart.github.io/tags/STL/"/>
     
   </entry>
   
@@ -443,28 +467,6 @@
     
     
       <category term="Nand2Tetris" scheme="http://bachzart.github.io/tags/Nand2Tetris/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MathJax 语法快速指南</title>
-    <link href="http://bachzart.github.io/2020/09/17/MathJax-%E8%AF%AD%E6%B3%95%E5%BF%AB%E9%80%9F%E6%8C%87%E5%8D%97/"/>
-    <id>http://bachzart.github.io/2020/09/17/MathJax-语法快速指南/</id>
-    <published>2020-09-17T10:28:45.000Z</published>
-    <updated>2020-09-17T14:48:21.391Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;MathJax 是一个 JavaScript 库，可以让你直接用 Latex 语法来书写数学公式，十分方便。&lt;br&gt;想深入了解 MathJax，点击链接：&lt;a href=&quot;https://mathjax-chinese-doc.readthedocs.io/en/latest/mathjax.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;MathJax&lt;/a&gt;，本文旨在整理一些平时写文档时常用的一些语法，便于复查。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Tools" scheme="http://bachzart.github.io/categories/Tools/"/>
-    
-      <category term="MathJax" scheme="http://bachzart.github.io/categories/Tools/MathJax/"/>
-    
-    
-      <category term="MathJax" scheme="http://bachzart.github.io/tags/MathJax/"/>
     
   </entry>
   

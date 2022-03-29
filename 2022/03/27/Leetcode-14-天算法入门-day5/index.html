@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="还是 two pointers 啊。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-03-28T10:23:43.227Z">
+<meta property="og:updated_time" content="2022-03-29T16:56:10.038Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode_14 天算法入门_day5">
 <meta name="twitter:description" content="还是 two pointers 啊。">
@@ -296,7 +296,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">54</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">55</span></a>
 
   </li>
         
@@ -334,7 +334,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">33</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">34</span></a>
 
   </li>
 
@@ -484,7 +484,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2022-03-28 18:23:43" itemprop="dateModified" datetime="2022-03-28T18:23:43+08:00">2022-03-28</time>
+                <time title="修改时间：2022-03-30 00:56:10" itemprop="dateModified" datetime="2022-03-30T00:56:10+08:00">2022-03-30</time>
               
             
           </span>
@@ -582,7 +582,7 @@
 <h3 id="method-3-1"><a href="#method-3-1" class="headerlink" title="method 3"></a>method 3</h3><p>用栈也可以做。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">removeNthFromEnd</span><span class="params">(ListNode* head, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode *dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>, head);</span><br><span class="line">        <span class="built_in">stack</span>&lt;ListNode*&gt; st;</span><br><span class="line">        ListNode *tmp = dummy;</span><br><span class="line">        <span class="keyword">while</span>(tmp != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            st.push(tmp);</span><br><span class="line">            tmp = tmp-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            st.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode *pre = st.top();</span><br><span class="line">        tmp = pre-&gt;next;</span><br><span class="line">        pre-&gt;next = tmp-&gt;next;</span><br><span class="line">        <span class="keyword">delete</span>(tmp);</span><br><span class="line">        pre = dummy-&gt;next;</span><br><span class="line">        <span class="keyword">delete</span>(dummy);</span><br><span class="line">        <span class="keyword">return</span> pre;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <h3 id="method-4"><a href="#method-4" class="headerlink" title="method 4"></a>method 4</h3><p>看评论，发现竟然还能用递归做😂，递归边界是遍历到链表表尾，判定条件是访问的结点数等于要删除的结点位置。不得不说，用递归来解决这个问题很巧。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> cur = <span class="number">0</span>;</span><br><span class="line">    <span class="function">ListNode* <span class="title">removeNthFromEnd</span><span class="params">(ListNode* head, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        head-&gt;next = removeNthFromEnd(head-&gt;next, n);</span><br><span class="line">        cur++;</span><br><span class="line">        <span class="keyword">if</span>(n == cur) <span class="keyword">return</span> head-&gt;next;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>今天是两个很常规的题目，不算难题，自己想也比较容易解决，就是可能想不到多种方法来解决这些问题。还有一个很奇怪的地方，按理说，即便加了哑结点，在不改变 head 的情况下，直接返回 head 应该是不会错误的。但是，address sanitizer 会报错，是有潜在的内存错误吗？🤔</p>
-
+<hr>
       
     </div>
 
@@ -759,7 +759,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-count">55</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -901,7 +901,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">31</span>
+                      
+                    
+                    <span class="site-state-item-count">32</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1033,7 +1035,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">767k</span>
+    <span title="站点总字数">774k</span>
   
 
   
@@ -1044,7 +1046,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">106:32</span>
+    <span title="站点阅读时长">107:30</span>
   
 </div>
 

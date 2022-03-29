@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2022-03-28T13:42:15.910Z</updated>
+  <updated>2022-03-29T17:01:40.975Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -17,11 +17,35 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Leetcode_14 天算法入门_day7</title>
+    <link href="http://bachzart.github.io/2022/03/29/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day7/"/>
+    <id>http://bachzart.github.io/2022/03/29/Leetcode-14-天算法入门-day7/</id>
+    <published>2022-03-29T14:05:59.000Z</published>
+    <updated>2022-03-29T17:01:40.975Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;滑动窗口还没练够啊，就到 DFS 了...14 天显然不够用。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+    
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+      <category term="DFS&amp;BFS" scheme="http://bachzart.github.io/tags/DFS-BFS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Leetcode_14 天算法入门-day6</title>
     <link href="http://bachzart.github.io/2022/03/28/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day6/"/>
     <id>http://bachzart.github.io/2022/03/28/Leetcode-14-天算法入门-day6/</id>
     <published>2022-03-28T10:23:12.000Z</published>
-    <updated>2022-03-28T13:42:15.910Z</updated>
+    <updated>2022-03-29T16:56:14.669Z</updated>
     
     <summary type="html">
     
@@ -45,7 +69,7 @@
     <link href="http://bachzart.github.io/2022/03/27/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day5/"/>
     <id>http://bachzart.github.io/2022/03/27/Leetcode-14-天算法入门-day5/</id>
     <published>2022-03-27T08:41:59.000Z</published>
-    <updated>2022-03-28T10:23:43.227Z</updated>
+    <updated>2022-03-29T16:56:10.038Z</updated>
     
     <summary type="html">
     
@@ -71,7 +95,7 @@
     <link href="http://bachzart.github.io/2022/03/26/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day4/"/>
     <id>http://bachzart.github.io/2022/03/26/Leetcode-14-天算法入门-day4/</id>
     <published>2022-03-26T06:52:16.000Z</published>
-    <updated>2022-03-26T07:32:51.946Z</updated>
+    <updated>2022-03-29T16:56:05.361Z</updated>
     
     <summary type="html">
     
@@ -95,7 +119,7 @@
     <link href="http://bachzart.github.io/2022/03/25/PAT-2022-%E6%98%A5-%E4%B9%99%E7%BA%A7%E7%9C%9F%E9%A2%98%E8%AF%95%E6%B0%B4/"/>
     <id>http://bachzart.github.io/2022/03/25/PAT-2022-春-乙级真题试水/</id>
     <published>2022-03-25T09:39:05.000Z</published>
-    <updated>2022-03-25T12:22:25.646Z</updated>
+    <updated>2022-03-29T16:55:59.958Z</updated>
     
     <summary type="html">
     
@@ -117,7 +141,7 @@
     <link href="http://bachzart.github.io/2022/03/25/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day3/"/>
     <id>http://bachzart.github.io/2022/03/25/Leetcode-14-天算法入门-day3/</id>
     <published>2022-03-25T03:23:03.000Z</published>
-    <updated>2022-03-25T09:36:21.412Z</updated>
+    <updated>2022-03-29T16:55:56.421Z</updated>
     
     <summary type="html">
     
@@ -141,7 +165,7 @@
     <link href="http://bachzart.github.io/2022/03/24/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day2/"/>
     <id>http://bachzart.github.io/2022/03/24/Leetcode-14-天算法入门-day2/</id>
     <published>2022-03-24T04:59:50.000Z</published>
-    <updated>2022-03-24T07:05:37.159Z</updated>
+    <updated>2022-03-29T16:55:51.581Z</updated>
     
     <summary type="html">
     
@@ -165,7 +189,7 @@
     <link href="http://bachzart.github.io/2022/03/23/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day1/"/>
     <id>http://bachzart.github.io/2022/03/23/Leetcode-14-天算法入门-day1/</id>
     <published>2022-03-23T10:43:14.000Z</published>
-    <updated>2022-03-24T05:01:53.154Z</updated>
+    <updated>2022-03-29T16:55:44.021Z</updated>
     
     <summary type="html">
     
@@ -189,7 +213,7 @@
     <link href="http://bachzart.github.io/2022/03/20/%E5%89%91%E6%8C%87-Offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
     <id>http://bachzart.github.io/2022/03/20/剑指-Offer（第二版）刷题记录/</id>
     <published>2022-03-20T12:39:57.000Z</published>
-    <updated>2022-03-21T06:21:37.416Z</updated>
+    <updated>2022-03-29T16:57:11.685Z</updated>
     
     <summary type="html">
     
@@ -211,7 +235,7 @@
     <link href="http://bachzart.github.io/2022/03/18/C-stack-queue%E5%AE%B9%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/"/>
     <id>http://bachzart.github.io/2022/03/18/C-stack-queue容器的基本用法/</id>
     <published>2022-03-18T13:37:48.000Z</published>
-    <updated>2022-03-18T14:16:18.212Z</updated>
+    <updated>2022-03-29T16:57:33.773Z</updated>
     
     <summary type="html">
     
@@ -237,7 +261,7 @@
     <link href="http://bachzart.github.io/2022/03/14/C-string-%E5%AE%B9%E5%99%A8%E7%9A%84%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/"/>
     <id>http://bachzart.github.io/2022/03/14/C-string-容器的常见用法/</id>
     <published>2022-03-14T03:18:09.000Z</published>
-    <updated>2022-03-16T15:28:56.030Z</updated>
+    <updated>2022-03-29T16:57:29.701Z</updated>
     
     <summary type="html">
     
@@ -449,28 +473,6 @@
     
     
       <category term="Music" scheme="http://bachzart.github.io/tags/Music/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Nand2Tetris_Part1_02</title>
-    <link href="http://bachzart.github.io/2020/09/21/Nand2Tetris-Part1-02/"/>
-    <id>http://bachzart.github.io/2020/09/21/Nand2Tetris-Part1-02/</id>
-    <published>2020-09-21T15:16:04.000Z</published>
-    <updated>2020-09-28T11:47:42.088Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本周的主题是 &lt;strong&gt;Boolean Arithmetic and the ALU Roadmap&lt;/strong&gt;，旨在介绍如何构建加法器（adder）和算术逻辑单元（Arithmetic Logic Unit，ALU），学习路线依然还是从简单到复杂。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
-    
-      <category term="Computer Organization" scheme="http://bachzart.github.io/categories/CS/Computer-Organization/"/>
-    
-    
-      <category term="Nand2Tetris" scheme="http://bachzart.github.io/tags/Nand2Tetris/"/>
     
   </entry>
   

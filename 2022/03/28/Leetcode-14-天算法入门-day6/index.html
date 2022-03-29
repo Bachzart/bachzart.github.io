@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="今天是滑动窗口了，终于不是双指针了，感觉双指针的题还没做够😂。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-03-28T13:42:15.910Z">
+<meta property="og:updated_time" content="2022-03-29T16:56:14.669Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode_14 天算法入门-day6">
 <meta name="twitter:description" content="今天是滑动窗口了，终于不是双指针了，感觉双指针的题还没做够😂。">
@@ -296,7 +296,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">54</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">55</span></a>
 
   </li>
         
@@ -334,7 +334,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">33</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">34</span></a>
 
   </li>
 
@@ -467,12 +467,24 @@
                 
               
 
-              <time title="创建时间：2022-03-28 18:23:12 / 修改时间：21:42:15" itemprop="dateCreated datePublished" datetime="2022-03-28T18:23:12+08:00">2022-03-28</time>
+              <time title="创建时间：2022-03-28 18:23:12" itemprop="dateCreated datePublished" datetime="2022-03-28T18:23:12+08:00">2022-03-28</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-03-30 00:56:14" itemprop="dateModified" datetime="2022-03-30T00:56:14+08:00">2022-03-30</time>
               
             
           </span>
@@ -571,7 +583,7 @@
 <h3 id="method-2-1"><a href="#method-2-1" class="headerlink" title="method 2"></a>method 2</h3><p>实际上，这个题也可以只用一个 vector，但是需要一个变量 diff 来保存当前子串是否与 s1 存在字符个数不相等的字符个数。不过，一时半会，好像还是看不明白。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* method 2: just use one vector */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">checkInclusion</span><span class="params">(<span class="built_in">string</span> s1, <span class="built_in">string</span> s2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = s1.length(), m = s2.length();</span><br><span class="line">        <span class="keyword">if</span>(n &gt; m) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; cnt(<span class="number">26</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            --cnt[s1[i] - <span class="string">'a'</span>];</span><br><span class="line">            ++cnt[s2[i] - <span class="string">'a'</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> diff = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> c: cnt) &#123;</span><br><span class="line">            <span class="keyword">if</span>(c != <span class="number">0</span>) diff++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(diff == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = n; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> x = s2[i] - <span class="string">'a'</span>, y = s2[i - n] - <span class="string">'a'</span>;</span><br><span class="line">            <span class="keyword">if</span>(x == y) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(cnt[x] == <span class="number">0</span>) diff++;</span><br><span class="line">            cnt[x]++;</span><br><span class="line">            <span class="keyword">if</span>(cnt[x] == <span class="number">0</span>) diff--;</span><br><span class="line">            <span class="keyword">if</span>(cnt[y] == <span class="number">0</span>) diff++;</span><br><span class="line">            cnt[y]--;</span><br><span class="line">            <span class="keyword">if</span>(cnt[y] == <span class="number">0</span>) diff--;</span><br><span class="line">            <span class="keyword">if</span>(diff == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <h3 id="method-3-1"><a href="#method-3-1" class="headerlink" title="method 3"></a>method 3</h3><p>没想到这题还能用双指针做，好吧，更加有点看不明白了。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* method 3: use tow pointers */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">checkInclusion</span><span class="params">(<span class="built_in">string</span> s1, <span class="built_in">string</span> s2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = s1.length(), m = s2.length();</span><br><span class="line">        <span class="keyword">if</span>(n &gt; m) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; cnt(<span class="number">26</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            cnt[s1[i] - <span class="string">'a'</span>]--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> right = <span class="number">0</span>; right &lt; m; right++) &#123;</span><br><span class="line">            <span class="keyword">int</span> x = s2[right] - <span class="string">'a'</span>;</span><br><span class="line">            cnt[x]++;</span><br><span class="line">            <span class="keyword">while</span>(cnt[x] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                cnt[s2[left] - <span class="string">'a'</span>]--;</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(right - left + <span class="number">1</span> == n) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>今天的两道题稍微复杂了一点，不是那么好理解，需要多做几次。</p>
-
+<hr>
       
     </div>
 
@@ -670,6 +682,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2022/03/29/Leetcode-14-天算法入门-day7/" rel="prev" title="Leetcode_14 天算法入门_day7">
+                Leetcode_14 天算法入门_day7 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -742,7 +758,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-count">55</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -884,7 +900,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">31</span>
+                      
+                    
+                    <span class="site-state-item-count">32</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1016,7 +1034,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">767k</span>
+    <span title="站点总字数">774k</span>
   
 
   
@@ -1027,7 +1045,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">106:32</span>
+    <span title="站点阅读时长">107:30</span>
   
 </div>
 

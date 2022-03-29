@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="第三天的主题还是 two pointers，一道简单题，一道中等题。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-03-25T09:36:21.412Z">
+<meta property="og:updated_time" content="2022-03-29T16:55:56.421Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode_14 天算法入门_day3">
 <meta name="twitter:description" content="第三天的主题还是 two pointers，一道简单题，一道中等题。">
@@ -296,7 +296,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">54</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">55</span></a>
 
   </li>
         
@@ -334,7 +334,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">33</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">34</span></a>
 
   </li>
 
@@ -467,12 +467,24 @@
                 
               
 
-              <time title="创建时间：2022-03-25 11:23:03 / 修改时间：17:36:21" itemprop="dateCreated datePublished" datetime="2022-03-25T11:23:03+08:00">2022-03-25</time>
+              <time title="创建时间：2022-03-25 11:23:03" itemprop="dateCreated datePublished" datetime="2022-03-25T11:23:03+08:00">2022-03-25</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-03-30 00:55:56" itemprop="dateModified" datetime="2022-03-30T00:55:56+08:00">2022-03-30</time>
               
             
           </span>
@@ -572,7 +584,7 @@
 <h3 id="method-3-1"><a href="#method-3-1" class="headerlink" title="method 3"></a>method 3</h3><p>考虑到数组有序，所以可以使用前两天学习的二分查找，这样时间复杂度就是 $O(nlogn)$ 了。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* method 3: use binary search */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; twoSum(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; numbers, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numbers.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> left = i + <span class="number">1</span>, right = numbers.size() - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(left &lt;= right) &#123;</span><br><span class="line">                <span class="keyword">int</span> mid = (right + left) / <span class="number">2</span>;</span><br><span class="line">                <span class="keyword">if</span>(numbers[mid] == target - numbers[i]) &#123;</span><br><span class="line">                    <span class="keyword">return</span> &#123;i + <span class="number">1</span>, mid + <span class="number">1</span>&#125;;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span>(numbers[mid] &gt; target - numbers[i]) right = mid - <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span> left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="number">-1</span>, <span class="number">-1</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <h3 id="method-4"><a href="#method-4" class="headerlink" title="method 4"></a>method 4</h3><p>由于这个题出现在双指针里面，所以肯定可以使用双指针的解法。如何使用双指针呢？<br>需要设置两个指针分别从数组的左右两边进行遍历，每次将指针所指的值之和与目标值进行比较。如果大于目标值，那么左移右指针；如果小于，那么右移左指针。可能会有人觉得漏解，实际上并不会。从反证法的角度很容易想明白，如果右指针固定，左指针左边存在满足条件的解，或者左指针固定，右指针右边存在满足条件的解，那么这个数组一定不是有序的。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* method 4: use two pointers */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; twoSum(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; numbers, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>, right = numbers.size() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right) &#123;</span><br><span class="line">            <span class="keyword">int</span> sum = numbers[left] + numbers[right];</span><br><span class="line">            <span class="keyword">if</span>(sum &lt; target) left++;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(sum &gt; target) right++;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> &#123;left + <span class="number">1</span>, right + <span class="number">1</span>&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="number">-1</span>, <span class="number">-1</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>双指针用来解决一些问题真是有奇效啊。大体上来讲，要么是从中间向两边遍历，要么是两边向中间遍历。遇到这种类型的题目的时候，不妨从这两个角度思考一下，说不定问题就能得到解决。</p>
-
+<hr>
       
     </div>
 
@@ -747,7 +759,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-count">55</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -889,7 +901,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">31</span>
+                      
+                    
+                    <span class="site-state-item-count">32</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1021,7 +1035,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">767k</span>
+    <span title="站点总字数">774k</span>
   
 
   
@@ -1032,7 +1046,7 @@
     
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">106:32</span>
+    <span title="站点阅读时长">107:30</span>
   
 </div>
 

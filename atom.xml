@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2022-03-30T14:49:45.784Z</updated>
+  <updated>2022-03-31T11:17:24.466Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode_14 天算法入门_day9</title>
+    <link href="http://bachzart.github.io/2022/03/31/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day9/"/>
+    <id>http://bachzart.github.io/2022/03/31/Leetcode-14-天算法入门-day9/</id>
+    <published>2022-03-31T03:47:53.000Z</published>
+    <updated>2022-03-31T11:17:24.466Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天好像还真的给图？&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+    
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+      <category term="DFS&amp;BFS" scheme="http://bachzart.github.io/tags/DFS-BFS/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode_14 天算法入门_day8</title>
@@ -45,7 +69,7 @@
     <link href="http://bachzart.github.io/2022/03/29/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day7/"/>
     <id>http://bachzart.github.io/2022/03/29/Leetcode-14-天算法入门-day7/</id>
     <published>2022-03-29T14:05:59.000Z</published>
-    <updated>2022-03-29T17:01:40.975Z</updated>
+    <updated>2022-03-31T04:15:51.862Z</updated>
     
     <summary type="html">
     
@@ -226,9 +250,9 @@
       <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
     
     
-      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
-    
       <category term="Binary Search" scheme="http://bachzart.github.io/tags/Binary-Search/"/>
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
     
   </entry>
   
@@ -300,9 +324,9 @@
     
       <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
     
-      <category term="STL" scheme="http://bachzart.github.io/tags/STL/"/>
-    
       <category term="string" scheme="http://bachzart.github.io/tags/string/"/>
+    
+      <category term="STL" scheme="http://bachzart.github.io/tags/STL/"/>
     
   </entry>
   
@@ -453,28 +477,6 @@
     
     
       <category term="Cooking" scheme="http://bachzart.github.io/tags/Cooking/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Nand2Tetris_Part1_03</title>
-    <link href="http://bachzart.github.io/2020/09/28/Nand2Tetris-Part1-03/"/>
-    <id>http://bachzart.github.io/2020/09/28/Nand2Tetris-Part1-03/</id>
-    <published>2020-09-28T09:06:46.000Z</published>
-    <updated>2020-09-29T08:40:02.536Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本周的主题是 &lt;strong&gt;Memory&lt;/strong&gt;，先把做好的 ALU 放一边，我们来研究一下和内存（RAM）有关的问题。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
-    
-      <category term="Computer Organization" scheme="http://bachzart.github.io/categories/CS/Computer-Organization/"/>
-    
-    
-      <category term="Nand2Tetris" scheme="http://bachzart.github.io/tags/Nand2Tetris/"/>
     
   </entry>
   

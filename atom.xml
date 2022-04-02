@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2022-03-31T11:17:24.466Z</updated>
+  <updated>2022-04-02T13:56:52.003Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,54 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode_14 天算法入门_day11</title>
+    <link href="http://bachzart.github.io/2022/04/02/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day11/"/>
+    <id>http://bachzart.github.io/2022/04/02/Leetcode-14-天算法入门-day11/</id>
+    <published>2022-04-02T05:34:43.000Z</published>
+    <updated>2022-04-02T13:56:52.003Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天是 3 道中等题，有点难度？？？&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+    
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+      <category term="Recursion&amp;Backtracking" scheme="http://bachzart.github.io/tags/Recursion-Backtracking/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode_14 天算法入门_day10</title>
+    <link href="http://bachzart.github.io/2022/04/01/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day10/"/>
+    <id>http://bachzart.github.io/2022/04/01/Leetcode-14-天算法入门-day10/</id>
+    <published>2022-04-01T05:24:41.000Z</published>
+    <updated>2022-04-02T11:42:32.899Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天的主题是递归跟回溯，正好强化一下对递归的理解。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+    
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+      <category term="Recursion&amp;Backtracking" scheme="http://bachzart.github.io/tags/Recursion-Backtracking/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode_14 天算法入门_day9</title>
@@ -93,7 +141,7 @@
     <link href="http://bachzart.github.io/2022/03/28/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day6/"/>
     <id>http://bachzart.github.io/2022/03/28/Leetcode-14-天算法入门-day6/</id>
     <published>2022-03-28T10:23:12.000Z</published>
-    <updated>2022-03-29T16:56:14.669Z</updated>
+    <updated>2022-04-02T05:38:47.241Z</updated>
     
     <summary type="html">
     
@@ -108,7 +156,7 @@
     
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
     
-      <category term="sliding window" scheme="http://bachzart.github.io/tags/sliding-window/"/>
+      <category term="Sliding window" scheme="http://bachzart.github.io/tags/Sliding-window/"/>
     
   </entry>
   
@@ -250,9 +298,9 @@
       <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
     
     
-      <category term="Binary Search" scheme="http://bachzart.github.io/tags/Binary-Search/"/>
-    
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+      <category term="Binary Search" scheme="http://bachzart.github.io/tags/Binary-Search/"/>
     
   </entry>
   
@@ -322,11 +370,11 @@
       <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
     
     
+      <category term="STL" scheme="http://bachzart.github.io/tags/STL/"/>
+    
       <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
     
       <category term="string" scheme="http://bachzart.github.io/tags/string/"/>
-    
-      <category term="STL" scheme="http://bachzart.github.io/tags/STL/"/>
     
   </entry>
   
@@ -439,44 +487,6 @@
     
     
       <category term="HIT_OS" scheme="http://bachzart.github.io/tags/HIT-OS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux 零散知识</title>
-    <link href="http://bachzart.github.io/2021/10/19/Linux-%E9%9B%B6%E6%95%A3%E7%9F%A5%E8%AF%86/"/>
-    <id>http://bachzart.github.io/2021/10/19/Linux-零散知识/</id>
-    <published>2021-10-19T03:01:33.000Z</published>
-    <updated>2021-11-14T14:20:53.562Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;记录一些容易忘记且与 Linux 相关的一些实用知识，方便自己查询。&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>料理随记</title>
-    <link href="http://bachzart.github.io/2021/09/07/%E6%96%99%E7%90%86%E9%9A%8F%E8%AE%B0/"/>
-    <id>http://bachzart.github.io/2021/09/07/料理随记/</id>
-    <published>2021-09-07T09:45:46.000Z</published>
-    <updated>2021-11-14T14:21:03.986Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;想不到自己接近一年没有更博后，再次更博的第一篇文章会是这个主题。不过反正也没有人看，权当是自己记录用的也可。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
-    
-      <category term="Cooking" scheme="http://bachzart.github.io/categories/Life/Cooking/"/>
-    
-    
-      <category term="Cooking" scheme="http://bachzart.github.io/tags/Cooking/"/>
     
   </entry>
   

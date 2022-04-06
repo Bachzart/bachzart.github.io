@@ -490,11 +490,11 @@
       <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
     
     
-      <category term="STL" scheme="http://bachzart.github.io/tags/STL/"/>
-    
       <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
     
       <category term="string" scheme="http://bachzart.github.io/tags/string/"/>
+    
+      <category term="STL" scheme="http://bachzart.github.io/tags/STL/"/>
     
   </entry>
   

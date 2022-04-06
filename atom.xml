@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2022-04-05T05:16:02.507Z</updated>
+  <updated>2022-04-06T13:54:49.501Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -17,9 +17,33 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Leetcode_14 天数据结构入门_day2</title>
+    <link href="http://bachzart.github.io/2022/04/06/Leetcode-14-%E5%A4%A9%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A8-day2/"/>
+    <id>http://bachzart.github.io/2022/04/06/Leetcode-14-天数据结构入门-day2/</id>
+    <published>2022-04-06T11:47:03.000Z</published>
+    <updated>2022-04-06T13:54:49.501Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这两天的主题都是数组，感觉叫线性表更合适。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+    
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+      <category term="Array" scheme="http://bachzart.github.io/tags/Array/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Leetcode_14 天数据结构入门_day1</title>
-    <link href="http://bachzart.github.io/2022/04/05/Leetcode-14-%E5%A4%A9%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A8-day1%E2%80%9C/"/>
-    <id>http://bachzart.github.io/2022/04/05/Leetcode-14-天数据结构入门-day1“/</id>
+    <link href="http://bachzart.github.io/2022/04/05/Leetcode-14-%E5%A4%A9%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A8-day1/"/>
+    <id>http://bachzart.github.io/2022/04/05/Leetcode-14-天数据结构入门-day1/</id>
     <published>2022-04-05T03:07:21.000Z</published>
     <updated>2022-04-05T05:16:02.507Z</updated>
     
@@ -466,33 +490,11 @@
       <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
     
     
+      <category term="STL" scheme="http://bachzart.github.io/tags/STL/"/>
+    
       <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
     
       <category term="string" scheme="http://bachzart.github.io/tags/string/"/>
-    
-      <category term="STL" scheme="http://bachzart.github.io/tags/STL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>两件小事</title>
-    <link href="http://bachzart.github.io/2021/12/07/%E4%B8%A4%E4%BB%B6%E5%B0%8F%E4%BA%8B/"/>
-    <id>http://bachzart.github.io/2021/12/07/两件小事/</id>
-    <published>2021-12-07T15:03:54.000Z</published>
-    <updated>2021-12-08T15:29:58.588Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天发生了两件小事，都与水相关。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
-    
-      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
-    
-    
-      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
     
   </entry>
   

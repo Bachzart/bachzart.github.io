@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2022-04-07T10:54:06.020Z</updated>
+  <updated>2022-04-08T12:52:00.105Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode_12 天编程能力入门_day1</title>
+    <link href="http://bachzart.github.io/2022/04/08/Leetcode-12-%E5%A4%A9%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%E5%85%A5%E9%97%A8-day1/"/>
+    <id>http://bachzart.github.io/2022/04/08/Leetcode-12-天编程能力入门-day1/</id>
+    <published>2022-04-08T11:46:14.000Z</published>
+    <updated>2022-04-08T12:52:00.105Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;感觉题目不够做，再开启一个学习计划吧~&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+    
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode_14 天数据结构入门_day4</title>
+    <link href="http://bachzart.github.io/2022/04/08/Leetcode-14-%E5%A4%A9%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A8-day4/"/>
+    <id>http://bachzart.github.io/2022/04/08/Leetcode-14-天数据结构入门-day4/</id>
+    <published>2022-04-08T06:14:50.000Z</published>
+    <updated>2022-04-08T07:17:06.595Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Let`s go go go!&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+    
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+      <category term="Array" scheme="http://bachzart.github.io/tags/Array/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode_14 天数据结构入门_day3</title>
@@ -445,54 +491,6 @@
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
     
       <category term="Binary Search" scheme="http://bachzart.github.io/tags/Binary-Search/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>剑指 Offer（第二版）刷题记录</title>
-    <link href="http://bachzart.github.io/2022/03/20/%E5%89%91%E6%8C%87-Offer%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
-    <id>http://bachzart.github.io/2022/03/20/剑指-Offer（第二版）刷题记录/</id>
-    <published>2022-03-20T12:39:57.000Z</published>
-    <updated>2022-03-29T16:57:11.685Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;原来就看到很多人都在刷这本书，最近有时间，也来做一下这本书上的题。&lt;br&gt;题目来源于 &lt;a href=&quot;https://leetcode-cn.com/problem-list/xb9nqhhg/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Leetcode&lt;/a&gt;。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
-    
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
-    
-    
-      <category term="剑指 Offer" scheme="http://bachzart.github.io/tags/%E5%89%91%E6%8C%87-Offer/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++_stack&amp;queue容器的基本用法</title>
-    <link href="http://bachzart.github.io/2022/03/18/C-stack-queue%E5%AE%B9%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/"/>
-    <id>http://bachzart.github.io/2022/03/18/C-stack-queue容器的基本用法/</id>
-    <published>2022-03-18T13:37:48.000Z</published>
-    <updated>2022-03-29T16:57:33.773Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本文只介绍 stack 和 queue 的一些常见用法，不着重讨论如何实现的问题。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
-    
-    
-      <category term="STL" scheme="http://bachzart.github.io/tags/STL/"/>
-    
-      <category term="stack" scheme="http://bachzart.github.io/tags/stack/"/>
-    
-      <category term="queue" scheme="http://bachzart.github.io/tags/queue/"/>
     
   </entry>
   

@@ -140,14 +140,14 @@
 
 
   <meta name="description" content="每日几道题，不要偷懒~">
-<meta name="keywords" content="Leetcode,Array">
+<meta name="keywords" content="Leetcode,array">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode_14 天数据结构入门_day3">
 <meta property="og:url" content="http://bachzart.github.io/2022/04/07/Leetcode-14-天数据结构入门-day3/index.html">
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="每日几道题，不要偷懒~">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-04-07T10:54:06.020Z">
+<meta property="og:updated_time" content="2022-04-10T07:27:44.874Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode_14 天数据结构入门_day3">
 <meta name="twitter:description" content="每日几道题，不要偷懒~">
@@ -296,7 +296,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">67</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">72</span></a>
 
   </li>
         
@@ -315,7 +315,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">25</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">26</span></a>
 
   </li>
         
@@ -467,12 +467,24 @@
                 
               
 
-              <time title="创建时间：2022-04-07 17:01:54 / 修改时间：18:54:06" itemprop="dateCreated datePublished" datetime="2022-04-07T17:01:54+08:00">2022-04-07</time>
+              <time title="创建时间：2022-04-07 17:01:54" itemprop="dateCreated datePublished" datetime="2022-04-07T17:01:54+08:00">2022-04-07</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-04-10 15:27:44" itemprop="dateModified" datetime="2022-04-10T15:27:44+08:00">2022-04-10</time>
               
             
           </span>
@@ -489,14 +501,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/Data-Structures-and-Algorithms/" itemprop="url" rel="index"><span itemprop="name">Data Structures and Algorithms</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Programming/Leetcode/" itemprop="url" rel="index"><span itemprop="name">Leetcode</span></a></span>
 
                 
                 
@@ -517,13 +529,13 @@
           
             <div class="post-symbolscount">
               
+                <span class="post-meta-divider">|</span>
+              
 
               
                 <span class="post-meta-item-icon">
                   <i class="fa fa-file-word-o"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
                 
                 <span title="本文字数">4.5k</span>
               
@@ -536,8 +548,6 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-clock-o"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">38 分钟</span>
               
@@ -576,7 +586,7 @@
 <h3 id="method-2-1"><a href="#method-2-1" class="headerlink" title="method 2"></a>method 2</h3><p>容易发现，第 i 天的利润只与第 i 天之前的最低价有关。选择在不同的天数购买，最终会得到不同的利润结果，这种题目多半要用<strong>动态规划</strong>的思路。设置一个 dp 数组用来表示第 i 天之前的最低价，再设置一个变量 ans 来维护当前最大的利润。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> days = prices.size(), ans = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(days);</span><br><span class="line">        dp[<span class="number">0</span>] = prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; days; i++) &#123;</span><br><span class="line">            dp[i] = min(dp[i - <span class="number">1</span>], prices[i]);</span><br><span class="line">            ans = max(ans, prices[i] - dp[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <p>这里，再利用<strong>滚动数组</strong>的思想来优化一下代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> days = prices.size(), ans = <span class="number">0</span>, minprice = prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; days; i++) &#123;</span><br><span class="line">            minprice = min(minprice, prices[i]);</span><br><span class="line">            ans = max(ans, prices[i] - minprice);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>虽然是两道简单题，但是考察的思想是很重要的思想。另外，动态规划的题目可真是灵活啊...还是题目做少了吗？😂</p>
-
+<hr>
       
     </div>
 
@@ -652,7 +662,7 @@
           
             <a href="/tags/Leetcode/" rel="tag"><i class="fa fa-tag"></i> Leetcode</a>
           
-            <a href="/tags/Array/" rel="tag"><i class="fa fa-tag"></i> Array</a>
+            <a href="/tags/array/" rel="tag"><i class="fa fa-tag"></i> array</a>
           
         </div>
       
@@ -751,7 +761,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">67</span>
+                    <span class="site-state-item-count">72</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -814,7 +824,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">21</span>
+                      
+                    
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1033,9 +1045,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-      <span class="post-meta-item-text">站点总字数：</span>
-    
-    <span title="站点总字数">818k</span>
+    <span title="站点总字数">831k</span>
   
 
   
@@ -1044,9 +1054,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    
-    <span title="站点阅读时长">113:37</span>
+    <span title="站点阅读时长">115:25</span>
   
 </div>
 

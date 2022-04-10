@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2022-04-08T12:52:00.105Z</updated>
+  <updated>2022-04-10T09:53:02.390Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -17,11 +17,125 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>自学吉他的一点心得</title>
+    <link href="http://bachzart.github.io/2022/04/10/%E8%87%AA%E5%AD%A6%E5%90%89%E4%BB%96%E7%9A%84%E4%B8%80%E7%82%B9%E5%BF%83%E5%BE%97/"/>
+    <id>http://bachzart.github.io/2022/04/10/自学吉他的一点心得/</id>
+    <published>2022-04-10T08:28:10.000Z</published>
+    <updated>2022-04-10T09:53:02.390Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近写的都是跟编程相关的文章，有点乏味了。正巧，最近感觉自己的吉他水平又有了一点进步，所以总结（感慨）一下。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Hobby" scheme="http://bachzart.github.io/categories/Life/Hobby/"/>
+    
+    
+      <category term="Guitar" scheme="http://bachzart.github.io/tags/Guitar/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode_14 天数据结构入门_day6</title>
+    <link href="http://bachzart.github.io/2022/04/10/Leetcode-14-%E5%A4%A9%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A8-day6/"/>
+    <id>http://bachzart.github.io/2022/04/10/Leetcode-14-天数据结构入门-day6/</id>
+    <published>2022-04-10T07:25:51.000Z</published>
+    <updated>2022-04-10T08:07:39.398Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天是 3 个跟字符串相关的题目。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
+    
+    
+      <category term="string" scheme="http://bachzart.github.io/tags/string/"/>
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode_12 天编程能力入门_day3</title>
+    <link href="http://bachzart.github.io/2022/04/10/Leetcode-12-%E5%A4%A9%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%E5%85%A5%E9%97%A8-day3/"/>
+    <id>http://bachzart.github.io/2022/04/10/Leetcode-12-天编程能力入门-day3/</id>
+    <published>2022-04-10T01:33:27.000Z</published>
+    <updated>2022-04-10T02:22:22.692Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;条件语句？&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode_14 天数据结构入门_day5</title>
+    <link href="http://bachzart.github.io/2022/04/09/Leetcode-14-%E5%A4%A9%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A8-day5/"/>
+    <id>http://bachzart.github.io/2022/04/09/Leetcode-14-天数据结构入门-day5/</id>
+    <published>2022-04-09T02:26:24.000Z</published>
+    <updated>2022-04-10T07:27:14.667Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;两个中等题~&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+      <category term="array" scheme="http://bachzart.github.io/tags/array/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode_12 天编程能力入门_day2</title>
+    <link href="http://bachzart.github.io/2022/04/09/Leetcode-12-%E5%A4%A9%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%E5%85%A5%E9%97%A8-day2/"/>
+    <id>http://bachzart.github.io/2022/04/09/Leetcode-12-天编程能力入门-day2/</id>
+    <published>2022-04-09T02:12:55.000Z</published>
+    <updated>2022-04-09T08:55:20.462Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;好像有做过的题？&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Leetcode_12 天编程能力入门_day1</title>
     <link href="http://bachzart.github.io/2022/04/08/Leetcode-12-%E5%A4%A9%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%E5%85%A5%E9%97%A8-day1/"/>
     <id>http://bachzart.github.io/2022/04/08/Leetcode-12-天编程能力入门-day1/</id>
     <published>2022-04-08T11:46:14.000Z</published>
-    <updated>2022-04-08T12:52:00.105Z</updated>
+    <updated>2022-04-09T08:55:24.215Z</updated>
     
     <summary type="html">
     
@@ -29,9 +143,9 @@
     
     </summary>
     
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
     
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
     
     
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
@@ -43,7 +157,7 @@
     <link href="http://bachzart.github.io/2022/04/08/Leetcode-14-%E5%A4%A9%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A8-day4/"/>
     <id>http://bachzart.github.io/2022/04/08/Leetcode-14-天数据结构入门-day4/</id>
     <published>2022-04-08T06:14:50.000Z</published>
-    <updated>2022-04-08T07:17:06.595Z</updated>
+    <updated>2022-04-10T07:27:46.489Z</updated>
     
     <summary type="html">
     
@@ -51,14 +165,14 @@
     
     </summary>
     
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
     
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
     
     
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
     
-      <category term="Array" scheme="http://bachzart.github.io/tags/Array/"/>
+      <category term="array" scheme="http://bachzart.github.io/tags/array/"/>
     
   </entry>
   
@@ -67,7 +181,7 @@
     <link href="http://bachzart.github.io/2022/04/07/Leetcode-14-%E5%A4%A9%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A8-day3/"/>
     <id>http://bachzart.github.io/2022/04/07/Leetcode-14-天数据结构入门-day3/</id>
     <published>2022-04-07T09:01:54.000Z</published>
-    <updated>2022-04-07T10:54:06.020Z</updated>
+    <updated>2022-04-10T07:27:44.874Z</updated>
     
     <summary type="html">
     
@@ -75,14 +189,14 @@
     
     </summary>
     
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
     
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
     
     
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
     
-      <category term="Array" scheme="http://bachzart.github.io/tags/Array/"/>
+      <category term="array" scheme="http://bachzart.github.io/tags/array/"/>
     
   </entry>
   
@@ -91,7 +205,7 @@
     <link href="http://bachzart.github.io/2022/04/06/Leetcode-14-%E5%A4%A9%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A8-day2/"/>
     <id>http://bachzart.github.io/2022/04/06/Leetcode-14-天数据结构入门-day2/</id>
     <published>2022-04-06T11:47:03.000Z</published>
-    <updated>2022-04-06T13:54:49.501Z</updated>
+    <updated>2022-04-10T07:27:38.714Z</updated>
     
     <summary type="html">
     
@@ -99,14 +213,14 @@
     
     </summary>
     
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
     
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
     
     
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
     
-      <category term="Array" scheme="http://bachzart.github.io/tags/Array/"/>
+      <category term="array" scheme="http://bachzart.github.io/tags/array/"/>
     
   </entry>
   
@@ -115,7 +229,7 @@
     <link href="http://bachzart.github.io/2022/04/05/Leetcode-14-%E5%A4%A9%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A8-day1/"/>
     <id>http://bachzart.github.io/2022/04/05/Leetcode-14-天数据结构入门-day1/</id>
     <published>2022-04-05T03:07:21.000Z</published>
-    <updated>2022-04-05T05:16:02.507Z</updated>
+    <updated>2022-04-10T07:27:42.859Z</updated>
     
     <summary type="html">
     
@@ -123,14 +237,14 @@
     
     </summary>
     
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
     
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
     
     
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
     
-      <category term="Array" scheme="http://bachzart.github.io/tags/Array/"/>
+      <category term="array" scheme="http://bachzart.github.io/tags/array/"/>
     
   </entry>
   
@@ -139,7 +253,7 @@
     <link href="http://bachzart.github.io/2022/04/05/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day14/"/>
     <id>http://bachzart.github.io/2022/04/05/Leetcode-14-天算法入门-day14/</id>
     <published>2022-04-05T01:47:26.000Z</published>
-    <updated>2022-04-05T02:47:33.078Z</updated>
+    <updated>2022-04-09T08:54:46.103Z</updated>
     
     <summary type="html">
     
@@ -147,9 +261,9 @@
     
     </summary>
     
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
     
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
     
     
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
@@ -163,7 +277,7 @@
     <link href="http://bachzart.github.io/2022/04/04/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day13/"/>
     <id>http://bachzart.github.io/2022/04/04/Leetcode-14-天算法入门-day13/</id>
     <published>2022-04-04T04:59:34.000Z</published>
-    <updated>2022-04-04T06:24:50.088Z</updated>
+    <updated>2022-04-09T08:54:48.544Z</updated>
     
     <summary type="html">
     
@@ -171,9 +285,9 @@
     
     </summary>
     
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
     
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
     
     
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
@@ -187,7 +301,7 @@
     <link href="http://bachzart.github.io/2022/04/03/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day12/"/>
     <id>http://bachzart.github.io/2022/04/03/Leetcode-14-天算法入门-day12/</id>
     <published>2022-04-03T02:31:41.000Z</published>
-    <updated>2022-04-03T09:12:10.015Z</updated>
+    <updated>2022-04-09T08:54:53.127Z</updated>
     
     <summary type="html">
     
@@ -195,9 +309,9 @@
     
     </summary>
     
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
     
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
     
     
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
@@ -211,7 +325,7 @@
     <link href="http://bachzart.github.io/2022/04/02/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day11/"/>
     <id>http://bachzart.github.io/2022/04/02/Leetcode-14-天算法入门-day11/</id>
     <published>2022-04-02T05:34:43.000Z</published>
-    <updated>2022-04-02T13:56:52.003Z</updated>
+    <updated>2022-04-09T08:54:55.783Z</updated>
     
     <summary type="html">
     
@@ -219,9 +333,9 @@
     
     </summary>
     
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
     
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
     
     
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
@@ -235,7 +349,7 @@
     <link href="http://bachzart.github.io/2022/04/01/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day10/"/>
     <id>http://bachzart.github.io/2022/04/01/Leetcode-14-天算法入门-day10/</id>
     <published>2022-04-01T05:24:41.000Z</published>
-    <updated>2022-04-02T11:42:32.899Z</updated>
+    <updated>2022-04-09T08:54:59.934Z</updated>
     
     <summary type="html">
     
@@ -243,9 +357,9 @@
     
     </summary>
     
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
     
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
     
     
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
@@ -259,7 +373,7 @@
     <link href="http://bachzart.github.io/2022/03/31/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day9/"/>
     <id>http://bachzart.github.io/2022/03/31/Leetcode-14-天算法入门-day9/</id>
     <published>2022-03-31T03:47:53.000Z</published>
-    <updated>2022-03-31T11:17:24.466Z</updated>
+    <updated>2022-04-09T08:55:02.966Z</updated>
     
     <summary type="html">
     
@@ -267,9 +381,9 @@
     
     </summary>
     
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
     
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
     
     
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
@@ -283,7 +397,7 @@
     <link href="http://bachzart.github.io/2022/03/30/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day8/"/>
     <id>http://bachzart.github.io/2022/03/30/Leetcode-14-天算法入门-day8/</id>
     <published>2022-03-30T11:30:22.000Z</published>
-    <updated>2022-03-30T14:49:45.784Z</updated>
+    <updated>2022-04-09T08:55:05.934Z</updated>
     
     <summary type="html">
     
@@ -291,9 +405,9 @@
     
     </summary>
     
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
     
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
     
     
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
@@ -307,7 +421,7 @@
     <link href="http://bachzart.github.io/2022/03/29/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day7/"/>
     <id>http://bachzart.github.io/2022/03/29/Leetcode-14-天算法入门-day7/</id>
     <published>2022-03-29T14:05:59.000Z</published>
-    <updated>2022-03-31T04:15:51.862Z</updated>
+    <updated>2022-04-09T08:55:08.464Z</updated>
     
     <summary type="html">
     
@@ -315,9 +429,9 @@
     
     </summary>
     
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
     
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
     
     
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
@@ -331,7 +445,7 @@
     <link href="http://bachzart.github.io/2022/03/28/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day6/"/>
     <id>http://bachzart.github.io/2022/03/28/Leetcode-14-天算法入门-day6/</id>
     <published>2022-03-28T10:23:12.000Z</published>
-    <updated>2022-04-02T05:38:47.241Z</updated>
+    <updated>2022-04-09T08:55:13.462Z</updated>
     
     <summary type="html">
     
@@ -339,9 +453,9 @@
     
     </summary>
     
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
     
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
     
     
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
@@ -355,7 +469,7 @@
     <link href="http://bachzart.github.io/2022/03/27/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day5/"/>
     <id>http://bachzart.github.io/2022/03/27/Leetcode-14-天算法入门-day5/</id>
     <published>2022-03-27T08:41:59.000Z</published>
-    <updated>2022-03-29T16:56:10.038Z</updated>
+    <updated>2022-04-09T08:55:15.774Z</updated>
     
     <summary type="html">
     
@@ -363,9 +477,9 @@
     
     </summary>
     
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
     
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
     
     
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
@@ -373,124 +487,6 @@
       <category term="two pointers" scheme="http://bachzart.github.io/tags/two-pointers/"/>
     
       <category term="Linked list" scheme="http://bachzart.github.io/tags/Linked-list/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode_14 天算法入门_day4</title>
-    <link href="http://bachzart.github.io/2022/03/26/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day4/"/>
-    <id>http://bachzart.github.io/2022/03/26/Leetcode-14-天算法入门-day4/</id>
-    <published>2022-03-26T06:52:16.000Z</published>
-    <updated>2022-03-29T16:56:05.361Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;为什么第四天的主题还是 two pointers，有点腻了。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
-    
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
-    
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
-    
-      <category term="two pointers" scheme="http://bachzart.github.io/tags/two-pointers/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT_2022_春_乙级真题试水</title>
-    <link href="http://bachzart.github.io/2022/03/25/PAT-2022-%E6%98%A5-%E4%B9%99%E7%BA%A7%E7%9C%9F%E9%A2%98%E8%AF%95%E6%B0%B4/"/>
-    <id>http://bachzart.github.io/2022/03/25/PAT-2022-春-乙级真题试水/</id>
-    <published>2022-03-25T09:39:05.000Z</published>
-    <updated>2022-03-29T16:55:59.958Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;买了套 2022 春季的 PAT 乙级真题做着玩。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="PAT" scheme="http://bachzart.github.io/categories/Programming/PAT/"/>
-    
-    
-      <category term="PAT" scheme="http://bachzart.github.io/tags/PAT/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode_14 天算法入门_day3</title>
-    <link href="http://bachzart.github.io/2022/03/25/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day3/"/>
-    <id>http://bachzart.github.io/2022/03/25/Leetcode-14-天算法入门-day3/</id>
-    <published>2022-03-25T03:23:03.000Z</published>
-    <updated>2022-03-29T16:55:56.421Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;第三天的主题还是 two pointers，一道简单题，一道中等题。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
-    
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
-    
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
-    
-      <category term="two pointers" scheme="http://bachzart.github.io/tags/two-pointers/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode_14 天算法入门_day2</title>
-    <link href="http://bachzart.github.io/2022/03/24/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day2/"/>
-    <id>http://bachzart.github.io/2022/03/24/Leetcode-14-天算法入门-day2/</id>
-    <published>2022-03-24T04:59:50.000Z</published>
-    <updated>2022-03-29T16:55:51.581Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;第二天的主题是 two pointers，一道简单题，一道困难题。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
-    
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
-    
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
-    
-      <category term="two pointers" scheme="http://bachzart.github.io/tags/two-pointers/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode_14 天算法入门_day1</title>
-    <link href="http://bachzart.github.io/2022/03/23/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day1/"/>
-    <id>http://bachzart.github.io/2022/03/23/Leetcode-14-天算法入门-day1/</id>
-    <published>2022-03-23T10:43:14.000Z</published>
-    <updated>2022-03-29T16:55:44.021Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;来试试 Leetcode 14 天算法入门的难度。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
-    
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
-    
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
-    
-      <category term="Binary Search" scheme="http://bachzart.github.io/tags/Binary-Search/"/>
     
   </entry>
   

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2022-04-10T10:14:09.565Z</updated>
+  <updated>2022-04-11T12:00:31.000Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode_14 天数据结构入门_day7</title>
+    <link href="http://bachzart.github.io/2022/04/11/Leetcode-14-%E5%A4%A9%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A8-day7/"/>
+    <id>http://bachzart.github.io/2022/04/11/Leetcode-14-天数据结构入门-day7/</id>
+    <published>2022-04-11T10:20:42.000Z</published>
+    <updated>2022-04-11T12:00:31.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前链表的题确实没做够啊~&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+      <category term="linked_list" scheme="http://bachzart.github.io/tags/linked-list/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode_12 天编程能力入门_day4</title>
+    <link href="http://bachzart.github.io/2022/04/11/Leetcode-12-%E5%A4%A9%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%E5%85%A5%E9%97%A8-day4/"/>
+    <id>http://bachzart.github.io/2022/04/11/Leetcode-12-天编程能力入门-day4/</id>
+    <published>2022-04-11T07:00:55.000Z</published>
+    <updated>2022-04-11T09:13:49.044Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这个系列好像都是简单题...有点没有挑战性~&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>自学吉他的一点心得</title>
@@ -437,56 +483,6 @@
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
     
       <category term="DFS&amp;BFS" scheme="http://bachzart.github.io/tags/DFS-BFS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode_14 天算法入门-day6</title>
-    <link href="http://bachzart.github.io/2022/03/28/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day6/"/>
-    <id>http://bachzart.github.io/2022/03/28/Leetcode-14-天算法入门-day6/</id>
-    <published>2022-03-28T10:23:12.000Z</published>
-    <updated>2022-04-09T08:55:13.462Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天是滑动窗口了，终于不是双指针了，感觉双指针的题还没做够😂。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
-    
-      <category term="Sliding window" scheme="http://bachzart.github.io/tags/Sliding-window/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode_14 天算法入门_day5</title>
-    <link href="http://bachzart.github.io/2022/03/27/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day5/"/>
-    <id>http://bachzart.github.io/2022/03/27/Leetcode-14-天算法入门-day5/</id>
-    <published>2022-03-27T08:41:59.000Z</published>
-    <updated>2022-04-09T08:55:15.774Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;还是 two pointers 啊。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
-    
-      <category term="two pointers" scheme="http://bachzart.github.io/tags/two-pointers/"/>
-    
-      <category term="Linked list" scheme="http://bachzart.github.io/tags/Linked-list/"/>
     
   </entry>
   

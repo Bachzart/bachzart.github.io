@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2022-04-11T12:00:31.000Z</updated>
+  <updated>2022-04-12T10:19:20.628Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode_14 天数据结构入门_day8</title>
+    <link href="http://bachzart.github.io/2022/04/12/Leetcode-14-%E5%A4%A9%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A8-day8/"/>
+    <id>http://bachzart.github.io/2022/04/12/Leetcode-14-天数据结构入门-day8/</id>
+    <published>2022-04-12T09:30:32.000Z</published>
+    <updated>2022-04-12T10:19:20.628Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天还是链表哦&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+      <category term="linked_list" scheme="http://bachzart.github.io/tags/linked-list/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode_12 天编程能力入门_day5</title>
+    <link href="http://bachzart.github.io/2022/04/12/Leetcode-12-%E5%A4%A9%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%E5%85%A5%E9%97%A8-day5/"/>
+    <id>http://bachzart.github.io/2022/04/12/Leetcode-12-天编程能力入门-day5/</id>
+    <published>2022-04-12T06:53:24.000Z</published>
+    <updated>2022-04-12T09:26:26.410Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;keeping going~&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode_14 天数据结构入门_day7</title>
@@ -424,54 +470,6 @@
     <summary type="html">
     
       &lt;p&gt;今天好像还真的给图？&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
-    
-      <category term="DFS&amp;BFS" scheme="http://bachzart.github.io/tags/DFS-BFS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode_14 天算法入门_day8</title>
-    <link href="http://bachzart.github.io/2022/03/30/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day8/"/>
-    <id>http://bachzart.github.io/2022/03/30/Leetcode-14-天算法入门-day8/</id>
-    <published>2022-03-30T11:30:22.000Z</published>
-    <updated>2022-04-09T08:55:05.934Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天的主题还是搜索~&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
-    
-      <category term="DFS&amp;BFS" scheme="http://bachzart.github.io/tags/DFS-BFS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode_14 天算法入门_day7</title>
-    <link href="http://bachzart.github.io/2022/03/29/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day7/"/>
-    <id>http://bachzart.github.io/2022/03/29/Leetcode-14-天算法入门-day7/</id>
-    <published>2022-03-29T14:05:59.000Z</published>
-    <updated>2022-04-09T08:55:08.464Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;滑动窗口还没练够啊，就到 DFS 了...14 天显然不够用。&lt;br&gt;
     
     </summary>
     

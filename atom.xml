@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2022-04-12T10:19:20.628Z</updated>
+  <updated>2022-04-13T12:41:42.530Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,54 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode_14 天数据结构入门_day9</title>
+    <link href="http://bachzart.github.io/2022/04/13/Leetcode-14-%E5%A4%A9%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A8-day9/"/>
+    <id>http://bachzart.github.io/2022/04/13/Leetcode-14-天数据结构入门-day9/</id>
+    <published>2022-04-13T10:27:18.000Z</published>
+    <updated>2022-04-13T12:41:42.530Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;2 个跟栈、队列相关的题。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
+    
+    
+      <category term="stack" scheme="http://bachzart.github.io/tags/stack/"/>
+    
+      <category term="queue" scheme="http://bachzart.github.io/tags/queue/"/>
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode_12 天编程能力入门_day6</title>
+    <link href="http://bachzart.github.io/2022/04/13/Leetcode-12-%E5%A4%A9%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%E5%85%A5%E9%97%A8-day6/"/>
+    <id>http://bachzart.github.io/2022/04/13/Leetcode-12-天编程能力入门-day6/</id>
+    <published>2022-04-13T05:10:33.000Z</published>
+    <updated>2022-04-13T10:25:52.339Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;3 个简单题~&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode_14 天数据结构入门_day8</title>
@@ -433,54 +481,6 @@
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
     
       <category term="Recursion&amp;Backtracking" scheme="http://bachzart.github.io/tags/Recursion-Backtracking/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode_14 天算法入门_day10</title>
-    <link href="http://bachzart.github.io/2022/04/01/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day10/"/>
-    <id>http://bachzart.github.io/2022/04/01/Leetcode-14-天算法入门-day10/</id>
-    <published>2022-04-01T05:24:41.000Z</published>
-    <updated>2022-04-09T08:54:59.934Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天的主题是递归跟回溯，正好强化一下对递归的理解。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
-    
-      <category term="Recursion&amp;Backtracking" scheme="http://bachzart.github.io/tags/Recursion-Backtracking/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode_14 天算法入门_day9</title>
-    <link href="http://bachzart.github.io/2022/03/31/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day9/"/>
-    <id>http://bachzart.github.io/2022/03/31/Leetcode-14-天算法入门-day9/</id>
-    <published>2022-03-31T03:47:53.000Z</published>
-    <updated>2022-04-09T08:55:02.966Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天好像还真的给图？&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
-    
-      <category term="DFS&amp;BFS" scheme="http://bachzart.github.io/tags/DFS-BFS/"/>
     
   </entry>
   

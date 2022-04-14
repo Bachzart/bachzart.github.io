@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2022-04-13T12:41:42.530Z</updated>
+  <updated>2022-04-14T15:01:09.318Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode_14 天数据结构入门_day10</title>
+    <link href="http://bachzart.github.io/2022/04/14/Leetcode-14-%E5%A4%A9%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A8-day10/"/>
+    <id>http://bachzart.github.io/2022/04/14/Leetcode-14-天数据结构入门-day10/</id>
+    <published>2022-04-14T10:04:10.000Z</published>
+    <updated>2022-04-14T15:01:09.318Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;3 个题，正好对应二叉树的先、中、后序遍历。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+      <category term="tree" scheme="http://bachzart.github.io/tags/tree/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode_12 天编程能力入门_day7</title>
+    <link href="http://bachzart.github.io/2022/04/14/Leetcode-12-%E5%A4%A9%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%E5%85%A5%E9%97%A8-day7/"/>
+    <id>http://bachzart.github.io/2022/04/14/Leetcode-12-天编程能力入门-day7/</id>
+    <published>2022-04-14T05:18:29.000Z</published>
+    <updated>2022-04-14T05:42:04.954Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;两个跟矩阵相关的简单题。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode_14 天数据结构入门_day9</title>
@@ -433,54 +479,6 @@
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
     
       <category term="Bit_Manipulation" scheme="http://bachzart.github.io/tags/Bit-Manipulation/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode_14 天算法入门_day12</title>
-    <link href="http://bachzart.github.io/2022/04/03/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day12/"/>
-    <id>http://bachzart.github.io/2022/04/03/Leetcode-14-天算法入门-day12/</id>
-    <published>2022-04-03T02:31:41.000Z</published>
-    <updated>2022-04-09T08:54:53.127Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天的主题是动态规划（dp），之前就想琢磨一下这类问题了。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
-    
-      <category term="Dynamic_Programming" scheme="http://bachzart.github.io/tags/Dynamic-Programming/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode_14 天算法入门_day11</title>
-    <link href="http://bachzart.github.io/2022/04/02/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day11/"/>
-    <id>http://bachzart.github.io/2022/04/02/Leetcode-14-天算法入门-day11/</id>
-    <published>2022-04-02T05:34:43.000Z</published>
-    <updated>2022-04-09T08:54:55.783Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天是 3 道中等题，有点难度？？？&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
-    
-      <category term="Recursion&amp;Backtracking" scheme="http://bachzart.github.io/tags/Recursion-Backtracking/"/>
     
   </entry>
   

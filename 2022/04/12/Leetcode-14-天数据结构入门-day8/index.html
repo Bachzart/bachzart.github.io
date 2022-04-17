@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="今天还是链表哦">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-04-12T10:19:20.628Z">
+<meta property="og:updated_time" content="2022-04-17T10:04:52.254Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode_14 天数据结构入门_day8">
 <meta name="twitter:description" content="今天还是链表哦">
@@ -296,7 +296,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">84</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">86</span></a>
 
   </li>
         
@@ -467,12 +467,24 @@
                 
               
 
-              <time title="创建时间：2022-04-12 17:30:32 / 修改时间：18:19:20" itemprop="dateCreated datePublished" datetime="2022-04-12T17:30:32+08:00">2022-04-12</time>
+              <time title="创建时间：2022-04-12 17:30:32" itemprop="dateCreated datePublished" datetime="2022-04-12T17:30:32+08:00">2022-04-12</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-04-17 18:04:52" itemprop="dateModified" datetime="2022-04-17T18:04:52+08:00">2022-04-17</time>
               
             
           </span>
@@ -559,7 +571,7 @@
       
         <p>今天还是链表哦</p>
 <a id="more"></a>
-<h1 id="206-Reverse-Linked-List"><a href="#206-Reverse-Linked-List" class="headerlink" title="206. Reverse Linked List"></a>206. Reverse Linked List</h1><p>这个题做过啦，参考：<a href="https://bachzart.github.io/2022/04/01/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day10/">Leetcode_14 天数据结构入门_day8</a><br>再写一遍~</p>
+<h1 id="206-Reverse-Linked-List"><a href="#206-Reverse-Linked-List" class="headerlink" title="206. Reverse Linked List"></a>206. Reverse Linked List</h1><p>这个题做过啦，参考：<a href="https://bachzart.github.io/2022/04/01/Leetcode-14-%E5%A4%A9%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8-day10/">Leetcode_14 天算法入门_day10</a><br>再写一遍~</p>
 <h1 id="83-Remove-Duplicates-from-Sorted-List"><a href="#83-Remove-Duplicates-from-Sorted-List" class="headerlink" title="83. Remove Duplicates from Sorted List"></a>83. Remove Duplicates from Sorted List</h1><h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>删除有序链表的重复元素，既然给定的是有序的，那么重复元素一定是相邻的，这样就好办了。</p>
 <h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><h3 id="method-1"><a href="#method-1" class="headerlink" title="method 1"></a>method 1</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">deleteDuplicates</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!head) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode *cur = head, *p;</span><br><span class="line">        <span class="keyword">while</span>(cur) &#123;</span><br><span class="line">            <span class="keyword">if</span>(cur-&gt;next != <span class="literal">nullptr</span> &amp;&amp; cur-&gt;val == cur-&gt;next-&gt;val) &#123;</span><br><span class="line">                p = cur-&gt;next;</span><br><span class="line">                cur-&gt;next = p-&gt;next;</span><br><span class="line">                <span class="keyword">delete</span>(p);</span><br><span class="line">            &#125; <span class="keyword">else</span> cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="method-2"><a href="#method-2" class="headerlink" title="method 2"></a>method 2</h3><p>不用想，肯定有递归的做法😂。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">deleteDuplicates</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!head || !head-&gt;next) <span class="keyword">return</span> head;</span><br><span class="line">        head-&gt;next = deleteDuplicates(head-&gt;next);</span><br><span class="line">        <span class="keyword">if</span>(head-&gt;val == head-&gt;next-&gt;val) head-&gt;next = head-&gt;next-&gt;next;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
@@ -740,7 +752,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">84</span>
+                    <span class="site-state-item-count">86</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1032,7 +1044,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">877k</span>
+    <span title="站点总字数">883k</span>
   
 
   
@@ -1041,7 +1053,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">121:51</span>
+    <span title="站点阅读时长">122:42</span>
   
 </div>
 

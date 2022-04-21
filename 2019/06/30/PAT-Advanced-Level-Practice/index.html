@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="Intro从入门到入土系列之 PAT 甲级 题库快乐🤣启动。长期更新ing~">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-03-24T10:39:00.924Z">
+<meta property="og:updated_time" content="2022-04-21T13:51:47.405Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PAT (Advanced Level) Practice">
 <meta name="twitter:description" content="Intro从入门到入土系列之 PAT 甲级 题库快乐🤣启动。长期更新ing~">
@@ -296,7 +296,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">91</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">92</span></a>
 
   </li>
         
@@ -484,7 +484,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2022-03-24 18:39:00" itemprop="dateModified" datetime="2022-03-24T18:39:00+08:00">2022-03-24</time>
+                <time title="修改时间：2022-04-21 21:51:47" itemprop="dateModified" datetime="2022-04-21T21:51:47+08:00">2022-04-21</time>
               
             
           </span>
@@ -537,7 +537,7 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                <span title="本文字数">174k</span>
+                <span title="本文字数">176k</span>
               
 
               
@@ -549,7 +549,7 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                <span title="阅读时长">24:09</span>
+                <span title="阅读时长">24:24</span>
               
             </div>
           
@@ -816,6 +816,9 @@
 </ol>
 <p>对应上述三种情况，按照实际规则进行比大小即可。</p>
 <h2 id="Code-58"><a href="#Code-58" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> t, a, b, c;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= t; i++) &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case #"</span> &lt;&lt; i &lt;&lt; <span class="string">": "</span>;</span><br><span class="line">        <span class="keyword">if</span>(a + b &lt; <span class="number">0</span> &amp;&amp; a &gt; <span class="number">0</span> &amp;&amp; b &gt; <span class="number">0</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">"true"</span>; <span class="comment">// positive overflow</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(a + b &gt;= <span class="number">0</span> &amp;&amp; a &lt; <span class="number">0</span> &amp;&amp; b &lt; <span class="number">0</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">"false"</span>;  <span class="comment">// negative overflow</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(a + b &gt; c) <span class="built_in">cout</span> &lt;&lt; <span class="string">"true"</span>;  <span class="comment">// normal</span></span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">"false"</span>;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上是原来未更新测试数据之前的 AC 代码，现在只能拿到 16 分了，最后一个测试点无法通过。<br>究其原因，其实是这个题目又开始玩文字游戏了，C 的范围是 $(2^{-63}, 2^{63})$，但 A 和 B 不是的，也就是说 A 和 B 的位数可能要超过 9223372036854775807。<br>从这里开始，这个题考察的内容就不再是对数据溢出的判断了，那考察什么？考察的是<code>cin</code>和<code>scanf</code> 从输入流获取输入的差别，也不知道这样改是为了什么😓。<br>至于<code>cin</code>和<code>scanf</code>有什么区别，得单独写文章总结，现在贴出 AC 的代码（其实就只是换掉了<code>cin</code>而已）：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> t, a, b, c;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= t; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld %lld %lld"</span>, &amp;a, &amp;b, &amp;c);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case #"</span> &lt;&lt; i &lt;&lt; <span class="string">": "</span>;</span><br><span class="line">        <span class="keyword">if</span>(a + b &lt; <span class="number">0</span> &amp;&amp; a &gt; <span class="number">0</span> &amp;&amp; b &gt; <span class="number">0</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">"true"</span>; <span class="comment">// positive overflow</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(a + b &gt;= <span class="number">0</span> &amp;&amp; a &lt; <span class="number">0</span> &amp;&amp; b &lt; <span class="number">0</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">"false"</span>;  <span class="comment">// negative overflow</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(a + b &gt; c) <span class="built_in">cout</span> &lt;&lt; <span class="string">"true"</span>;  <span class="comment">// normal</span></span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">"false"</span>;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>看到这里，一上来就用<code>cin</code>的人，估计要被气吐血了。按照出题人的意图和这道题的分值而言，考察了溢出的相关知识就可以了。这样改了之后，还需要对库函数有一定的了解。当然，直接上来就用<code>scanf</code>的，当我没说。<br>但针对这道题而言，还有一种做法，那就是选用更高精度的数据类型 <code>long double</code>，如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= t; i++) &#123;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">double</span> a, b, c;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case #"</span> &lt;&lt; i &lt;&lt; <span class="string">": "</span>;</span><br><span class="line">        <span class="keyword">if</span>(a + b &lt; <span class="number">0</span> &amp;&amp; a &gt; <span class="number">0</span> &amp;&amp; b &gt; <span class="number">0</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">"true"</span>; <span class="comment">// positive overflow</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(a + b &gt;= <span class="number">0</span> &amp;&amp; a &lt; <span class="number">0</span> &amp;&amp; b &lt; <span class="number">0</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">"false"</span>;  <span class="comment">// negative overflow</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(a + b &gt; c) <span class="built_in">cout</span> &lt;&lt; <span class="string">"true"</span>;  <span class="comment">// normal</span></span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">"false"</span>;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在 C++11 标准中测试，<code>long double</code>的数据类型占了 16 个字节，能表示相当大的数了。</p>
 <h1 id="1066-Root-of-AVL-Tree"><a href="#1066-Root-of-AVL-Tree" class="headerlink" title="1066 Root of AVL Tree"></a>1066 Root of AVL Tree</h1><h2 id="Analysis-59"><a href="#Analysis-59" class="headerlink" title="Analysis"></a>Analysis</h2><p>题目大意给定一棵树的结点个数，再给定各个结点的值，建立一颗<strong>平衡二叉树（AVL）</strong>，然后输出结点的值即可。</p>
 <p>由于题目需要建立 AVL 树，依据 AVL 树的性质，每个结点的<strong>平衡因子</strong>绝对值不能大于<code>1</code>，所以在插入每个结点时，需要对树进行调整，使其满足 AVL 树的性质。</p>
 <p>AVL 树失衡的情况总共有4种：LL、LR、RR 和 RL 四种，会根据每种情况做对应的旋转即可。注意每次插入结点时都需要检查树是否失衡，这样能够及时调整。</p>
@@ -1087,7 +1090,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">91</span>
+                    <span class="site-state-item-count">92</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1383,7 +1386,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">897k</span>
+    <span title="站点总字数">900k</span>
   
 
   
@@ -1392,7 +1395,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">124:33</span>
+    <span title="站点阅读时长">125:03</span>
   
 </div>
 

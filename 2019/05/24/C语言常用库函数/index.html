@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="Intro最近发现一个问题，做题的时候，不管有的没的，要用的函数全靠自己写，写来写去也懒得去管到底有没有那个库函数了…这样不太好，日后还不是得把自己累死，还是得善于利用东西才行（又为自己偷懒找借口🤣）。于是，这篇文章就用来记录C中常用的一些库函数，以免日后又忘记了。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-02-23T14:11:35.412Z">
+<meta property="og:updated_time" content="2022-04-24T09:40:30.929Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言常用库函数">
 <meta name="twitter:description" content="Intro最近发现一个问题，做题的时候，不管有的没的，要用的函数全靠自己写，写来写去也懒得去管到底有没有那个库函数了…这样不太好，日后还不是得把自己累死，还是得善于利用东西才行（又为自己偷懒找借口🤣）。于是，这篇文章就用来记录C中常用的一些库函数，以免日后又忘记了。">
@@ -296,7 +296,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">92</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">99</span></a>
 
   </li>
         
@@ -484,7 +484,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2022-02-23 22:11:35" itemprop="dateModified" datetime="2022-02-23T22:11:35+08:00">2022-02-23</time>
+                <time title="修改时间：2022-04-24 17:40:30" itemprop="dateModified" datetime="2022-04-24T17:40:30+08:00">2022-04-24</time>
               
             
           </span>
@@ -537,7 +537,7 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                <span title="本文字数">3k</span>
+                <span title="本文字数">3.2k</span>
               
 
               
@@ -549,7 +549,7 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                <span title="阅读时长">25 分钟</span>
+                <span title="阅读时长">27 分钟</span>
               
             </div>
           
@@ -601,6 +601,9 @@
 <p>若传入的字符是字母或数字，则返回<strong>非零</strong>，若不是则返回<strong>0</strong>。</p>
 <h1 id="string-h"><a href="#string-h" class="headerlink" title="string.h"></a>string.h</h1><h2 id="strcpy"><a href="#strcpy" class="headerlink" title="strcpy"></a>strcpy</h2><p>这个函数用于拷贝字符串。<br>函数原型：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">strcpy</span><span class="params">(<span class="keyword">char</span> *dest, <span class="keyword">char</span> *src)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>需要注意的是 dest 数组必须要足够大，不然可能会造成缓冲溢出的情况。</p>
+<h1 id="math-h"><a href="#math-h" class="headerlink" title="math.h"></a>math.h</h1><h2 id="ceil"><a href="#ceil" class="headerlink" title="ceil"></a>ceil</h2><p>返回不小于 x 的最小整数（向上取整），函数原型：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">ceil</span><span class="params">(<span class="keyword">double</span> x)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<h2 id="floor"><a href="#floor" class="headerlink" title="floor"></a>floor</h2><p>返回不大于 x 的最大整数（向下取整），函数原型：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">floor</span><span class="params">(<span class="keyword">double</span> x)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<h2 id="round"><a href="#round" class="headerlink" title="round"></a>round</h2><p>返回 x 的四舍五入整数值，函数原型：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">round</span><span class="params">(<span class="keyword">double</span> x)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <hr>
       
     </div>
@@ -774,7 +777,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">92</span>
+                    <span class="site-state-item-count">99</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1038,7 +1041,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Intro"><span class="nav-number">1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#stdlib-h"><span class="nav-number">2.</span> <span class="nav-text">stdlib.h</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#qsort"><span class="nav-number">2.1.</span> <span class="nav-text">qsort</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Function-Prototype"><span class="nav-number">2.1.1.</span> <span class="nav-text">Function Prototype</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Compare-Function"><span class="nav-number">2.1.2.</span> <span class="nav-text">Compare Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Examples"><span class="nav-number">2.1.3.</span> <span class="nav-text">Examples</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ctype-h"><span class="nav-number">3.</span> <span class="nav-text">ctype.h</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#isalpha"><span class="nav-number">3.1.</span> <span class="nav-text">isalpha</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isdigit"><span class="nav-number">3.2.</span> <span class="nav-text">isdigit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isxdigit"><span class="nav-number">3.3.</span> <span class="nav-text">isxdigit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#islower"><span class="nav-number">3.4.</span> <span class="nav-text">islower</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isupper"><span class="nav-number">3.5.</span> <span class="nav-text">isupper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tolower"><span class="nav-number">3.6.</span> <span class="nav-text">tolower</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#toupper"><span class="nav-number">3.7.</span> <span class="nav-text">toupper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isalnum"><span class="nav-number">3.8.</span> <span class="nav-text">isalnum</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#string-h"><span class="nav-number">4.</span> <span class="nav-text">string.h</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#strcpy"><span class="nav-number">4.1.</span> <span class="nav-text">strcpy</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Intro"><span class="nav-number">1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#stdlib-h"><span class="nav-number">2.</span> <span class="nav-text">stdlib.h</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#qsort"><span class="nav-number">2.1.</span> <span class="nav-text">qsort</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Function-Prototype"><span class="nav-number">2.1.1.</span> <span class="nav-text">Function Prototype</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Compare-Function"><span class="nav-number">2.1.2.</span> <span class="nav-text">Compare Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Examples"><span class="nav-number">2.1.3.</span> <span class="nav-text">Examples</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ctype-h"><span class="nav-number">3.</span> <span class="nav-text">ctype.h</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#isalpha"><span class="nav-number">3.1.</span> <span class="nav-text">isalpha</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isdigit"><span class="nav-number">3.2.</span> <span class="nav-text">isdigit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isxdigit"><span class="nav-number">3.3.</span> <span class="nav-text">isxdigit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#islower"><span class="nav-number">3.4.</span> <span class="nav-text">islower</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isupper"><span class="nav-number">3.5.</span> <span class="nav-text">isupper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tolower"><span class="nav-number">3.6.</span> <span class="nav-text">tolower</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#toupper"><span class="nav-number">3.7.</span> <span class="nav-text">toupper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isalnum"><span class="nav-number">3.8.</span> <span class="nav-text">isalnum</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#string-h"><span class="nav-number">4.</span> <span class="nav-text">string.h</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#strcpy"><span class="nav-number">4.1.</span> <span class="nav-text">strcpy</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#math-h"><span class="nav-number">5.</span> <span class="nav-text">math.h</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ceil"><span class="nav-number">5.1.</span> <span class="nav-text">ceil</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#floor"><span class="nav-number">5.2.</span> <span class="nav-text">floor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#round"><span class="nav-number">5.3.</span> <span class="nav-text">round</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1070,7 +1073,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">900k</span>
+    <span title="站点总字数">930k</span>
   
 
   
@@ -1079,7 +1082,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">125:03</span>
+    <span title="站点阅读时长">129:12</span>
   
 </div>
 

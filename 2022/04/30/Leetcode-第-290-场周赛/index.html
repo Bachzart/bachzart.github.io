@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="如题...">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-04-30T13:01:08.211Z">
+<meta property="og:updated_time" content="2022-05-01T13:15:42.655Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode 第 290 场周赛">
 <meta name="twitter:description" content="如题...">
@@ -296,7 +296,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">102</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">103</span></a>
 
   </li>
         
@@ -467,12 +467,24 @@
                 
               
 
-              <time title="创建时间：2022-04-30 19:49:11 / 修改时间：21:01:08" itemprop="dateCreated datePublished" datetime="2022-04-30T19:49:11+08:00">2022-04-30</time>
+              <time title="创建时间：2022-04-30 19:49:11" itemprop="dateCreated datePublished" datetime="2022-04-30T19:49:11+08:00">2022-04-30</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-05-01 21:15:42" itemprop="dateModified" datetime="2022-05-01T21:15:42+08:00">2022-05-01</time>
               
             
           </span>
@@ -525,7 +537,7 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                <span title="本文字数">2.2k</span>
+                <span title="本文字数">4.5k</span>
               
 
               
@@ -537,7 +549,7 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                <span title="阅读时长">19 分钟</span>
+                <span title="阅读时长">37 分钟</span>
               
             </div>
           
@@ -565,7 +577,25 @@
 <p>这个题还可以使用 set 来模拟，依次求当前数组与 set 内元素的交集，得到的交集再与下一个数组求交集（需要有一个 tmpset 来保存结果），依次求完，最后的结果就是所有数组的交集。<br>不过这种做法没有用 map 的方法直接明了，所以就不写了。</p>
 <h1 id="6043-Count-Number-of-Rectangles-Containing-Each-Point"><a href="#6043-Count-Number-of-Rectangles-Containing-Each-Point" class="headerlink" title="6043. Count Number of Rectangles Containing Each Point"></a>6043. Count Number of Rectangles Containing Each Point</h1><h2 id="Analysis-1"><a href="#Analysis-1" class="headerlink" title="Analysis"></a>Analysis</h2><p>这是第 3 个题，不过是第二个提交的题。<br>题意理解起来还算容易，就是求出每个点被多少个矩形包括。</p>
 <h2 id="Code-1"><a href="#Code-1" class="headerlink" title="Code"></a>Code</h2><p>理解题意后，其实可以发现这不是个很复杂的题目。判断一个点是否在矩形内，只需要这个点的横纵坐标分别小于等于矩形右上端点（也就是题目给的点）的横纵坐标即可，那么很容易的就会想到暴力解法：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; countRectangles(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; rectangles, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; points) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ret;</span><br><span class="line">        <span class="keyword">int</span> pointnums = points.size(), rectanglenums = rectangles.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; pointnums; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> x = points[i][<span class="number">0</span>], y = points[i][<span class="number">1</span>], cnt = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; rectanglenums; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(x &lt;= rectangles[j][<span class="number">0</span>] &amp;&amp;  y &lt;= rectangles[j][<span class="number">1</span>]) cnt++;</span><br><span class="line">            &#125;</span><br><span class="line">            ret.push_back(cnt);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>这是当时提交的代码，果然，提交上去超时了。<br>没想到怎么优化时间复杂度，就放弃了...😂</p>
+<p>这是当时提交的代码，果然，提交上去超时了。<br>没想到怎么优化时间复杂度，就放弃了...😂<br>简单分析一下，可以知道上述算法的时间复杂度是 $O(m^n)$，其中 $m$ 是点个数，$n$ 是矩形的个数，这不超时就怪了。<br>后面看了别人的解题思路后，发现其实这个（准确说是这类）问题其实可以分解成 2 个子问题：</p>
+<ol>
+<li>判断当前点的横坐标是不是都小于等于所有矩形的横坐标。</li>
+<li>判断当前点的纵坐标是不是都小于等于所有矩形的纵坐标。</li>
+</ol>
+<p>如果能把这两个事情放在两个单独的循环完成，或者说分开进行，然后合并 2 个结果是不是就能缩短时间复杂度了呢？<br>当然是的啊！虽然这个问题的解决过程肯定不可能这么理想化，不过这是一个不错的思考思路。<br>进一步观察题目，可以发现纵坐标的规模是 $[1, 100]$，横坐标的规模是 $[1, 10^9]$。为什么纵坐标规模这么小？显然有猫腻啊，不妨先按照相同的纵坐标，统计所有不同的横坐标的矩形：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; rec(<span class="number">110</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v: rectangles) &#123;</span><br><span class="line">    rec[v[<span class="number">1</span>]].push_back(v[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>由于纵坐标规模较小，所以可以直接拿来当作数组的下标。得到这样的结果后，进一步思考如何进行判断。</p>
+<p>因为纵坐标是下标，所以可以直接找出纵坐标大于等于点的纵坐标的所有矩形（时间复杂度 $O(1)$），也即 $rec[i], i &gt;= h$。但如果矩形的横坐标不满足条件也是不符合题意的，所以也要在这些纵坐标符合条件的矩形中，快速找出所有横坐标符合条件的矩形。<br>实际上，在 rec 这个数组中，每一个元素都是纵坐标相等的矩形的横坐标的集合。要完成上面说的事情，其实只需要遍历这些集合即可（此时问题已经转化了）。</p>
+<p>到这里，回过头看可以发现，上面提到的 2 个问题，已经被拆开来<strong>分别解决</strong>了。</p>
+<p>继续思考下去，遍历横坐标（上面提到的集合），一般是直接遍历，那样时间复杂度就是 $O(n)$。因为，外层还有 m 个点，如果直接这样遍历，估计还是够呛。有什么办法？答案是<strong>先排序，然后用二分查找</strong>：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; rec(<span class="number">110</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v: rectangles) &#123;</span><br><span class="line">    rec[v[<span class="number">1</span>]].push_back(v[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v: rec) &#123;</span><br><span class="line">    sort(v.begin(), v.end());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>是的，排序可以在遍历点的循环外做完，这样就可以直接用了😂。<br>剩下就是遍历点，然后统计出所有的矩形就好了：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; countRectangles(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; rectangles, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; points) &#123;</span><br><span class="line">        <span class="keyword">int</span> size = points.size();</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; rec(<span class="number">110</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v: rectangles) &#123;</span><br><span class="line">            rec[v[<span class="number">1</span>]].push_back(v[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v: rec) &#123;</span><br><span class="line">            sort(v.begin(), v.end());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ret(size);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> x = points[i][<span class="number">0</span>], y = points[i][<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = y; j &lt;= <span class="number">100</span>; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(!rec[j].empty()) &#123;</span><br><span class="line">                    ret[i] += rec[j].end() - (lower_bound(rec[j].begin(), rec[j].end(), x));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>二分查找直接调用 lower_bound 函数来完成，做差的结果就是当前纵坐标下，所有大于等于点的横坐标的矩形个数。<br>不容易啊，好歹算是通过了。<br>现在回过头来看一下这个算法的时间复杂度：</p>
+<ol>
+<li>首先按照纵坐标来统计横坐标，$O(m)$。</li>
+<li>排序，$O(nlogn)$。</li>
+<li>最后就是统计所有符合条件的个数，$O(m × 100 × logn)$，这个 100 可以换成字母，表示横坐标或纵坐标规模小的那个。</li>
+</ol>
+<p>合计就是：$O(m) + O(nlogn) + O(H_{min} m logn)$。<br>对应的空间复杂度：$O(m + n)$。</p>
+<p>没做过这类题，还真不太好想。还剩 2 道题，明天再写。</p>
 <hr>
       
     </div>
@@ -663,6 +693,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2022/05/01/Leetcode-20-天编程能力基础-day2/" rel="prev" title="Leetcode_20 天编程能力基础_day2">
+                Leetcode_20 天编程能力基础_day2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -735,7 +769,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">102</span>
+                    <span class="site-state-item-count">103</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1035,7 +1069,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">939k</span>
+    <span title="站点总字数">947k</span>
   
 
   
@@ -1044,7 +1078,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">130:27</span>
+    <span title="站点阅读时长">131:32</span>
   
 </div>
 

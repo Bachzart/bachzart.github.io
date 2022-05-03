@@ -140,14 +140,14 @@
 
 
   <meta name="description" content="C++ 提供了两种类型的字符串表示形式：C 语言类型和引入的 string 类。在某些场景下，使用新的 string 类来处理字符串十分方便，这里介绍一下其常见的用法。">
-<meta name="keywords" content="C&#x2F;C++,string,STL">
+<meta name="keywords" content="C&#x2F;C++,STL,string">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++_string 容器的常见用法">
 <meta property="og:url" content="http://bachzart.github.io/2022/03/14/C-string-容器的常见用法/index.html">
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="C++ 提供了两种类型的字符串表示形式：C 语言类型和引入的 string 类。在某些场景下，使用新的 string 类来处理字符串十分方便，这里介绍一下其常见的用法。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-04-28T13:57:38.097Z">
+<meta property="og:updated_time" content="2022-05-03T14:17:50.039Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++_string 容器的常见用法">
 <meta name="twitter:description" content="C++ 提供了两种类型的字符串表示形式：C 语言类型和引入的 string 类。在某些场景下，使用新的 string 类来处理字符串十分方便，这里介绍一下其常见的用法。">
@@ -296,7 +296,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">103</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">105</span></a>
 
   </li>
         
@@ -484,7 +484,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2022-04-28 21:57:38" itemprop="dateModified" datetime="2022-04-28T21:57:38+08:00">2022-04-28</time>
+                <time title="修改时间：2022-05-03 22:17:50" itemprop="dateModified" datetime="2022-05-03T22:17:50+08:00">2022-05-03</time>
               
             
           </span>
@@ -537,7 +537,7 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                <span title="本文字数">7.2k</span>
+                <span title="本文字数">7.4k</span>
               
 
               
@@ -549,7 +549,7 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                <span title="阅读时长">1:01</span>
+                <span title="阅读时长">1:02</span>
               
             </div>
           
@@ -575,8 +575,9 @@
 <p>如果要初始化，就需要直接对 string 类型的变量赋值：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> str = <span class="string">"abcd"</span>;</span><br></pre></td></tr></table></figure></p>
 <p>有时候需要一个含有 n 个相同字符的字符串，此时可以利用 string 的构造函数完成：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> str = <span class="built_in">string</span>(<span class="number">4</span>, <span class="string">'a'</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">aaaa</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
 <p>还可以用构造函数完成截取字符串的操作：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> str = <span class="string">"abcd"</span>;</span><br><span class="line">    <span class="built_in">string</span> s = <span class="built_in">string</span>(str, <span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">bcd</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h1><p>C++ 提供了两种访问 string 类的方式。</p>
+<h1 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h1><p>C++ 提供了<del>两种</del>多种访问 string 类的方式。</p>
 <h2 id="通过下标访问"><a href="#通过下标访问" class="headerlink" title="通过下标访问"></a>通过下标访问</h2><p>C++ 可以通过下标直接访问到 string 类型变量的每一个字符变量，如：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> str = <span class="string">"abcde"</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; str.length(); i++) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; str[i] &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* out:</span></span><br><span class="line"><span class="comment">a b c d e </span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<p>访问单个字符还可以通过 at 函数来完成：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> str = <span class="string">"abcde"</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; str.length(); i++) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; str.at(i) &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* out:</span></span><br><span class="line"><span class="comment">a b c d e </span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
 <p>如果要输入或输出整个字符串，就得用 cin 和 cout：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> str;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; str;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>硬要用 scanf 和 printf 也是可以的，如：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> str;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>, str.c_str());</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s"</span>, str.c_str());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="通过迭代器访问"><a href="#通过迭代器访问" class="headerlink" title="通过迭代器访问"></a>通过迭代器访问</h2><p>string 类与其他 STL 容器一样，也是支持用迭代器访问的，如：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">string</span> str = <span class="string">"abcde"</span>;</span><br><span class="line">    <span class="built_in">string</span>::iterator it = str.begin();</span><br><span class="line">    <span class="keyword">for</span>(; it != str.end(); it++) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; *it &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* out:</span></span><br><span class="line"><span class="comment">a b c d e </span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
@@ -681,9 +682,9 @@
           
             <a href="/tags/C-C/" rel="tag"><i class="fa fa-tag"></i> C/C++</a>
           
-            <a href="/tags/string/" rel="tag"><i class="fa fa-tag"></i> string</a>
-          
             <a href="/tags/STL/" rel="tag"><i class="fa fa-tag"></i> STL</a>
+          
+            <a href="/tags/string/" rel="tag"><i class="fa fa-tag"></i> string</a>
           
         </div>
       
@@ -782,7 +783,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">105</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1082,7 +1083,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">947k</span>
+    <span title="站点总字数">954k</span>
   
 
   
@@ -1091,7 +1092,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">131:32</span>
+    <span title="站点阅读时长">132:31</span>
   
 </div>
 

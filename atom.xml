@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2022-05-07T09:07:02.709Z</updated>
+  <updated>2022-05-08T13:05:45.290Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode 第 77 场双周赛</title>
+    <link href="http://bachzart.github.io/2022/05/08/Leetcode-%E7%AC%AC-77-%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/"/>
+    <id>http://bachzart.github.io/2022/05/08/Leetcode-第-77-场双周赛/</id>
+    <published>2022-05-08T08:40:23.000Z</published>
+    <updated>2022-05-08T13:05:45.290Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;RT...&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
+    
+    
+      <category term="Leetcode weekly contest" scheme="http://bachzart.github.io/tags/Leetcode-weekly-contest/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode_20 天编程能力基础_day9</title>
+    <link href="http://bachzart.github.io/2022/05/08/Leetcode-20-%E5%A4%A9%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%E5%9F%BA%E7%A1%80-day9/"/>
+    <id>http://bachzart.github.io/2022/05/08/Leetcode-20-天编程能力基础-day9/</id>
+    <published>2022-05-08T03:59:20.000Z</published>
+    <updated>2022-05-08T05:59:05.231Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;从周赛回来了~&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
+    
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode_20 天编程能力基础_day8</title>
@@ -175,7 +219,7 @@
     <link href="http://bachzart.github.io/2022/04/30/Leetcode-%E7%AC%AC-290-%E5%9C%BA%E5%91%A8%E8%B5%9B/"/>
     <id>http://bachzart.github.io/2022/04/30/Leetcode-第-290-场周赛/</id>
     <published>2022-04-30T11:49:11.000Z</published>
-    <updated>2022-05-07T13:52:40.659Z</updated>
+    <updated>2022-05-08T06:02:55.321Z</updated>
     
     <summary type="html">
     
@@ -400,50 +444,6 @@
     <summary type="html">
     
       &lt;p&gt;继续，继续。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SQL 的一些基础知识点</title>
-    <link href="http://bachzart.github.io/2022/04/20/SQL-%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
-    <id>http://bachzart.github.io/2022/04/20/SQL-的一些基础知识点/</id>
-    <published>2022-04-20T08:32:49.000Z</published>
-    <updated>2022-04-29T10:14:52.831Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;记录一下 SQL 的一些相关知识。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="SQL" scheme="http://bachzart.github.io/categories/Programming/SQL/"/>
-    
-    
-      <category term="SQL" scheme="http://bachzart.github.io/tags/SQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode_10 天 SQL 入门_day1</title>
-    <link href="http://bachzart.github.io/2022/04/20/Leetcode-10-%E5%A4%A9-SQL-%E5%85%A5%E9%97%A8-day1/"/>
-    <id>http://bachzart.github.io/2022/04/20/Leetcode-10-天-SQL-入门-day1/</id>
-    <published>2022-04-20T08:24:25.000Z</published>
-    <updated>2022-04-21T06:38:44.620Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这个系列好像是和数据库相关的内容，需要补充一点这些知识。&lt;br&gt;
     
     </summary>
     

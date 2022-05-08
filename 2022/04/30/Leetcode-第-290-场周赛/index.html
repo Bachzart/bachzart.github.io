@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="如题...">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-05-07T13:52:40.659Z">
+<meta property="og:updated_time" content="2022-05-08T06:02:55.321Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode 第 290 场周赛">
 <meta name="twitter:description" content="如题...">
@@ -296,7 +296,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">109</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">111</span></a>
 
   </li>
         
@@ -484,7 +484,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2022-05-07 21:52:40" itemprop="dateModified" datetime="2022-05-07T21:52:40+08:00">2022-05-07</time>
+                <time title="修改时间：2022-05-08 14:02:55" itemprop="dateModified" datetime="2022-05-08T14:02:55+08:00">2022-05-08</time>
               
             
           </span>
@@ -616,7 +616,7 @@
 <p>因为 set 与 pair 一起使用时要重新写下 hash 函数（遗憾的是...我不知道 C++ 这个怎么写😂），就直接用 map 了。可惜的是，方向是找对了，就是还是超时了，死在第 57 个样例了。<br>看了下提示：<code>Since you need to reduce the search space, consider the minimum and maximum possible values of the coordinates of a lattice point contained in any circle.</code>。<br>想了下，枚举每个圆的外切矩形一定会有很多重复的点，如果我们直接从能容纳所有圆的那个最大的外切矩形坐标开始枚举，再利用 hash 不就可以减少重复比较的次数了吗？<br>是的，就是这样的...感谢提示~<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countLatticePoints</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; circles)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> leftlowerxmin = INT_MAX, leftlowerymin = INT_MAX;</span><br><span class="line">        <span class="keyword">int</span> lmax = INT_MIN, hmax = INT_MIN;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v: circles) &#123;</span><br><span class="line">            <span class="keyword">int</span> l = v[<span class="number">0</span>] + v[<span class="number">2</span>], h = v[<span class="number">1</span>] + v[<span class="number">2</span>];</span><br><span class="line">            <span class="keyword">int</span> leftlowerx = v[<span class="number">0</span>] - v[<span class="number">2</span>], leftlowery = v[<span class="number">1</span>] - v[<span class="number">2</span>];</span><br><span class="line">            <span class="keyword">if</span>(l &gt; lmax) lmax = l;</span><br><span class="line">            <span class="keyword">if</span>(h &gt; hmax) hmax = h;</span><br><span class="line">            <span class="keyword">if</span>(leftlowerx &lt; leftlowerxmin) leftlowerxmin = leftlowerx;</span><br><span class="line">            <span class="keyword">if</span>(leftlowery &lt; leftlowerymin) leftlowerymin = leftlowery;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">map</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt; latticepoints;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = leftlowerxmin; i &lt;= lmax; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = leftlowerymin; j &lt;= hmax; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(latticepoints.count(make_pair(i, j))) <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v: circles) &#123;</span><br><span class="line">                    <span class="keyword">int</span> dis = (i - v[<span class="number">0</span>]) * (i - v[<span class="number">0</span>]) + (j - v[<span class="number">1</span>]) * (j - v[<span class="number">1</span>]);</span><br><span class="line">                    <span class="keyword">if</span>(dis &lt;= v[<span class="number">2</span>] * v[<span class="number">2</span>]) &#123;</span><br><span class="line">                        latticepoints[make_pair(i, j)] = <span class="number">1</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> latticepoints.size();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <p>这个其实也是暴力解法，只是转换了一下思考的角度...<br>突然发现，好像前面的暴力解法，忘记用 hash 的性质了...<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countLatticePoints</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; circles)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">map</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt; points;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> v: circles) &#123;</span><br><span class="line">            <span class="keyword">int</span> l = v[<span class="number">0</span>] + v[<span class="number">2</span>], h = v[<span class="number">1</span>] + v[<span class="number">2</span>], r = v[<span class="number">2</span>];</span><br><span class="line">            <span class="keyword">int</span> leftlowerx = v[<span class="number">0</span>] - v[<span class="number">2</span>], leftlowery = v[<span class="number">1</span>] - v[<span class="number">2</span>];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = leftlowerx; i &lt;= l; i++) &#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j = leftlowery; j &lt;= h; j++) &#123;</span><br><span class="line">                    <span class="keyword">if</span>(points.count(make_pair(i, j))) <span class="keyword">continue</span>;</span><br><span class="line">                    <span class="keyword">int</span> dis = (i - v[<span class="number">0</span>]) * (i - v[<span class="number">0</span>]) + (j - v[<span class="number">1</span>]) * (j - v[<span class="number">1</span>]);</span><br><span class="line">                    <span class="keyword">if</span>(dis &lt;= r * r) points[make_pair(i, j)] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">return</span> points.size();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <p>加上 hash 后竟然通过了...😂，就是时间、空间消耗惨不忍睹。<br>看了下大佬们的思路，这个题好像还有其他解法，懒得继续思考了，这个题就到此为止了...</p>
-<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>现在回头看一下这次场周赛的题目，感觉 4 个题有点类似，特别是第 2 题、第 3 题和第 4 题，都有数学的影子在里面。现在看来，好像也不是特别复杂的题目😂。哈哈，当时做的时候还是问题很多的，现在疑惑差不多就解决了，反而觉得不难了...<br>真是应了那句话了：难者不会，会者不难。不过，我想，现在的“会者”也是从曾经的“难者”一步一步过来的吧...</p>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>现在回头看一下这次场周赛的题目，感觉 4 个题有点类似，特别是第 2 题、第 3 题和第 4 题，都有数学的影子在里面。另外，这几个题好像的题目形式都与<strong>树状数组</strong>有点关系，等之后研究一下再来看看吧。<br>不过现在再回头看看，感觉好像也不是特别复杂的题目（我在说什么 P 话😂）。<br>哈哈，当时做的时候还是问题很多的，现在疑惑差不多就解决了，反而觉得不难了...<br>真是应了那句话了：难者不会，会者不难。不过，我想，现在的“会者”也是从曾经的“难者”一步一步过来的吧...</p>
 <hr>
       
     </div>
@@ -790,7 +790,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">109</span>
+                    <span class="site-state-item-count">111</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1092,7 +1092,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">995k</span>
+    <span title="站点总字数">1m</span>
   
 
   
@@ -1101,7 +1101,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">138:13</span>
+    <span title="站点阅读时长">141:06</span>
   
 </div>
 

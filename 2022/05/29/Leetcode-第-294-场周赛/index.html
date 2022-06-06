@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="上周的周赛...">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-05-29T07:14:42.557Z">
+<meta property="og:updated_time" content="2022-05-31T13:54:41.733Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode 第 294 场周赛">
 <meta name="twitter:description" content="上周的周赛...">
@@ -296,7 +296,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">130</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">133</span></a>
 
   </li>
         
@@ -467,12 +467,24 @@
                 
               
 
-              <time title="创建时间：2022-05-29 13:03:58 / 修改时间：15:14:42" itemprop="dateCreated datePublished" datetime="2022-05-29T13:03:58+08:00">2022-05-29</time>
+              <time title="创建时间：2022-05-29 13:03:58" itemprop="dateCreated datePublished" datetime="2022-05-29T13:03:58+08:00">2022-05-29</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-05-31 21:54:41" itemprop="dateModified" datetime="2022-05-31T21:54:41+08:00">2022-05-31</time>
               
             
           </span>
@@ -525,7 +537,7 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                <span title="本文字数">6.2k</span>
+                <span title="本文字数">8k</span>
               
 
               
@@ -537,7 +549,7 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                <span title="阅读时长">52 分钟</span>
+                <span title="阅读时长">1:06</span>
               
             </div>
           
@@ -571,7 +583,12 @@
 <p>实际上用 multiset 就可以了。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maximumBags</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; capacity, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; rocks, <span class="keyword">int</span> additionalRocks)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">multiset</span>&lt;<span class="keyword">int</span>&gt; remains;</span><br><span class="line">        <span class="keyword">int</span> n = capacity.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            remains.insert(capacity[i] - rocks[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;i: remains) &#123;</span><br><span class="line">            <span class="keyword">if</span>(i != <span class="number">0</span>) &#123;</span><br><span class="line">                additionalRocks -= i;</span><br><span class="line">                <span class="keyword">if</span>(additionalRocks &gt;= <span class="number">0</span>) cnt++;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(i == <span class="number">0</span>) cnt++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cnt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <p>使用 multiset 容器的时间、空间消耗都很大，不如直接换成 vector，然后排序。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maximumBags</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; capacity, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; rocks, <span class="keyword">int</span> additionalRocks)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; remains;</span><br><span class="line">        <span class="keyword">int</span> n = capacity.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            remains.push_back(capacity[i] - rocks[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        sort(remains.begin(), remains.end());</span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;i: remains) &#123;</span><br><span class="line">            <span class="keyword">if</span>(i != <span class="number">0</span>) &#123;</span><br><span class="line">                additionalRocks -= i;</span><br><span class="line">                <span class="keyword">if</span>(additionalRocks &gt;= <span class="number">0</span>) cnt++;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(i == <span class="number">0</span>) cnt++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cnt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <p>果然，快多了...<br>这么一看的话，这个题当时是可以做出来的，没经过仔细思考，直接认为这个题需要用 dfs 来求解...大意失荆州了啊~</p>
-<h1 id="2281-Sum-of-Total-Strength-of-Wizards"><a href="#2281-Sum-of-Total-Strength-of-Wizards" class="headerlink" title="2281. Sum of Total Strength of Wizards"></a>2281. Sum of Total Strength of Wizards</h1><h2 id="Analysis-3"><a href="#Analysis-3" class="headerlink" title="Analysis"></a>Analysis</h2><h2 id="Code-3"><a href="#Code-3" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="2281-Sum-of-Total-Strength-of-Wizards"><a href="#2281-Sum-of-Total-Strength-of-Wizards" class="headerlink" title="2281. Sum of Total Strength of Wizards"></a>2281. Sum of Total Strength of Wizards</h1><h2 id="Analysis-3"><a href="#Analysis-3" class="headerlink" title="Analysis"></a>Analysis</h2><p>题意不难理解，就是算出所有子数组最小值与对应的和的积然后再相加。</p>
+<p>参考思路：<a href="https://leetcode.cn/problems/sum-of-total-strength-of-wizards/solution/ji-suan-mei-ge-shu-zi-zuo-wei-zui-xiao-z-3jvr/" target="_blank" rel="noopener">计算每个数字作为最小值的贡献</a>。</p>
+<p>如这篇题解所说先做一下 907 比较好。仔细拆分下来这个题实际上是前缀和 + 单调栈 + 数学，不过自己能单独做出来，估计得很长一段时间后了。</p>
+<h2 id="Code-3"><a href="#Code-3" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">totalStrength</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; strength)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = strength.size();</span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; left(n, <span class="number">-1</span>), right(n, n);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">while</span>(!st.empty() &amp;&amp; strength[st.top()] &gt; strength[i]) &#123;</span><br><span class="line">                right[st.top()] = i;</span><br><span class="line">                st.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(!st.empty()) left[i] = st.top();</span><br><span class="line">            st.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; psum = strength;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            psum[i] = (psum[i] + psum[i - <span class="number">1</span>]) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ppsum = psum;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            ppsum[i] = (ppsum[i] + ppsum[i - <span class="number">1</span>]) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">auto</span> f = [&amp;](<span class="keyword">int</span> l, <span class="keyword">int</span> r) &#123;</span><br><span class="line">            <span class="keyword">if</span>(r &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(l &lt; <span class="number">0</span>) <span class="keyword">return</span> ppsum[r];</span><br><span class="line">            <span class="keyword">return</span> (ppsum[r] - ppsum[l] + mod) % mod;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> l = left[i] + <span class="number">1</span>, r = right[i] - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">long</span> <span class="keyword">long</span> sleft = <span class="number">1l</span>l * f(l - <span class="number">2</span>, i - <span class="number">1</span>) * (r - i + <span class="number">1</span>) % mod;</span><br><span class="line">            <span class="keyword">long</span> <span class="keyword">long</span> sright = <span class="number">1l</span>l * f(i - <span class="number">1</span>, r) * (i - l + <span class="number">1</span>) % mod;</span><br><span class="line">            ret += <span class="number">1l</span>l * strength[i] * (((sright - sleft) + mod) % mod) % mod;</span><br><span class="line">            ret %= mod;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>这次周赛大意了，本来第二个题可以做的，结果把时间都花在第三个题上了（大致思路是对的，但没做出来）。第二题的主要问题是，搞错题目类型了，然后就放掉了...<br>第三题其实是每日一题见过的类似题目，但是升级到中等题就做不出来了...<br>第四题是个很不错的单调栈 + 前缀和的综合题，花时间把这个题吃透应该能有所值。</p>
+<p>总之，这周的周赛有点亏😭。</p>
 <hr>
       
     </div>
@@ -745,7 +762,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">130</span>
+                    <span class="site-state-item-count">133</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1017,7 +1034,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2278-Percentage-of-Letter-in-String"><span class="nav-number">1.</span> <span class="nav-text">2278. Percentage of Letter in String</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis"><span class="nav-number">1.1.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">1.2.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2280-Minimum-Lines-to-Represent-a-Line-Chart"><span class="nav-number">2.</span> <span class="nav-text">2280. Minimum Lines to Represent a Line Chart</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis-1"><span class="nav-number">2.1.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-1"><span class="nav-number">2.2.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2279-Maximum-Bags-With-Full-Capacity-of-Rocks"><span class="nav-number">3.</span> <span class="nav-text">2279. Maximum Bags With Full Capacity of Rocks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis-2"><span class="nav-number">3.1.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-2"><span class="nav-number">3.2.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2281-Sum-of-Total-Strength-of-Wizards"><span class="nav-number">4.</span> <span class="nav-text">2281. Sum of Total Strength of Wizards</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis-3"><span class="nav-number">4.1.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-3"><span class="nav-number">4.2.</span> <span class="nav-text">Code</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2278-Percentage-of-Letter-in-String"><span class="nav-number">1.</span> <span class="nav-text">2278. Percentage of Letter in String</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis"><span class="nav-number">1.1.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">1.2.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2280-Minimum-Lines-to-Represent-a-Line-Chart"><span class="nav-number">2.</span> <span class="nav-text">2280. Minimum Lines to Represent a Line Chart</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis-1"><span class="nav-number">2.1.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-1"><span class="nav-number">2.2.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2279-Maximum-Bags-With-Full-Capacity-of-Rocks"><span class="nav-number">3.</span> <span class="nav-text">2279. Maximum Bags With Full Capacity of Rocks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis-2"><span class="nav-number">3.1.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-2"><span class="nav-number">3.2.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2281-Sum-of-Total-Strength-of-Wizards"><span class="nav-number">4.</span> <span class="nav-text">2281. Sum of Total Strength of Wizards</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis-3"><span class="nav-number">4.1.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-3"><span class="nav-number">4.2.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Summary"><span class="nav-number">5.</span> <span class="nav-text">Summary</span></a></li></ol></div>
             
 
           </div>
@@ -1049,7 +1066,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">1.1m</span>
+    <span title="站点总字数">1.2m</span>
   
 
   
@@ -1058,7 +1075,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">158:34</span>
+    <span title="站点阅读时长">161:53</span>
   
 </div>
 

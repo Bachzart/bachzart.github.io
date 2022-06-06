@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2022-05-29T10:17:43.021Z</updated>
+  <updated>2022-06-06T14:26:07.694Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,72 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode 第 296 场周赛</title>
+    <link href="http://bachzart.github.io/2022/06/05/Leetcode-%E7%AC%AC-296-%E5%9C%BA%E5%91%A8%E8%B5%9B/"/>
+    <id>http://bachzart.github.io/2022/06/05/Leetcode-第-296-场周赛/</id>
+    <published>2022-06-05T12:11:31.000Z</published>
+    <updated>2022-06-06T14:26:07.694Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这次周赛的题目感觉简单了一点。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
+    
+    
+      <category term="Leetcode weekly contest" scheme="http://bachzart.github.io/tags/Leetcode-weekly-contest/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode 第 295 场周赛</title>
+    <link href="http://bachzart.github.io/2022/06/01/Leetcode-%E7%AC%AC-295-%E5%9C%BA%E5%91%A8%E8%B5%9B/"/>
+    <id>http://bachzart.github.io/2022/06/01/Leetcode-第-295-场周赛/</id>
+    <published>2022-06-01T14:38:38.000Z</published>
+    <updated>2022-06-04T14:18:54.979Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;上周周赛。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
+    
+    
+      <category term="Leetcode weekly contest" scheme="http://bachzart.github.io/tags/Leetcode-weekly-contest/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode 第 79 场双周赛</title>
+    <link href="http://bachzart.github.io/2022/05/31/Leetcode-%E7%AC%AC-79-%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/"/>
+    <id>http://bachzart.github.io/2022/05/31/Leetcode-第-79-场双周赛/</id>
+    <published>2022-05-31T14:08:05.000Z</published>
+    <updated>2022-06-01T14:39:30.053Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;上周的双周赛~&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
+    
+    
+      <category term="Leetcode weekly contest" scheme="http://bachzart.github.io/tags/Leetcode-weekly-contest/"/>
+    
+  </entry>
   
   <entry>
     <title>《Heart of Gold》简易吉他谱</title>
@@ -43,7 +109,7 @@
     <link href="http://bachzart.github.io/2022/05/29/Leetcode-%E7%AC%AC-294-%E5%9C%BA%E5%91%A8%E8%B5%9B/"/>
     <id>http://bachzart.github.io/2022/05/29/Leetcode-第-294-场周赛/</id>
     <published>2022-05-29T05:03:58.000Z</published>
-    <updated>2022-05-29T07:14:42.557Z</updated>
+    <updated>2022-05-31T13:54:41.733Z</updated>
     
     <summary type="html">
     
@@ -389,72 +455,6 @@
     
     
       <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode 第 291 场周赛</title>
-    <link href="http://bachzart.github.io/2022/05/09/Leetcode-%E7%AC%AC-291-%E5%9C%BA%E5%91%A8%E8%B5%9B/"/>
-    <id>http://bachzart.github.io/2022/05/09/Leetcode-第-291-场周赛/</id>
-    <published>2022-05-09T10:34:33.000Z</published>
-    <updated>2022-05-14T13:34:36.017Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这是上上周的周赛了...&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode weekly contest" scheme="http://bachzart.github.io/tags/Leetcode-weekly-contest/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode_20 天编程能力基础_day10</title>
-    <link href="http://bachzart.github.io/2022/05/09/Leetcode-20-%E5%A4%A9%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%E5%9F%BA%E7%A1%80-day10/"/>
-    <id>http://bachzart.github.io/2022/05/09/Leetcode-20-天编程能力基础-day10/</id>
-    <published>2022-05-09T02:21:04.000Z</published>
-    <updated>2022-05-09T10:29:33.930Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;继续冲~&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode 第 77 场双周赛</title>
-    <link href="http://bachzart.github.io/2022/05/08/Leetcode-%E7%AC%AC-77-%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/"/>
-    <id>http://bachzart.github.io/2022/05/08/Leetcode-第-77-场双周赛/</id>
-    <published>2022-05-08T08:40:23.000Z</published>
-    <updated>2022-05-08T13:05:45.290Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;RT...&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode weekly contest" scheme="http://bachzart.github.io/tags/Leetcode-weekly-contest/"/>
     
   </entry>
   

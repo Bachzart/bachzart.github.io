@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="梳理一下 vector 的常见用法。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-05-29T03:54:30.532Z">
+<meta property="og:updated_time" content="2022-11-01T15:35:55.007Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++_vector 容器的常见用法">
 <meta name="twitter:description" content="梳理一下 vector 的常见用法。">
@@ -296,7 +296,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">133</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">135</span></a>
 
   </li>
         
@@ -334,7 +334,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">43</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">44</span></a>
 
   </li>
 
@@ -484,7 +484,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2022-05-29 11:54:30" itemprop="dateModified" datetime="2022-05-29T11:54:30+08:00">2022-05-29</time>
+                <time title="修改时间：2022-11-01 23:35:55" itemprop="dateModified" datetime="2022-11-01T23:35:55+08:00">2022-11-01</time>
               
             
           </span>
@@ -537,7 +537,7 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                <span title="本文字数">2.8k</span>
+                <span title="本文字数">2.9k</span>
               
 
               
@@ -549,7 +549,7 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                <span title="阅读时长">23 分钟</span>
+                <span title="阅读时长">24 分钟</span>
               
             </div>
           
@@ -570,7 +570,7 @@
 
       
         <p>梳理一下 vector 的常见用法。<br><a id="more"></a><br>C++ 的 vector 本质上是一个动态数组，也就是可以自动扩容的数组，具体如何实现这里不深究。如果要使用 vector，需要添加 vector 头文件。</p>
-<h1 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h1><p>vector 的初始化有很多种方式：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v1;  <span class="comment">// v1 是一个空 vector，内部元素都是 int 类型的</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v2(v1);  <span class="comment">// v2 中包含了 v1 所有元素的副本</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v2 = v1; <span class="comment">// 同上</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v3(size, val);  <span class="comment">// v3 是大小为 size，内部元素全是 val 的 vector</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v4(size); <span class="comment">// v4 的大小是 size，内部元素全是 0</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v5&#123;a, b, c, ...&#125; <span class="comment">// v5 包含了初始值个数的元素，前几个元素被赋予相应的值</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v5=&#123;a, b, c, ...&#125; <span class="comment">//  同上</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v6[size]  <span class="comment">// v6 的大小为 size，内部每一个元素都是单独的 vector，长度不限</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; v6(size) <span class="comment">//同上</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; v7; <span class="comment">//  不限定长度的二维 vector</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; v8(size, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(size));  <span class="comment">// 同时限定一维和二维的大小</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h1><p>vector 的初始化有很多种方式（本质上就是如何如何使用 vector 提供的构造函数）：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v1;  <span class="comment">// v1 是一个空 vector，内部元素都是 int 类型的</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v2(v1);  <span class="comment">// v2 中包含了 v1 所有元素的副本</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v2 = v1; <span class="comment">// 同上</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v3(size, val);  <span class="comment">// v3 是大小为 size，内部元素全是 val 的 vector</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v4(size); <span class="comment">// v4 的大小是 size，内部元素全是 0</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v5&#123;a, b, c, ...&#125; <span class="comment">// v5 包含了初始值个数的元素，前几个元素被赋予相应的值</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v5=&#123;a, b, c, ...&#125; <span class="comment">//  同上</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v6[size]  <span class="comment">// v6 的大小为 size，内部每一个元素都是单独的 vector，长度不限</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; v6(size) <span class="comment">//同上</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v7(v1.begin(), v1.begin() + k); <span class="comment">// v7的大小为 k，内部元素顺序与 v1 的前 k个元素一致</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; v7; <span class="comment">//  不限定长度的二维 vector</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; v8(size, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(size));  <span class="comment">// 同时限定一维和二维的大小</span></span><br></pre></td></tr></table></figure></p>
 <p>上面的<code>int</code>都可以换成其他基本类型、类或容器。</p>
 <h1 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h1><h2 id="下标"><a href="#下标" class="headerlink" title="下标"></a>下标</h2><p>vector 访问元素的方式有很多，可以用类似数组下标的方式访问，此时下标范围是<code>[0, v.size() - 1]</code>。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v(<span class="number">5</span>);</span><br><span class="line">v[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">v[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">v[<span class="number">2</span>] = <span class="number">2</span>;</span><br></pre></td></tr></table></figure></p>
 <h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><p>STL 容器都可以用迭代器来访问。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt; </span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line">  <span class="keyword">auto</span> it = v.begin();</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; *it &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; *(++it) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; *(v.begin() + <span class="number">1</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
@@ -772,7 +772,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">133</span>
+                    <span class="site-state-item-count">135</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -938,7 +938,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                    <span class="site-state-item-count">42</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1085,7 +1087,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">164:49</span>
+    <span title="站点阅读时长">165:39</span>
   
 </div>
 

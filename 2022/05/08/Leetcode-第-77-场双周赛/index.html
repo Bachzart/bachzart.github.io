@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="RT...">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-05-08T13:05:45.290Z">
+<meta property="og:updated_time" content="2022-06-10T15:09:38.506Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode 第 77 场双周赛">
 <meta name="twitter:description" content="RT...">
@@ -296,7 +296,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">133</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">135</span></a>
 
   </li>
         
@@ -334,7 +334,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">43</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">44</span></a>
 
   </li>
 
@@ -467,12 +467,24 @@
                 
               
 
-              <time title="创建时间：2022-05-08 16:40:23 / 修改时间：21:05:45" itemprop="dateCreated datePublished" datetime="2022-05-08T16:40:23+08:00">2022-05-08</time>
+              <time title="创建时间：2022-05-08 16:40:23" itemprop="dateCreated datePublished" datetime="2022-05-08T16:40:23+08:00">2022-05-08</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-06-10 23:09:38" itemprop="dateModified" datetime="2022-06-10T23:09:38+08:00">2022-06-10</time>
               
             
           </span>
@@ -584,7 +596,7 @@
 <p>如果人在中途与火相遇了，那肯定就无法逃生了，但人若是与火同时到达安全屋，那也是可以逃生的。</p>
 <p>再回头想想如何枚举时间比较合理，按照 $O(n)$ 的时间来枚举肯定不太行，比它更短的时间就是 $O(logn)$ 了，想到这里，脑子里自然就会浮现<strong>二分</strong>的影子。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> dirs[<span class="number">4</span>][<span class="number">2</span>] = &#123;&#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;&#125;;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; grid, <span class="keyword">int</span> t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = grid.size(), n = grid[<span class="number">0</span>].size();</span><br><span class="line">        <span class="keyword">bool</span> fire[m][n]; <span class="built_in">memset</span>(fire, <span class="number">0</span>, <span class="keyword">sizeof</span>(fire));</span><br><span class="line">        <span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; f, q;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(grid[i][j] == <span class="number">1</span>) &#123;</span><br><span class="line">                    fire[i][j] = <span class="literal">true</span>;</span><br><span class="line">                    f.emplace_back(i, j);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">auto</span> separate_fire = [&amp;] () &#123;</span><br><span class="line">            <span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; nf;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;[i, j]: f) &#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">auto</span> [dx, dy]: dirs) &#123;</span><br><span class="line">                    <span class="keyword">int</span> x = i + dx, y = j + dy;</span><br><span class="line">                    <span class="keyword">if</span>(<span class="number">0</span> &lt;= x &amp;&amp; x &lt; m &amp;&amp; <span class="number">0</span> &lt;= y &amp;&amp; y &lt; n &amp;&amp; !fire[x][y] &amp;&amp; grid[x][y] != <span class="number">2</span>) &#123;</span><br><span class="line">                        fire[x][y] = <span class="literal">true</span>;</span><br><span class="line">                        nf.emplace_back(x, y);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            f = move(nf);</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">while</span>(t-- &amp;&amp; !f.empty()) separate_fire();</span><br><span class="line">        <span class="keyword">if</span>(fire[<span class="number">0</span>][<span class="number">0</span>]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">bool</span> vis[m][n]; <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</span><br><span class="line">        vis[<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">        q.emplace_back(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">while</span>(!q.empty()) &#123;</span><br><span class="line">            <span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt; nq;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;[i, j]: q) &#123;</span><br><span class="line">                <span class="keyword">if</span>(!fire[i][j]) &#123;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">auto</span> [dx, dy]: dirs) &#123;</span><br><span class="line">                        <span class="keyword">int</span> x = i + dx, y = j + dy;</span><br><span class="line">                        <span class="keyword">if</span>(<span class="number">0</span> &lt;= x &amp;&amp; x &lt; m &amp;&amp; <span class="number">0</span> &lt;= y &amp;&amp; y &lt; n &amp;&amp; !fire[x][y] &amp;&amp; !vis[x][y] &amp;&amp; grid[x][y] != <span class="number">2</span>) &#123;</span><br><span class="line">                            <span class="keyword">if</span>(x == m - <span class="number">1</span> &amp;&amp; y == n - <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                            vis[x][y] = <span class="literal">true</span>;</span><br><span class="line">                            nq.emplace_back(x, y);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            q = move(nq);</span><br><span class="line">            separate_fire();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maximumMinutes</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; grid)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = grid.size(), n = grid[<span class="number">0</span>].size();</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">-1</span>, right = m * n;</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (left + right + <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(check(grid, mid)) left = mid;</span><br><span class="line">            <span class="keyword">else</span> right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> left &lt; m * n ? left : <span class="number">1e9</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <p>姑且算是搞清楚了大致的求解过程。不过很显然，对于图的内容早忘完了的我，现在琢磨这个问题有点浪费时间了，暂时先放着。</p>
-<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>额，这次周赛之后，从做一个题签个到，变成了做二个题，再签到了，哈哈🤣。<br>回过头来看，第三个题其实已经想到了做法了，只是早如何优化时间上没有经验啊。直接原因是忽略了一些细节，根本原因还是不熟练。仔细想想，第 3 题跟第 4 题好像是递进关系的题目，第 4 题好像是第 3 题的加强版一样，都是 bfs。</p>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>额，这次周赛之后，从做一个题签个到，变成了做二个题，再签到了，哈哈🤣。<br>回过头来看，第三个题其实已经想到了做法了，只是在如何优化时间上没有经验啊。直接原因是忽略了一些细节，根本原因还是不熟练。仔细想想，第 3 题跟第 4 题好像是递进关系的题目，第 4 题好像是第 3 题的加强版一样，都是 bfs。</p>
 <hr>
       
     </div>
@@ -758,7 +770,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">133</span>
+                    <span class="site-state-item-count">135</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -924,7 +936,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                    <span class="site-state-item-count">42</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1071,7 +1085,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">164:49</span>
+    <span title="站点阅读时长">165:39</span>
   
 </div>
 

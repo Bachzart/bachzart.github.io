@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="要没了。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-05-16T09:05:58.625Z">
+<meta property="og:updated_time" content="2022-10-30T01:20:43.976Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode_20 天编程能力基础_day17">
 <meta name="twitter:description" content="要没了。">
@@ -296,7 +296,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">133</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">135</span></a>
 
   </li>
         
@@ -334,7 +334,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">43</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">44</span></a>
 
   </li>
 
@@ -467,12 +467,24 @@
                 
               
 
-              <time title="创建时间：2022-05-16 15:06:15 / 修改时间：17:05:58" itemprop="dateCreated datePublished" datetime="2022-05-16T15:06:15+08:00">2022-05-16</time>
+              <time title="创建时间：2022-05-16 15:06:15" itemprop="dateCreated datePublished" datetime="2022-05-16T15:06:15+08:00">2022-05-16</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-10-30 09:20:43" itemprop="dateModified" datetime="2022-10-30T09:20:43+08:00">2022-10-30</time>
               
             
           </span>
@@ -559,7 +571,7 @@
       
         <p>要没了。<br><a id="more"></a></p>
 <h1 id="1845-Seat-Reservation-Manager"><a href="#1845-Seat-Reservation-Manager" class="headerlink" title="1845. Seat Reservation Manager"></a>1845. Seat Reservation Manager</h1><h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><p>题目的意思很直接，从 reverse 函数的功能来看，就是最小堆的出堆操作了。所以，这个题是要构造最小堆。</p>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p>堆的功能可以直接用<strong>优先队列</strong>来完成。<br>C++ 的优先队列默认是<strong>大根堆</strong>，如果要用小根堆就得写成<code>priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt; q;</code>，其中第二个参数就是优先队列的底层数据结构，而第三个参数表示<strong>值越小越优先</strong>，对应的<code>less&lt;int&gt;</code>则表示<strong>值越大越优先</strong>。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SeatManager</span> &#123;</span></span><br><span class="line">    priority_queue&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;, greater&lt;<span class="keyword">int</span>&gt;&gt; q;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    SeatManager(<span class="keyword">int</span> n) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            q.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">reserve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = q.top();</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="keyword">return</span> tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">unreserve</span><span class="params">(<span class="keyword">int</span> seatNumber)</span> </span>&#123;</span><br><span class="line">        q.push(seatNumber);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><p>堆的功能可以直接用<strong>优先队列</strong>来完成。<br>C++ 的优先队列默认是<strong>大根堆</strong>，如果要用小根堆就得写成<code>priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; q;</code>，其中第二个参数就是优先队列的底层数据结构，而第三个参数表示<strong>值越小越优先</strong>，对应的<code>less&lt;int&gt;</code>则表示<strong>值越大越优先</strong>。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SeatManager</span> &#123;</span></span><br><span class="line">    priority_queue&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;, greater&lt;<span class="keyword">int</span>&gt;&gt; q;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    SeatManager(<span class="keyword">int</span> n) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            q.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">reserve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = q.top();</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="keyword">return</span> tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">unreserve</span><span class="params">(<span class="keyword">int</span> seatNumber)</span> </span>&#123;</span><br><span class="line">        q.push(seatNumber);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <h1 id="860-Lemonade-Change"><a href="#860-Lemonade-Change" class="headerlink" title="860. Lemonade Change"></a>860. Lemonade Change</h1><h2 id="Analysis-1"><a href="#Analysis-1" class="headerlink" title="Analysis"></a>Analysis</h2><p>默认的找钱规则是能找大的尽量找大的，所以这是一个跟<strong>贪心</strong>相关的问题。用 2 个变量来记录能被找出去的 5 块和 10 块的数目，模拟找钱。如果顾客给了 20 块，此时有两种找钱方法，但是得按照规则来进行。一旦某个变量为负了，说明没办法正确找零。</p>
 <h2 id="Code-1"><a href="#Code-1" class="headerlink" title="Code"></a>Code</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">lemonadeChange</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; bills)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> five, ten;</span><br><span class="line">        five = ten = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> size = bills.size();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(bills[i] == <span class="number">10</span>) &#123;</span><br><span class="line">                five--;</span><br><span class="line">                ten++;</span><br><span class="line">                <span class="keyword">if</span>(five &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(bills[i] == <span class="number">20</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span>(ten == <span class="number">0</span>) five -= <span class="number">3</span>;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    ten--;</span><br><span class="line">                    five--;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(ten &lt; <span class="number">0</span> || five &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> five++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>第一个题如果要是自己写堆，估计挺废劲的😂。<br>第二个题还 WA 了一次，有点亏...</p>
@@ -736,7 +748,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">133</span>
+                    <span class="site-state-item-count">135</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -902,7 +914,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                    <span class="site-state-item-count">42</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1049,7 +1063,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">164:49</span>
+    <span title="站点阅读时长">165:39</span>
   
 </div>
 

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2022-11-11T13:08:50.906Z</updated>
+  <updated>2022-12-03T15:06:55.129Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -17,11 +17,99 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>CLI 下 G++ 的使用方法</title>
+    <link href="http://bachzart.github.io/2022/11/24/CLI-%E4%B8%8B-G-%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
+    <id>http://bachzart.github.io/2022/11/24/CLI-下-G-的使用方法/</id>
+    <published>2022-11-24T01:48:42.000Z</published>
+    <updated>2022-12-03T15:06:55.129Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;学习一下 CLI 下如何使用 G++/GCC 编译器。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Tools" scheme="http://bachzart.github.io/categories/Tools/"/>
+    
+      <category term="GCC/G++" scheme="http://bachzart.github.io/categories/Tools/GCC-G/"/>
+    
+    
+      <category term="G++" scheme="http://bachzart.github.io/tags/G/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>VBS_蠕虫病毒</title>
+    <link href="http://bachzart.github.io/2022/11/18/VBS-%E8%A0%95%E8%99%AB%E7%97%85%E6%AF%92/"/>
+    <id>http://bachzart.github.io/2022/11/18/VBS-蠕虫病毒/</id>
+    <published>2022-11-18T05:54:34.000Z</published>
+    <updated>2022-12-03T15:08:48.879Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这几天看了很多跟 VBS 相关的资料...&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="VBS" scheme="http://bachzart.github.io/categories/Programming/VBS/"/>
+    
+    
+      <category term="VBS" scheme="http://bachzart.github.io/tags/VBS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>VBS_简单实例</title>
+    <link href="http://bachzart.github.io/2022/11/15/VBS-%E7%AE%80%E5%8D%95%E5%AE%9E%E4%BE%8B/"/>
+    <id>http://bachzart.github.io/2022/11/15/VBS-简单实例/</id>
+    <published>2022-11-15T05:14:13.000Z</published>
+    <updated>2022-12-03T15:08:02.995Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这篇文章来记录一些用 vbscript 编写的实例。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="VBS" scheme="http://bachzart.github.io/categories/Programming/VBS/"/>
+    
+    
+      <category term="VBS" scheme="http://bachzart.github.io/tags/VBS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>VBS_Basic</title>
+    <link href="http://bachzart.github.io/2022/11/14/VBS-basic/"/>
+    <id>http://bachzart.github.io/2022/11/14/VBS-basic/</id>
+    <published>2022-11-14T07:14:13.000Z</published>
+    <updated>2022-12-03T15:09:21.559Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;记录一些与 VBS 相关的东西。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="VBS" scheme="http://bachzart.github.io/categories/Programming/VBS/"/>
+    
+    
+      <category term="VBS" scheme="http://bachzart.github.io/tags/VBS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>2022_10_月总结</title>
     <link href="http://bachzart.github.io/2022/11/11/2022-10-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
     <id>http://bachzart.github.io/2022/11/11/2022-10-月总结/</id>
     <published>2022-11-11T12:17:44.000Z</published>
-    <updated>2022-11-11T13:08:50.906Z</updated>
+    <updated>2022-12-03T15:04:55.546Z</updated>
     
     <summary type="html">
     
@@ -360,94 +448,6 @@
     <summary type="html">
     
       &lt;p&gt;还有两天哦~&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode_20 天编程能力基础_day17</title>
-    <link href="http://bachzart.github.io/2022/05/16/Leetcode-20-%E5%A4%A9%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%E5%9F%BA%E7%A1%80-day17/"/>
-    <id>http://bachzart.github.io/2022/05/16/Leetcode-20-天编程能力基础-day17/</id>
-    <published>2022-05-16T07:06:15.000Z</published>
-    <updated>2022-10-30T01:20:43.976Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;要没了。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode_20 天编程能力基础_day16</title>
-    <link href="http://bachzart.github.io/2022/05/15/Leetcode-20-%E5%A4%A9%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%E5%9F%BA%E7%A1%80-day16/"/>
-    <id>http://bachzart.github.io/2022/05/15/Leetcode-20-天编程能力基础-day16/</id>
-    <published>2022-05-15T09:51:11.000Z</published>
-    <updated>2022-05-15T13:22:09.192Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;go on, go on!&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode_20 天编程能力基础_day15</title>
-    <link href="http://bachzart.github.io/2022/05/14/Leetcode-20-%E5%A4%A9%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%E5%9F%BA%E7%A1%80-day15/"/>
-    <id>http://bachzart.github.io/2022/05/14/Leetcode-20-天编程能力基础-day15/</id>
-    <published>2022-05-14T04:54:17.000Z</published>
-    <updated>2022-05-14T06:54:41.797Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;还是两道链表题。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode_20 天编程能力基础_day14</title>
-    <link href="http://bachzart.github.io/2022/05/13/Leetcode-20-%E5%A4%A9%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%E5%9F%BA%E7%A1%80-day14/"/>
-    <id>http://bachzart.github.io/2022/05/13/Leetcode-20-天编程能力基础-day14/</id>
-    <published>2022-05-13T09:17:58.000Z</published>
-    <updated>2022-05-13T15:20:35.999Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;继续，继续。&lt;br&gt;
     
     </summary>
     

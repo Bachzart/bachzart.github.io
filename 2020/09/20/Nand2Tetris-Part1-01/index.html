@@ -142,14 +142,14 @@
   <meta name="description" content="Nand2Tetris 是由希伯来大学的两位教授 Noam Nisan 和 Shimon Schocken 在 Coursera 上开设的在线课程（网络课程）。课程全称叫做：依据基本原理构建现代计算机：从与非门到俄罗斯方块（基于项目的课程），其主要内容与计算机组成原理、操作系统等科目的关联性较大，但课程的受众群体也不止局限于专业人士，且课程的实践性很强，对深入理解理论知识很有帮助。">
 <meta name="keywords" content="Nand2Tetris">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nand2Tetri_Part1_01">
+<meta property="og:title" content="Nand2Tetris_Part1_01">
 <meta property="og:url" content="http://bachzart.github.io/2020/09/20/Nand2Tetris-Part1-01/index.html">
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="Nand2Tetris 是由希伯来大学的两位教授 Noam Nisan 和 Shimon Schocken 在 Coursera 上开设的在线课程（网络课程）。课程全称叫做：依据基本原理构建现代计算机：从与非门到俄罗斯方块（基于项目的课程），其主要内容与计算机组成原理、操作系统等科目的关联性较大，但课程的受众群体也不止局限于专业人士，且课程的实践性很强，对深入理解理论知识很有帮助。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-28T09:05:15.791Z">
+<meta property="og:updated_time" content="2022-12-11T06:34:06.961Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nand2Tetri_Part1_01">
+<meta name="twitter:title" content="Nand2Tetris_Part1_01">
 <meta name="twitter:description" content="Nand2Tetris 是由希伯来大学的两位教授 Noam Nisan 和 Shimon Schocken 在 Coursera 上开设的在线课程（网络课程）。课程全称叫做：依据基本原理构建现代计算机：从与非门到俄罗斯方块（基于项目的课程），其主要内容与计算机组成原理、操作系统等科目的关联性较大，但课程的受众群体也不止局限于专业人士，且课程的实践性很强，对深入理解理论知识很有帮助。">
 
 
@@ -169,7 +169,7 @@
   };
 </script>
 
-  <title>Nand2Tetri_Part1_01 | bachzart's Blog</title>
+  <title>Nand2Tetris_Part1_01 | bachzart's Blog</title>
   
 
 
@@ -296,7 +296,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">140</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">141</span></a>
 
   </li>
         
@@ -441,7 +441,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Nand2Tetri_Part1_01
+          <h2 class="post-title" itemprop="name headline">Nand2Tetris_Part1_01
 
               
             
@@ -484,7 +484,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-09-28 17:05:15" itemprop="dateModified" datetime="2020-09-28T17:05:15+08:00">2020-09-28</time>
+                <time title="Modified: 2022-12-11 14:34:06" itemprop="dateModified" datetime="2022-12-11T14:34:06+08:00">2022-12-11</time>
               
             
           </span>
@@ -651,7 +651,7 @@
 <h3 id="Or8Way"><a href="#Or8Way" class="headerlink" title="Or8Way"></a>Or8Way</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CHIP Or8Way &#123;</span><br><span class="line">    IN in[8];</span><br><span class="line">    OUT out;</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    Or(a=in[0], b=in[1], out=v1);</span><br><span class="line">    Or(a=v1, b=in[2], out=v2);</span><br><span class="line">    Or(a=v2, b=in[3], out=v3);</span><br><span class="line">    Or(a=v3, b=in[4], out=v4);</span><br><span class="line">    Or(a=v4, b=in[5], out=v5);</span><br><span class="line">    Or(a=v5, b=in[6], out=v6);</span><br><span class="line">    Or(a=v6, b=in[7], out=out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="Mux4Way16"><a href="#Mux4Way16" class="headerlink" title="Mux4Way16"></a>Mux4Way16</h3><p>4 路 Mux16 使用三个 Mux16 即可完成，可能会有人问为什么要先让 a 和 c 先通过一次 Mux16。因为 sel bits 是从右往左读的，若 a 和 b 先通过一次 Mux16，当 sel[1]=0 时，就无法得到正确的输出结果了（sel[0]=0，就输出 a，sel[0]=1，就输出 b，但第一次通过 Mux16 后已经过滤掉 a 或 b 了）。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CHIP Mux4Way16 &#123;</span><br><span class="line">    IN a[16], b[16], c[16], d[16], sel[2];</span><br><span class="line">    OUT out[16];</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    Mux16(a=a, b=c, sel=sel[1], out=v1);</span><br><span class="line">    Mux16(a=b, b=d, sel=sel[1], out=v2);</span><br><span class="line">    Mux16(a=v1, b=v2, sel=sel[0], out=out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="Mux8Way16"><a href="#Mux8Way16" class="headerlink" title="Mux8Way16"></a>Mux8Way16</h3><p>在 Mux4Way16 的基础上构造就行了，注意一下这里的语法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CHIP Mux8Way16 &#123;</span><br><span class="line">    IN a[16], b[16], c[16], d[16],</span><br><span class="line">       e[16], f[16], g[16], h[16],</span><br><span class="line">       sel[3];</span><br><span class="line">    OUT out[16];</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    Mux4Way16(a=a, b=c, c=e, d=g, sel=sel[1..2], out=v1);</span><br><span class="line">    Mux4Way16(a=b, b=d, c=f, d=h, sel=sel[1..2], out=v2);</span><br><span class="line">    Mux16(a=v1, b=v2, sel=sel[0], out=out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="DMux4Way"><a href="#DMux4Way" class="headerlink" title="DMux4Way"></a>DMux4Way</h3><p>先用 sel[1] 来区分 a、b 和 c、d 两组，在用 sel[0] 在组内分别区分 a、b 和 c、d。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CHIP DMux4Way &#123;</span><br><span class="line">    IN in, sel[2];</span><br><span class="line">    OUT a, b, c, d;</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    DMux(in=in, sel=sel[1], a=u1, b=u2);</span><br><span class="line">    DMux(in=u1, sel=sel[0], a=a, b=b);</span><br><span class="line">    DMux(in=u2, sel=sel[0], a=c, b=d);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="DMux4Way"><a href="#DMux4Way" class="headerlink" title="DMux4Way"></a>DMux4Way</h3><p>先用 sel[1] 来区分 a、b 和 c、d 两组，再用 sel[0] 在组内分别区分 a、b 和 c、d。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CHIP DMux4Way &#123;</span><br><span class="line">    IN in, sel[2];</span><br><span class="line">    OUT a, b, c, d;</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    DMux(in=in, sel=sel[1], a=u1, b=u2);</span><br><span class="line">    DMux(in=u1, sel=sel[0], a=a, b=b);</span><br><span class="line">    DMux(in=u2, sel=sel[0], a=c, b=d);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="DMux8Way"><a href="#DMux8Way" class="headerlink" title="DMux8Way"></a>DMux8Way</h3><p>在 DMux4Way 的基础上构建就行，思路是完全一致的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CHIP DMux8Way &#123;</span><br><span class="line">    IN in, sel[3];</span><br><span class="line">    OUT a, b, c, d, e, f, g, h;</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    DMux4Way(in=in, sel=sel[1..2], a=u1, b=u2, c=u3, d=u4);</span><br><span class="line">    DMux(in=u1, sel=sel[0], a=a, b=b);</span><br><span class="line">    DMux(in=u2, sel=sel[0], a=c, b=d);</span><br><span class="line">    DMux(in=u3, sel=sel[0], a=e, b=f);</span><br><span class="line">    DMux(in=u4, sel=sel[0], a=g, b=h);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="Unit-1-8-Perspectives"><a href="#Unit-1-8-Perspectives" class="headerlink" title="Unit 1.8 Perspectives"></a>Unit 1.8 Perspectives</h2><p>本小节主要老师们回答学生在论坛区提出的一些典型问题，这次主要回答了 3 个问题：</p>
 <ol>
@@ -669,7 +669,7 @@
 </li>
 </ol>
 <p>本周内容过于底层，估计不少人觉得无聊，不过还好不是太难。当然，可能会有第一次使用这样的 HDL 语言和硬件模拟器而不熟悉的问题，不过老师提供的手册和视频的讲解帮助还是很大的。个人感觉老师给的手册如果能更详细一点，用例再多一点就更好了（主要还是自己太懒，笑）。</p>
-
+<hr>
       
     </div>
 
@@ -731,7 +731,7 @@
   <li class="post-copyright-link">
     <strong>Post link: </strong>
     
-    <a href="http://bachzart.github.io/2020/09/20/Nand2Tetris-Part1-01/" title="Nand2Tetri_Part1_01">http://bachzart.github.io/2020/09/20/Nand2Tetris-Part1-01/</a>
+    <a href="http://bachzart.github.io/2020/09/20/Nand2Tetris-Part1-01/" title="Nand2Tetris_Part1_01">http://bachzart.github.io/2020/09/20/Nand2Tetris-Part1-01/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
@@ -842,7 +842,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">140</span>
+                    <span class="site-state-item-count">141</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1165,7 +1165,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">168:43</span>
+    <span title="Reading time total">169:48</span>
   
 </div>
 

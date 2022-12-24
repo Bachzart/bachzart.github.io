@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2022-12-04T07:32:52.396Z</updated>
+  <updated>2022-12-23T15:17:51.242Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>新冠感染记</title>
+    <link href="http://bachzart.github.io/2022/12/19/%E6%96%B0%E5%86%A0%E6%84%9F%E6%9F%93%E8%AE%B0/"/>
+    <id>http://bachzart.github.io/2022/12/19/新冠感染记/</id>
+    <published>2022-12-19T14:44:11.000Z</published>
+    <updated>2022-12-23T15:17:51.242Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;新冠已经三年了，今天终于轮到我了...&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
+    
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nand2Tetris_Part1_04</title>
+    <link href="http://bachzart.github.io/2022/12/17/Nand2Tetris-Part1-04/"/>
+    <id>http://bachzart.github.io/2022/12/17/Nand2Tetris-Part1-04/</id>
+    <published>2022-12-17T12:40:27.000Z</published>
+    <updated>2022-12-24T13:39:22.003Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;接着 2 年前的课程继续学习😂...&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Computer Organization" scheme="http://bachzart.github.io/categories/CS/Computer-Organization/"/>
+    
+    
+      <category term="Nand2Tetris" scheme="http://bachzart.github.io/tags/Nand2Tetris/"/>
+    
+  </entry>
   
   <entry>
     <title>2022_11_月总结</title>
@@ -43,7 +87,7 @@
     <link href="http://bachzart.github.io/2022/11/24/CLI-%E4%B8%8B-G-%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
     <id>http://bachzart.github.io/2022/11/24/CLI-下-G-的使用方法/</id>
     <published>2022-11-24T01:48:42.000Z</published>
-    <updated>2022-12-03T15:06:55.129Z</updated>
+    <updated>2022-12-18T14:27:31.996Z</updated>
     
     <summary type="html">
     
@@ -413,50 +457,6 @@
     
     
       <category term="Guitar" scheme="http://bachzart.github.io/tags/Guitar/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode_20 天编程能力基础_day20</title>
-    <link href="http://bachzart.github.io/2022/05/19/Leetcode-20-%E5%A4%A9%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%E5%9F%BA%E7%A1%80-day20/"/>
-    <id>http://bachzart.github.io/2022/05/19/Leetcode-20-天编程能力基础-day20/</id>
-    <published>2022-05-19T04:59:05.000Z</published>
-    <updated>2022-05-19T08:22:58.091Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最后一天~&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode_20 天编程能力基础_day19</title>
-    <link href="http://bachzart.github.io/2022/05/18/Leetcode-20-%E5%A4%A9%E7%BC%96%E7%A8%8B%E8%83%BD%E5%8A%9B%E5%9F%BA%E7%A1%80-day19/"/>
-    <id>http://bachzart.github.io/2022/05/18/Leetcode-20-天编程能力基础-day19/</id>
-    <published>2022-05-18T06:03:27.000Z</published>
-    <updated>2022-05-18T09:17:57.444Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;倒数第二天~&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/tags/Leetcode/"/>
     
   </entry>
   

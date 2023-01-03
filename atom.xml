@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2022-12-23T15:17:51.242Z</updated>
+  <updated>2023-01-02T06:47:19.911Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -17,11 +17,55 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>2022_年末小结</title>
+    <link href="http://bachzart.github.io/2023/01/02/2022-%E5%B9%B4%E6%9C%AB%E5%B0%8F%E7%BB%93/"/>
+    <id>http://bachzart.github.io/2023/01/02/2022-年末小结/</id>
+    <published>2023-01-02T03:02:53.000Z</published>
+    <updated>2023-01-02T06:47:19.911Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;不知不觉，2022 已经过去了...&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
+    
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nand2Tetris_Part1_05</title>
+    <link href="http://bachzart.github.io/2022/12/26/Nand2Tetris-Part1-05/"/>
+    <id>http://bachzart.github.io/2022/12/26/Nand2Tetris-Part1-05/</id>
+    <published>2022-12-26T06:18:40.000Z</published>
+    <updated>2022-12-27T01:54:25.809Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这周好像要开始讲具体的计算机结构了...&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Computer Organization" scheme="http://bachzart.github.io/categories/CS/Computer-Organization/"/>
+    
+    
+      <category term="Nand2Tetris" scheme="http://bachzart.github.io/tags/Nand2Tetris/"/>
+    
+  </entry>
+  
+  <entry>
     <title>新冠感染记</title>
     <link href="http://bachzart.github.io/2022/12/19/%E6%96%B0%E5%86%A0%E6%84%9F%E6%9F%93%E8%AE%B0/"/>
     <id>http://bachzart.github.io/2022/12/19/新冠感染记/</id>
     <published>2022-12-19T14:44:11.000Z</published>
-    <updated>2022-12-23T15:17:51.242Z</updated>
+    <updated>2023-01-02T14:22:11.820Z</updated>
     
     <summary type="html">
     
@@ -413,50 +457,6 @@
     
     
       <category term="Leetcode weekly contest" scheme="http://bachzart.github.io/tags/Leetcode-weekly-contest/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode 第 292 场周赛</title>
-    <link href="http://bachzart.github.io/2022/05/21/Leetcode-%E7%AC%AC-292-%E5%9C%BA%E5%91%A8%E8%B5%9B/"/>
-    <id>http://bachzart.github.io/2022/05/21/Leetcode-第-292-场周赛/</id>
-    <published>2022-05-21T12:12:40.000Z</published>
-    <updated>2022-05-25T12:50:10.050Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;上上周的周赛了...&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode weekly contest" scheme="http://bachzart.github.io/tags/Leetcode-weekly-contest/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《美丽的梭罗河》简易吉他谱</title>
-    <link href="http://bachzart.github.io/2022/05/20/%E3%80%8A%E7%BE%8E%E4%B8%BD%E7%9A%84%E6%A2%AD%E7%BD%97%E6%B2%B3%E3%80%8B%E7%AE%80%E6%98%93%E5%90%89%E4%BB%96%E8%B0%B1/"/>
-    <id>http://bachzart.github.io/2022/05/20/《美丽的梭罗河》简易吉他谱/</id>
-    <published>2022-05-20T08:19:07.000Z</published>
-    <updated>2022-05-29T07:18:41.988Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这是原来扒的歌，是黄秋生在电影《太阳照常升起》演唱的版本...&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
-    
-      <category term="Hobby" scheme="http://bachzart.github.io/categories/Life/Hobby/"/>
-    
-    
-      <category term="Guitar" scheme="http://bachzart.github.io/tags/Guitar/"/>
     
   </entry>
   

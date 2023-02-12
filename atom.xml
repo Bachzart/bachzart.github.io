@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-01-02T06:47:19.911Z</updated>
+  <updated>2023-02-12T07:04:51.345Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2023_01_月总结</title>
+    <link href="http://bachzart.github.io/2023/02/12/2023-01-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
+    <id>http://bachzart.github.io/2023/02/12/2023-01-月总结/</id>
+    <published>2023-02-12T04:04:54.000Z</published>
+    <updated>2023-02-12T07:04:51.345Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;要过年啦~&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
+    
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
+    
+  </entry>
   
   <entry>
     <title>2022_年末小结</title>
@@ -109,7 +131,7 @@
     <link href="http://bachzart.github.io/2022/12/04/2022-11-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
     <id>http://bachzart.github.io/2022/12/04/2022-11-月总结/</id>
     <published>2022-12-04T06:54:21.000Z</published>
-    <updated>2022-12-04T07:32:52.396Z</updated>
+    <updated>2023-02-12T07:04:52.050Z</updated>
     
     <summary type="html">
     
@@ -426,28 +448,6 @@
     <summary type="html">
     
       &lt;p&gt;又是之前的周赛~&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode weekly contest" scheme="http://bachzart.github.io/tags/Leetcode-weekly-contest/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode 第 78 场双周赛</title>
-    <link href="http://bachzart.github.io/2022/05/25/Leetcode-%E7%AC%AC-78-%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/"/>
-    <id>http://bachzart.github.io/2022/05/25/Leetcode-第-78-场双周赛/</id>
-    <published>2022-05-25T12:56:02.000Z</published>
-    <updated>2022-05-28T08:33:43.563Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;上上周的双周赛~&lt;br&gt;
     
     </summary>
     

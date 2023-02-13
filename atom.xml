@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-02-12T07:04:51.345Z</updated>
+  <updated>2023-02-13T14:31:34.630Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++_类的简单构造案例</title>
+    <link href="http://bachzart.github.io/2023/02/12/C-%E7%B1%BB%E7%9A%84%E7%AE%80%E5%8D%95%E6%9E%84%E9%80%A0%E6%A1%88%E4%BE%8B/"/>
+    <id>http://bachzart.github.io/2023/02/12/C-类的简单构造案例/</id>
+    <published>2023-02-12T08:13:57.000Z</published>
+    <updated>2023-02-13T14:31:34.630Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这篇文章主要是介绍用 C++ 实现的一个简单数学类——分数类，其中包含了对应的基本运算规则。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
+    
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
+    
+  </entry>
   
   <entry>
     <title>2023_01_月总结</title>
@@ -435,28 +457,6 @@
       <category term="STL" scheme="http://bachzart.github.io/tags/STL/"/>
     
       <category term="vector" scheme="http://bachzart.github.io/tags/vector/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode 第 293 场周赛</title>
-    <link href="http://bachzart.github.io/2022/05/28/Leetcode-%E7%AC%AC-293-%E5%9C%BA%E5%91%A8%E8%B5%9B/"/>
-    <id>http://bachzart.github.io/2022/05/28/Leetcode-第-293-场周赛/</id>
-    <published>2022-05-28T08:36:14.000Z</published>
-    <updated>2022-05-29T03:48:17.462Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;又是之前的周赛~&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode weekly contest" scheme="http://bachzart.github.io/tags/Leetcode-weekly-contest/"/>
     
   </entry>
   

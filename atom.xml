@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-02-13T14:31:34.630Z</updated>
+  <updated>2023-03-05T13:50:02.706Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,74 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2023_02_月总结</title>
+    <link href="http://bachzart.github.io/2023/03/05/2023-02-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
+    <id>http://bachzart.github.io/2023/03/05/2023-02-月总结/</id>
+    <published>2023-03-05T13:19:41.000Z</published>
+    <updated>2023-03-05T13:50:02.706Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;现在是 2023 年 3 月 5 日了...😑&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
+    
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>找房记</title>
+    <link href="http://bachzart.github.io/2023/02/28/%E6%89%BE%E6%88%BF%E8%AE%B0/"/>
+    <id>http://bachzart.github.io/2023/02/28/找房记/</id>
+    <published>2023-02-28T13:03:56.000Z</published>
+    <updated>2023-03-01T12:44:52.927Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;不知不觉来到上海已经五个月了，与朋友小 y 也一起度过了五个月...&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
+    
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TinyHttpd_Reading_Notes</title>
+    <link href="http://bachzart.github.io/2023/02/20/TinyHttpd-Reading-Notes/"/>
+    <id>http://bachzart.github.io/2023/02/20/TinyHttpd-Reading-Notes/</id>
+    <published>2023-02-20T13:02:39.000Z</published>
+    <updated>2023-03-02T13:15:57.317Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;http://tinyhttpd.sourceforge.net&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;TinyHttpd&lt;/a&gt; 是 J. David Blackstone 于 1999 年写的一个 500 行左右的超轻量级 http server，用来学习服务器的工作原理十分不错。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
+    
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
+    
+      <category term="TinyHttpd" scheme="http://bachzart.github.io/tags/TinyHttpd/"/>
+    
+  </entry>
   
   <entry>
     <title>C++_类的简单构造案例</title>
@@ -285,7 +353,7 @@
     <link href="http://bachzart.github.io/2022/11/01/C-set-%E5%AE%B9%E5%99%A8%E7%9A%84%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/"/>
     <id>http://bachzart.github.io/2022/11/01/C-set-容器的常见用法/</id>
     <published>2022-11-01T14:45:35.000Z</published>
-    <updated>2022-11-01T15:50:57.200Z</updated>
+    <updated>2023-02-20T13:11:02.033Z</updated>
     
     <summary type="html">
     
@@ -389,74 +457,6 @@
     
     
       <category term="Leetcode weekly contest" scheme="http://bachzart.github.io/tags/Leetcode-weekly-contest/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《Heart of Gold》简易吉他谱</title>
-    <link href="http://bachzart.github.io/2022/05/29/%E3%80%8AHeart-of-Gold%E3%80%8B%E7%AE%80%E6%98%93%E5%90%89%E4%BB%96%E8%B0%B1/"/>
-    <id>http://bachzart.github.io/2022/05/29/《Heart-of-Gold》简易吉他谱/</id>
-    <published>2022-05-29T07:25:42.000Z</published>
-    <updated>2022-05-29T10:17:43.021Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摇滚老炮 Neil Young 1971 年 26 岁写的歌...&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
-    
-      <category term="Hobby" scheme="http://bachzart.github.io/categories/Life/Hobby/"/>
-    
-    
-      <category term="Guitar" scheme="http://bachzart.github.io/tags/Guitar/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode 第 294 场周赛</title>
-    <link href="http://bachzart.github.io/2022/05/29/Leetcode-%E7%AC%AC-294-%E5%9C%BA%E5%91%A8%E8%B5%9B/"/>
-    <id>http://bachzart.github.io/2022/05/29/Leetcode-第-294-场周赛/</id>
-    <published>2022-05-29T05:03:58.000Z</published>
-    <updated>2022-05-31T13:54:41.733Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;上周的周赛...&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode weekly contest" scheme="http://bachzart.github.io/tags/Leetcode-weekly-contest/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++_vector 容器的常见用法</title>
-    <link href="http://bachzart.github.io/2022/05/28/C-vector-%E5%AE%B9%E5%99%A8%E7%9A%84%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/"/>
-    <id>http://bachzart.github.io/2022/05/28/C-vector-容器的常见用法/</id>
-    <published>2022-05-28T12:32:05.000Z</published>
-    <updated>2022-11-01T15:35:55.007Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;梳理一下 vector 的常见用法。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
-    
-    
-      <category term="STL" scheme="http://bachzart.github.io/tags/STL/"/>
-    
-      <category term="vector" scheme="http://bachzart.github.io/tags/vector/"/>
     
   </entry>
   

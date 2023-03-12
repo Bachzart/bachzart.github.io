@@ -152,7 +152,7 @@
 <meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/fancybox3_test.png">
 <meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/quote_center.png">
 <meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/test_github.png">
-<meta property="og:updated_time" content="2020-09-17T14:58:14.970Z">
+<meta property="og:updated_time" content="2023-03-10T12:02:11.287Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何使用Hexo搭建个性化博客">
 <meta name="twitter:description" content="Intro偶然看到别人用Hexo建立的个人Blog，觉得挺不错的，然后就开始动手折腾了。而此篇Blog就用来记录自己建立这个Blog的整个过程和一些细节吧，这样在出现问题的时候可以及时找到问题所在，也可以给其他人作为参考，持续更新ing(偷懒😴)。">
@@ -490,7 +490,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-09-17 22:58:14" itemprop="dateModified" datetime="2020-09-17T22:58:14+08:00">2020-09-17</time>
+                <time title="Modified: 2023-03-10 20:02:11" itemprop="dateModified" datetime="2023-03-10T20:02:11+08:00">2023-03-10</time>
               
             
           </span>
@@ -750,7 +750,7 @@
 <center><strong>bla bla bla</strong></center>
 
 <h3 id="代码块的书写方法"><a href="#代码块的书写方法" class="headerlink" title="代码块的书写方法"></a>代码块的书写方法</h3><p><code>codeblock</code>代码块用法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- swig语法 --&gt;</span><br><span class="line">&#123;% codeblock [title] [lang:language] [url] [link text] %&#125;</span><br><span class="line">code snippet</span><br><span class="line">&#123;% endcodeblock %&#125;</span><br></pre></td></tr></table></figure></p>
-<p>另一种形式的代码块使用六个反引号（正好一对）来包裹代码块，<code>[language] [title] [url] [link text]</code>这四个参数也写在首行，这两种方式书写时都没有<code>[]</code>。<br><div class="tabs" id="forth-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#forth-unique-name-1">title</a></li><li class="tab"><a href="#forth-unique-name-2">title</a></li><li class="tab"><a href="#forth-unique-name-3">url</a></li><li class="tab"><a href="#forth-unique-name-4">link text</a></li></ul><div class="tab-content"><div class="tab-pane active" id="forth-unique-name-1"><p><code>language</code>是代码语言的名称，用来设置代码块颜色高亮，非必须</p></div><div class="tab-pane" id="forth-unique-name-2"><p><code>title</code>是顶部左边的说明，非必须</p></div><div class="tab-pane" id="forth-unique-name-3"><p><code>url</code>是顶部右边的超链接地址，非必须</p></div><div class="tab-pane" id="forth-unique-name-4"><p><code>link text</code>是超链接的名称，非必须</p></div></div></div><br>如果需要对比功能，需要写<code>lang：diff</code>，并在相应的代码行首加上<code>-</code>和<code>+</code>即可，对应的颜色也是可以自定义的，修改如下代码：<br><figure class="highlight yaml"><figcaption><span>~\hexo\themes\next\source\css\_custom\custom.syl</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">//</span> <span class="string">the</span> <span class="string">diff</span> <span class="string">style</span> <span class="string">of</span> <span class="string">codeblock</span></span><br><span class="line"><span class="string">pre</span> <span class="string">.addition</span> <span class="string">&#123;</span></span><br><span class="line"><span class="attr">    background:</span> <span class="comment">#e6ffed;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">pre</span> <span class="string">.deletion</span> <span class="string">&#123;</span></span><br><span class="line"><span class="attr">    background:</span> <span class="comment">#ffeef0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>另一种形式的代码块使用六个反引号（正好一对）来包裹代码块，<code>[language] [title] [url] [link text]</code>这四个参数也写在首行，这两种方式书写时都没有<code>[]</code>。<br><div class="tabs" id="forth-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#forth-unique-name-1">language</a></li><li class="tab"><a href="#forth-unique-name-2">title</a></li><li class="tab"><a href="#forth-unique-name-3">url</a></li><li class="tab"><a href="#forth-unique-name-4">link text</a></li></ul><div class="tab-content"><div class="tab-pane active" id="forth-unique-name-1"><p><code>language</code>是代码语言的名称，用来设置代码块颜色高亮，非必须</p></div><div class="tab-pane" id="forth-unique-name-2"><p><code>title</code>是顶部左边的说明，非必须</p></div><div class="tab-pane" id="forth-unique-name-3"><p><code>url</code>是顶部右边的超链接地址，非必须</p></div><div class="tab-pane" id="forth-unique-name-4"><p><code>link text</code>是超链接的名称，非必须</p></div></div></div><br>如果需要对比功能，需要写<code>lang：diff</code>，并在相应的代码行首加上<code>-</code>和<code>+</code>即可，对应的颜色也是可以自定义的，修改如下代码：<br><figure class="highlight yaml"><figcaption><span>~\hexo\themes\next\source\css\_custom\custom.syl</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">//</span> <span class="string">the</span> <span class="string">diff</span> <span class="string">style</span> <span class="string">of</span> <span class="string">codeblock</span></span><br><span class="line"><span class="string">pre</span> <span class="string">.addition</span> <span class="string">&#123;</span></span><br><span class="line"><span class="attr">    background:</span> <span class="comment">#e6ffed;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">pre</span> <span class="string">.deletion</span> <span class="string">&#123;</span></span><br><span class="line"><span class="attr">    background:</span> <span class="comment">#ffeef0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="Note-Plugin"><a href="#Note-Plugin" class="headerlink" title="Note Plugin"></a>Note Plugin</h3><p><code>NexT</code>主题扩展了一种<code>note</code>插件，可以用来单独展示重点性或结论性内容，其配置信息保存在<code>主题配置文件</code>中，具体如下：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">note:</span></span><br><span class="line">  <span class="comment"># Note tag style values:</span></span><br><span class="line">  <span class="comment">#  - simple    bs-callout old alert style. Default.</span></span><br><span class="line">  <span class="comment">#  - modern    bs-callout new (v2-v3) alert style.</span></span><br><span class="line">  <span class="comment">#  - flat      flat callout style with background, like on Mozilla or StackOverflow.</span></span><br><span class="line">  <span class="comment">#  - disabled  disable all CSS styles import of note tag.</span></span><br><span class="line"><span class="attr">  style:</span> <span class="string">simple</span></span><br><span class="line"><span class="attr">  icons:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  border_radius:</span> <span class="number">3</span></span><br><span class="line">  <span class="comment"># Offset lighter of background in % for modern and flat styles (modern: -12 | 12; flat: -18 | 6).</span></span><br><span class="line">  <span class="comment"># Offset also applied to label tag variables. This option can work with disabled note tag.</span></span><br><span class="line"><span class="attr">  light_bg_offset:</span> <span class="number">0</span></span><br></pre></td></tr></table></figure></p>
 <p>在书写时，在<code>.md</code>文件内直接插入以下代码即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- swig --&gt;</span><br><span class="line">&#123;% note %&#125;</span><br><span class="line">bla bla bla</span><br><span class="line">&#123;% endnote %&#125;</span><br><span class="line"></span><br><span class="line">&lt;!-- HTML --&gt;</span><br><span class="line">&lt;div class=&quot;note&quot;&gt;&lt;p&gt;bla bla bla&lt;/p&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
 <p>效果如下：<br><div class="note ">
@@ -1171,7 +1171,7 @@
                   
                     
                   
-                  <a href="https://github.com/Bachzart" title="GitHub &rarr; https://github.com/Bachzart" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  <a href="https://github.com/bachzart" title="GitHub &rarr; https://github.com/bachzart" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
                 </span>
               
                 <span class="links-of-author-item">
@@ -1183,17 +1183,6 @@
                     
                   
                   <a href="mailto:whistlesilp@gmail.com" title="E-Mail &rarr; mailto:whistlesilp@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  
-                  
-                    
-                  
-                  
-                    
-                  
-                  <a href="https://gitter.im/Bachzart" title="Gitter &rarr; https://gitter.im/Bachzart" rel="noopener" target="_blank"><i class="fa fa-fw fa-github-alt"></i>Gitter</a>
                 </span>
               
             </div>
@@ -1290,7 +1279,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">173:59</span>
+    <span title="Reading time total">176:33</span>
   
 </div>
 

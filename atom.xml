@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-03-05T13:50:02.706Z</updated>
+  <updated>2023-03-13T14:59:25.874Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C 语言函数指针的一些理解</title>
+    <link href="http://bachzart.github.io/2023/03/13/C-%E8%AF%AD%E8%A8%80%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/"/>
+    <id>http://bachzart.github.io/2023/03/13/C-语言函数指针的一些理解/</id>
+    <published>2023-03-13T12:33:41.000Z</published>
+    <updated>2023-03-13T14:59:25.874Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;函数指针属于 C 语言的进阶内容之一，前两天研究 tinyhttpd 时，碰到了函数指针，产生了一些疑问...&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
+    
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
+    
+  </entry>
   
   <entry>
     <title>2023_02_月总结</title>
@@ -65,7 +87,7 @@
     <link href="http://bachzart.github.io/2023/02/20/TinyHttpd-Reading-Notes/"/>
     <id>http://bachzart.github.io/2023/02/20/TinyHttpd-Reading-Notes/</id>
     <published>2023-02-20T13:02:39.000Z</published>
-    <updated>2023-03-12T16:37:05.439Z</updated>
+    <updated>2023-03-13T12:07:45.021Z</updated>
     
     <summary type="html">
     
@@ -426,28 +448,6 @@
     <summary type="html">
     
       &lt;p&gt;上周周赛。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode weekly contest" scheme="http://bachzart.github.io/tags/Leetcode-weekly-contest/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode 第 79 场双周赛</title>
-    <link href="http://bachzart.github.io/2022/05/31/Leetcode-%E7%AC%AC-79-%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/"/>
-    <id>http://bachzart.github.io/2022/05/31/Leetcode-第-79-场双周赛/</id>
-    <published>2022-05-31T14:08:05.000Z</published>
-    <updated>2022-06-01T14:39:30.053Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;上周的双周赛~&lt;br&gt;
     
     </summary>
     

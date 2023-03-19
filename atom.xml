@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-03-14T15:24:29.780Z</updated>
+  <updated>2023-03-19T10:01:51.888Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PAT_乙级题库_1111-1115</title>
+    <link href="http://bachzart.github.io/2023/03/19/PAT-%E4%B9%99%E7%BA%A7%E9%A2%98%E5%BA%93-1111-1115/"/>
+    <id>http://bachzart.github.io/2023/03/19/PAT-乙级题库-1111-1115/</id>
+    <published>2023-03-19T04:17:03.000Z</published>
+    <updated>2023-03-19T10:01:51.888Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;很久没来 PAT 了，没想到乙级题库新增了 5 道题😁~百度了一下，发现这是 2020 年春考 PAT 的原题，正好是周末的时间，做一下。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="PAT" scheme="http://bachzart.github.io/categories/Programming/PAT/"/>
+    
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
+    
+      <category term="PAT" scheme="http://bachzart.github.io/tags/PAT/"/>
+    
+  </entry>
   
   <entry>
     <title>C 语言函数指针的一些理解</title>
@@ -375,7 +399,7 @@
     <link href="http://bachzart.github.io/2022/11/01/C-set-%E5%AE%B9%E5%99%A8%E7%9A%84%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/"/>
     <id>http://bachzart.github.io/2022/11/01/C-set-容器的常见用法/</id>
     <published>2022-11-01T14:45:35.000Z</published>
-    <updated>2023-02-20T13:11:02.033Z</updated>
+    <updated>2023-03-19T04:19:11.377Z</updated>
     
     <summary type="html">
     
@@ -391,6 +415,8 @@
       <category term="STL" scheme="http://bachzart.github.io/tags/STL/"/>
     
       <category term="set" scheme="http://bachzart.github.io/tags/set/"/>
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
     
   </entry>
   
@@ -426,28 +452,6 @@
     <summary type="html">
     
       &lt;p&gt;这次周赛的题目感觉简单了一点。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode weekly contest" scheme="http://bachzart.github.io/tags/Leetcode-weekly-contest/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode 第 295 场周赛</title>
-    <link href="http://bachzart.github.io/2022/06/01/Leetcode-%E7%AC%AC-295-%E5%9C%BA%E5%91%A8%E8%B5%9B/"/>
-    <id>http://bachzart.github.io/2022/06/01/Leetcode-第-295-场周赛/</id>
-    <published>2022-06-01T14:38:38.000Z</published>
-    <updated>2022-06-04T14:18:54.979Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;上周周赛。&lt;br&gt;
     
     </summary>
     

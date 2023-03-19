@@ -295,7 +295,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">151</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">152</span></a>
 
   </li>
         
@@ -314,7 +314,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">29</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">28</span></a>
 
   </li>
         
@@ -333,7 +333,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">47</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">46</span></a>
 
   </li>
 
@@ -407,6 +407,217 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2019/03/29/BFD基础配置方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="I've been in my mind, it's such a fine line.">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/29/BFD基础配置方法/" class="post-title-link" itemprop="url">BFD基础配置方法</a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-29 14:31:05" itemprop="dateCreated datePublished" datetime="2019-03-29T14:31:05+08:00">2019-03-29</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-09-20 21:36:36" itemprop="dateModified" datetime="2020-09-20T21:36:36+08:00">2020-09-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/Network/" itemprop="url" rel="index"><span itemprop="name">Network</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="Symbols count in article">1.9k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="Reading time">16 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><p><code>BFD</code>常用于多线静态路由的检测和自动切换，在没有使用其他动态协议的情况下，若网络出现故障，可以使用BFD达到故障线路和正常线路的路由切换效果。当然，<code>BFD</code>依然可以和其他协议配合使用（MPLS也可以），这里只介绍<code>BFD</code>和静态路由的配合使用，在不同的应用场景内把握好BFD本身的作用机制，从而达到使用者想要达到的效果即可。<br>另外，一般的动态协议收敛速度比较慢，为秒级，<code>BFD</code>可以将收敛时间降低到毫秒级。<br>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/29/BFD基础配置方法/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </p></div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1125,7 +1336,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2022-03-26 17:11:08" itemprop="dateModified" datetime="2022-03-26T17:11:08+08:00">2022-03-26</time>
+                <time title="Modified: 2023-03-19 12:21:27" itemprop="dateModified" datetime="2023-03-19T12:21:27+08:00">2023-03-19</time>
               
             
           </span>
@@ -1149,7 +1360,7 @@
                   , 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Programming/PTA/" itemprop="url" rel="index"><span itemprop="name">PTA</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Programming/PAT/" itemprop="url" rel="index"><span itemprop="name">PAT</span></a></span>
 
                 
                 
@@ -1260,217 +1471,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2019/02/20/PTA基础编程题目集/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="bachzart">
-      <meta itemprop="description" content="I've been in my mind, it's such a fine line.">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="bachzart's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/20/PTA基础编程题目集/" class="post-title-link" itemprop="url">PTA基础编程题目集</a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-02-20 23:28:10" itemprop="dateCreated datePublished" datetime="2019-02-20T23:28:10+08:00">2019-02-20</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-07-03 23:18:32" itemprop="dateModified" datetime="2019-07-03T23:18:32+08:00">2019-07-03</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Programming/PTA/" itemprop="url" rel="index"><span itemprop="name">PTA</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                <span title="Symbols count in article">62k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                <span title="Reading time">8:35</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><p>此Blog用来记录自己的”PTA基础编程题目集之旅(受虐)”。<br>每道题目包含输入(输出)样例、输入(输出)说明、思路分析及得到AC的源码。<br>所有AC代码已上传到GitHub上，点击<a href="https://github.com/Bachzart/PTA-Basical-Programming-problem-set" target="_blank" rel="noopener">PTA-Basical-Programming-problem-set</a>即可获取。<br>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/02/20/PTA基础编程题目集/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1522,7 +1522,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">151</span>
+                    <span class="site-state-item-count">152</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1591,9 +1591,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -1698,9 +1696,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -1819,7 +1815,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">177:27</span>
+    <span title="Reading time total">179:47</span>
   
 </div>
 
@@ -2280,9 +2276,9 @@
       
     
       
-        
-      
     
+      
+        
       
     
   

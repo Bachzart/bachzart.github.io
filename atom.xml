@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-03-19T10:18:46.960Z</updated>
+  <updated>2023-04-01T12:09:07.824Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2023_03_月总结</title>
+    <link href="http://bachzart.github.io/2023/04/01/2023-03-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
+    <id>http://bachzart.github.io/2023/04/01/2023-03-月总结/</id>
+    <published>2023-04-01T11:40:37.000Z</published>
+    <updated>2023-04-01T12:09:07.824Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;三月，是樱花🌸飞舞的季节...&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
+    
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C 语言数组与指针的深入理解</title>
+    <link href="http://bachzart.github.io/2023/03/28/C-%E8%AF%AD%E8%A8%80%E6%95%B0%E7%BB%84%E4%B8%8E%E6%8C%87%E9%92%88%E7%9A%84%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/"/>
+    <id>http://bachzart.github.io/2023/03/28/C-语言数组与指针的深入理解/</id>
+    <published>2023-03-28T13:42:18.000Z</published>
+    <updated>2023-03-30T12:57:28.776Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;来深入理解一下数组与指针吧~&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
+    
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
+    
+      <category term="Pointer" scheme="http://bachzart.github.io/tags/Pointer/"/>
+    
+  </entry>
   
   <entry>
     <title>PAT_乙级题库_1111-1115</title>
@@ -45,7 +91,7 @@
     <link href="http://bachzart.github.io/2023/03/13/C-%E8%AF%AD%E8%A8%80%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/"/>
     <id>http://bachzart.github.io/2023/03/13/C-语言函数指针的一些理解/</id>
     <published>2023-03-13T12:33:41.000Z</published>
-    <updated>2023-03-14T15:24:29.780Z</updated>
+    <updated>2023-03-28T13:45:30.164Z</updated>
     
     <summary type="html">
     
@@ -60,6 +106,8 @@
     
       <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
     
+      <category term="Pointer" scheme="http://bachzart.github.io/tags/Pointer/"/>
+    
   </entry>
   
   <entry>
@@ -67,7 +115,7 @@
     <link href="http://bachzart.github.io/2023/03/05/2023-02-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
     <id>http://bachzart.github.io/2023/03/05/2023-02-月总结/</id>
     <published>2023-03-05T13:19:41.000Z</published>
-    <updated>2023-03-05T13:50:02.706Z</updated>
+    <updated>2023-04-01T11:40:10.876Z</updated>
     
     <summary type="html">
     
@@ -412,55 +460,11 @@
       <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
     
     
-      <category term="STL" scheme="http://bachzart.github.io/tags/STL/"/>
-    
       <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
     
+      <category term="STL" scheme="http://bachzart.github.io/tags/STL/"/>
+    
       <category term="set" scheme="http://bachzart.github.io/tags/set/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode 第 80 场双周赛</title>
-    <link href="http://bachzart.github.io/2022/06/13/Leetcode-%E7%AC%AC-80-%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/"/>
-    <id>http://bachzart.github.io/2022/06/13/Leetcode-第-80-场双周赛/</id>
-    <published>2022-06-13T13:17:16.000Z</published>
-    <updated>2022-06-13T14:14:46.257Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;上周的双周赛~&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode weekly contest" scheme="http://bachzart.github.io/tags/Leetcode-weekly-contest/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode 第 296 场周赛</title>
-    <link href="http://bachzart.github.io/2022/06/05/Leetcode-%E7%AC%AC-296-%E5%9C%BA%E5%91%A8%E8%B5%9B/"/>
-    <id>http://bachzart.github.io/2022/06/05/Leetcode-第-296-场周赛/</id>
-    <published>2022-06-05T12:11:31.000Z</published>
-    <updated>2022-06-08T13:57:39.782Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这次周赛的题目感觉简单了一点。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="Leetcode" scheme="http://bachzart.github.io/categories/Programming/Leetcode/"/>
-    
-    
-      <category term="Leetcode weekly contest" scheme="http://bachzart.github.io/tags/Leetcode-weekly-contest/"/>
     
   </entry>
   

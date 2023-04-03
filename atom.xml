@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-04-01T12:09:07.824Z</updated>
+  <updated>2023-04-02T07:48:46.161Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Makefile_简单入门</title>
+    <link href="http://bachzart.github.io/2023/04/02/Makefile-%E7%AE%80%E5%8D%95%E5%85%A5%E9%97%A8/"/>
+    <id>http://bachzart.github.io/2023/04/02/Makefile-简单入门/</id>
+    <published>2023-04-02T06:05:27.000Z</published>
+    <updated>2023-04-02T07:48:46.161Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;简单学一下 Makefile 的编写规则~🧐&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Tools" scheme="http://bachzart.github.io/categories/Tools/"/>
+    
+      <category term="Makefile" scheme="http://bachzart.github.io/categories/Tools/Makefile/"/>
+    
+    
+      <category term="Makefile" scheme="http://bachzart.github.io/tags/Makefile/"/>
+    
+  </entry>
   
   <entry>
     <title>2023_03_月总结</title>
@@ -359,7 +381,7 @@
     <link href="http://bachzart.github.io/2022/11/18/VBS-%E8%A0%95%E8%99%AB%E7%97%85%E6%AF%92/"/>
     <id>http://bachzart.github.io/2022/11/18/VBS-蠕虫病毒/</id>
     <published>2022-11-18T05:54:34.000Z</published>
-    <updated>2022-12-03T15:08:48.879Z</updated>
+    <updated>2023-04-02T03:02:31.398Z</updated>
     
     <summary type="html">
     
@@ -439,32 +461,6 @@
     
     
       <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++_set 容器的常见用法</title>
-    <link href="http://bachzart.github.io/2022/11/01/C-set-%E5%AE%B9%E5%99%A8%E7%9A%84%E5%B8%B8%E8%A7%81%E7%94%A8%E6%B3%95/"/>
-    <id>http://bachzart.github.io/2022/11/01/C-set-容器的常见用法/</id>
-    <published>2022-11-01T14:45:35.000Z</published>
-    <updated>2023-03-19T04:19:11.377Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;好久没有水文了，这次梳理一下 set 的用法。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
-    
-    
-      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
-    
-      <category term="STL" scheme="http://bachzart.github.io/tags/STL/"/>
-    
-      <category term="set" scheme="http://bachzart.github.io/tags/set/"/>
     
   </entry>
   

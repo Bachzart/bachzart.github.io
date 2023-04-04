@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-04-02T07:48:46.161Z</updated>
+  <updated>2023-04-03T14:18:42.125Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>浅析快速幂算法</title>
+    <link href="http://bachzart.github.io/2023/04/03/%E6%B5%85%E6%9E%90%E5%BF%AB%E9%80%9F%E5%B9%82%E7%AE%97%E6%B3%95/"/>
+    <id>http://bachzart.github.io/2023/04/03/浅析快速幂算法/</id>
+    <published>2023-04-03T11:25:14.000Z</published>
+    <updated>2023-04-03T14:18:42.125Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;上周做了一道简单 C 语言练习题，做完了才反应过来是&lt;strong&gt;快速幂&lt;/strong&gt;...😶&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+    
+    
+      <category term="Binary Exponentiation" scheme="http://bachzart.github.io/tags/Binary-Exponentiation/"/>
+    
+  </entry>
   
   <entry>
     <title>Makefile_简单入门</title>
@@ -205,7 +227,7 @@
     <link href="http://bachzart.github.io/2023/02/12/C-%E7%B1%BB%E7%9A%84%E7%AE%80%E5%8D%95%E6%9E%84%E9%80%A0%E6%A1%88%E4%BE%8B/"/>
     <id>http://bachzart.github.io/2023/02/12/C-类的简单构造案例/</id>
     <published>2023-02-12T08:13:57.000Z</published>
-    <updated>2023-02-13T14:31:34.630Z</updated>
+    <updated>2023-04-03T15:58:57.315Z</updated>
     
     <summary type="html">
     
@@ -439,28 +461,6 @@
     
     
       <category term="VBS" scheme="http://bachzart.github.io/tags/VBS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2022_10_月总结</title>
-    <link href="http://bachzart.github.io/2022/11/11/2022-10-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
-    <id>http://bachzart.github.io/2022/11/11/2022-10-月总结/</id>
-    <published>2022-11-11T12:17:44.000Z</published>
-    <updated>2022-12-03T15:04:55.546Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;不知不觉，来上海一个月了...&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
-    
-      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
-    
-    
-      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
     
   </entry>
   

@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="这周好像要开始讲具体的计算机结构了...">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2022-12-27T01:54:25.809Z">
+<meta property="og:updated_time" content="2023-04-13T14:00:38.329Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nand2Tetris_Part1_05">
 <meta name="twitter:description" content="这周好像要开始讲具体的计算机结构了...">
@@ -484,7 +484,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2022-12-27 09:54:25" itemprop="dateModified" datetime="2022-12-27T09:54:25+08:00">2022-12-27</time>
+                <time title="Modified: 2023-04-13 22:00:38" itemprop="dateModified" datetime="2023-04-13T22:00:38+08:00">2023-04-13</time>
               
             
           </span>
@@ -537,7 +537,7 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                <span title="Symbols count in article">998</span>
+                <span title="Symbols count in article">4.2k</span>
               
 
               
@@ -549,7 +549,7 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                <span title="Reading time">8 mins.</span>
+                <span title="Reading time">35 mins.</span>
               
             </div>
           
@@ -572,11 +572,14 @@
         <p>这周好像要开始讲具体的计算机结构了...<br><a id="more"></a></p>
 <h1 id="Unit-5-1-Von-Neumann-Architecture"><a href="#Unit-5-1-Von-Neumann-Architecture" class="headerlink" title="Unit 5.1 Von Neumann Architecture"></a>Unit 5.1 Von Neumann Architecture</h1><p>这节课的标题是冯诺依曼结构，实际上讲到了 3 个概念：数据总线（data bus）、地址总线（address bus）和控制总线（control bus）。这些总线就是计算机内部信息的公路，比特流在这些总线上流动，不同功能的比特流在不同的总线上流动。计算机的硬件设备，如内存、CPU等都连接在这些总线上，时不时的读入信息和输出信息。</p>
 <h1 id="Unit-5-2-The-Fetch-Execute-Cycle"><a href="#Unit-5-2-The-Fetch-Execute-Cycle" class="headerlink" title="Unit 5.2 The Fetch-Execute Cycle"></a>Unit 5.2 The Fetch-Execute Cycle</h1><p>这节课主要在讲解提取-执行周期（Fetch-Execute Cycle）的大致过程。按照前面的思路，程序的数据和控制指令都保存在一块内存芯片中，那 CPU 是如何知道什么时候该执行那条指令，如何去分辨控制指令和数据呢？</p>
-<p>实际上，CPU 有一个叫做 Program Counter 的程序寄存器来专门记录内存中保存指令的地址，数据地址和指令地址（Program Counter）中保存的一同流入 Multiplexor 中，而这个多路复用器用一位控制位来区分现在是提取（Fetch）周期还是执行（Execute）周期。如果是提取模式，那么就读取指令地址，将具体的指令加载到 CPU 中；如果是执行周期，就读取数据地址，将具体的数据加载到 CPU 中用于执行。</p>
+<p>实际上，CPU 有一个叫做 Program Counter 的程序寄存器来专门记录内存中保存指令的地址，数据地址和指令地址（Program Counter）中保存比特的一同流入 Multiplexor 中，而这个多路复用器用一位控制位来区分现在是提取（Fetch）周期还是执行（Execute）周期。如果是提取模式，那么就读取指令地址，将具体的指令加载到 CPU 中；如果是执行周期，就读取数据地址，将具体的数据加载到 CPU 中用于执行。</p>
 <h1 id="Unit-5-3-Central-Processing-Unit"><a href="#Unit-5-3-Central-Processing-Unit" class="headerlink" title="Unit 5.3 Central Processing Unit"></a>Unit 5.3 Central Processing Unit</h1><p>这节课的主要内容是 CPU 的内部结构、功能和对应的实现原理，讲的不是很深入。<br>CPU 实际上就是 ALU 和其他寄存器的组合体，与计算相关的功能是由 ALU 实现的，过程控制是由 ALU 和其他寄存器组合完成的。<br>老师用上周讲的 A 指令和 C 指令举例，说明了 CPU 是如何识别这些指令，如何实现这些指令的功能，这里就不具体展开了。</p>
 <h1 id="Unit-5-4-The-Hack-Computer"><a href="#Unit-5-4-The-Hack-Computer" class="headerlink" title="Unit 5.4 The Hack Computer"></a>Unit 5.4 The Hack Computer</h1><p>这节课主要在讲 Hack Computer 的结构：一块 CPU、一个 ROM32K 的外存、一块内存，再加键盘和屏幕两个 I/O 设备。<br>接着老师又分开讲解了每部分硬件的构成原理，不过讲的不是很深入，与前面提到的差不多，毕竟这一周的任务就是做这些东西。</p>
 <h1 id="Unit-5-5-Project-Overview"><a href="#Unit-5-5-Project-Overview" class="headerlink" title="Unit 5.5 Project Overview"></a>Unit 5.5 Project Overview</h1><p>这周主要实现 3 个硬件设备，而这些设备就是上一周用到的设备。</p>
-<h2 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h2><hr>
+<h2 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h2><p>第一个实现的设备是 Memory，实现过程真是一言难尽，明明是相对容易的问题，却想了很久，最后才意识到是自己有些基础概念（或者说默认规则）没理解清楚，导致做不出来，查资料纠正过来后，就迎刃而解了。<br>但话说回来，能这样一步步做到第五周也是没谁了😅...不多说了，进入正题。<br>Memory 的实现相对比较简单，参考资料已经给了很详细的提示——参考第三周构造内存芯片的思路完成。<br>按照提示的思路，完成 Memory 需要使用 RAM16K、Screen 和 Keyboard 这三个主要芯片，然后再加上其他若干芯片。此时，已知的内容是 Memory 的地址范围在$[0, 24576]$，并且分别对应着内存、显示器和键盘的地址范围，即：<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0x0000 - 0x3FFFF -&gt; 0000 .... 0000 - 0111 .... 1111 -&gt; Ram</span><br><span class="line">0x4000 - 0x5FFFF -&gt; 0010 .... 0000 - 0101 .... 1111 -&gt; Screen</span><br><span class="line">0x6000           -&gt; 1100 .... 0000 -&gt; Keyboard</span><br></pre></td></tr></table></figure></p>
+<p>结合实现 RAM16K 的思路，实现 Memory 也需要使用一个 DMux4Way 将输入的地址区分开，然后将特定的管脚连接到特定的芯片上即可，最后再用 Mux4Way16 输出即可，整体思路还算是比较简单的。<br>因为已经知道 RAM16K 是 14 位寻址的，Screen 是 13 位寻址的，Keyboard 就一个地址，而 Memory 的 address 是 15 位的，所以可以很自然的想到用 address 的前两位来作为 DMux4Way 的 sel bits，这样就可以区分出地址了。<br>但是，在选择管脚作为 sel bits 和连接管脚的时候，我没有搞清楚在 hdl 语言中比特流到底是怎么流动的，导致我无论怎么操作管脚都是错误的...（虽然按照错误思路编写好的 hdl 能跑完和内存相关的部分脚本）<br>具体而言，以一条 A 指令为例：<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> 指令      对应的比特流        流入机器的顺序（与人正好相反）</span><br><span class="line">@3001 -&gt; 000101110111001 -&gt; 100111011101000</span><br><span class="line"></span><br><span class="line">之前理解的比特流在 hdl 中的顺序</span><br><span class="line">v[0] v[1] v[2] v[3]  ... v[13] v[14]</span><br><span class="line">  0    0    0    1   ...   0     1 </span><br><span class="line"></span><br><span class="line">实际比特流在 hdl 中的顺序</span><br><span class="line">v[0] v[1] v[2] v[3]  ... v[13] v[14]</span><br><span class="line">  1    0    0    1   ...   0     0 </span><br><span class="line"></span><br><span class="line">所以，在 hdl 中，选取头两位作为 sel bits，就应该选取 v[13] 和 v[14] 而不是 v[0] 和 v[1]，</span><br><span class="line">同时可以发现，实际顺序中的 0 - 14 也确实代表着进入到计算机内的比特流顺序，也说明这样表示是科学的。</span><br><span class="line">PS：这里其实可以深入扩展一下 MSB 和 LSB 的概念。</span><br></pre></td></tr></table></figure></p>
+<p>最后，贴出正确的实现代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">// This file is part of www.nand2tetris.org</span><br><span class="line">// and the book &quot;The Elements of Computing Systems&quot;</span><br><span class="line">// by Nisan and Schocken, MIT Press.</span><br><span class="line">// File name: projects/05/Memory.hdl</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * The complete address space of the Hack computer&apos;s memory,</span><br><span class="line"> * including RAM and memory-mapped I/O. </span><br><span class="line"> * The chip facilitates read and write operations, as follows:</span><br><span class="line"> *     Read:  out(t) = Memory[address(t)](t)</span><br><span class="line"> *     Write: if load(t-1) then Memory[address(t-1)](t) = in(t-1)</span><br><span class="line"> * In words: the chip always outputs the value stored at the memory </span><br><span class="line"> * location specified by address. If load==1, the in value is loaded </span><br><span class="line"> * into the memory location specified by address. This value becomes </span><br><span class="line"> * available through the out output from the next time step onward.</span><br><span class="line"> * Address space rules:</span><br><span class="line"> * Only the upper 16K+8K+1 words of the Memory chip are used. </span><br><span class="line"> * Access to address&gt;0x6000 is invalid. Access to any address in </span><br><span class="line"> * the range 0x4000-0x5FFF results in accessing the screen memory </span><br><span class="line"> * map. Access to address 0x6000 results in accessing the keyboard </span><br><span class="line"> * memory map. The behavior in these addresses is described in the </span><br><span class="line"> * Screen and Keyboard chip specifications given in the book.</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">    0x0000 - 0x3FFFF -&gt; 0000 .... 0000 - 0111 .... 1111 -&gt; Ram</span><br><span class="line">    0x4000 - 0x5FFFF -&gt; 0010 .... 0000 - 0101 .... 1111 -&gt; Screen</span><br><span class="line">    0x6000           -&gt; 1100 .... 0000 -&gt; Keyboard</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">CHIP Memory &#123;</span><br><span class="line">    IN in[16], load, address[15];</span><br><span class="line">    OUT out[16];</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    // Put your code here:</span><br><span class="line">    DMux4Way(in=load, sel=address[13..14], a=load0, b=load1, c=loadsrc, d=loadkb);</span><br><span class="line">    Or(a=load0, b=load1, out=loadram);</span><br><span class="line">    RAM16K(in=in, load=loadram, address=address[0..13], out=uram);</span><br><span class="line"></span><br><span class="line">    Screen(in=in, load=loadsrc, address=address[0..12], out=usrc);</span><br><span class="line"></span><br><span class="line">    Keyboard(out=ukb);</span><br><span class="line"></span><br><span class="line">    Mux4Way16(a=uram, b=uram, c=usrc, d=ukb, sel=address[13..14], out=out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
       
     </div>
 
@@ -1069,7 +1072,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">182:04</span>
+    <span title="Reading time total">182:31</span>
   
 </div>
 

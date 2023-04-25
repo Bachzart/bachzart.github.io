@@ -147,13 +147,13 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="接着 2 年前的课程继续学习😂...">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/Nand_2_Tetris_04/hardware1.png">
-<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/Nand_2_Tetris_04/hardware2.png">
-<meta property="og:updated_time" content="2022-12-24T13:39:22.003Z">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/Nand2Tetris_04/hardware1.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/Nand2Tetris_04/hardware2.png">
+<meta property="og:updated_time" content="2023-04-23T12:50:34.055Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nand2Tetris_Part1_04">
 <meta name="twitter:description" content="接着 2 年前的课程继续学习😂...">
-<meta name="twitter:image" content="http://bachzart.github.io/my_photo_gallery/Nand_2_Tetris_04/hardware1.png">
+<meta name="twitter:image" content="http://bachzart.github.io/my_photo_gallery/Nand2Tetris_04/hardware1.png">
 
 
 
@@ -487,7 +487,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2022-12-24 21:39:22" itemprop="dateModified" datetime="2022-12-24T21:39:22+08:00">2022-12-24</time>
+                <time title="Modified: 2023-04-23 20:50:34" itemprop="dateModified" datetime="2023-04-23T20:50:34+08:00">2023-04-23</time>
               
             
           </span>
@@ -579,7 +579,7 @@
 <h1 id="Unit-4-2-Machine-Language-Elements"><a href="#Unit-4-2-Machine-Language-Elements" class="headerlink" title="Unit 4.2 Machine Language: Elements"></a>Unit 4.2 Machine Language: Elements</h1><p>依然延续上一节和机器语言相关的内容，不过这一小节讲的更多的是机器语言的语法，或者说，是这一条指令在计算机（Hack）内如何在执行。</p>
 <h2 id="Addressing-Modes"><a href="#Addressing-Modes" class="headerlink" title="Addressing Modes"></a>Addressing Modes</h2><p>机器语言的指令都是地址模式（Addressing Mode，也不知道这么翻译对不对？）的，按照大胡子老师的讲解，机器语言可以直接作用于寄存器，大概就是这个意思。<br>举了四个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// Register</span><br><span class="line">Add R1, R2  // R2 &lt;- R2 + R1</span><br><span class="line"></span><br><span class="line">// Direct</span><br><span class="line">Add R1, M[200]  // Mem[200] &lt;- Mem[200] + R1</span><br><span class="line"></span><br><span class="line">// Indirect</span><br><span class="line">Add R1, @A  // Mem[A] &lt;- Mem[A] + R1</span><br><span class="line"></span><br><span class="line">// Immediate</span><br><span class="line">Add 73, R1  // R1 &lt;- R1 + R3</span><br></pre></td></tr></table></figure></p>
 <p>这难道看着不就是汇编吗？😂</p>
-<h1 id="Unit-4-3-The-Hack-Computer-and-Machine-Language"><a href="#Unit-4-3-The-Hack-Computer-and-Machine-Language" class="headerlink" title="Unit 4.3 The Hack Computer and Machine Language"></a>Unit 4.3 The Hack Computer and Machine Language</h1><p>本小节主要讲解即将要做的 Hack Computer 的工作原理和在 Hack 上用的 Machine Language 的一些语法。<br>Hack 中的机器语言的执行过程是：<br><img src="/my_photo_gallery/Nand_2_Tetris_04/hardware1.png" alt="hardware1" title="hardware1"><br>实际上也就是 CPU 读取保存在 instruction memory 内的指令（instructions），然后加载保存在 data memory 中的数据，计算后，将结果保存在 data memory 中。<br>实际上，这个图还可以画成：<br><img src="/my_photo_gallery/Nand_2_Tetris_04/hardware2.png" alt="hardware2" title="hardware2"><br>这样会更清晰一些。<br>Hack 是个 16 的计算机，所以这些硬件的总线宽度也是 16-bits 的。</p>
+<h1 id="Unit-4-3-The-Hack-Computer-and-Machine-Language"><a href="#Unit-4-3-The-Hack-Computer-and-Machine-Language" class="headerlink" title="Unit 4.3 The Hack Computer and Machine Language"></a>Unit 4.3 The Hack Computer and Machine Language</h1><p>本小节主要讲解即将要做的 Hack Computer 的工作原理和在 Hack 上用的 Machine Language 的一些语法。<br>Hack 中的机器语言的执行过程是：<br><img src="/my_photo_gallery/Nand2Tetris_04/hardware1.png" alt="hardware1" title="hardware1"><br>实际上也就是 CPU 读取保存在 instruction memory 内的指令（instructions），然后加载保存在 data memory 中的数据，计算后，将结果保存在 data memory 中。<br>实际上，这个图还可以画成：<br><img src="/my_photo_gallery/Nand2Tetris_04/hardware2.png" alt="hardware2" title="hardware2"><br>这样会更清晰一些。<br>Hack 是个 16 的计算机，所以这些硬件的总线宽度也是 16-bits 的。</p>
 <h2 id="The-A-instruction"><a href="#The-A-instruction" class="headerlink" title="The A-instruction"></a>The A-instruction</h2><p>直译是 A-指令，实际上就是 Hack 的机器语言中的一种语法，利用<code>@</code>来表示地址，后面跟上数字，这个数字代表内存地址。<br>只不过，这个语法需要借助 A 寄存器来完成。所以实际上，Hack 中这条语句的执行过程是先将<code>@</code>后的地址存入 A 寄存器，而 A 寄存器中的地址值，会被当作<code>RAM[A]</code>来使用，实际上 M 就是 <code>RAM[A]</code>，基本语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@0</span><br><span class="line">M=1 // RAM[0] = 1</span><br></pre></td></tr></table></figure></p>
 <h2 id="The-C-instruction"><a href="#The-C-instruction" class="headerlink" title="The C-instruction"></a>The C-instruction</h2><p>C-指令，这是个复合语句，有点类似 C/C++ 中的 for 循环，基本语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dest = comp; jump   // both dest and jump are optional</span><br><span class="line">comp = 0, 1, -1, D...   // read the book get the others</span><br><span class="line">dest = null, M, D, MD...    // read the book get the others</span><br><span class="line">jump = null, JGT, JEQ...    // read the book get the others</span><br></pre></td></tr></table></figure></p>
 <p>老师举得例子这里就不写了。</p>
@@ -1127,7 +1127,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">182:31</span>
+    <span title="Reading time total">184:06</span>
   
 </div>
 

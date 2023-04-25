@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="本周的主题是 Memory，先把做好的 ALU 放一边，我们来研究一下和内存（RAM）有关的问题。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2023-04-09T01:54:55.171Z">
+<meta property="og:updated_time" content="2023-04-22T12:46:40.335Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nand2Tetris_Part1_03">
 <meta name="twitter:description" content="本周的主题是 Memory，先把做好的 ALU 放一边，我们来研究一下和内存（RAM）有关的问题。">
@@ -484,7 +484,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2023-04-09 09:54:55" itemprop="dateModified" datetime="2023-04-09T09:54:55+08:00">2023-04-09</time>
+                <time title="Modified: 2023-04-22 20:46:40" itemprop="dateModified" datetime="2023-04-22T20:46:40+08:00">2023-04-22</time>
               
             
           </span>
@@ -592,8 +592,8 @@
 <blockquote>
 <p><strong>Counter</strong> A w-bit counter consists of two main elements: a regular w-bit register, and<br>combinational logic. The combinational logic is designed to (a) compute the counting function, and (b) put the counter in the right operating mode, as mandated by the values of its three control bits. Tip: Most of this logic was already built in chapter 2.</p>
 </blockquote>
-<p>仔细看最后一行：<code>Tip: Most of this logic was already built in chapter 2.</code>，原来第二章就做过了。仔细一想，在做 ALU 的时候面对的也是类似的问题，那时是通过 Mux 来挑选出来合适的值进行输出的，那么用到这里应该也是也可以的。</p>
-<p>可是又该如何实现循环计数的功能呢？<br>回想一下循环的过程，上一次的结果作为这一次的初始值。那么在 HDL 里面是不是也可以这样写呢？答案是可以的（总觉得这样写有语法错误😂）。<br>那么正常输出的值与循环递增的值又该如何保存呢？难道保存在一个 Register 里面？<br>然后又开始没有思路了，直到又看到了别人文章里面的：</p>
+<p>仔细看最后一行：<code>Tip: Most of this logic was already built in chapter 2.</code>，原来第二章就做过了。再仔细一想，在做 ALU 的时候面对的也是类似的问题，那时是通过 Mux 来挑选出来合适的值进行输出的，那么用到这里应该也是可以的。</p>
+<p>可是又该如何实现循环计数的功能呢？<br>回想一下循环的过程，即上一次的结果作为这一次的初始值。那么在 HDL 里面是不是也可以这样写呢？答案是可以的（总觉得这样写有语法错误😂）。<br>那么正常输出的值与循环递增的值又该如何保存呢？难道保存在一个 Register 里面？<br>然后又开始没有思路了，直到又看到了别人文章里面的：</p>
 <blockquote>
 <p>Multiple Outputs<br>Sometimes you need more than one sub-bus connected to the output of a chip-part. Simply add more than one out= connection to the chip-part definition.<br>CHIP Foo { IN in[16]; OUT out[8]; PARTS: Not16 (in=in, out[0..7]=low8, out[8..15]=high8); Something8 (a=low8, b=high8, out=out); }<br>This also works if you want to use an output of a chip in further computations.<br>CHIP Foo { IN a, b, c; OUT out1, out2; PARTS: Something (a=a, b=b, out=x, out=out1); Whatever (a=x, b=c, out=out2); }</p>
 </blockquote>
@@ -1103,7 +1103,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">182:31</span>
+    <span title="Reading time total">184:06</span>
   
 </div>
 

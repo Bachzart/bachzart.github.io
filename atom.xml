@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-04-08T13:45:36.254Z</updated>
+  <updated>2023-05-04T12:53:11.835Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2023_04_月总结</title>
+    <link href="http://bachzart.github.io/2023/05/04/2023-04-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
+    <id>http://bachzart.github.io/2023/05/04/2023-04-月总结/</id>
+    <published>2023-05-04T11:47:33.000Z</published>
+    <updated>2023-05-04T12:53:11.835Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;五一假期过的真快啊😪~&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
+    
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
+    
+  </entry>
   
   <entry>
     <title>关于 C 语言内存对齐的思考</title>
@@ -432,28 +454,6 @@
     <summary type="html">
     
       &lt;p&gt;这几天看了很多跟 VBS 相关的资料...&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="VBS" scheme="http://bachzart.github.io/categories/Programming/VBS/"/>
-    
-    
-      <category term="VBS" scheme="http://bachzart.github.io/tags/VBS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>VBS_简单实例</title>
-    <link href="http://bachzart.github.io/2022/11/15/VBS-%E7%AE%80%E5%8D%95%E5%AE%9E%E4%BE%8B/"/>
-    <id>http://bachzart.github.io/2022/11/15/VBS-简单实例/</id>
-    <published>2022-11-15T05:14:13.000Z</published>
-    <updated>2022-12-03T15:08:02.995Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这篇文章来记录一些用 vbscript 编写的实例。&lt;br&gt;
     
     </summary>
     

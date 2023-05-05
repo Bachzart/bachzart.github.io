@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Nand2Tetris_Part1_06]]></title>
+    <url>%2F2023%2F05%2F05%2FNand2Tetris-Part1-06%2F</url>
+    <content type="text"><![CDATA[好几年了，上册终于要学完了🤣...最后一周要将的内容与汇编解释器有关。因为这一周在课堂上用 iPad 做了笔记，所以每一节的内容直接用课堂上的笔记即可，看情况再增加或修改一点内容吧。 Unit 6.1 Assembly Languages and AssemblersWeek Target: use a Assembler translate Assembly Language to binary code.Basic Concept: The “Assembler” is software First software layer above the hardware Basic Logic: Read the next Assembly language command Break it into the different fields it is composed of Lookup the binary code for each field Combine these codes into a single machine language command Output this machine language command example1234567891011121314151. Load R1, 18 &lt;- char array == strings 👇2. load R1 18 v s t &lt;- 3 strings 👇3. Command Table &lt;- use a table to translate the command into machine language directly Load 11001 R1 01 18 000010010 ... ... 👇4. Combination, sometime need to add other bits to it. Load + R1 + 18 = 1100101000010010 👇5. Output About Symbols: Assembler must replace names with address by using a Symbols-Address Table like Command Table. Unit 6.2 The Hack Assembly Language: A Translator’s PerspectiveHack language specification: A-instructionSymbolic syntax: @valueBinary syntax: 0valueInBinaryExample: @21 == 0000000000010101 C-instructionSymbolic syntax: dest=comp;jumpBinary syntax: 111 ac1c2c3c4c5c6 d1d2d3 j1j2j3 Pre-defined symbolsR0, R1, R2...(refer to the book for more information) Assembly program elements: White space(Ignore it, we don’t need to care ✅) Empty lines / indentation Line comments In-line comments Instructions A-instructions C-instructions Symbols (⭐⭐⭐ Challenges) References Label declaration The plan ahead: Develop a basic assembler that translate symbol-less Hack programs(next unit) Develop an ability to handle symbols(nexxt unit) Morph the basic assembler into an assembler that translate any Hack program(nexxxt unit) Unit 6.3 The Assembly Process: Handling Instructions Translating A-instructions 2 situations121. If value is a decimal constant, generate the equivalent 15-bit binary constant2. If value is a symbol, later Translating C-instructions example12345678MD=D+1 👇dst = MD, comp = D+1, jmp = null 👇dst = 011, comp = 1011111, jmp = 000, C-flag = 111 👇C-flag + comp + dst + jmp111 1011111 011 000 The overall assembly logic Unit 6.4 The Assembly Process: Handling SymbolsSymbols: Pre-defined symbols, Label symbols, Variable symbols. Pre-defined symbolsPre-defined symbols represent special memory locations. @pre-defined symbols = @value, it’s A-instructions. Label symbolsLabel symbols represent destinations of goto instructions.3 steps: Used to label destinations of goto commands Declared by the pseudo-command: (xxx), and no need to translate, just ignore it. This directive defines the symbols xxx to refer to the memory location holding the next instruction in the program, like that:example1234Symbol Value LOOP 4 STOP 18 END 22 So, translate the label symbol:@lableSymbol = @value, and here the value is just a line number. Variable symbolsVariable symbols represent memory location where the programmer wants to maintain values. There’s a little hard to translate it. First of all, any symbol xxx appearing in an assembly program which isnot pre-defined and is not defined elsewhere using the (xxx) directive is treated as a variable. Secondly, each variable is assigned a unique memory address, starting at 16(not a arbitrary number 👀). So, translate variable symbols by 2 steps: If you see it for the first time, assign a unique memory address. Replace variable symbols with it’s value. And in order to get this value, we search the value by a Symbol Table . Now, how do we get the Symbol Table?3 steps: Initialization: Add the pre-defined symbols First pass: Add the label symbols Second pass: Add the variable symbols]]></content>
+      <categories>
+        <category>CS</category>
+        <category>Computer Organization</category>
+      </categories>
+      <tags>
+        <tag>Nand2Tetris</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[2023_04_月总结]]></title>
     <url>%2F2023%2F05%2F04%2F2023-04-%E6%9C%88%E6%80%BB%E7%BB%93%2F</url>
     <content type="text"><![CDATA[五一假期过的真快啊😪~ 風の詩 - 押尾コータローYour browser does not support the audio tag. 本来这篇总结应该在五一假期期间（也就是四月的最后几天）写好的，但是五一期间，因为在爆肝 Nand2tetris 和几道算法填空题，所以耽搁了。先说说工作的事情，四月份没有投产，很舒服~但这个月配合测试的单子太多了，各种配合测试的任务，还有一些让人很烦躁的工单...不过总的说来，还算是度过的比较平稳，尽管自己还是有很多不足的地方。四月底做了一个单子，是与前端相关的单子，这个单子也耗费了自己很多功夫，实际的改动却少的很。在开发这个任务的过程中，只有一个感觉：前端真的好无聊啊...🤣另外，到了月底的时候，突然一下子又来了两个其他的开发任务，可以预料到节后很忙。结果今天去上班，竟然又来了一个开发任务，这样算下来，节后的前几天需要解决三个开发任务了🙃，真忙啊...不过好在，今天已经解决完一个了，这两天依次解决剩下的即可。所以，给自己加个油吧！ 本来打算在四月继续学习 Linux/C 下的嵌入式开发课程的，结果学完了与 C 的相关内容后，就重新开始完成 Nand2tetris 课程去了，不得不说，Week 5 的任务真的太难了，花了自己很长的时间才完成，Week 6 的任务相对简单一些了，完成后也有很多收获。目前，想的是再回来看看这两个章节的内容，完善一下 blog 的内容。 这个月选了一首原来常听的指弹曲子作为 BGM，原因是自己最近在练习这首曲子，哈哈。实际上，这个月已经把 One more time，One more change 练熟了，歌词也记了大概一半左右，想着等先学会唱整首歌再继续练习，所以先开始练习风之诗了。突然想到，应该先练习太聪明的，哈哈。 可惜的是，这个月没有把《黄金时代》读完，不知道自己天天在忙啥，哎，五月份一定要看完，最好是能再多读一本，嘻嘻。 实际上，还有一件事情要提一下，那就是入手了一个 Apple pencil 一代，上课的时候用来记下笔记真的挺不错的，确实能让自己的课堂效率提高，至于生产力的提高，暂时还体会不到，可能自己还不太会用。 对了，因为四月为了完成 Nand2tetris week 5 的 project，耗费了大量时间，导致这个月的文档产出，都是集中在月初，学习和 C 相关内容的时候写的...😓这个月，得想办法增加一点文档的产出了😤。 暂定的计划是完成 Nand2tetris week 6 的 project，至于要不要继续下册，看情况了，可能会回头继续去玩 Linux/C 的内容，感觉玩内核才有意思。另外，希望自己不要忘记的是，组成原理和操作系统这两门课程，一定也要想办法完成。还有，五一节期间做的几道算法题，涉及了一些 DFS、DP 的思想，真的是很好的入门题。不得不感慨，好学校还是不一样啊，老师教的东西都要好一些，哎，其实说这话挺没意思的。 继续加油吧，骚年~ PS：我的门卡好像掉了，得花 30 块补办😭]]></content>
@@ -290,9 +302,9 @@
         <category>C/C++</category>
       </categories>
       <tags>
+        <tag>C/C++</tag>
         <tag>STL</tag>
         <tag>Set</tag>
-        <tag>C/C++</tag>
       </tags>
   </entry>
   <entry>
@@ -376,8 +388,8 @@
         <category>C/C++</category>
       </categories>
       <tags>
-        <tag>STL</tag>
         <tag>C/C++</tag>
+        <tag>STL</tag>
         <tag>Vector</tag>
       </tags>
   </entry>
@@ -1380,8 +1392,8 @@
         <category>C/C++</category>
       </categories>
       <tags>
-        <tag>STL</tag>
         <tag>C/C++</tag>
+        <tag>STL</tag>
         <tag>Stack</tag>
         <tag>Queue</tag>
       </tags>
@@ -1395,8 +1407,8 @@
         <category>C/C++</category>
       </categories>
       <tags>
-        <tag>STL</tag>
         <tag>C/C++</tag>
+        <tag>STL</tag>
         <tag>String</tag>
       </tags>
   </entry>

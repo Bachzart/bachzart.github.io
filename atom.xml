@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-05-04T12:53:11.835Z</updated>
+  <updated>2023-05-05T13:48:38.517Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Nand2Tetris_Part1_06</title>
+    <link href="http://bachzart.github.io/2023/05/05/Nand2Tetris-Part1-06/"/>
+    <id>http://bachzart.github.io/2023/05/05/Nand2Tetris-Part1-06/</id>
+    <published>2023-05-05T12:10:57.000Z</published>
+    <updated>2023-05-05T13:48:38.517Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;好几年了，上册终于要学完了🤣...&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Computer Organization" scheme="http://bachzart.github.io/categories/CS/Computer-Organization/"/>
+    
+    
+      <category term="Nand2Tetris" scheme="http://bachzart.github.io/tags/Nand2Tetris/"/>
+    
+  </entry>
   
   <entry>
     <title>2023_04_月总结</title>
@@ -441,28 +463,6 @@
     
     
       <category term="G++" scheme="http://bachzart.github.io/tags/G/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>VBS_蠕虫病毒</title>
-    <link href="http://bachzart.github.io/2022/11/18/VBS-%E8%A0%95%E8%99%AB%E7%97%85%E6%AF%92/"/>
-    <id>http://bachzart.github.io/2022/11/18/VBS-蠕虫病毒/</id>
-    <published>2022-11-18T05:54:34.000Z</published>
-    <updated>2023-04-02T03:02:31.398Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这几天看了很多跟 VBS 相关的资料...&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="VBS" scheme="http://bachzart.github.io/categories/Programming/VBS/"/>
-    
-    
-      <category term="VBS" scheme="http://bachzart.github.io/tags/VBS/"/>
     
   </entry>
   

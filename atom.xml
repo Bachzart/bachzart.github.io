@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-06-04T05:55:26.843Z</updated>
+  <updated>2023-07-03T13:47:14.399Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2023_06_月总结</title>
+    <link href="http://bachzart.github.io/2023/07/03/2023-06-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
+    <id>http://bachzart.github.io/2023/07/03/2023-06-月总结/</id>
+    <published>2023-07-03T12:42:02.000Z</published>
+    <updated>2023-07-03T13:47:14.399Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;2023 已经过去一半~✈&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
+    
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
+    
+  </entry>
   
   <entry>
     <title>2023_05_月总结</title>
@@ -383,7 +405,7 @@
     <link href="http://bachzart.github.io/2023/01/02/2022-%E5%B9%B4%E6%9C%AB%E5%B0%8F%E7%BB%93/"/>
     <id>http://bachzart.github.io/2023/01/02/2022-年末小结/</id>
     <published>2023-01-02T03:02:53.000Z</published>
-    <updated>2023-01-02T06:47:19.911Z</updated>
+    <updated>2023-07-03T12:57:14.106Z</updated>
     
     <summary type="html">
     
@@ -441,28 +463,6 @@
     
     
       <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Nand2Tetris_Part1_04</title>
-    <link href="http://bachzart.github.io/2022/12/17/Nand2Tetris-Part1-04/"/>
-    <id>http://bachzart.github.io/2022/12/17/Nand2Tetris-Part1-04/</id>
-    <published>2022-12-17T12:40:27.000Z</published>
-    <updated>2023-04-23T12:50:34.055Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;接着 2 年前的课程继续学习😂...&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
-    
-      <category term="Computer Organization" scheme="http://bachzart.github.io/categories/CS/Computer-Organization/"/>
-    
-    
-      <category term="Nand2Tetris" scheme="http://bachzart.github.io/tags/Nand2Tetris/"/>
     
   </entry>
   

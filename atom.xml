@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-07-03T13:47:14.399Z</updated>
+  <updated>2023-07-30T13:58:04.709Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,22 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2023_07_月总结</title>
+    <link href="http://bachzart.github.io/2023/07/30/2023-07-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
+    <id>http://bachzart.github.io/2023/07/30/2023-07-月总结/</id>
+    <published>2023-07-30T13:26:33.000Z</published>
+    <updated>2023-07-30T13:58:04.709Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;暑假已经过去一半，然而我已经没有了暑假...&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>2023_06_月总结</title>
@@ -441,28 +457,6 @@
     
     
       <category term="Nand2Tetris" scheme="http://bachzart.github.io/tags/Nand2Tetris/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>新冠感染记</title>
-    <link href="http://bachzart.github.io/2022/12/19/%E6%96%B0%E5%86%A0%E6%84%9F%E6%9F%93%E8%AE%B0/"/>
-    <id>http://bachzart.github.io/2022/12/19/新冠感染记/</id>
-    <published>2022-12-19T14:44:11.000Z</published>
-    <updated>2023-01-02T14:22:11.820Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;新冠已经三年了，今天终于轮到我了...&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
-    
-      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
-    
-    
-      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
     
   </entry>
   

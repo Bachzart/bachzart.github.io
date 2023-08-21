@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/acoustic_guitar_128px.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/acoustic_guitar_32px.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/acoustic_guitar_16px.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/uploads/acoustic_guitar.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本周将会介绍几种常见的排序算法。">
+<meta name="keywords" content="ZJU_DS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ZJU_DS_09_排序（上）">
+<meta property="og:url" content="http://bachzart.github.io/2020/09/02/ZJU-DS-09-排序（上）/index.html">
+<meta property="og:site_name" content="bachzart&#39;s Blog">
+<meta property="og:description" content="本周将会介绍几种常见的排序算法。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2022-11-10T15:18:33.789Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ZJU_DS_09_排序（上）">
+<meta name="twitter:description" content="本周将会介绍几种常见的排序算法。">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="bachzart's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://bachzart.github.io/2020/09/02/ZJU-DS-09-排序（上）/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>ZJU_DS_09_排序（上） | bachzart's Blog</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3eb545f7f54637f67ed532005e0261f7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">bachzart's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">163</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">28</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">52</span></a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/bachzart" class="github-corner" title="Follow me on GitHub :)" aria-label="Follow me on GitHub :)" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2020/09/02/ZJU-DS-09-排序（上）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="I've been in my mind, it's such a fine line.">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">ZJU_DS_09_排序（上）
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-09-02 21:03:54" itemprop="dateCreated datePublished" datetime="2020-09-02T21:03:54+08:00">2020-09-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2022-11-10 23:18:33" itemprop="dateModified" datetime="2022-11-10T23:18:33+08:00">2022-11-10</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/Data-Structures-and-Algorithms/" itemprop="url" rel="index"><span itemprop="name">Data Structures and Algorithms</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="Symbols count in article">21k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="Reading time">2:58</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本周将会介绍几种常见的排序算法。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="简单排序"><a href="#简单排序" class="headerlink" title="简单排序"></a>简单排序</h1><p>简单排序是几个简单的排序算法的统称，下面来一一介绍。</p>
+<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>冒泡排序的思想比较直观，每次循环时，会将数组（或链表）内相邻的两个元素进行比较，按照规定的递增（或递减）顺序向后移动，一直到重复到末尾，基本代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Bubble_Sort</span><span class="params">(ElementType A[], <span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(P=N<span class="number">-1</span>; P&gt;=<span class="number">0</span>; P--) &#123;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;P; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(A[i] &gt; A[i+<span class="number">1</span>]) &#123;</span><br><span class="line">                Swap(A[i], A[i+<span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>代码框架十分简单，但是这样会有一个问题，那就是待排序列在已经有序的情况下，依然会进行两次循环，尽管不会交换相邻元素的值，但是还是会进行判断，会白白浪费时间。仔细想一下，如果输入序列是有序的，那么元素的值一次也不会交换，根据这个特点，可以对上述的代码进行一点小优化，添加一个<strong>标志位</strong>，一次有序后就可以直接跳出循环了。具体代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Bubble_Sort</span><span class="params">(ElementType A[], <span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(P=N<span class="number">-1</span>; P&gt;=<span class="number">0</span>; P--) &#123;</span><br><span class="line">        flag = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;P; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(A[i] &gt; A[i+<span class="number">1</span>]) &#123;</span><br><span class="line">                Swap(A[i], A[i+<span class="number">1</span>]);</span><br><span class="line">                flag = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!flag) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>按照上述代码的思路，可以较为清晰的分析出冒泡排序算法的时间复杂度：</p>
+<ul>
+<li>最好的情况，序列为顺序序列，$T = O(N)$</li>
+<li>最坏的情况，序列为逆序序列，$T = O(N^2)$</li>
+</ul>
+<p>另外，对于冒泡排序而言，<strong>每一次冒泡结束（内层循环结束一轮）后都会有一个元素被放到这个序列有序后的最终位置上</strong>，而且，冒泡排序也不会交换相同元素的位置（使用$&gt;$而不是$\geq$），所以<strong>冒泡排序是稳定的排序算法</strong>，再者，<strong><font color="red">冒泡排序还有一个优点，即排序的方向是一定的，只会按照一个方向遍历存储数据的数据结构，这是其他排序算法无法达到的</font></strong>。</p>
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>插入排序有个很形象的例子，就是打扑克牌时“理牌”的过程，不过可能有点差别。区别在于，理扑克牌时，手上是没有牌的，而需要理的牌在牌堆里面，也就是说，有两个空间可以放牌，但插入排序实际上只使用了一个内存空间，这样的话，每一次插入时就需要先找到插入的位置了。<br>按照“理牌”的过程来描述就是：先摸一张牌，从后往前找到合适的插入位置，将比这张牌大的牌向后移（腾出位置），再将新牌插入到这个位置下即可。基本代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Insertion_Sort</span><span class="params">(ElementType A[], <span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(P=<span class="number">1</span>; P&lt;N; p++) &#123;</span><br><span class="line">        temp = A[P];</span><br><span class="line">        <span class="keyword">for</span>(i=P; i&gt;<span class="number">0</span> &amp;&amp; A[i<span class="number">-1</span>]&gt;temp; i--) &#123;</span><br><span class="line">            A[i] = A[i<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        A[i] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>插入排序和冒泡排序的时间复杂度类似：</p>
+<ul>
+<li>最好的情况，序列为顺序序列，$T = O(N)$</li>
+<li>最坏的情况，序列为逆序序列，$T = O(N^2)$</li>
+</ul>
+<p>同时，插入排序也是稳定的排序算法。</p>
+<h2 id="时间复杂度下界"><a href="#时间复杂度下界" class="headerlink" title="时间复杂度下界"></a>时间复杂度下界</h2><div class="note success">
+            <p>对于下标$i &lt; j$，如果$A[i] &gt; A[j]$，则称$(i, j)$是一对<strong>逆序对（Inversion）</strong>如序列${2, 3, 1}$中，$(2, 1)$和$(3, 1)$分别是一对逆序对，<strong>逆序对的个数称为逆序数</strong>，这与线性代数中的概念是一致的。</p>
+          </div>
+<p>在冒泡排序和插入排序中，每次交换位置的两个相邻元素正好消去 1 个逆序对，那么它们的时间复杂度就是：$T(N, I) = O(N+I)$，其中$I$是逆序对的对数。很明显，如果序列<strong>基本有序</strong>，则$I$值可忽略不计，时间复杂度仅为$T(N)$，此时算法既简单，又高效。<br><div class="note success">
+            <p><strong>定理：对于任意N个不同元素组成的序列平均具有$N(N-1)/4$个逆序对。</strong></p>
+          </div><br>由上面的定理，我们可以得出：<strong>任何仅以交换相邻两元素来排序的算法，其平均时间复杂度为$\Omega(N^2)$</strong>。这意味着，如果想要提高算法的效率，就得在每次交换元素时，不止消去 1 个逆序对，这就要求每次交换的两个元素要在序列中相隔的比较远。</p>
+<h1 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h1><p>希尔排序的主要目的就是每次交换元素时，通过消去多个逆序对来达到提升算法效率。其主要思想：先定义增量序列$D_M &gt; D_{M-1} &gt; \dots &gt; D_1 = 1$，然后对每个$D_k$进行“$D_k$-间隔”排序（$k=M, M-1, \dots,1$），值得注意的是，<strong>后面进行的“间隔”排序不会影响前面“间隔”排序的有序性</strong>，也即“$D_k$-间隔”有序的序列，在执行“$D_{k-1}$-间隔”排序后，仍然是“$D_k$-间隔”有序的。<br>原始希尔排序，增量依次减半，$D_M = \lfloor N/2 \rfloor, D_k = \lfloor D{k+1}/2 \rfloor$，此时最坏情况下的时间复杂度为$T = \Theta(N^2)$，基本代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Shell_Sort</span><span class="params">(ElementType A[], <span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(D=N/<span class="number">2</span>; D&gt;<span class="number">0</span>; D/=<span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span>(P=D; P&lt;N; P++) &#123;</span><br><span class="line">            temp = A[P];</span><br><span class="line">            <span class="keyword">for</span>(i=P; i&gt;=D &amp;&amp; A[i-D]&gt;temp; i-=D) &#123;</span><br><span class="line">                A[i] = A[i-D];</span><br><span class="line">            &#125;</span><br><span class="line">            A[i] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>在最坏的情况（每次进行间隔排序的序列都是有序的）下，希尔排序会退化成插入排序，原因在于增量元素不互质，则小增量可能根本不起作用</strong>。为了解决这个问题，引入了更多的增量序列：</p>
+<ul>
+<li>Hibbard增量序列，$D_k = 2^k - 1$，这样保证了相邻增量元素互质，最坏情况下$T = \Omega(N^{3/2})$，猜想$T_{avg} = O(N^{5/4})$</li>
+<li>Sedgewick增量序列，${1, 5, 19, 41, 109, \dots}$，也即增量序列的每一个元素是由$9 \times 4^i + 1$或$4^i - 3 \times 2^i + 1$计算得到，猜想$T_{avg} = O(N^{7/6}), T_{worst} = O(N^{4/3})$</li>
+</ul>
+<p><strong>由于希尔排序每次对增量序列进行排序，相邻的相等元素属于不同增量序列，则希尔排序可能会改变相等且相邻元素的相对位置，属于不稳定的排序。</strong></p>
+<h1 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h1><p>选择排序是一种简单直观的排序算法，基本工作原理是每一次从待排序的数据元素中选出最小（大）的一个元素，存放在序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾，重复此过程直到全部待排序的数据元素排完。</p>
+<h2 id="简单选择排序"><a href="#简单选择排序" class="headerlink" title="简单选择排序"></a>简单选择排序</h2><p>简单选择排序的思路很简单，与选择排序的基本思想一致，基本代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Selection_Sort</span><span class="params">(ElementType A[], <span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">    <span class="comment">//find the minimum from A[i] to A[n-1], and return to Position</span></span><br><span class="line">        MinPosition = ScanForMin(A, i, N<span class="number">-1</span>);</span><br><span class="line">    <span class="comment">//replace the minimum element to the last position of the ordered part</span></span><br><span class="line">        Swap(A[i], A[MinPosition]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>简单选择排序的时间复杂度主要有两个影响条件，<strong>第一个是查找最小值</strong>，<strong>第二个是交换</strong>，所以它的时间复杂度无论怎样都是$T=\Theta(N^2)$。</p>
+<h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><p>分析了简单选择排序算法的时间复杂度后，发现简单选择排序的时间都耗费在了查找最小值上，如果能把这一操作变快，那么简单选择排序的效率就能提高。根据选择排序的特点，每次查找的值必须是最小（大）值，这与小（大）根堆的性质是一致的，那么使用堆来进行元素的查找，每次弹出最小（大）值，就可以提升排序效率。基本代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Heap_Sort</span><span class="params">(ElementType A[], <span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">    BuildHeap(A);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">        tempA[i] = DeleteMin[A];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">        A[i] = tempA[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述代码的过程比较简单，每次找出最小（大）元素后，保存在一个临时数组内，然后在将临时数组内的排序结果复制到原始数组中。这样即需要额外的空间（$O(N)$）去存储这部分数据，又要额外的时间去复制元素。那么如何去避免这部分开销呢？请看下面的代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Heap_Sort</span><span class="params">(ElementType A[], <span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(i=N/<span class="number">2</span>; i&gt;=<span class="number">0</span>; i--) &#123;</span><br><span class="line">        PercDown(A, i, N);	<span class="comment">//Build heap</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(i=N<span class="number">-1</span>; i&gt;<span class="number">0</span>; i--) &#123;</span><br><span class="line">        Swap(&amp;A[<span class="number">0</span>], &amp;A[i]);	<span class="comment">//delete max</span></span><br><span class="line">        PercDown(A, <span class="number">0</span>, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>按照上述代码，建立一个大根堆，排序开始后，交换大根堆最大元素与最末尾元素的值，完成后，将这个最大值剔除出堆，紧接着再调整为大根堆，重复执行上述操作。<br><div class="note success">
+            <p><strong>定理：堆排序处理N个不同元素的随机排列的平均比较次数是$2NlogN - O(N log logN)$</strong></p>
+          </div><br>虽然堆排序给出最佳平均时间复杂度，但<strong><span class="label success">实际效果不如用Sedgewick增量序列的希尔排序</span></strong>。</p>
+<h1 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h1><p>归并排序的核心就是<strong>有序子列的归并</strong>，首先，申请空间，保存合并后的有序序列，设定两个指针，最初位置分别为两个有序序列的起始位置，比较两个指针指向的元素，选择相对小的元素放到申请的空间内，并移动指针到下一位置，重复直至某一个子序列超出序列尾，接着将另一序列剩下的所有元素直接复制到申请空间的尾部。<strong>合并两个有序子列</strong>的基本代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(ElementType A[], ElementType TempA[], <span class="keyword">int</span> L, <span class="keyword">int</span> R, <span class="keyword">int</span> RightEnd)</span> </span>&#123;</span><br><span class="line">    LeftEnd = R<span class="number">-1</span>;	<span class="comment">//Suppose two subsequences are side-by-side</span></span><br><span class="line">    Tmp = L;	<span class="comment">//initial position</span></span><br><span class="line">    NumElements = RightEnd - L + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(L &lt;= LeftEnd &amp;&amp; R &lt;= RightEnd) &#123;</span><br><span class="line">        <span class="keyword">if</span>(A[L] &lt;= A[R]) TempA[Tmp++] = A[L++];</span><br><span class="line">        <span class="keyword">else</span> TempA[Tmp++] = A[R++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// copy the rest straightly</span></span><br><span class="line">    <span class="keyword">while</span>(L &lt;= LeftEnd) TempA[Tmp++] = A[L++];	</span><br><span class="line">    <span class="keyword">while</span>(R &lt;= RightEnd) TempA[Tmp++] = A[R++];</span><br><span class="line">    <span class="comment">//copy the result to A[] from right to left</span></span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;NumElements; i++, RightEnd--) &#123;</span><br><span class="line">        A[RightEnd] = TempA[RightEnd]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>归并算法在实现的时候有两种不同的策略，下面先介绍递归。</p>
+<h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><p>归并排序的递归算法的思想是基于<strong>分治法</strong>的，先将分开的子序列排好，在合并成一个大的序列。基本代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MSort</span><span class="params">(ElementType A[], ElementType TempA[], <span class="keyword">int</span> L, <span class="keyword">int</span> RightEnd)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> Center;</span><br><span class="line">    <span class="keyword">if</span>(L &lt; RightEnd) &#123;</span><br><span class="line">        Center = (L + RightEnd)/<span class="number">2</span>;</span><br><span class="line">        MSort(A, TempA, L, Center);</span><br><span class="line">        MSort(A, TempA, Center+<span class="number">1</span>, RightEnd);</span><br><span class="line">        Merge(A, TempA, L, Center+<span class="number">1</span>, RightEnd);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>基于分治法的归并排序递归算法的时间复杂度为$T(NlogN)$，推导过程如下：<br>$$<br>\begin{align} T(N)<br>&amp; = 2 T(N/2)) + cN \\<br>&amp; = 2\ (2T(N/2^2) + c N/2) + cN \\<br>&amp; = \dots = 2^k * O(1) + ckN \\<br>&amp; = O(NlogN)<br>\end{align}<br>$$<br>可得$T(N) = O(NlogN)$，这个时间复杂度是很“强”的😆，也即是说在任何情况下（无论好坏）都是$NlogN$，另外，<strong>归并排序是稳定的排序算法</strong>。为了使它与上述其他排序算法的函数接口统一，再整理下代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge_Sort_Recursion</span><span class="params">(ElementType A[], <span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">    ElementType *TempA;</span><br><span class="line">    TempA = <span class="built_in">malloc</span>(N*<span class="keyword">sizeof</span>(ElementType));</span><br><span class="line">    <span class="keyword">if</span>(TempA != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        MSort(A, TempA, <span class="number">0</span>, N<span class="number">-1</span>);</span><br><span class="line">        <span class="built_in">free</span>(TempA);</span><br><span class="line">    &#125; <span class="keyword">else</span> Error(<span class="string">"Insufficient Space."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意在上面的代码中，临时传递使用的数组是声明在<code>Merge_Sort</code>函数中的，这样做的好处就是避免了在<code>MSort</code>中重复声明和重复释放内存操作。</p>
+<h2 id="非递归"><a href="#非递归" class="headerlink" title="非递归"></a>非递归</h2><p>归并排序的非递归算法基本思想依然是<strong>分治法</strong>的思想，每次循环先归并相邻的两个子列，子列长度逐渐增加，直至最后左右两个子列之和大于序列总长度。基本代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge_Sort_Non_Recursion</span><span class="params">(ElementType A[], <span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> length;</span><br><span class="line">    ElementType *TempA;</span><br><span class="line">    length = <span class="number">1</span>; <span class="comment">//initialize the length of subsequence</span></span><br><span class="line">    TempA = <span class="built_in">malloc</span>(N*<span class="keyword">sizeof</span>(ElementType));</span><br><span class="line">    <span class="keyword">if</span>(TempA != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span>(length &lt; N) &#123;</span><br><span class="line">            Merge_pass(A, TempA, N, length);	<span class="comment">//left</span></span><br><span class="line">            length *= <span class="number">2</span>;</span><br><span class="line">            Merge_pass(TempA, A, N, length);	<span class="comment">//right</span></span><br><span class="line">            length *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"Insufficient Space.\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*Merge adjacent ordered subsequence in pairs accroding to the current </span></span><br><span class="line"><span class="comment">length of subsequence*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge_pass</span><span class="params">(ElementType A[], ElementType TempA[], <span class="keyword">int</span> N, <span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, j;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;=N<span class="number">-2</span>*length; i+=length) &#123;</span><br><span class="line">        Merge(A, TempA, i, i+length, i+<span class="number">2</span>*length<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(i+length &lt; N) &#123;</span><br><span class="line">        <span class="comment">//Merge the last two subsequence</span></span><br><span class="line">        Merge(A, TempA, i, i+length, N<span class="number">-1</span>); </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//only one subsequence last </span></span><br><span class="line">        <span class="keyword">for</span>(j=i; j&lt;N; j++) TempA[j] = A[j];	</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意上述代码中的细节，<code>Merge_pass</code>是一个按照序列长度进行一次归并的函数，当序列长度发生变化的时候，将再次调用此函数，另外，在此函数内，<code>for</code>循环内归并的序列是前<code>N/length - 1</code>对，而不是<code>N/length</code>对，如果<code>N</code>是奇数，最后一个子列就被单独出来了，它与其他子列的长度不等，所以针对最后一个子列的处理，要与前面区分开来。再者，上述代码中<code>length</code>增长的倍数是<code>2</code>，理论上即是<strong>二路归并</strong>。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>归并排序算法的优点很明显，那就是在任何情况（无论好坏）下，其时间复杂度都是$T(NlogN)$，同时，它还是稳定的排序算法，但是它有一个很明显的缺点，就是需要占用$O(N)$大小的空间，并且在内存内要频繁的进行倒换操作，所以，一般内部排序中不会使用归并排序，外部排序会使用归并排序。</p>
+<h1 id="Homework"><a href="#Homework" class="headerlink" title="Homework"></a>Homework</h1><h2 id="09-1-排序"><a href="#09-1-排序" class="headerlink" title="09-1 排序"></a>09-1 排序</h2><p>这个题专门用来检测自己实现的排序算法，最好把老师讲了的都实现一下。</p>
+<h3 id="冒泡排序-1"><a href="#冒泡排序-1" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 100005</span></span><br><span class="line"><span class="keyword">int</span> <span class="built_in">array</span>[maxn], n;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> *p1, <span class="keyword">int</span> *p2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t = *p1;</span><br><span class="line">    *p1 = *p2;</span><br><span class="line">    *p2 = t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubble_sort</span><span class="params">(<span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">array</span>[j] &gt; <span class="built_in">array</span>[j + <span class="number">1</span>])&#123;</span><br><span class="line">                swap(&amp;<span class="built_in">array</span>[j], &amp;<span class="built_in">array</span>[j + <span class="number">1</span>]);</span><br><span class="line">                flag = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(flag) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, <span class="built_in">array</span> + i);</span><br><span class="line">    &#125;</span><br><span class="line">    bubble_sort(<span class="built_in">array</span>, n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>, <span class="built_in">array</span>[i]);</span><br><span class="line">        <span class="keyword">if</span>(i &lt; n - <span class="number">1</span>) <span class="built_in">putchar</span>(<span class="string">' '</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="插入排序-1"><a href="#插入排序-1" class="headerlink" title="插入排序"></a>插入排序</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 100005</span></span><br><span class="line"><span class="keyword">int</span> <span class="built_in">array</span>[maxn], n;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertion_sort</span><span class="params">(<span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = <span class="built_in">array</span>[i], j;</span><br><span class="line">        <span class="keyword">for</span>(j = i; j &gt; <span class="number">0</span> &amp;&amp; tmp &lt; <span class="built_in">array</span>[j - <span class="number">1</span>]; j--) &#123;</span><br><span class="line">            <span class="built_in">array</span>[j] = <span class="built_in">array</span>[j - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">array</span>[j] = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, <span class="built_in">array</span> + i);</span><br><span class="line">    &#125;</span><br><span class="line">    insertion_sort(<span class="built_in">array</span>, n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>, <span class="built_in">array</span>[i]);</span><br><span class="line">        <span class="keyword">if</span>(i &lt; n - <span class="number">1</span>) <span class="built_in">putchar</span>(<span class="string">' '</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="希尔排序-1"><a href="#希尔排序-1" class="headerlink" title="希尔排序"></a>希尔排序</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 100005</span></span><br><span class="line"><span class="keyword">int</span> <span class="built_in">array</span>[maxn], n;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertion_sort</span><span class="params">(<span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = <span class="built_in">array</span>[i], j;</span><br><span class="line">        <span class="keyword">for</span>(j = i; j &gt; <span class="number">0</span> &amp;&amp; tmp &lt; <span class="built_in">array</span>[j - <span class="number">1</span>]; j--) &#123;</span><br><span class="line">            <span class="built_in">array</span>[j] = <span class="built_in">array</span>[j - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">array</span>[j] = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, <span class="built_in">array</span> + i);</span><br><span class="line">    &#125;</span><br><span class="line">    insertion_sort(<span class="built_in">array</span>, n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>, <span class="built_in">array</span>[i]);</span><br><span class="line">        <span class="keyword">if</span>(i &lt; n - <span class="number">1</span>) <span class="built_in">putchar</span>(<span class="string">' '</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="堆排序-1"><a href="#堆排序-1" class="headerlink" title="堆排序"></a>堆排序</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 100005</span></span><br><span class="line"><span class="keyword">int</span> <span class="built_in">array</span>[maxn], n;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> *p1, <span class="keyword">int</span> *p2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t = *p1;</span><br><span class="line">    *p1 = *p2;</span><br><span class="line">    *p2 = t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Percolatedown</span><span class="params">(<span class="keyword">int</span> *heap, <span class="keyword">int</span> pos, <span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> parent, child, tmp = heap[pos];</span><br><span class="line">    <span class="keyword">for</span>(parent = pos; parent * <span class="number">2</span> + <span class="number">1</span> &lt;= size - <span class="number">1</span>; parent = child) &#123;</span><br><span class="line">        child = parent * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(child != size - <span class="number">1</span> &amp;&amp; heap[child] &lt; heap[child + <span class="number">1</span>]) child++;</span><br><span class="line">        <span class="keyword">if</span>(tmp &gt;= heap[child]) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">else</span> heap[parent] = heap[child];</span><br><span class="line">    &#125;</span><br><span class="line">    heap[parent] = tmp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">heap_sort</span><span class="params">(<span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n / <span class="number">2</span> - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        Percolatedown(<span class="built_in">array</span>, i, n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        swap(&amp;<span class="built_in">array</span>[<span class="number">0</span>], &amp;<span class="built_in">array</span>[i]);</span><br><span class="line">        Percolatedown(<span class="built_in">array</span>, <span class="number">0</span>, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, <span class="built_in">array</span> + i);</span><br><span class="line">    &#125;</span><br><span class="line">    heap_sort(<span class="built_in">array</span>, n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>, <span class="built_in">array</span>[i]);</span><br><span class="line">        <span class="keyword">if</span>(i &lt; n - <span class="number">1</span>) <span class="built_in">putchar</span>(<span class="string">' '</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="归并排序-1"><a href="#归并排序-1" class="headerlink" title="归并排序"></a>归并排序</h3><h4 id="非递归-1"><a href="#非递归-1" class="headerlink" title="非递归"></a>非递归</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 100005</span></span><br><span class="line"><span class="keyword">int</span> <span class="built_in">array</span>[maxn], n;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">int</span> *tmparr, <span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> rightend)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> leftend = right - <span class="number">1</span>, tmp = left;</span><br><span class="line">    <span class="keyword">int</span> numofelements = rightend - left + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(left &lt;= leftend &amp;&amp; right &lt;= rightend) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">array</span>[left] &lt; <span class="built_in">array</span>[right]) tmparr[tmp++] = <span class="built_in">array</span>[left++];</span><br><span class="line">        <span class="keyword">else</span> tmparr[tmp++] = <span class="built_in">array</span>[right++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(left &lt;= leftend) tmparr[tmp++] = <span class="built_in">array</span>[left++];</span><br><span class="line">    <span class="keyword">while</span>(right &lt;= rightend) tmparr[tmp++] = <span class="built_in">array</span>[right++];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numofelements; i++, rightend--) &#123;</span><br><span class="line">        <span class="built_in">array</span>[rightend] = tmparr[rightend];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge_pass</span><span class="params">(<span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">int</span> *tmparr, <span class="keyword">int</span> n, <span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, j;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt;= n - <span class="number">2</span> * length; i += (<span class="number">2</span> * length)) &#123;</span><br><span class="line">        merge(<span class="built_in">array</span>, tmparr, i, i + length, i + <span class="number">2</span> * length - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(i + length &lt; n) merge(<span class="built_in">array</span>, tmparr, i, i + length, n - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">for</span>(j = i; j &lt; n; j++) tmparr[j] = <span class="built_in">array</span>[j];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge_sort</span><span class="params">(<span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> *tmparr;</span><br><span class="line">    tmparr = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(n * <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">    <span class="keyword">if</span>(tmparr != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> length = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(length &lt; n) &#123;</span><br><span class="line">            merge_pass(<span class="built_in">array</span>, tmparr, n, length);</span><br><span class="line">            length *= <span class="number">2</span>;</span><br><span class="line">            merge_pass(tmparr, <span class="built_in">array</span>, n, length);</span><br><span class="line">            length *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">free</span>(tmparr);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, <span class="built_in">array</span> + i);</span><br><span class="line">    &#125;</span><br><span class="line">    merge_sort(<span class="built_in">array</span>, n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>, <span class="built_in">array</span>[i]);</span><br><span class="line">        <span class="keyword">if</span>(i &lt; n - <span class="number">1</span>) <span class="built_in">putchar</span>(<span class="string">' '</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="递归-1"><a href="#递归-1" class="headerlink" title="递归"></a>递归</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 100005</span></span><br><span class="line"><span class="keyword">int</span> <span class="built_in">array</span>[maxn], n;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">int</span> *tmparr, <span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> rightend)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> leftend = right - <span class="number">1</span>, tmp = left;</span><br><span class="line">    <span class="keyword">int</span> numofelements = rightend - left + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(left &lt;= leftend &amp;&amp; right &lt;= rightend) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">array</span>[left] &lt; <span class="built_in">array</span>[right]) tmparr[tmp++] = <span class="built_in">array</span>[left++];</span><br><span class="line">        <span class="keyword">else</span> tmparr[tmp++] = <span class="built_in">array</span>[right++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(left &lt;= leftend) tmparr[tmp++] = <span class="built_in">array</span>[left++];</span><br><span class="line">    <span class="keyword">while</span>(right &lt;= rightend) tmparr[tmp++] = <span class="built_in">array</span>[right++];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numofelements; i++, rightend--) &#123;</span><br><span class="line">        <span class="built_in">array</span>[rightend] = tmparr[rightend];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">msort</span><span class="params">(<span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">int</span> *tmparr, <span class="keyword">int</span> left, <span class="keyword">int</span> rightend)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> center;</span><br><span class="line">    <span class="keyword">if</span>(left &lt; rightend) &#123;</span><br><span class="line">        center = (left + rightend) / <span class="number">2</span>;</span><br><span class="line">        msort(<span class="built_in">array</span>, tmparr, left, center);</span><br><span class="line">        msort(<span class="built_in">array</span>, tmparr, center + <span class="number">1</span>, rightend);</span><br><span class="line">        merge(<span class="built_in">array</span>, tmparr, left, center + <span class="number">1</span>, rightend);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge_sort</span><span class="params">(<span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> *tmparr;</span><br><span class="line">    tmparr = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(n * <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">    <span class="keyword">if</span>(tmparr != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        msort(<span class="built_in">array</span>, tmparr, <span class="number">0</span>, n - <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">free</span>(tmparr);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, <span class="built_in">array</span> + i);</span><br><span class="line">    &#125;</span><br><span class="line">    merge_sort(<span class="built_in">array</span>, n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>, <span class="built_in">array</span>[i]);</span><br><span class="line">        <span class="keyword">if</span>(i &lt; n - <span class="number">1</span>) <span class="built_in">putchar</span>(<span class="string">' '</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="09-2-Insert-or-Merge"><a href="#09-2-Insert-or-Merge" class="headerlink" title="09-2 Insert or Merge"></a>09-2 Insert or Merge</h2><p>这个题形式简单，但是要想得满分，必须得对插入排序跟归并排序都很了解才行。</p>
+<p>题目要求输出两样东西：</p>
+<ol>
+<li>判断属于那一种排序</li>
+<li>然后输出再进行下一次这种排序后所得的序列<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 105</span></span><br><span class="line"><span class="keyword">int</span> tar[maxn], arr[maxn], tmparr[maxn], n;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">issame</span><span class="params">(<span class="keyword">int</span> *a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i] != tar[i]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printarray</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>, <span class="built_in">array</span>[i]);</span><br><span class="line">        <span class="keyword">if</span>(i &lt; n - <span class="number">1</span>) <span class="built_in">putchar</span>(<span class="string">' '</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert_pass</span><span class="params">(<span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">int</span> pos)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tmp = <span class="built_in">array</span>[pos], j;</span><br><span class="line">    <span class="keyword">for</span>(j = pos; j &gt; <span class="number">0</span> &amp;&amp; tmp &lt; <span class="built_in">array</span>[j - <span class="number">1</span>]; j--) &#123;</span><br><span class="line">        <span class="built_in">array</span>[j] = <span class="built_in">array</span>[j - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">array</span>[j] = tmp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isinsert</span><span class="params">(<span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">int</span> n, <span class="keyword">int</span> *round)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">        insert_pass(<span class="built_in">array</span>, i);</span><br><span class="line">        <span class="keyword">if</span>(issame(<span class="built_in">array</span>)) &#123;</span><br><span class="line">            *round = i + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">int</span> *tmparr, <span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> rightend)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> leftend = right - <span class="number">1</span>, tmp = left;</span><br><span class="line">    <span class="keyword">int</span> numofelements = rightend - left + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(left &lt;= leftend &amp;&amp; right &lt;= rightend) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">array</span>[left] &lt; <span class="built_in">array</span>[right]) tmparr[tmp++] = <span class="built_in">array</span>[left++];</span><br><span class="line">        <span class="keyword">else</span> tmparr[tmp++] = <span class="built_in">array</span>[right++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(left &lt;= leftend) tmparr[tmp++] = <span class="built_in">array</span>[left++];</span><br><span class="line">    <span class="keyword">while</span>(right &lt;= rightend) tmparr[tmp++] = <span class="built_in">array</span>[right++];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numofelements; i++, rightend--) &#123;</span><br><span class="line">        <span class="built_in">array</span>[rightend] = tmparr[rightend];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge_pass</span><span class="params">(<span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">int</span> *tmparr, <span class="keyword">int</span> n, <span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, j;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt;= n - <span class="number">2</span> * length; i += (<span class="number">2</span> * length)) &#123;</span><br><span class="line">        merge(<span class="built_in">array</span>, tmparr, i, i + length, i + <span class="number">2</span> * length - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(i + length &lt; n) merge(<span class="built_in">array</span>, tmparr, i, i + length, n - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">for</span>(j = i; j &lt; n; j++) tmparr[j] = <span class="built_in">array</span>[j];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge_sort</span><span class="params">(<span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> *tmparr;</span><br><span class="line">    tmparr = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(n * <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">    <span class="keyword">if</span>(tmparr != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> length = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(length &lt; n) &#123;</span><br><span class="line">            merge_pass(<span class="built_in">array</span>, tmparr, n, length);</span><br><span class="line">            length *= <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(issame(tmparr)) &#123;</span><br><span class="line">                merge_pass(tmparr, <span class="built_in">array</span>, n, length);</span><br><span class="line">                printarray(<span class="built_in">array</span>, n);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            merge_pass(tmparr, <span class="built_in">array</span>, n, length);</span><br><span class="line">            length *= <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(issame(<span class="built_in">array</span>)) &#123;</span><br><span class="line">                merge_pass(<span class="built_in">array</span>, tmparr, n, length);</span><br><span class="line">                printarray(tmparr, n);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">free</span>(tmparr);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;arr[i]);</span><br><span class="line">        tmparr[i] = arr[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;tar[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> round = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(isinsert(tmparr, n, &amp;round)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Insertion Sort\n"</span>);</span><br><span class="line">        insert_pass(tmparr, round);</span><br><span class="line">        printarray(tmparr, n);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) tmparr[i] = arr[i];</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Merge Sort\n"</span>);</span><br><span class="line">        merge_sort(tmparr, n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">samples:</span></span><br><span class="line"><span class="comment">in:</span></span><br><span class="line"><span class="comment">10</span></span><br><span class="line"><span class="comment">3 1 2 8 7 5 9 4 6 0</span></span><br><span class="line"><span class="comment">1 2 3 7 8 5 9 4 6 0</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">Insertion Sort</span></span><br><span class="line"><span class="comment">1 2 3 5 7 8 9 4 6 0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">in:</span></span><br><span class="line"><span class="comment">10</span></span><br><span class="line"><span class="comment">3 1 2 8 7 5 9 4 0 6</span></span><br><span class="line"><span class="comment">1 3 2 8 5 7 4 9 0 6</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">Merge Sort</span></span><br><span class="line"><span class="comment">1 2 3 8 4 5 7 9 0 6</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="09-3-Insertion-or-Heap-Sort"><a href="#09-3-Insertion-or-Heap-Sort" class="headerlink" title="09-3 Insertion or Heap Sort"></a>09-3 Insertion or Heap Sort</h2><p>这个题与上题类型一致，只不过把归并排序换成了堆排序。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 105</span></span><br><span class="line"><span class="keyword">int</span> tar[maxn], arr[maxn], tmparr[maxn], n;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> *p1, <span class="keyword">int</span> *p2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t = *p1;</span><br><span class="line">    *p1 = *p2;</span><br><span class="line">    *p2 = t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">issame</span><span class="params">(<span class="keyword">int</span> *a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i] != tar[i]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printarray</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>, <span class="built_in">array</span>[i]);</span><br><span class="line">        <span class="keyword">if</span>(i &lt; n - <span class="number">1</span>) <span class="built_in">putchar</span>(<span class="string">' '</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert_pass</span><span class="params">(<span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">int</span> pos)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tmp = <span class="built_in">array</span>[pos], j;</span><br><span class="line">    <span class="keyword">for</span>(j = pos; j &gt; <span class="number">0</span> &amp;&amp; tmp &lt; <span class="built_in">array</span>[j - <span class="number">1</span>]; j--) &#123;</span><br><span class="line">        <span class="built_in">array</span>[j] = <span class="built_in">array</span>[j - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">array</span>[j] = tmp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isinsert</span><span class="params">(<span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">int</span> n, <span class="keyword">int</span> *round)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">        insert_pass(<span class="built_in">array</span>, i);</span><br><span class="line">        <span class="keyword">if</span>(issame(<span class="built_in">array</span>)) &#123;</span><br><span class="line">            *round = i + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Percolatedown</span><span class="params">(<span class="keyword">int</span> *heap, <span class="keyword">int</span> pos, <span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> parent, child, tmp = heap[pos];</span><br><span class="line">    <span class="keyword">for</span>(parent = pos; parent * <span class="number">2</span> + <span class="number">1</span> &lt;= size - <span class="number">1</span>; parent = child) &#123;</span><br><span class="line">        child = parent * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(child != size - <span class="number">1</span> &amp;&amp; heap[child] &lt; heap[child + <span class="number">1</span>]) child++;</span><br><span class="line">        <span class="keyword">if</span>(tmp &gt;= heap[child]) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">else</span> heap[parent] = heap[child];</span><br><span class="line">    &#125;</span><br><span class="line">    heap[parent] = tmp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">heap_sort</span><span class="params">(<span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n / <span class="number">2</span> - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        Percolatedown(<span class="built_in">array</span>, i, n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>(i = n - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span>(issame(<span class="built_in">array</span>)) <span class="keyword">break</span>;</span><br><span class="line">        swap(&amp;<span class="built_in">array</span>[<span class="number">0</span>], &amp;<span class="built_in">array</span>[i]);</span><br><span class="line">        Percolatedown(<span class="built_in">array</span>, <span class="number">0</span>, i);</span><br><span class="line">    &#125;</span><br><span class="line">    swap(&amp;<span class="built_in">array</span>[<span class="number">0</span>], &amp;<span class="built_in">array</span>[i]);</span><br><span class="line">    Percolatedown(<span class="built_in">array</span>, <span class="number">0</span>, i);</span><br><span class="line">    printarray(<span class="built_in">array</span>, n);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;arr[i]);</span><br><span class="line">        tmparr[i] = arr[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;tar[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> round = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(isinsert(tmparr, n, &amp;round)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Insertion Sort\n"</span>);</span><br><span class="line">        insert_pass(tmparr, round);</span><br><span class="line">        printarray(tmparr, n);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) tmparr[i] = arr[i];</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Heap Sort\n"</span>);</span><br><span class="line">        heap_sort(tmparr, n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">samples:</span></span><br><span class="line"><span class="comment">in:</span></span><br><span class="line"><span class="comment">10</span></span><br><span class="line"><span class="comment">3 1 2 8 7 5 9 4 6 0</span></span><br><span class="line"><span class="comment">1 2 3 7 8 5 9 4 6 0</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">Insertion Sort</span></span><br><span class="line"><span class="comment">1 2 3 5 7 8 9 4 6 0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">in:</span></span><br><span class="line"><span class="comment">10</span></span><br><span class="line"><span class="comment">3 1 2 8 7 5 9 4 6 0</span></span><br><span class="line"><span class="comment">6 4 5 1 0 3 2 7 8 9</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">Heap Sort</span></span><br><span class="line"><span class="comment">5 4 3 1 0 2 6 7 8 9</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Buy me a coffee ? :)</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="bachzart WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.png" alt="bachzart Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>bachzart</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    
+    <a href="http://bachzart.github.io/2020/09/02/ZJU-DS-09-排序（上）/" title="ZJU_DS_09_排序（上）">http://bachzart.github.io/2020/09/02/ZJU-DS-09-排序（上）/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ZJU-DS/" rel="tag"><i class="fa fa-tag"></i> ZJU_DS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/08/31/ZJU-DS-08-图（下）/" rel="next" title="ZJU_DS_08-图（下）">
+                <i class="fa fa-chevron-left"></i> ZJU_DS_08-图（下）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/09/05/ZJU-DS-10-排序（下）/" rel="prev" title="ZJU_DS_10-排序（下）">
+                ZJU_DS_10-排序（下） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="bachzart">
+            
+              <p class="site-author-name" itemprop="name">bachzart</p>
+              <p class="site-description motion-element" itemprop="description">I've been in my mind, it's such a fine line.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">163</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">49</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/bachzart" title="GitHub &rarr; https://github.com/bachzart" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:whistlesilp@gmail.com" title="E-Mail &rarr; mailto:whistlesilp@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/about/" title="/about/">About This Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/Book-List/" title="/Book-List/">Book List</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sudoku.name/index.php?ln=cn&ref=44355" title="https://www.sudoku.name/index.php?ln=cn&ref=44355" rel="noopener" target="_blank">Soduku Game</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://2048game.com/" title="https://2048game.com/" rel="noopener" target="_blank">2048 Game</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简单排序"><span class="nav-number">1.</span> <span class="nav-text">简单排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#冒泡排序"><span class="nav-number">1.1.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入排序"><span class="nav-number">1.2.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间复杂度下界"><span class="nav-number">1.3.</span> <span class="nav-text">时间复杂度下界</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#希尔排序"><span class="nav-number">2.</span> <span class="nav-text">希尔排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#选择排序"><span class="nav-number">3.</span> <span class="nav-text">选择排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单选择排序"><span class="nav-number">3.1.</span> <span class="nav-text">简单选择排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆排序"><span class="nav-number">3.2.</span> <span class="nav-text">堆排序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#归并排序"><span class="nav-number">4.</span> <span class="nav-text">归并排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#递归"><span class="nav-number">4.1.</span> <span class="nav-text">递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非递归"><span class="nav-number">4.2.</span> <span class="nav-text">非递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">4.3.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Homework"><span class="nav-number">5.</span> <span class="nav-text">Homework</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#09-1-排序"><span class="nav-number">5.1.</span> <span class="nav-text">09-1 排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#冒泡排序-1"><span class="nav-number">5.1.1.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入排序-1"><span class="nav-number">5.1.2.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#希尔排序-1"><span class="nav-number">5.1.3.</span> <span class="nav-text">希尔排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆排序-1"><span class="nav-number">5.1.4.</span> <span class="nav-text">堆排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#归并排序-1"><span class="nav-number">5.1.5.</span> <span class="nav-text">归并排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#非递归-1"><span class="nav-number">5.1.5.1.</span> <span class="nav-text">非递归</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#递归-1"><span class="nav-number">5.1.5.2.</span> <span class="nav-text">递归</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#09-2-Insert-or-Merge"><span class="nav-number">5.2.</span> <span class="nav-text">09-2 Insert or Merge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#09-3-Insertion-or-Heap-Sort"><span class="nav-number">5.3.</span> <span class="nav-text">09-3 Insertion or Heap Sort</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bachzart</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">1.4m</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total">188:51</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function(i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function(e) {
+        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('Copied');
+          else $(this).text('Copy failed');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function(e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function() {
+          $b.text('Copy');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+</body>
+</html>

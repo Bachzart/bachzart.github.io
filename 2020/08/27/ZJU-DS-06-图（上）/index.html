@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/acoustic_guitar_128px.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/acoustic_guitar_32px.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/acoustic_guitar_16px.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/uploads/acoustic_guitar.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="什么是图？如何表示和实现？图又有那些基本的性质？常见的应用有哪些？">
+<meta name="keywords" content="ZJU_DS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ZJU_DS_06-图（上）">
+<meta property="og:url" content="http://bachzart.github.io/2020/08/27/ZJU-DS-06-图（上）/index.html">
+<meta property="og:site_name" content="bachzart&#39;s Blog">
+<meta property="og:description" content="什么是图？如何表示和实现？图又有那些基本的性质？常见的应用有哪些？">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-09-20T13:30:41.155Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ZJU_DS_06-图（上）">
+<meta name="twitter:description" content="什么是图？如何表示和实现？图又有那些基本的性质？常见的应用有哪些？">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="bachzart's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://bachzart.github.io/2020/08/27/ZJU-DS-06-图（上）/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>ZJU_DS_06-图（上） | bachzart's Blog</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3eb545f7f54637f67ed532005e0261f7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">bachzart's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">163</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">28</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">52</span></a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/bachzart" class="github-corner" title="Follow me on GitHub :)" aria-label="Follow me on GitHub :)" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2020/08/27/ZJU-DS-06-图（上）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="I've been in my mind, it's such a fine line.">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">ZJU_DS_06-图（上）
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-08-27 20:23:26" itemprop="dateCreated datePublished" datetime="2020-08-27T20:23:26+08:00">2020-08-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-09-20 21:30:41" itemprop="dateModified" datetime="2020-09-20T21:30:41+08:00">2020-09-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/Data-Structures-and-Algorithms/" itemprop="url" rel="index"><span itemprop="name">Data Structures and Algorithms</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="Symbols count in article">16k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="Reading time">2:15</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>什么是图？如何表示和实现？图又有那些基本的性质？常见的应用有哪些？</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="什么是图"><a href="#什么是图" class="headerlink" title="什么是图"></a>什么是图</h1><p>图常用来建立多对多的关系，如社交网络等。那么用什么概念来说明这些关系呢？答案就是“顶点”跟“边”。<br>图的构成只有两种：顶点和边，二者即是用来表示关系的概念。</p>
+<h2 id="顶点"><a href="#顶点" class="headerlink" title="顶点"></a>顶点</h2><p>一个图内肯定不止一个顶点（Vertex），所以一般用 Ｖ 来表示顶点集合</p>
+<h2 id="边"><a href="#边" class="headerlink" title="边"></a>边</h2><p>同样，一个图内肯定不止一条边（Edge），所以一般用 E 来表示边的集合。需要注意的是，图分为有向图与无向图，所以边在这两种图中分别称作有向边（单行线，如$&lt;v_1, v_2&gt;$）与无向边（$(v1, v2)$）。 </p>
+<p>另外，在图内是不考虑重边和自回路的。</p>
+<h2 id="基本术语"><a href="#基本术语" class="headerlink" title="基本术语"></a>基本术语</h2><p>与图相关的基本术语有很多，碰见一个记录一个：</p>
+<ol>
+<li>无向图，图内所有的边都是无向边，对应的，若图内所有的边都是有向边，那这个图就是有向图</li>
+<li>每一条边上赋予权值后，那么称这个图叫做“网络”，这个概念与互联网络是不一样的</li>
+<li>完全图，图内所有顶点，任意两个顶点之间都有边</li>
+<li>连通，如果从 V 到 W 存在一条（无向）路径，则称 V 和 W 是连通的</li>
+<li>路径，V 到 W 的路径是一系列顶点${V, V_1, V_2, \dots, V_n, W}$的集合，其中任一对相邻顶点间都有图中的边。路径的长度是路径种的边数（如果带权，则是所有边的权重和）。如果 V 到 W 之间的所有顶点都不同，则称简单路径</li>
+<li>回路，起点等于终点的路径</li>
+<li>连通图，图中任意两顶点均连通</li>
+<li>连通分量，无向图的极大连通子图，其中“极大”包含下面两个意思：<ul>
+<li>极大顶点数：再加一个顶点就不连通了</li>
+<li>极大边数：包含子图种所有顶点相连的所有边</li>
+</ul>
+</li>
+<li>有向图中顶点 V 和 W 之间存在双向路径，则称 V 和 W 是强连通的</li>
+<li>强连通图，有向图中任意两顶点均强连通</li>
+<li>强连通分量，有向图的极大强连通子图</li>
+<li>弱连通图，如果一个非强连通图，将其中所有的有向边改为无向边，得到的图为连通图，这样的图称为弱连通图</li>
+</ol>
+<h1 id="图的抽象数据类型描述"><a href="#图的抽象数据类型描述" class="headerlink" title="图的抽象数据类型描述"></a>图的抽象数据类型描述</h1><p>类型名称：图（Graph）<br>数据对象集：$G(V, E)$由一个非空的有限顶点集$V$和一个有限边集合$E$组成。<br>操作集：最大堆$H ∈ MaxHeap$，元素$item ∈ ElementType$，主要操作有：</p>
+<ol>
+<li>Graph Create()，建立并返回空图</li>
+<li>Graph InsertVertex(Graph G, Vertex v)，将 v 插入 G</li>
+<li>Graph InsertEdge(Graph G, Edge e)，将 e 插入 G</li>
+<li>void DFS(Graph G, Vertex v)，从顶点 v 出发深度优先遍历图 G</li>
+<li>void BFS(Graph G, Vertex v)，从顶点 v 出发宽度优先遍历图 G</li>
+<li>void ShortestPath(Graph G, Vertex v, int Dist[])，计算图 G 中顶点 v 到任意其他顶点的最短距离</li>
+<li>void MST(Graph G)，计算图 G 的最小生成树</li>
+</ol>
+<h1 id="图的表示"><a href="#图的表示" class="headerlink" title="图的表示"></a>图的表示</h1><p>图的表示有多种方法，按照所要解决的问题的性质，用符合问题情况的表示方法来表示图，在解决问题是可以事半功倍，<br>下面只介绍两种常见的表示方法。</p>
+<h2 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h2><p>邻接矩阵本质上就是一个二维数组，用数组下标$0-N-1$代表$N$个顶点的编号，数组的元素的值表示两个顶点之间是否有边（若是网络，那么直接将数组元素的值修改为对应的权值即可），即有：</p>
+<p><center><br>$G[i][j] =<br>\begin{cases}<br>1&amp; 若&lt;v_i, v_j&gt;是G中的边\\<br>0&amp; 否则<br>\end{cases}<br>$<br></center><br>值得注意的是，无向图的邻接矩阵一定是对称的。也就是说，无向图的邻接矩阵只需要存储一半即可。要解决这个问题，需要用到矩阵的压缩存储知识。</p>
+<p>使用邻接矩阵表示图的优点有以下几点：</p>
+<ol>
+<li>直观、简单、便于理解</li>
+<li>方便检查任意一对顶点间是否存在边</li>
+<li>方便找任一顶点的所有“邻接点”（有边直接相连的顶点）</li>
+<li>方便计算任一顶点的“度”（这里的度的概念与树是类似的，从该顶点发出的边数为“出度”，指向该点的边数为“入度”）<ul>
+<li>无向图：对应行（或列）非 0 元素的个数</li>
+<li>有向图：对应行非 0 元素的个数是“出度”，对应列非 0 元素的个数是“入度”</li>
+</ul>
+</li>
+</ol>
+<p>邻接矩阵的缺点如下：</p>
+<ol>
+<li>存储稀疏图（顶点多边很少）时有大量无效元素，极大浪费空间，但存储稠密图（特别是完全图）很合算</li>
+<li>统计稀疏图中的边数效率很低</li>
+</ol>
+<h2 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h2><p>由于邻接矩阵表示稀疏图浪费空间，为了解决这个问题对应出现的就是邻接表。</p>
+<p>在邻接表中，$G[N]$为指针数组，对应矩阵每一行一个链表，只存非 0 元素，注意邻接表的表示并不唯一。</p>
+<p>邻接表的特点：</p>
+<ol>
+<li>方便找任一顶点的所有“邻接点”</li>
+<li>节约稀疏图的空间，需要 N 个头指针 和 2E 个结点（每个结点至少 2 个域）</li>
+<li>方便计算无向图任一顶点的度和有向图任一顶点的出度，但计算有向图任一顶点的入度比较麻烦，需要构造“逆邻接表”（存储指向自己的边）才能方便的计算入度</li>
+<li>不便于检查任意一对顶点是否存在边</li>
+</ol>
+<h1 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h1><p>图里面遍历的概念与树是一致的，图的基本遍历方法有两种：深度优先搜索（Depth First Search，DFS）和广度优先搜索（Breath First Search，BFS）。根据应用场景的不同，两种遍历算法在不同场景下解决问题的难易程度也不一样。</p>
+<h2 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h2><p>DFS 算是树的先序遍历的推广，其伪码算法为：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(Vertex V)</span> </span>&#123;</span><br><span class="line">    visited[V] = <span class="literal">true</span>; <span class="comment">// 此结点标记为已访问</span></span><br><span class="line">    <span class="keyword">for</span>( V 的每个邻接点 W) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!visited[W]) DFS(W);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>根据图的存储结构的不同，DFS 的时间复杂度也不同：</p>
+<ul>
+<li>使用邻接表存储，时间复杂度为：$O(N + E)$</li>
+<li>使用邻接矩阵存储，时间复杂度为：$O(N^2)$</li>
+</ul>
+<h2 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h2><p>BFS 算是树的层序遍历的推广，其伪码算法为：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(Vertex V)</span> </span>&#123;</span><br><span class="line">    visited[V] = <span class="literal">true</span>;</span><br><span class="line">    Enqueu(V, Q);</span><br><span class="line">    <span class="keyword">while</span>(!Isempty(Q)) &#123;</span><br><span class="line">        V = Dequeue(Q);</span><br><span class="line">        <span class="keyword">for</span>(V 的每个邻接点 W) &#123;</span><br><span class="line">            <span class="keyword">if</span>(!visited[W]) &#123;</span><br><span class="line">                visited[W] = <span class="literal">true</span>;</span><br><span class="line">                Enqueue(W, Q);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>同样，其时间复杂度也分两种情况：</p>
+<ul>
+<li>使用邻接表存储，时间复杂度为：$O(N+E)$</li>
+<li>使用邻接矩阵存储，时间复杂度为：$O(N^2)$</li>
+</ul>
+<h1 id="Homework"><a href="#Homework" class="headerlink" title="Homework"></a>Homework</h1><h2 id="06-1-列出连通集"><a href="#06-1-列出连通集" class="headerlink" title="06-1 列出连通集"></a>06-1 列出连通集</h2><p>题目意思很明确，给定一个无向图，分别用 DFS 和 BFS列出其所有的连通集（其实就是连通分量，忘记是啥了，可以重新看下上面的概念）即可。之前姥姥在课上讲过，按照 DFS 的遍历过程，一个最外层的 DFS 的调用，就相当于访问了这个图的一个连通集。那么使用 DFS 在访问每个连通集是顺便输出当前所处连通集的所有元素即可，同理，BFS 也是一样的。</p>
+<p>由于姥姥讲了图的两种存储方法，继续按部就班的按照姥姥给定的代码接着往下写：</p>
+<h3 id="邻接表-1"><a href="#邻接表-1" class="headerlink" title="邻接表"></a>邻接表</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* notes: The adjacency list is built by head pointer, so the traversal sequences is not same as sample output.</span></span><br><span class="line"><span class="comment">Actually, the adjacency list is not unique, so the traversal sequences are also not unique.</span></span><br><span class="line"><span class="comment">You can use the sort function to get the same result. </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxVertexNum 100</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INFINITY 65535</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> Vertex;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> WeightType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> DataType;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ENode</span>* <span class="title">PtrToENode</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ENode</span>&#123;</span></span><br><span class="line">    Vertex V1, V2;</span><br><span class="line">    WeightType Weight;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> PtrToENode Edge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">AdjVNode</span>* <span class="title">PtrToAdjVNode</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">AdjVNode</span>&#123;</span></span><br><span class="line">    Vertex AdjV;</span><br><span class="line">    WeightType Weight;</span><br><span class="line">    PtrToAdjVNode Next;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Vnode</span>&#123;</span></span><br><span class="line">    PtrToAdjVNode FirstEdge;</span><br><span class="line">    DataType Data;</span><br><span class="line">&#125; AdjList[MaxVertexNum];</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">GNode</span>* <span class="title">PtrToGNode</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> Nv;</span><br><span class="line">    <span class="keyword">int</span> Ne;</span><br><span class="line">    AdjList G; </span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> PtrToGNode LGraph;</span><br><span class="line"><span class="function">LGraph <span class="title">CreateGraph</span><span class="params">(<span class="keyword">int</span> VertexNum)</span> </span>&#123;</span><br><span class="line">    Vertex V;</span><br><span class="line">    LGraph Graph;</span><br><span class="line">    Graph = (LGraph)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct GNode));</span><br><span class="line">    Graph-&gt;Nv = VertexNum;</span><br><span class="line">    Graph-&gt;Ne = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(V = <span class="number">0</span>; V &lt; Graph-&gt;Nv; V++) &#123;</span><br><span class="line">        Graph-&gt;G[V].FirstEdge = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Graph;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertEdge</span><span class="params">(LGraph Graph, Edge E)</span> </span>&#123;</span><br><span class="line">    PtrToAdjVNode NewNode;</span><br><span class="line">    NewNode = (PtrToAdjVNode)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct AdjVNode));</span><br><span class="line">    NewNode-&gt;AdjV = E-&gt;V2;</span><br><span class="line">    NewNode-&gt;Weight = E-&gt;Weight;</span><br><span class="line">    NewNode-&gt;Next = Graph-&gt;G[E-&gt;V1].FirstEdge;</span><br><span class="line">    Graph-&gt;G[E-&gt;V1].FirstEdge = NewNode;</span><br><span class="line">    </span><br><span class="line">    NewNode = (PtrToAdjVNode)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct AdjVNode));</span><br><span class="line">    NewNode-&gt;AdjV = E-&gt;V1;</span><br><span class="line">    NewNode-&gt;Weight = E-&gt;Weight;</span><br><span class="line">    NewNode-&gt;Next = Graph-&gt;G[E-&gt;V2].FirstEdge;</span><br><span class="line">    Graph-&gt;G[E-&gt;V2].FirstEdge = NewNode;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">LGraph <span class="title">BuildGraph</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    LGraph Graph;</span><br><span class="line">    Edge E;</span><br><span class="line">    Vertex V;</span><br><span class="line">    <span class="keyword">int</span> Nv, i;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;Nv);</span><br><span class="line">    Graph = CreateGraph(Nv);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;Graph-&gt;Ne);</span><br><span class="line">    <span class="keyword">if</span>(Graph-&gt;Ne != <span class="number">0</span>) &#123;</span><br><span class="line">        E = (Edge)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct ENode));</span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; Graph-&gt;Ne; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;E-&gt;V1, &amp;E-&gt;V2);</span><br><span class="line">            InsertEdge(Graph, E);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Graph;</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Visit</span><span class="params">(Vertex V)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d "</span>, V);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(LGraph Graph, Vertex S, <span class="keyword">void</span> (*Visit)(Vertex), <span class="keyword">int</span> Visited[])</span> </span>&#123;</span><br><span class="line">    PtrToAdjVNode W;</span><br><span class="line">    Visit(S);</span><br><span class="line">    Visited[S] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span>(W = Graph-&gt;G[S].FirstEdge; W; W = W-&gt;Next) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!Visited[W-&gt;AdjV]) DFS(Graph, W-&gt;AdjV, Visit, Visited);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(LGraph Graph, Vertex S, <span class="keyword">void</span> (*Visit)(Vertex), <span class="keyword">int</span> Visited[])</span> </span>&#123;</span><br><span class="line">    Vertex Queue[MaxVertexNum], front = <span class="number">-1</span>, rear = <span class="number">-1</span>;</span><br><span class="line">    Vertex V;</span><br><span class="line">    Visit(S);</span><br><span class="line">    Visited[S] = <span class="literal">true</span>;</span><br><span class="line">    Queue[++rear] = S;</span><br><span class="line">    <span class="keyword">while</span>(front &lt; rear) &#123;</span><br><span class="line">        V = Queue[++front];</span><br><span class="line">        PtrToAdjVNode W;</span><br><span class="line">        <span class="keyword">for</span>(W = Graph-&gt;G[V].FirstEdge; W; W = W-&gt;Next) &#123;</span><br><span class="line">            <span class="keyword">if</span>(!Visited[W-&gt;AdjV]) &#123;</span><br><span class="line">                Visit(W-&gt;AdjV);</span><br><span class="line">                Visited[W-&gt;AdjV] = <span class="literal">true</span>;</span><br><span class="line">                Queue[++rear] = W-&gt;AdjV;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ListComponents</span><span class="params">(LGraph Graph)</span> </span>&#123;</span><br><span class="line">    Vertex S;</span><br><span class="line">    <span class="keyword">int</span> Visited[MaxVertexNum] = &#123;<span class="literal">false</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span>(S = <span class="number">0</span>; S &lt; Graph-&gt;Nv; S++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!Visited[S]) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"&#123; "</span>);</span><br><span class="line">            DFS(Graph, S, Visit, Visited);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"&#125;\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(Visited, <span class="number">0</span>, <span class="keyword">sizeof</span>(Visited));</span><br><span class="line">    <span class="keyword">for</span>(S = <span class="number">0</span>; S &lt; Graph-&gt;Nv; S++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!Visited[S]) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"&#123; "</span>);</span><br><span class="line">            BFS(Graph, S, Visit, Visited);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"&#125;\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    LGraph G = BuildGraph();</span><br><span class="line">    ListComponents(G);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">samples:</span></span><br><span class="line"><span class="comment">in:</span></span><br><span class="line"><span class="comment">8 6</span></span><br><span class="line"><span class="comment">0 7</span></span><br><span class="line"><span class="comment">0 1</span></span><br><span class="line"><span class="comment">2 0</span></span><br><span class="line"><span class="comment">4 1</span></span><br><span class="line"><span class="comment">2 4</span></span><br><span class="line"><span class="comment">3 5</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">&#123; 0 2 4 1 7 &#125;</span></span><br><span class="line"><span class="comment">&#123; 3 5 &#125;</span></span><br><span class="line"><span class="comment">&#123; 6 &#125;</span></span><br><span class="line"><span class="comment">&#123; 0 2 1 7 4 &#125;</span></span><br><span class="line"><span class="comment">&#123; 3 5 &#125;</span></span><br><span class="line"><span class="comment">&#123; 6 &#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="邻接矩阵-1"><a href="#邻接矩阵-1" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxVertexNum 100</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INFINITY 65535</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> Vertex;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> WeightType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> DataType;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ENode</span>* <span class="title">PtrToENode</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ENode</span> &#123;</span></span><br><span class="line">    Vertex V1, V2;</span><br><span class="line">    WeightType Weight;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> PtrToENode Edge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">GNode</span>* <span class="title">PtrToGNode</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GNode</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> Nv;</span><br><span class="line">    <span class="keyword">int</span> Ne;</span><br><span class="line">    WeightType G[MaxVertexNum][MaxVertexNum];</span><br><span class="line">    DataType Data[MaxVertexNum];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> PtrToGNode MGraph;</span><br><span class="line"></span><br><span class="line"><span class="function">MGraph <span class="title">CreateGraph</span><span class="params">(<span class="keyword">int</span> VertexNum)</span> </span>&#123;</span><br><span class="line">    Vertex V, W;</span><br><span class="line">    MGraph Graph;</span><br><span class="line">    Graph = (MGraph)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct GNode));</span><br><span class="line">    Graph-&gt;Nv = VertexNum;</span><br><span class="line">    Graph-&gt;Ne = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(V = <span class="number">0</span>; V &lt; Graph-&gt;Nv; V++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(W = <span class="number">0</span>; W &lt; Graph-&gt;Nv; W++) &#123;</span><br><span class="line">            Graph-&gt;G[V][W] = INFINITY;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Graph;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertEdge</span><span class="params">(MGraph Graph, Edge E)</span> </span>&#123;</span><br><span class="line">    Graph-&gt;G[E-&gt;V1][E-&gt;V2] = <span class="number">1</span>;</span><br><span class="line">    Graph-&gt;G[E-&gt;V2][E-&gt;V1] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">MGraph <span class="title">BuildGraph</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    MGraph Graph;</span><br><span class="line">    Edge E;</span><br><span class="line">    Vertex V;</span><br><span class="line">    <span class="keyword">int</span> Nv, i;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;Nv);</span><br><span class="line">    Graph = CreateGraph(Nv);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;Graph-&gt;Ne);</span><br><span class="line">    <span class="keyword">if</span>(Graph-&gt;Ne != <span class="number">0</span>) &#123;</span><br><span class="line">        E = (Edge)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct ENode));</span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; Graph-&gt;Ne; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;E-&gt;V1, &amp;E-&gt;V2);</span><br><span class="line">            InsertEdge(Graph, E);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Graph;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">IsEdge</span><span class="params">(MGraph Graph, Vertex V, Vertex W)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Graph-&gt;G[V][W] &lt; INFINITY ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Visit</span><span class="params">(Vertex V)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d "</span>, V);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(MGraph Graph, Vertex V, <span class="keyword">void</span> (*Visit)(Vertex), <span class="keyword">int</span> Visited[])</span> </span>&#123;</span><br><span class="line">    Visit(V);</span><br><span class="line">    Visited[V] = <span class="literal">true</span>;</span><br><span class="line">    Vertex W;</span><br><span class="line">    <span class="keyword">for</span>(W = <span class="number">0</span>; W &lt; Graph-&gt;Nv; W++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!Visited[W] &amp;&amp; IsEdge(Graph, V, W)) DFS(Graph, W, Visit, Visited);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(MGraph Graph, Vertex S, <span class="keyword">void</span> (*Visit)(Vertex), <span class="keyword">int</span> Visited[])</span> </span>&#123;</span><br><span class="line">    Vertex Queue[MaxVertexNum], front = <span class="number">-1</span>, rear = <span class="number">-1</span>;	<span class="comment">// use a simple queue</span></span><br><span class="line">    Vertex V, W;</span><br><span class="line">    Visit(S);</span><br><span class="line">    Visited[S] = <span class="literal">true</span>;</span><br><span class="line">    Queue[++rear] = S;	<span class="comment">//enqueue</span></span><br><span class="line">    <span class="keyword">while</span>(front &lt; rear) &#123;</span><br><span class="line">        V = Queue[++front];	<span class="comment">//dequeue</span></span><br><span class="line">        <span class="keyword">for</span>(W = <span class="number">0</span>; W &lt; Graph-&gt;Nv; W++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(!Visited[W] &amp;&amp; IsEdge(Graph, V, W)) &#123;</span><br><span class="line">                Visit(W);</span><br><span class="line">                Visited[W] = <span class="literal">true</span>;</span><br><span class="line">                Queue[++rear] = W;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ListComponents</span><span class="params">(MGraph Graph)</span> </span>&#123;</span><br><span class="line">    Vertex S;</span><br><span class="line">    <span class="keyword">int</span> Visited[MaxVertexNum] = &#123;<span class="literal">false</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span>(S = <span class="number">0</span>; S &lt; Graph-&gt;Nv; S++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!Visited[S]) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"&#123; "</span>);</span><br><span class="line">            DFS(Graph, S, Visit, Visited);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"&#125;\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(Visited, <span class="number">0</span>, <span class="keyword">sizeof</span>(Visited));</span><br><span class="line">    <span class="keyword">for</span>(S = <span class="number">0</span>; S &lt; Graph-&gt;Nv; S++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!Visited[S]) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"&#123; "</span>);</span><br><span class="line">            BFS(Graph, S, Visit, Visited);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"&#125;\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    MGraph G = BuildGraph();</span><br><span class="line">    ListComponents(G);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* simple method: use 2-dimensional array represent adjcent matrix</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;queue&gt;</span></span><br><span class="line"><span class="comment">#include &lt;cstring&gt;</span></span><br><span class="line"><span class="comment">using namespace std;</span></span><br><span class="line"><span class="comment">const int maxn = 10 + 5;</span></span><br><span class="line"><span class="comment">const int inf = 0x3fffffff;</span></span><br><span class="line"><span class="comment">int G[maxn][maxn], nv, ne;</span></span><br><span class="line"><span class="comment">bool visited[maxn] = &#123;false&#125;;</span></span><br><span class="line"><span class="comment">void init() &#123;</span></span><br><span class="line"><span class="comment">	for(int i = 0; i &lt; maxn; i++) &#123;</span></span><br><span class="line"><span class="comment">		for(int j = 0; j &lt; maxn; j++) &#123;</span></span><br><span class="line"><span class="comment">			G[i][j] = inf;</span></span><br><span class="line"><span class="comment">		&#125;</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">void dfs(int node) &#123;</span></span><br><span class="line"><span class="comment">	visited[node] = true;</span></span><br><span class="line"><span class="comment">	cout &lt;&lt; node &lt;&lt; ' ';</span></span><br><span class="line"><span class="comment">	for(int i = 0; i &lt; nv; i++) &#123;</span></span><br><span class="line"><span class="comment">		if(!visited[i] &amp;&amp; G[node][i] != inf) dfs(i);</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">void bfs(int node) &#123;</span></span><br><span class="line"><span class="comment">	queue&lt;int&gt; q;</span></span><br><span class="line"><span class="comment">	cout &lt;&lt; node &lt;&lt; ' ';</span></span><br><span class="line"><span class="comment">	visited[node] = true;</span></span><br><span class="line"><span class="comment">	q.push(node);</span></span><br><span class="line"><span class="comment">	while(!q.empty()) &#123;</span></span><br><span class="line"><span class="comment">		int front = q.front();</span></span><br><span class="line"><span class="comment">		q.pop();</span></span><br><span class="line"><span class="comment">		for(int i = 0; i &lt; nv; i++) &#123;</span></span><br><span class="line"><span class="comment">			if(!visited[i] &amp;&amp; G[front][i] != inf) &#123;</span></span><br><span class="line"><span class="comment">				cout &lt;&lt; i &lt;&lt; ' ';</span></span><br><span class="line"><span class="comment">				visited[i] = true;</span></span><br><span class="line"><span class="comment">				q.push(i);</span></span><br><span class="line"><span class="comment">			&#125;</span></span><br><span class="line"><span class="comment">		&#125;</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">void listcomponents() &#123;</span></span><br><span class="line"><span class="comment">	for(int i = 0; i &lt; nv; i++) &#123;</span></span><br><span class="line"><span class="comment">		if(!visited[i]) &#123;</span></span><br><span class="line"><span class="comment">			cout &lt;&lt; "&#123; ";</span></span><br><span class="line"><span class="comment">			dfs(i);</span></span><br><span class="line"><span class="comment">			cout &lt;&lt; "&#125;\n";</span></span><br><span class="line"><span class="comment">		&#125;</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">	memset(visited, 0, sizeof(visited));</span></span><br><span class="line"><span class="comment">	for(int i = 0; i &lt; nv; i++) &#123;</span></span><br><span class="line"><span class="comment">		if(!visited[i]) &#123;</span></span><br><span class="line"><span class="comment">			cout &lt;&lt; "&#123; ";</span></span><br><span class="line"><span class="comment">			bfs(i);</span></span><br><span class="line"><span class="comment">			cout &lt;&lt; "&#125;\n";</span></span><br><span class="line"><span class="comment">		&#125;</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">int main() &#123;</span></span><br><span class="line"><span class="comment">	init();</span></span><br><span class="line"><span class="comment">	cin &gt;&gt; nv &gt;&gt; ne;</span></span><br><span class="line"><span class="comment">	for(int i = 0; i &lt; ne; i++) &#123;</span></span><br><span class="line"><span class="comment">		int v1, v2;</span></span><br><span class="line"><span class="comment">		cin &gt;&gt; v1 &gt;&gt; v2;</span></span><br><span class="line"><span class="comment">		G[v1][v2] = G[v2][v1] = 1;</span></span><br><span class="line"><span class="comment">	&#125;</span></span><br><span class="line"><span class="comment">	listcomponents();</span></span><br><span class="line"><span class="comment">	return 0;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">some samples:</span></span><br><span class="line"><span class="comment">in:</span></span><br><span class="line"><span class="comment">8 6</span></span><br><span class="line"><span class="comment">0 7</span></span><br><span class="line"><span class="comment">0 1</span></span><br><span class="line"><span class="comment">2 0</span></span><br><span class="line"><span class="comment">4 1</span></span><br><span class="line"><span class="comment">2 4</span></span><br><span class="line"><span class="comment">3 5</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">&#123; 0 1 4 2 7 &#125;</span></span><br><span class="line"><span class="comment">&#123; 3 5 &#125;</span></span><br><span class="line"><span class="comment">&#123; 6 &#125;</span></span><br><span class="line"><span class="comment">&#123; 0 1 2 7 4 &#125;</span></span><br><span class="line"><span class="comment">&#123; 3 5 &#125;</span></span><br><span class="line"><span class="comment">&#123; 6 &#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="06-2-Saving-James-Bond-Easy-Version"><a href="#06-2-Saving-James-Bond-Easy-Version" class="headerlink" title="06-2 Saving James Bond - Easy Version"></a>06-2 Saving James Bond - Easy Version</h2><p>这道题目是难度降低后的简单版，按照姥姥给定的思路来写即可，这里使用 C++ 的部分功能来写可能会比较方便（用纯 C 也可以胜任，可能会稍微麻烦），如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100</span> + <span class="number">5</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">    <span class="keyword">double</span> x, y;</span><br><span class="line">&#125; coords[maxn];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">double</span> d;</span><br><span class="line"><span class="keyword">bool</span> visited[maxn] = &#123;<span class="literal">false</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">firstjump</span><span class="params">(<span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sqrt</span>(<span class="built_in">pow</span>(coords[v].x, <span class="number">2</span>) + <span class="built_in">pow</span>(coords[v].y, <span class="number">2</span>)) - <span class="number">7.5</span> &lt;= d;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">jump</span><span class="params">(<span class="keyword">int</span> v, <span class="keyword">int</span> w)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sqrt</span>(<span class="built_in">pow</span>(coords[v].x - coords[w].x, <span class="number">2</span>) + <span class="built_in">pow</span>(coords[v].y - coords[w].y, <span class="number">2</span>)) &lt;= d;</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">issafe</span><span class="params">(<span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">fabs</span>(<span class="built_in">fabs</span>(coords[v].x) - <span class="number">50</span>) &lt;= d || <span class="built_in">fabs</span>(<span class="built_in">fabs</span>(coords[v].y) - <span class="number">50</span>) &lt;= d;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    visited[v] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(issafe(v)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> w = <span class="number">0</span>; w &lt; n; w++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(!visited[w] &amp;&amp; jump(v, w)) &#123;</span><br><span class="line">                flag = DFS(w);</span><br><span class="line">                <span class="keyword">if</span>(flag) <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> flag;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">save007</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> v = <span class="number">0</span>; v &lt; n; v++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!visited[v] &amp;&amp; firstjump(v)) &#123;</span><br><span class="line">            flag = DFS(v);</span><br><span class="line">            <span class="keyword">if</span>(flag) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    flag ? <span class="built_in">cout</span> &lt;&lt; <span class="string">"Yes"</span> : <span class="built_in">cout</span> &lt;&lt; <span class="string">"No"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; d;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> v = <span class="number">0</span>; v &lt; n; v++) &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; coords[v].x &gt;&gt; coords[v].y;</span><br><span class="line">    &#125;</span><br><span class="line">    save007();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">sample:</span></span><br><span class="line"><span class="comment">in:</span></span><br><span class="line"><span class="comment">25 -15</span></span><br><span class="line"><span class="comment">-25 28</span></span><br><span class="line"><span class="comment">8 49</span></span><br><span class="line"><span class="comment">29 15</span></span><br><span class="line"><span class="comment">-35 -2</span></span><br><span class="line"><span class="comment">5 28</span></span><br><span class="line"><span class="comment">27 -29</span></span><br><span class="line"><span class="comment">-8 -28</span></span><br><span class="line"><span class="comment">-20 -35</span></span><br><span class="line"><span class="comment">-25 -20</span></span><br><span class="line"><span class="comment">-13 29</span></span><br><span class="line"><span class="comment">-30 15</span></span><br><span class="line"><span class="comment">-35 40</span></span><br><span class="line"><span class="comment">12 12</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">Yes</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">in:</span></span><br><span class="line"><span class="comment">4 13</span></span><br><span class="line"><span class="comment">-12 12</span></span><br><span class="line"><span class="comment">12 12</span></span><br><span class="line"><span class="comment">-12 -12</span></span><br><span class="line"><span class="comment">12 -12</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">No</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="06-3-六度空间"><a href="#06-3-六度空间" class="headerlink" title="06-3 六度空间"></a>06-3 六度空间</h2><p>由于六度空间理论姥姥已经介绍过了，所以题目意思理解起来比较容易，按照姥姥的讲解，只需要稍稍修改 BFS 算法就可以了，但注意最后边界条件的设置要好好理解。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 1005</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf = <span class="number">0x3fffffff</span>;</span><br><span class="line"><span class="keyword">int</span> G[maxn][maxn], nv, ne;</span><br><span class="line"><span class="keyword">bool</span> visited[maxn];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; maxn; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; maxn; j++) &#123;</span><br><span class="line">            G[i][j] = inf;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">BFS</span><span class="params">(<span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(visited, <span class="literal">false</span>, <span class="keyword">sizeof</span>(visited));</span><br><span class="line">    visited[v] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">int</span> Queue[maxn], front = <span class="number">-1</span>, rear = <span class="number">-1</span>;</span><br><span class="line">    Queue[++rear] = v;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">1</span>, level = <span class="number">0</span>, last = v, tail;</span><br><span class="line">    <span class="keyword">while</span>(front &lt; rear) &#123;</span><br><span class="line">        <span class="keyword">int</span> first = Queue[++front];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> w = <span class="number">1</span>; w &lt;= nv; w++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(!visited[w] &amp;&amp; G[first][w] != inf) &#123;</span><br><span class="line">                Queue[++rear] = w;</span><br><span class="line">                visited[w] = <span class="literal">true</span>;</span><br><span class="line">                tail = w;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(first == last) &#123;</span><br><span class="line">            level++;</span><br><span class="line">            last = tail;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(level == <span class="number">6</span>) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sds</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= nv; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> count = BFS(i);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d: %.2lf%%\n"</span>, i, (<span class="keyword">double</span>)count / nv * <span class="number">100.0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    init();</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;nv, &amp;ne);</span><br><span class="line">    <span class="keyword">int</span> v1, v2;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ne; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;v1, &amp;v2);</span><br><span class="line">        G[v1][v2] = G[v2][v1] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    sds();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">samples:</span></span><br><span class="line"><span class="comment">in:</span></span><br><span class="line"><span class="comment">10 9</span></span><br><span class="line"><span class="comment">1 2</span></span><br><span class="line"><span class="comment">2 3</span></span><br><span class="line"><span class="comment">3 4</span></span><br><span class="line"><span class="comment">4 5</span></span><br><span class="line"><span class="comment">5 6</span></span><br><span class="line"><span class="comment">6 7</span></span><br><span class="line"><span class="comment">7 8</span></span><br><span class="line"><span class="comment">8 9</span></span><br><span class="line"><span class="comment">9 10</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">1: 70.00%</span></span><br><span class="line"><span class="comment">2: 80.00%</span></span><br><span class="line"><span class="comment">3: 90.00%</span></span><br><span class="line"><span class="comment">4: 100.00%</span></span><br><span class="line"><span class="comment">5: 100.00%</span></span><br><span class="line"><span class="comment">6: 100.00%</span></span><br><span class="line"><span class="comment">7: 100.00%</span></span><br><span class="line"><span class="comment">8: 90.00%</span></span><br><span class="line"><span class="comment">9: 80.00%</span></span><br><span class="line"><span class="comment">10: 70.00%</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Buy me a coffee ? :)</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="bachzart WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.png" alt="bachzart Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>bachzart</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    
+    <a href="http://bachzart.github.io/2020/08/27/ZJU-DS-06-图（上）/" title="ZJU_DS_06-图（上）">http://bachzart.github.io/2020/08/27/ZJU-DS-06-图（上）/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ZJU-DS/" rel="tag"><i class="fa fa-tag"></i> ZJU_DS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/08/26/扒谱记录-秋柳/" rel="next" title="扒谱记录 - 秋柳">
+                <i class="fa fa-chevron-left"></i> 扒谱记录 - 秋柳
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/08/28/ZJU-DS-07-图（中）/" rel="prev" title="ZJU_DS_07-图（中）">
+                ZJU_DS_07-图（中） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="bachzart">
+            
+              <p class="site-author-name" itemprop="name">bachzart</p>
+              <p class="site-description motion-element" itemprop="description">I've been in my mind, it's such a fine line.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">163</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">49</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/bachzart" title="GitHub &rarr; https://github.com/bachzart" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:whistlesilp@gmail.com" title="E-Mail &rarr; mailto:whistlesilp@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/about/" title="/about/">About This Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/Book-List/" title="/Book-List/">Book List</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sudoku.name/index.php?ln=cn&ref=44355" title="https://www.sudoku.name/index.php?ln=cn&ref=44355" rel="noopener" target="_blank">Soduku Game</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://2048game.com/" title="https://2048game.com/" rel="noopener" target="_blank">2048 Game</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是图"><span class="nav-number">1.</span> <span class="nav-text">什么是图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#顶点"><span class="nav-number">1.1.</span> <span class="nav-text">顶点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#边"><span class="nav-number">1.2.</span> <span class="nav-text">边</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本术语"><span class="nav-number">1.3.</span> <span class="nav-text">基本术语</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图的抽象数据类型描述"><span class="nav-number">2.</span> <span class="nav-text">图的抽象数据类型描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图的表示"><span class="nav-number">3.</span> <span class="nav-text">图的表示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#邻接矩阵"><span class="nav-number">3.1.</span> <span class="nav-text">邻接矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#邻接表"><span class="nav-number">3.2.</span> <span class="nav-text">邻接表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图的遍历"><span class="nav-number">4.</span> <span class="nav-text">图的遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DFS"><span class="nav-number">4.1.</span> <span class="nav-text">DFS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BFS"><span class="nav-number">4.2.</span> <span class="nav-text">BFS</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Homework"><span class="nav-number">5.</span> <span class="nav-text">Homework</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#06-1-列出连通集"><span class="nav-number">5.1.</span> <span class="nav-text">06-1 列出连通集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#邻接表-1"><span class="nav-number">5.1.1.</span> <span class="nav-text">邻接表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#邻接矩阵-1"><span class="nav-number">5.1.2.</span> <span class="nav-text">邻接矩阵</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#06-2-Saving-James-Bond-Easy-Version"><span class="nav-number">5.2.</span> <span class="nav-text">06-2 Saving James Bond - Easy Version</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#06-3-六度空间"><span class="nav-number">5.3.</span> <span class="nav-text">06-3 六度空间</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bachzart</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">1.4m</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total">188:51</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function(i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function(e) {
+        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('Copied');
+          else $(this).text('Copy failed');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function(e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function() {
+          $b.text('Copy');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+</body>
+</html>

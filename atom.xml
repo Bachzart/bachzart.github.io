@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>bachzart&#39;s Blog</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://bachzart.github.io/"/>
+  <updated>2023-08-13T05:54:52.762Z</updated>
+  <id>http://bachzart.github.io/</id>
+  
+  <author>
+    <name>bachzart</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C 语言中的回调函数</title>
+    <link href="http://bachzart.github.io/2023/08/12/C-%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"/>
+    <id>http://bachzart.github.io/2023/08/12/C-语言中的回调函数/</id>
+    <published>2023-08-12T11:00:48.000Z</published>
+    <updated>2023-08-13T05:54:52.762Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;很久没有写 blog 了，这次写一点与回调函数相关的内容...🧐&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
+    
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
+    
+      <category term="callback_function" scheme="http://bachzart.github.io/tags/callback-function/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2023_07_月总结</title>
+    <link href="http://bachzart.github.io/2023/07/30/2023-07-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
+    <id>http://bachzart.github.io/2023/07/30/2023-07-月总结/</id>
+    <published>2023-07-30T13:26:33.000Z</published>
+    <updated>2023-07-30T13:58:04.709Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;暑假已经过去一半，然而我已经没有了暑假...&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>2023_06_月总结</title>
+    <link href="http://bachzart.github.io/2023/07/03/2023-06-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
+    <id>http://bachzart.github.io/2023/07/03/2023-06-月总结/</id>
+    <published>2023-07-03T12:42:02.000Z</published>
+    <updated>2023-07-03T13:47:14.399Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;2023 已经过去一半~✈&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
+    
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2023_05_月总结</title>
+    <link href="http://bachzart.github.io/2023/06/04/2023-05-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
+    <id>http://bachzart.github.io/2023/06/04/2023-05-月总结/</id>
+    <published>2023-06-04T03:22:21.000Z</published>
+    <updated>2023-06-04T05:55:26.843Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;忙碌的五月~😑&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
+    
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>printf 函数的一些细节</title>
+    <link href="http://bachzart.github.io/2023/05/18/printf-%E5%87%BD%E6%95%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%86%E8%8A%82/"/>
+    <id>http://bachzart.github.io/2023/05/18/printf-函数的一些细节/</id>
+    <published>2023-05-18T12:08:09.000Z</published>
+    <updated>2023-05-18T13:46:51.379Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一道容易犯思维惯性错误的 C 语言题目...&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
+    
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nand2Tetris_Part1_06</title>
+    <link href="http://bachzart.github.io/2023/05/05/Nand2Tetris-Part1-06/"/>
+    <id>http://bachzart.github.io/2023/05/05/Nand2Tetris-Part1-06/</id>
+    <published>2023-05-05T12:10:57.000Z</published>
+    <updated>2023-08-12T08:28:34.846Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;好几年了，上册终于要学完了🤣...&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Computer Organization" scheme="http://bachzart.github.io/categories/CS/Computer-Organization/"/>
+    
+    
+      <category term="Nand2Tetris" scheme="http://bachzart.github.io/tags/Nand2Tetris/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2023_04_月总结</title>
+    <link href="http://bachzart.github.io/2023/05/04/2023-04-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
+    <id>http://bachzart.github.io/2023/05/04/2023-04-月总结/</id>
+    <published>2023-05-04T11:47:33.000Z</published>
+    <updated>2023-05-04T12:53:11.835Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;五一假期过的真快啊😪~&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
+    
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于 C 语言内存对齐的思考</title>
+    <link href="http://bachzart.github.io/2023/04/05/%E5%85%B3%E4%BA%8E-C-%E8%AF%AD%E8%A8%80%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E7%9A%84%E6%80%9D%E8%80%83/"/>
+    <id>http://bachzart.github.io/2023/04/05/关于-C-语言内存对齐的思考/</id>
+    <published>2023-04-05T06:28:23.000Z</published>
+    <updated>2023-05-18T12:53:05.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;内存对齐又是 C 语言的经典问题了...&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
+    
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
+    
+      <category term="Memory alignment" scheme="http://bachzart.github.io/tags/Memory-alignment/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>浅析快速幂算法</title>
+    <link href="http://bachzart.github.io/2023/04/03/%E6%B5%85%E6%9E%90%E5%BF%AB%E9%80%9F%E5%B9%82%E7%AE%97%E6%B3%95/"/>
+    <id>http://bachzart.github.io/2023/04/03/浅析快速幂算法/</id>
+    <published>2023-04-03T11:25:14.000Z</published>
+    <updated>2023-04-08T13:45:53.966Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;上周做了一道简单 C 语言练习题，做完了才反应过来是&lt;strong&gt;快速幂&lt;/strong&gt;...😶&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
+    
+    
+      <category term="Binary Exponentiation" scheme="http://bachzart.github.io/tags/Binary-Exponentiation/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Makefile_简单入门</title>
+    <link href="http://bachzart.github.io/2023/04/02/Makefile-%E7%AE%80%E5%8D%95%E5%85%A5%E9%97%A8/"/>
+    <id>http://bachzart.github.io/2023/04/02/Makefile-简单入门/</id>
+    <published>2023-04-02T06:05:27.000Z</published>
+    <updated>2023-04-02T07:48:46.161Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;简单学一下 Makefile 的编写规则~🧐&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Tools" scheme="http://bachzart.github.io/categories/Tools/"/>
+    
+      <category term="Makefile" scheme="http://bachzart.github.io/categories/Tools/Makefile/"/>
+    
+    
+      <category term="Makefile" scheme="http://bachzart.github.io/tags/Makefile/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2023_03_月总结</title>
+    <link href="http://bachzart.github.io/2023/04/01/2023-03-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
+    <id>http://bachzart.github.io/2023/04/01/2023-03-月总结/</id>
+    <published>2023-04-01T11:40:37.000Z</published>
+    <updated>2023-04-01T12:09:07.824Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;三月，是樱花🌸飞舞的季节...&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
+    
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C 语言数组与指针的深入理解</title>
+    <link href="http://bachzart.github.io/2023/03/28/C-%E8%AF%AD%E8%A8%80%E6%95%B0%E7%BB%84%E4%B8%8E%E6%8C%87%E9%92%88%E7%9A%84%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/"/>
+    <id>http://bachzart.github.io/2023/03/28/C-语言数组与指针的深入理解/</id>
+    <published>2023-03-28T13:42:18.000Z</published>
+    <updated>2023-03-30T12:57:28.776Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;来深入理解一下数组与指针吧~&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
+    
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
+    
+      <category term="Pointer" scheme="http://bachzart.github.io/tags/Pointer/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT_乙级题库_1111-1115</title>
+    <link href="http://bachzart.github.io/2023/03/19/PAT-%E4%B9%99%E7%BA%A7%E9%A2%98%E5%BA%93-1111-1115/"/>
+    <id>http://bachzart.github.io/2023/03/19/PAT-乙级题库-1111-1115/</id>
+    <published>2023-03-19T04:17:03.000Z</published>
+    <updated>2023-03-19T10:18:46.960Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;很久没来 PAT 了，没想到乙级题库新增了 5 道题😁~百度了一下，发现这是 2020 年春考 PAT 的原题，正好是周末的时间，做一下。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="PAT" scheme="http://bachzart.github.io/categories/Programming/PAT/"/>
+    
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
+    
+      <category term="PAT" scheme="http://bachzart.github.io/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C 语言函数指针的一些理解</title>
+    <link href="http://bachzart.github.io/2023/03/13/C-%E8%AF%AD%E8%A8%80%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/"/>
+    <id>http://bachzart.github.io/2023/03/13/C-语言函数指针的一些理解/</id>
+    <published>2023-03-13T12:33:41.000Z</published>
+    <updated>2023-03-28T13:45:30.164Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;函数指针属于 C 语言的进阶内容之一，前两天研究 tinyhttpd 时，碰到了函数指针，产生了一些疑问...&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
+    
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
+    
+      <category term="Pointer" scheme="http://bachzart.github.io/tags/Pointer/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2023_02_月总结</title>
+    <link href="http://bachzart.github.io/2023/03/05/2023-02-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
+    <id>http://bachzart.github.io/2023/03/05/2023-02-月总结/</id>
+    <published>2023-03-05T13:19:41.000Z</published>
+    <updated>2023-04-01T11:40:10.876Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;现在是 2023 年 3 月 5 日了...😑&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
+    
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>找房记</title>
+    <link href="http://bachzart.github.io/2023/02/28/%E6%89%BE%E6%88%BF%E8%AE%B0/"/>
+    <id>http://bachzart.github.io/2023/02/28/找房记/</id>
+    <published>2023-02-28T13:03:56.000Z</published>
+    <updated>2023-03-01T12:44:52.927Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;不知不觉来到上海已经五个月了，与朋友小 y 也一起度过了五个月...&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
+    
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TinyHttpd_Reading_Notes</title>
+    <link href="http://bachzart.github.io/2023/02/20/TinyHttpd-Reading-Notes/"/>
+    <id>http://bachzart.github.io/2023/02/20/TinyHttpd-Reading-Notes/</id>
+    <published>2023-02-20T13:02:39.000Z</published>
+    <updated>2023-04-08T13:46:38.205Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;http://tinyhttpd.sourceforge.net&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;TinyHttpd&lt;/a&gt; 是 J. David Blackstone 于 1999 年写的一个 500 行左右的超轻量级 http server，用来学习服务器的工作原理十分不错。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
+    
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
+    
+      <category term="TinyHttpd" scheme="http://bachzart.github.io/tags/TinyHttpd/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++_类的简单构造案例</title>
+    <link href="http://bachzart.github.io/2023/02/12/C-%E7%B1%BB%E7%9A%84%E7%AE%80%E5%8D%95%E6%9E%84%E9%80%A0%E6%A1%88%E4%BE%8B/"/>
+    <id>http://bachzart.github.io/2023/02/12/C-类的简单构造案例/</id>
+    <published>2023-02-12T08:13:57.000Z</published>
+    <updated>2023-04-03T15:58:57.315Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这篇文章主要是介绍用 C++ 实现的一个简单数学类——分数类，其中包含了对应的基本运算规则。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
+    
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2023_01_月总结</title>
+    <link href="http://bachzart.github.io/2023/02/12/2023-01-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
+    <id>http://bachzart.github.io/2023/02/12/2023-01-月总结/</id>
+    <published>2023-02-12T04:04:54.000Z</published>
+    <updated>2023-02-12T07:04:51.345Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;要过年啦~&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
+    
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2022_年末小结</title>
+    <link href="http://bachzart.github.io/2023/01/02/2022-%E5%B9%B4%E6%9C%AB%E5%B0%8F%E7%BB%93/"/>
+    <id>http://bachzart.github.io/2023/01/02/2022-年末小结/</id>
+    <published>2023-01-02T03:02:53.000Z</published>
+    <updated>2023-07-03T12:57:14.106Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;不知不觉，2022 已经过去了...&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
+    
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
+    
+  </entry>
+  
+</feed>

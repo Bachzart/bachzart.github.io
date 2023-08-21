@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/acoustic_guitar_128px.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/acoustic_guitar_32px.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/acoustic_guitar_16px.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/uploads/acoustic_guitar.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="这周好像要开始讲具体的计算机结构了...">
+<meta name="keywords" content="Nand2Tetris">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nand2Tetris_Part1_05">
+<meta property="og:url" content="http://bachzart.github.io/2022/12/26/Nand2Tetris-Part1-05/index.html">
+<meta property="og:site_name" content="bachzart&#39;s Blog">
+<meta property="og:description" content="这周好像要开始讲具体的计算机结构了...">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/Nand2tetris_05/CPU_1.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/Nand2tetris_05/CPU_2.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/Nand2tetris_05/Cins_1.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/Nand2tetris_05/Cins_2.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/Nand2tetris_05/Cins_3.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/Nand2tetris_05/ALU_1.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/Nand2tetris_05/ALU_2.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/Nand2tetris_05/ALU_3.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/Nand2tetris_05/ALU_4.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/Nand2tetris_05/Cins_4.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/Nand2tetris_05/Computer.png">
+<meta property="og:updated_time" content="2023-04-25T13:30:44.994Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nand2Tetris_Part1_05">
+<meta name="twitter:description" content="这周好像要开始讲具体的计算机结构了...">
+<meta name="twitter:image" content="http://bachzart.github.io/my_photo_gallery/Nand2tetris_05/CPU_1.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="bachzart's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://bachzart.github.io/2022/12/26/Nand2Tetris-Part1-05/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Nand2Tetris_Part1_05 | bachzart's Blog</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3eb545f7f54637f67ed532005e0261f7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">bachzart's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">163</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">28</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">52</span></a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/bachzart" class="github-corner" title="Follow me on GitHub :)" aria-label="Follow me on GitHub :)" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2022/12/26/Nand2Tetris-Part1-05/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="I've been in my mind, it's such a fine line.">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Nand2Tetris_Part1_05
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2022-12-26 14:18:40" itemprop="dateCreated datePublished" datetime="2022-12-26T14:18:40+08:00">2022-12-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2023-04-25 21:30:44" itemprop="dateModified" datetime="2023-04-25T21:30:44+08:00">2023-04-25</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/Computer-Organization/" itemprop="url" rel="index"><span itemprop="name">Computer Organization</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="Symbols count in article">16k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="Reading time">2:10</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这周好像要开始讲具体的计算机结构了...<br><a id="more"></a></p>
+<h1 id="Unit-5-1-Von-Neumann-Architecture"><a href="#Unit-5-1-Von-Neumann-Architecture" class="headerlink" title="Unit 5.1 Von Neumann Architecture"></a>Unit 5.1 Von Neumann Architecture</h1><p>这节课的标题是冯诺依曼结构，实际上讲到了 3 个概念：数据总线（data bus）、地址总线（address bus）和控制总线（control bus）。这些总线就是计算机内部信息的公路，比特流在这些总线上流动，不同功能的比特流在不同的总线上流动。计算机的硬件设备，如内存、CPU等都连接在这些总线上，时不时的读入信息和输出信息。</p>
+<h1 id="Unit-5-2-The-Fetch-Execute-Cycle"><a href="#Unit-5-2-The-Fetch-Execute-Cycle" class="headerlink" title="Unit 5.2 The Fetch-Execute Cycle"></a>Unit 5.2 The Fetch-Execute Cycle</h1><p>这节课主要在讲解提取-执行周期（Fetch-Execute Cycle）的大致过程。按照前面的思路，程序的数据和控制指令都保存在一块内存芯片中，那 CPU 是如何知道什么时候该执行那条指令，如何去分辨控制指令和数据呢？</p>
+<p>实际上，CPU 有一个叫做 Program Counter 的程序寄存器来专门记录内存中保存指令的地址，数据地址和指令地址（Program Counter）中保存比特的一同流入 Multiplexor 中，而这个多路复用器用一位控制位来区分现在是提取（Fetch）周期还是执行（Execute）周期。如果是提取模式，那么就读取指令地址，将具体的指令加载到 CPU 中；如果是执行周期，就读取数据地址，将具体的数据加载到 CPU 中用于执行。</p>
+<h1 id="Unit-5-3-Central-Processing-Unit"><a href="#Unit-5-3-Central-Processing-Unit" class="headerlink" title="Unit 5.3 Central Processing Unit"></a>Unit 5.3 Central Processing Unit</h1><p>这节课的主要内容是 CPU 的内部结构、功能和对应的实现原理，讲的不是很深入。<br>CPU 实际上就是 ALU 和其他寄存器的组合体，与计算相关的功能是由 ALU 实现的，过程控制是由 ALU 和其他寄存器组合完成的。<br>老师用上周讲的 A 指令和 C 指令举例，说明了 CPU 是如何识别这些指令，如何实现这些指令的功能，这里就不具体展开了。</p>
+<h1 id="Unit-5-4-The-Hack-Computer"><a href="#Unit-5-4-The-Hack-Computer" class="headerlink" title="Unit 5.4 The Hack Computer"></a>Unit 5.4 The Hack Computer</h1><p>这节课主要在讲 Hack Computer 的结构：一块 CPU、一个 ROM32K 的外存、一块内存，再加键盘和屏幕两个 I/O 设备。<br>接着老师又分开讲解了每部分硬件的构成原理，不过讲的不是很深入，与前面提到的差不多，毕竟这一周的任务就是做这些东西。</p>
+<h1 id="Unit-5-5-Project-Overview"><a href="#Unit-5-5-Project-Overview" class="headerlink" title="Unit 5.5 Project Overview"></a>Unit 5.5 Project Overview</h1><p>这周主要实现 3 个硬件设备，而这些设备就是上一周用到的设备。</p>
+<h2 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h2><p>第一个实现的设备是 Memory，实现过程真是一言难尽，明明是相对容易的问题，却想了很久，最后才意识到是自己有些基础概念（或者说默认规则）没理解清楚，导致做不出来，查资料纠正过来后，就迎刃而解了。<br>但话说回来，能这样一步步做到第五周也是没谁了😅...不多说了，进入正题。<br>Memory 的实现相对比较简单，参考资料已经给了很详细的提示——参考第三周构造内存芯片的思路完成。<br>按照提示的思路，完成 Memory 需要使用 RAM16K、Screen 和 Keyboard 这三个主要芯片，然后再加上其他若干芯片。此时，已知的内容是 Memory 的地址范围在$[0, 24576]$，并且分别对应着内存、显示器和键盘的地址范围，即：<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0x0000 - 0x3FFFF -&gt; 0000 .... 0000 - 0111 .... 1111 -&gt; Ram</span><br><span class="line">0x4000 - 0x5FFFF -&gt; 0010 .... 0000 - 0101 .... 1111 -&gt; Screen</span><br><span class="line">0x6000           -&gt; 1100 .... 0000 -&gt; Keyboard</span><br></pre></td></tr></table></figure></p>
+<p>结合实现 RAM16K 的思路，实现 Memory 也需要使用一个 DMux4Way 将输入的地址区分开，然后将特定的管脚连接到特定的芯片上即可，最后再用 Mux4Way16 输出即可，整体思路还算是比较简单的。<br>因为已经知道 RAM16K 是 14 位寻址的，Screen 是 13 位寻址的，Keyboard 就一个地址，而 Memory 的 address 是 15 位的，所以可以很自然的想到用 address 的前两位来作为 DMux4Way 的 sel bits，这样就可以区分出地址了。<br>但是，在选择管脚作为 sel bits 和连接管脚的时候，我没有搞清楚在 hdl 语言中比特流到底是怎么流动的，导致我无论怎么操作管脚都是错误的...（虽然按照错误思路编写好的 hdl 能跑完和内存相关的部分脚本）<br>具体而言，以一条 A 指令为例：<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> 指令      对应的比特流        流入机器的顺序（与人正好相反）</span><br><span class="line">@3001 -&gt; 000101110111001 -&gt; 100111011101000</span><br><span class="line"></span><br><span class="line">之前理解的比特流在 hdl 中的顺序</span><br><span class="line">v[0] v[1] v[2] v[3]  ... v[13] v[14]</span><br><span class="line">  0    0    0    1   ...   0     1 </span><br><span class="line"></span><br><span class="line">实际比特流在 hdl 中的顺序</span><br><span class="line">v[0] v[1] v[2] v[3]  ... v[13] v[14]</span><br><span class="line">  1    0    0    1   ...   0     0 </span><br><span class="line"></span><br><span class="line">所以，在 hdl 中，选取头两位作为 sel bits，就应该选取 v[13] 和 v[14] 而不是 v[0] 和 v[1]，</span><br><span class="line">同时可以发现，实际顺序中的 0 - 14 也确实代表着进入到计算机内的比特流顺序，也说明这样表示是科学的。</span><br><span class="line">PS：这里其实可以深入扩展一下 MSB 和 LSB 的概念。</span><br></pre></td></tr></table></figure></p>
+<p>最后，贴出正确的实现代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">// This file is part of www.nand2tetris.org</span><br><span class="line">// and the book &quot;The Elements of Computing Systems&quot;</span><br><span class="line">// by Nisan and Schocken, MIT Press.</span><br><span class="line">// File name: projects/05/Memory.hdl</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * The complete address space of the Hack computer&apos;s memory,</span><br><span class="line"> * including RAM and memory-mapped I/O. </span><br><span class="line"> * The chip facilitates read and write operations, as follows:</span><br><span class="line"> *     Read:  out(t) = Memory[address(t)](t)</span><br><span class="line"> *     Write: if load(t-1) then Memory[address(t-1)](t) = in(t-1)</span><br><span class="line"> * In words: the chip always outputs the value stored at the memory </span><br><span class="line"> * location specified by address. If load==1, the in value is loaded </span><br><span class="line"> * into the memory location specified by address. This value becomes </span><br><span class="line"> * available through the out output from the next time step onward.</span><br><span class="line"> * Address space rules:</span><br><span class="line"> * Only the upper 16K+8K+1 words of the Memory chip are used. </span><br><span class="line"> * Access to address&gt;0x6000 is invalid. Access to any address in </span><br><span class="line"> * the range 0x4000-0x5FFF results in accessing the screen memory </span><br><span class="line"> * map. Access to address 0x6000 results in accessing the keyboard </span><br><span class="line"> * memory map. The behavior in these addresses is described in the </span><br><span class="line"> * Screen and Keyboard chip specifications given in the book.</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">    0x0000 - 0x3FFFF -&gt; 0000 .... 0000 - 0111 .... 1111 -&gt; Ram</span><br><span class="line">    0x4000 - 0x5FFFF -&gt; 0010 .... 0000 - 0101 .... 1111 -&gt; Screen</span><br><span class="line">    0x6000           -&gt; 1100 .... 0000 -&gt; Keyboard</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">CHIP Memory &#123;</span><br><span class="line">    IN in[16], load, address[15];</span><br><span class="line">    OUT out[16];</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    // Put your code here:</span><br><span class="line">    DMux4Way(in=load, sel=address[13..14], a=load0, b=load1, c=loadsrc, d=loadkb);</span><br><span class="line">    Or(a=load0, b=load1, out=loadram);</span><br><span class="line">    RAM16K(in=in, load=loadram, address=address[0..13], out=uram);</span><br><span class="line"></span><br><span class="line">    Screen(in=in, load=loadsrc, address=address[0..12], out=usrc);</span><br><span class="line"></span><br><span class="line">    Keyboard(out=ukb);</span><br><span class="line"></span><br><span class="line">    Mux4Way16(a=uram, b=uram, c=usrc, d=ukb, sel=address[13..14], out=out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>另外，还有一点，Memory 的测试脚本在执行到测试 Keyboard 的时候，需要在软件上切换成键盘输入，具体的操作方法（Stackoverflow 论坛上的方法）：</p>
+<blockquote>
+<p>To anyone facing the same problem… on the Hardware Simulator user interface, right above where you see the script executing the tests, there are three drop down boxes. The one furthest to the right which is labeled “View” is probably currently set to “Script.” Click the drop down and select “Screen,” and you will see an interface that has a keyboard icon. Click it and then hit the corresponding key to complete the test.</p>
+</blockquote>
+<h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><p>第二个实现的是 CPU，花了我半个月的时间，总算是大致理解了设计原理，而且还是参考别人的做法...<br>想要完整的设计出 CPU，首先必须要搞明白老师课上给的设计图：</p>
+<p><img src="/my_photo_gallery/Nand2tetris_05/CPU_1.png" alt="CPU_1" title="CPU_1"></p>
+<p>这张图清楚的标出了 bits 在 Hack-CPU 中的流动，并指出了在特定 control bit 位置时所使用的芯片，所以需要我们做的事情就是搞清楚这些 control bit 是什么和并合理使用它们得到想要的输出。</p>
+<p>从图中可以看到，整个 CPU 一共有 4 个输出，分别是：outM、writeM、addressM 和 pc，还有 3 个输入，分别是：instruction、inM 和 reset，这些名词的含义可以直接从<code>hdl</code>文件中得到：<br><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">inM[16],         // M value input  (M = contents of RAM[A])</span><br><span class="line">instruction[16], // Instruction for execution</span><br><span class="line">reset;           // Signals whether to re-start the current</span><br><span class="line">                 // program (reset==1) or continue executing</span><br><span class="line">                 // the current program (reset==0).</span><br><span class="line">outM[16],        // M value output</span><br><span class="line">writeM,          // Write to M? </span><br><span class="line">addressM[15],    // Address in data memory (of M)</span><br><span class="line">pc[15];          // address of next instruction</span><br></pre></td></tr></table></figure></p>
+<p>按照课程中老师讲解的思路，我们可以先实现与 ALU 相关的内容：</p>
+<p><img src="/my_photo_gallery/Nand2tetris_05/CPU_2.png" alt="CPU_2" title="CPU_2"></p>
+<p>为了方便表示和使用，提前一次性将 C 指令的各个 bit 全部提取出来：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// C-ins</span><br><span class="line">And(a=instruction[15], b=instruction[12], out=ca);  // a</span><br><span class="line">And(a=instruction[15], b=instruction[11], out=c1);  // c1</span><br><span class="line">And(a=instruction[15], b=instruction[10], out=c2);  // c2</span><br><span class="line">And(a=instruction[15], b=instruction[9], out=c3);  // c3</span><br><span class="line">And(a=instruction[15], b=instruction[8], out=c4);  // c4</span><br><span class="line">And(a=instruction[15], b=instruction[7], out=c5);  // c5</span><br><span class="line">And(a=instruction[15], b=instruction[6], out=c6);  // c6</span><br><span class="line"></span><br><span class="line">And(a=instruction[15], b=instruction[5], out=d1);   // d1</span><br><span class="line">And(a=instruction[15], b=instruction[4], out=d2);   // d2</span><br><span class="line">And(a=instruction[15], b=instruction[3], out=d3);   // d3</span><br><span class="line"></span><br><span class="line">And(a=instruction[15], b=instruction[2], out=j1);   // j1</span><br><span class="line">And(a=instruction[15], b=instruction[1], out=j2);   // j2</span><br><span class="line">And(a=instruction[15], b=instruction[0], out=j3);   // j3</span><br></pre></td></tr></table></figure></p>
+<h3 id="ARegister-and-inM"><a href="#ARegister-and-inM" class="headerlink" title="ARegister and inM"></a>ARegister and inM</h3><p>这里我们按照 instruction 和 inM 从左至右的方向进行实现，首先实现的是与 ARegister 相关的内容。<br>按照图示，指令（instruction）刚进入到 CPU 时，就会有一个 control bit 用来区分是 A 指令还是 C 指令，此时图示是使用一个 Mux16 来完成的。<br>而对于 A/C 指令的区分，通过第四章的知识可知指令的首位为 0 即为 A 指令，为 1 则为 C 指令，所以直接按照首位 bit 进行区分即可。</p>
+<p>但仔细看图可以发现，图上还有一个 ALU output 也指向这里，这是为什么？<br>实际上这是因为经过 ALU 计算后的 C 指令也有可能会访问 ARegister，这还是第四章的知识，具体参考下面的表格：</p>
+<p><img src="/my_photo_gallery/Nand2tetris_05/Cins_1.png" alt="Cins_1" title="Cins_1"></p>
+<p>所以需要先用 Mux16 将 instruction 和 ALUout 多路复用，而在到达 ARegister 后，又出现了一个 control bit，此时为了将区分这两种情况的 bit 位组合起来，需要使用一个 Mux 来实现。<br>同时，观察到图示上 ARegister 的 output 也指向了 addressM，这也就是说 ARegister 与 Memory 是对应的，而我们已经知道了 Memory 的地址是 15 位的，所以 ARegister 的前 15 位就是 addressM。<br>综上，与 ARegister 相关的内容，可以设计为：<br><figure class="highlight plain"><figcaption><span>ARegister</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// instruction[15]: 0 -&gt; A, 1 -&gt; C</span><br><span class="line">Mux16(a=instruction, b=ALUout, sel=instruction[15], out=uins);</span><br><span class="line"></span><br><span class="line">// ARegister</span><br><span class="line">Mux(a=true, b=instruction[5], sel=instruction[15], out=insA); // ALUout -&gt; A Register</span><br><span class="line">ARegister(in=uins, load=insA, out[0..14]=addressM, out=uAreg);</span><br></pre></td></tr></table></figure></p>
+<p>再接着朝右走，ARegister 的 output 会和 inM 一起进入 Mux16，也即：<br><figure class="highlight plain"><figcaption><span>inM</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// inM</span><br><span class="line">Mux16(a=uAreg, b=inM, sel=ca, out=u1);</span><br></pre></td></tr></table></figure></p>
+<p>之所以这里会用到 Mux16，是因为只有 C 指令的 a bit 才能区分这条 C 指令是操作 M 寄存器的，反之就是 A 指令了。</p>
+<h3 id="DRegister-and-writeM"><a href="#DRegister-and-writeM" class="headerlink" title="DRegister and writeM"></a>DRegister and writeM</h3><p>继续观察设计图，ALU 的输入一共有两个，已经解决了一个，还有一个 DRegister 需要解决。<br>相比 ARegister 而言，DRegister 就简单多了，只有一个输入就是 ALU output，同样按照第四章的知识：</p>
+<p><img src="/my_photo_gallery/Nand2tetris_05/Cins_2.png" alt="Cins_2" title="Cins_2"></p>
+<p>所以我们只需要讨论对应指令的 d2 位即可：<br><figure class="highlight plain"><figcaption><span>DRegister</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// DRegister</span><br><span class="line">DRegister(in=ALUout, load=d2, out=uDreg);</span><br></pre></td></tr></table></figure></p>
+<p>同时，我们也可以发现只有当 d3 为 1 时，才会写入 M 寄存器，也就是 writeM 才会是 1：<br><figure class="highlight plain"><figcaption><span>writeM</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// writeM</span><br><span class="line">And(a=instruction[15], b=d3, out=writeM);</span><br></pre></td></tr></table></figure></p>
+<p>这里可能会有人疑问为什么是 C 指令的 d2 和 d3 位，实际上书的第四章已经解释了：</p>
+<p><img src="/my_photo_gallery/Nand2tetris_05/Cins_3.png" alt="Cins_3" title="Cins_3"></p>
+<h3 id="ALU"><a href="#ALU" class="headerlink" title="ALU"></a>ALU</h3><p>解决了 ALU 的输入问题，现在再考虑如何使用 ALU 来完成计算。<br>ALU 的接口直接参考书上的图示：</p>
+<p><img src="/my_photo_gallery/Nand2tetris_05/ALU_1.png" alt="ALU_1" title="ALU_1"></p>
+<p>除了两个输入，还有 6 个控制位需要解决，而这 6 个控制位正好对应的就是 C 指令的 comp bits：</p>
+<p><img src="/my_photo_gallery/Nand2tetris_05/ALU_2.png" alt="ALU_2" title="ALU_2"></p>
+<p><img src="/my_photo_gallery/Nand2tetris_05/ALU_3.png" alt="ALU_3" title="ALU_3"></p>
+<p>同时，从上面的指令图中也可以看出 ALU 的 x 一定是 DRegister 的输出，y 一定是 ARegister 的输出和 inM 中的一个，比如下面这条指令：</p>
+<p><img src="/my_photo_gallery/Nand2tetris_05/ALU_4.png" alt="ALU_4" title="ALU_4"></p>
+<p>所以 ALU 可以设计为：<br><figure class="highlight plain"><figcaption><span>ALU</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// ALU</span><br><span class="line">ALU(x=uDreg, y=u1, zx=c1, nx=c2, zy=c3, ny=c4, f=c5, no=c6, out=ALUout, out=outM, zr=zr, ng=ng);</span><br></pre></td></tr></table></figure></p>
+<h3 id="C-JUMP-by-PC"><a href="#C-JUMP-by-PC" class="headerlink" title="C-JUMP by PC"></a>C-JUMP by PC</h3><p>最后要实现的功能是 C 指令的跳转功能，这部分功能是通过 PC 来实现的，但是否跳转取决于 C 指令的 jump field：</p>
+<p><img src="/my_photo_gallery/Nand2tetris_05/Cins_4.png" alt="Cins_4" title="Cins_4"></p>
+<p>根据 ALU 输出的 zr 和 ng 刚好可以判断 output 的大小：<br><figure class="highlight plain"><figcaption><span>zr and ng</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// PC</span><br><span class="line">Not(in=zr, out=notzr);</span><br><span class="line">Not(in=ng, out=notng);</span><br><span class="line"></span><br><span class="line">And(a=notzr, b=ng, out=negative);  // ALUout &lt; 0</span><br><span class="line">And(a=zr, b=notng, out=zero); // ALUout = 0</span><br><span class="line">And(a=notzr, b=notng, out=positive); // ALUout &gt; 0</span><br></pre></td></tr></table></figure></p>
+<p>接下来，再来逐一实现跳转功能：<br><figure class="highlight plain"><figcaption><span>JUMP</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// JUMP</span><br><span class="line">And(a=j3, b=positive, out=JGT); // JGT</span><br><span class="line">And(a=j2, b=zero, out=JEQ);     // JEQ</span><br><span class="line">And(a=j1, b=negative, out=JLT); // JLT</span><br><span class="line">And(a=j1, b=j2, out=tmp);</span><br><span class="line">And(a=tmp, b=j3, out=JMP);  // JMP + JNE + null</span><br><span class="line"></span><br><span class="line">Or(a=JGT, b=JEQ, out=jmp1);    // JGT + JEQ + JGE, 3 possibilities</span><br><span class="line">Or(a=jmp1, b=JLT, out=jmp2);  // jmp1 + JLT + JLE, 5 possibilities</span><br><span class="line">Or(a=jmp2, b=JMP, out=jmp3);  // jmp2 + JMP + JNE + null, 8 possibilities</span><br></pre></td></tr></table></figure></p>
+<p>考虑到 PC 还有一个自增的功能，当指令为 A 指令时，不进行跳转，PC 自增：<br><figure class="highlight plain"><figcaption><span>increment</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">And(a=instruction[15], b=jmp3, out=load);   // not C-ins</span><br><span class="line">Not(in=load, out=inc);  // increment</span><br></pre></td></tr></table></figure></p>
+<p>最后写入 PC 中：<br><figure class="highlight plain"><figcaption><span>PC</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PC(in=uAreg, inc=inc, load=load, reset=reset, out[0..14]=pc);</span><br></pre></td></tr></table></figure></p>
+<h3 id="CPU-Codes"><a href="#CPU-Codes" class="headerlink" title="CPU_Codes"></a>CPU_Codes</h3><figure class="highlight plain"><figcaption><span>CPU</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line">// This file is part of www.nand2tetris.org</span><br><span class="line">// and the book &quot;The Elements of Computing Systems&quot;</span><br><span class="line">// by Nisan and Schocken, MIT Press.</span><br><span class="line">// File name: projects/05/CPU.hdl</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * The Hack CPU (Central Processing unit), consisting of an ALU,</span><br><span class="line"> * two registers named A and D, and a program counter named PC.</span><br><span class="line"> * The CPU is designed to fetch and execute instructions written in </span><br><span class="line"> * the Hack machine language. In particular, functions as follows:</span><br><span class="line"> * Executes the inputted instruction according to the Hack machine </span><br><span class="line"> * language specification. The D and A in the language specification</span><br><span class="line"> * refer to CPU-resident registers, while M refers to the external</span><br><span class="line"> * memory location addressed by A, i.e. to Memory[A]. The inM input </span><br><span class="line"> * holds the value of this location. If the current instruction needs </span><br><span class="line"> * to write a value to M, the value is placed in outM, the address </span><br><span class="line"> * of the target location is placed in the addressM output, and the </span><br><span class="line"> * writeM control bit is asserted. (When writeM==0, any value may </span><br><span class="line"> * appear in outM). The outM and writeM outputs are combinational: </span><br><span class="line"> * they are affected instantaneously by the execution of the current </span><br><span class="line"> * instruction. The addressM and pc outputs are clocked: although they </span><br><span class="line"> * are affected by the execution of the current instruction, they commit </span><br><span class="line"> * to their new values only in the next time step. If reset==1 then the </span><br><span class="line"> * CPU jumps to address 0 (i.e. pc is set to 0 in next time step) rather </span><br><span class="line"> * than to the address resulting from executing the current instruction. </span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">CHIP CPU &#123;</span><br><span class="line"></span><br><span class="line">    IN  inM[16],         // M value input  (M = contents of RAM[A])</span><br><span class="line">        instruction[16], // Instruction for execution</span><br><span class="line">        reset;           // Signals whether to re-start the current</span><br><span class="line">                         // program (reset==1) or continue executing</span><br><span class="line">                         // the current program (reset==0).</span><br><span class="line"></span><br><span class="line">    OUT outM[16],        // M value output</span><br><span class="line">        writeM,          // Write to M? </span><br><span class="line">        addressM[15],    // Address in data memory (of M)</span><br><span class="line">        pc[15];          // address of next instruction</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    // Put your code here:</span><br><span class="line">    // C-ins bits</span><br><span class="line">    And(a=instruction[15], b=instruction[12], out=ca);  // a</span><br><span class="line">    And(a=instruction[15], b=instruction[11], out=c1);  // c1</span><br><span class="line">    And(a=instruction[15], b=instruction[10], out=c2);  // c2</span><br><span class="line">    And(a=instruction[15], b=instruction[9], out=c3);  // c3</span><br><span class="line">    And(a=instruction[15], b=instruction[8], out=c4);  // c4</span><br><span class="line">    And(a=instruction[15], b=instruction[7], out=c5);  // c5</span><br><span class="line">    And(a=instruction[15], b=instruction[6], out=c6);  // c6</span><br><span class="line"></span><br><span class="line">    And(a=instruction[15], b=instruction[5], out=d1);   // d1</span><br><span class="line">    And(a=instruction[15], b=instruction[4], out=d2);   // d2</span><br><span class="line">    And(a=instruction[15], b=instruction[3], out=d3);   // d3</span><br><span class="line"></span><br><span class="line">    And(a=instruction[15], b=instruction[2], out=j1);   // j1</span><br><span class="line">    And(a=instruction[15], b=instruction[1], out=j2);   // j2</span><br><span class="line">    And(a=instruction[15], b=instruction[0], out=j3);   // j3</span><br><span class="line"></span><br><span class="line">    // instruction[15]: 0 -&gt; A, 1 -&gt; C</span><br><span class="line">    Mux16(a=instruction, b=ALUout, sel=instruction[15], out=uins);</span><br><span class="line"></span><br><span class="line">    // A-ins</span><br><span class="line">    Mux(a=true, b=instruction[5], sel=instruction[15], out=insA); // ALUout -&gt; A Register</span><br><span class="line">    ARegister(in=uins, load=insA, out[0..14]=addressM, out=uAreg);</span><br><span class="line"></span><br><span class="line">    // inM</span><br><span class="line">    Mux16(a=uAreg, b=inM, sel=ca, out=u1);</span><br><span class="line"></span><br><span class="line">    // DRegister</span><br><span class="line">    DRegister(in=ALUout, load=d2, out=uDreg);</span><br><span class="line"></span><br><span class="line">    // writeM</span><br><span class="line">    And(a=instruction[15], b=d3, out=writeM);</span><br><span class="line"></span><br><span class="line">    // ALU</span><br><span class="line">    ALU(x=uDreg, y=u1, zx=c1, nx=c2, zy=c3, ny=c4,</span><br><span class="line">            f=c5, no=c6, out=ALUout, out=outM, zr=zr, ng=ng);</span><br><span class="line"></span><br><span class="line">    // PC</span><br><span class="line">    Not(in=zr, out=notzr);</span><br><span class="line">    Not(in=ng, out=notng);</span><br><span class="line"></span><br><span class="line">    And(a=notzr, b=ng, out=negative);  // ALUout &lt; 0</span><br><span class="line">    And(a=zr, b=notng, out=zero); // ALUout = 0</span><br><span class="line">    And(a=notzr, b=notng, out=positive); // ALUout &gt; 0</span><br><span class="line"></span><br><span class="line">    // JUMP</span><br><span class="line">    And(a=j3, b=positive, out=JGT); // JGT</span><br><span class="line">    And(a=j2, b=zero, out=JEQ);     // JEQ</span><br><span class="line">    And(a=j1, b=negative, out=JLT); // JLT</span><br><span class="line">    And(a=j1, b=j2, out=tmp);</span><br><span class="line">    And(a=tmp, b=j3, out=JMP);  // JMP + JNE + null</span><br><span class="line"></span><br><span class="line">    Or(a=JGT, b=JEQ, out=jmp1);    // JGT + JEQ + JGE, 3 possibilities</span><br><span class="line">    Or(a=jmp1, b=JLT, out=jmp2);  // jmp1 + JLT + JLE, 5 possibilities</span><br><span class="line">    Or(a=jmp2, b=JMP, out=jmp3);  // jmp2 + JMP + JNE + null, 8 possibilities</span><br><span class="line"></span><br><span class="line">    And(a=instruction[15], b=jmp3, out=load);   // not C-ins</span><br><span class="line">    Not(in=load, out=inc);</span><br><span class="line">    </span><br><span class="line">    PC(in=uAreg, inc=inc, load=load, reset=reset, out[0..14]=pc);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Computer"><a href="#Computer" class="headerlink" title="Computer"></a>Computer</h2><p>Computer 的设计思路还是参考老师上课给出的思路：</p>
+<p><img src="/my_photo_gallery/Nand2tetris_05/Computer.png" alt="Computer" title="Computer"></p>
+<p>有了前面的设计基础（被反复拷打🤣），现在只需要按照上图中的思路将各个硬件连接起来即可，最后得到的代码如下：<br><figure class="highlight plain"><figcaption><span>Computer</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// This file is part of www.nand2tetris.org</span><br><span class="line">// and the book &quot;The Elements of Computing Systems&quot;</span><br><span class="line">// by Nisan and Schocken, MIT Press.</span><br><span class="line">// File name: projects/05/Computer.hdl</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * The HACK computer, including CPU, ROM and RAM.</span><br><span class="line"> * When reset is 0, the program stored in the computer&apos;s ROM executes.</span><br><span class="line"> * When reset is 1, the execution of the program restarts. </span><br><span class="line"> * Thus, to start a program&apos;s execution, reset must be pushed &quot;up&quot; (1)</span><br><span class="line"> * and &quot;down&quot; (0). From this point onward the user is at the mercy of </span><br><span class="line"> * the software. In particular, depending on the program&apos;s code, the </span><br><span class="line"> * screen may show some output and the user may be able to interact </span><br><span class="line"> * with the computer via the keyboard.</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">CHIP Computer &#123;</span><br><span class="line"></span><br><span class="line">    IN reset;</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    // Put your code here:</span><br><span class="line">    ROM32K(address=Upc, out=ROMins);</span><br><span class="line">    CPU(inM=MinM, instruction=ROMins, reset=reset, </span><br><span class="line">            outM=UoutM, writeM=UwriteM, addressM=UaddrM, pc=Upc);</span><br><span class="line">    Memory(in=UoutM, load=UwriteM, address=UaddrM, out=MinM);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="Unit-5-6-Perspective"><a href="#Unit-5-6-Perspective" class="headerlink" title="Unit 5.6 Perspective"></a>Unit 5.6 Perspective</h1><p>这周一共只有两个问题：</p>
+<ol>
+<li>冯诺依曼结构和哈佛结构有什么差异？<ul>
+<li>哈佛结构是冯诺依曼结构的一个变种，二者的差异在于哈佛结构的数据内存和指令内存是分开的，而冯诺依曼结构的数据和指令是存放在一起的，这也就导致哈佛结构进行取址执行只需要一个时间周期，而冯诺依曼结构需要两个独立的时间周期。另外，还提到了如何构建结合两种结构特点的计算机，答案就是通过<strong>有限状态机</strong>的形式来构建，这里不深究。</li>
+</ul>
+</li>
+<li>计算机连接其他的外设，是如何工作的？<ul>
+<li>除了键盘和屏幕，计算机有很多其他的外设（这里的外设包括显卡、网卡等硬件设备），而计算机连接这些外设的方式与连接键盘和屏幕是类似的（注意这里的类似指的是现代计算机而不是 Hack）。换句话说，现代计算机连接外设都是通过设备控制器（device controllers）来完成的，这点其实也可以从 Windows 系统中的设备管理器页面看出，而之所以要这样做是为了降低 CPU 的工作压力。</li>
+</ul>
+</li>
+</ol>
+<h1 id="Unit-5-7-Summary"><a href="#Unit-5-7-Summary" class="headerlink" title="Unit 5.7 Summary"></a>Unit 5.7 Summary</h1><p>这一章真的让我感慨良多...（其实是被虐的体无完肤🤣，不过还是完成了😤）</p>
+<p>本章算是对前五章内容的汇总，基本把前五章所学的知识点都概括进来了。一开始琢磨 CPU 和 Memory 如何设计的时候，真的是脑袋都要想破了，想了很久一点头绪都没有，导致自己越想越烦躁，越想越想不出来，完全冷静不下来。然后，就一直拖着，结果就是进度很慢，花了半个月，这篇 Blog 才完成...这样真的不好😥，还是要注意效率。</p>
+<p>现在回想起来，不够冷静是一个问题，还有一个问题是自己完成这些内容的时间间隔太长了，第一章的基础芯片、第二章的 ALU 和第三周的 RAM，都是一两年前完成的了，现在重新捡起来学习，原来的感觉都没了...<br>所以，学习需要趁热打铁，熟练才能生巧！</p>
+<p>另外，还想说的是，前五章的核心内容就是如何设计硬件，而贯穿前五章设计硬件的技巧（或者说思路），就是<strong>如何使用特定的 control bit 来分情况输入输出比特流</strong>，这一点在 Mux、ALU、RAM、PC、CPU 和 Memory 上都有体现。</p>
+<p>最后，希望自己再接再厉，趁热打铁，赶紧把第六章的汇编器完成了，这回不能偷懒了！😤</p>
+<hr>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Buy me a coffee ? :)</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="bachzart WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.png" alt="bachzart Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>bachzart</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    
+    <a href="http://bachzart.github.io/2022/12/26/Nand2Tetris-Part1-05/" title="Nand2Tetris_Part1_05">http://bachzart.github.io/2022/12/26/Nand2Tetris-Part1-05/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Nand2Tetris/" rel="tag"><i class="fa fa-tag"></i> Nand2Tetris</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/12/19/新冠感染记/" rel="next" title="新冠感染记">
+                <i class="fa fa-chevron-left"></i> 新冠感染记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/01/02/2022-年末小结/" rel="prev" title="2022_年末小结">
+                2022_年末小结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="bachzart">
+            
+              <p class="site-author-name" itemprop="name">bachzart</p>
+              <p class="site-description motion-element" itemprop="description">I've been in my mind, it's such a fine line.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">163</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">49</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/bachzart" title="GitHub &rarr; https://github.com/bachzart" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:whistlesilp@gmail.com" title="E-Mail &rarr; mailto:whistlesilp@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/about/" title="/about/">About This Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/Book-List/" title="/Book-List/">Book List</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sudoku.name/index.php?ln=cn&ref=44355" title="https://www.sudoku.name/index.php?ln=cn&ref=44355" rel="noopener" target="_blank">Soduku Game</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://2048game.com/" title="https://2048game.com/" rel="noopener" target="_blank">2048 Game</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Unit-5-1-Von-Neumann-Architecture"><span class="nav-number">1.</span> <span class="nav-text">Unit 5.1 Von Neumann Architecture</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unit-5-2-The-Fetch-Execute-Cycle"><span class="nav-number">2.</span> <span class="nav-text">Unit 5.2 The Fetch-Execute Cycle</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unit-5-3-Central-Processing-Unit"><span class="nav-number">3.</span> <span class="nav-text">Unit 5.3 Central Processing Unit</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unit-5-4-The-Hack-Computer"><span class="nav-number">4.</span> <span class="nav-text">Unit 5.4 The Hack Computer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unit-5-5-Project-Overview"><span class="nav-number">5.</span> <span class="nav-text">Unit 5.5 Project Overview</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Memory"><span class="nav-number">5.1.</span> <span class="nav-text">Memory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU"><span class="nav-number">5.2.</span> <span class="nav-text">CPU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ARegister-and-inM"><span class="nav-number">5.2.1.</span> <span class="nav-text">ARegister and inM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DRegister-and-writeM"><span class="nav-number">5.2.2.</span> <span class="nav-text">DRegister and writeM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ALU"><span class="nav-number">5.2.3.</span> <span class="nav-text">ALU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-JUMP-by-PC"><span class="nav-number">5.2.4.</span> <span class="nav-text">C-JUMP by PC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU-Codes"><span class="nav-number">5.2.5.</span> <span class="nav-text">CPU_Codes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Computer"><span class="nav-number">5.3.</span> <span class="nav-text">Computer</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unit-5-6-Perspective"><span class="nav-number">6.</span> <span class="nav-text">Unit 5.6 Perspective</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unit-5-7-Summary"><span class="nav-number">7.</span> <span class="nav-text">Unit 5.7 Summary</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bachzart</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">1.4m</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total">188:51</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function(i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function(e) {
+        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('Copied');
+          else $(this).text('Copy failed');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function(e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function() {
+          $b.text('Copy');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+</body>
+</html>

@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/acoustic_guitar_128px.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/acoustic_guitar_32px.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/acoustic_guitar_16px.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/uploads/acoustic_guitar.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Nand2Tetris 是由希伯来大学的两位教授 Noam Nisan 和 Shimon Schocken 在 Coursera 上开设的在线课程（网络课程）。课程全称叫做：依据基本原理构建现代计算机：从与非门到俄罗斯方块（基于项目的课程），其主要内容与计算机组成原理、操作系统等科目的关联性较大，但课程的受众群体也不止局限于专业人士，且课程的实践性很强，对深入理解理论知识很有帮助。">
+<meta name="keywords" content="Nand2Tetris">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nand2Tetris_Part1_01">
+<meta property="og:url" content="http://bachzart.github.io/2020/09/20/Nand2Tetris-Part1-01/index.html">
+<meta property="og:site_name" content="bachzart&#39;s Blog">
+<meta property="og:description" content="Nand2Tetris 是由希伯来大学的两位教授 Noam Nisan 和 Shimon Schocken 在 Coursera 上开设的在线课程（网络课程）。课程全称叫做：依据基本原理构建现代计算机：从与非门到俄罗斯方块（基于项目的课程），其主要内容与计算机组成原理、操作系统等科目的关联性较大，但课程的受众群体也不止局限于专业人士，且课程的实践性很强，对深入理解理论知识很有帮助。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2022-12-11T06:34:06.961Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nand2Tetris_Part1_01">
+<meta name="twitter:description" content="Nand2Tetris 是由希伯来大学的两位教授 Noam Nisan 和 Shimon Schocken 在 Coursera 上开设的在线课程（网络课程）。课程全称叫做：依据基本原理构建现代计算机：从与非门到俄罗斯方块（基于项目的课程），其主要内容与计算机组成原理、操作系统等科目的关联性较大，但课程的受众群体也不止局限于专业人士，且课程的实践性很强，对深入理解理论知识很有帮助。">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="bachzart's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://bachzart.github.io/2020/09/20/Nand2Tetris-Part1-01/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Nand2Tetris_Part1_01 | bachzart's Blog</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3eb545f7f54637f67ed532005e0261f7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">bachzart's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">163</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">28</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">52</span></a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/bachzart" class="github-corner" title="Follow me on GitHub :)" aria-label="Follow me on GitHub :)" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2020/09/20/Nand2Tetris-Part1-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="I've been in my mind, it's such a fine line.">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Nand2Tetris_Part1_01
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-09-20 20:55:41" itemprop="dateCreated datePublished" datetime="2020-09-20T20:55:41+08:00">2020-09-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2022-12-11 14:34:06" itemprop="dateModified" datetime="2022-12-11T14:34:06+08:00">2022-12-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/Computer-Organization/" itemprop="url" rel="index"><span itemprop="name">Computer Organization</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="Symbols count in article">11k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="Reading time">1:33</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://www.nand2tetris.org/project01" target="_blank" rel="noopener">Nand2Tetris</a> 是由希伯来大学的两位教授 Noam Nisan 和 Shimon Schocken 在 Coursera 上开设的在线课程（网络课程）。课程全称叫做：依据基本原理构建现代计算机：从与非门到俄罗斯方块（基于项目的课程），其主要内容与计算机组成原理、操作系统等科目的关联性较大，但课程的受众群体也不止局限于专业人士，且课程的实践性很强，对深入理解理论知识很有帮助。<br><a id="more"></a></p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>第一周包含两个章节（一般情况下，一周一个）：Introduction 和 Boolean Functions and Gate Logic。<br>顾名思义，Introduction 是对本课程的说明，Boolean Functions and Gate Logic 才是第一周的真正的学习内容。<br>通过 Introduction 可以知道大体的学习路线是从基本的逻辑门单元开始，<strong>自下而上</strong>的学习如何构建计算机，继而构建出能在这台计算机上运行的程序，也即：Nand -&gt; Hack -&gt; Tetris。<br>另外，对于购买了课程的同学而言，这章节会有一个编程作业，用来练习如何在 Coursera 上提交作业。但如果你是旁听生（auditor），那么可以忽略掉。</p>
+<h1 id="Boolean-Functions-and-Gate-Logic"><a href="#Boolean-Functions-and-Gate-Logic" class="headerlink" title="Boolean Functions and Gate Logic"></a>Boolean Functions and Gate Logic</h1><p>这部分内容属于计算机系统结构底层中的底层，课程从一个小小门逻辑电路开始讲起（当然不会讲与物理相关的内容，这也是老师让大家不要过分在意的地方），逐步介绍各种不同的逻辑电路，并自行构造具有一定复杂性的复合逻辑门电路。</p>
+<h2 id="Unit-1-1-Boolean-Logic"><a href="#Unit-1-1-Boolean-Logic" class="headerlink" title="Unit 1.1 Boolean Logic"></a>Unit 1.1 Boolean Logic</h2><p>本小节主要介绍了三种基本的逻辑门（Logic gate）：与（And）、或（Or）和非（Not），并举例说明了与之对应的基本运算方法和规律。</p>
+<p>三种逻辑门的真值表（Truth table）如下：<br>And：<br>$$\begin{array}{cc|c}<br>x &amp; y &amp; And \\<br>\hline<br>0 &amp; 0 &amp; 0    \\<br>0 &amp; 1 &amp; 0    \\<br>1 &amp; 0 &amp; 0    \\<br>1 &amp; 1 &amp; 1    \\<br>\end{array}$$</p>
+<p>Or：<br>$$\begin{array}{cc|c}<br>x &amp; y &amp; Or \\<br>\hline<br>0 &amp; 0 &amp; 0    \\<br>0 &amp; 1 &amp; 1    \\<br>1 &amp; 0 &amp; 1    \\<br>1 &amp; 1 &amp; 1    \\<br>\end{array}$$</p>
+<p>Not：<br>$$\begin{array}{c|c}<br>x &amp; Not \\<br>\hline<br>0 &amp; 0    \\<br>1 &amp; 0    \\<br>\end{array}$$</p>
+<p>运算规律：</p>
+<ol>
+<li>交换律（Commutative Law）<ul>
+<li>x and y = y and x</li>
+<li>x or y = y or x</li>
+</ul>
+</li>
+<li>结合律（Associative Law）<ul>
+<li>x and (y and z) = (x and y) and z</li>
+<li>x or (y or z) = (x or y) or z</li>
+</ul>
+</li>
+<li>分配律（Distributive Law）<ul>
+<li>x and (y or z) = (x and y) or (x and z)</li>
+<li>x or (y and z) = (x or y) and (x or z)</li>
+</ul>
+</li>
+<li>德摩根律（De Morgan Law）<ul>
+<li>not (x and y) = (not x) or (not y)</li>
+<li>not (x or y) = (not x) and (not y)</li>
+</ul>
+</li>
+</ol>
+<p>以上基本内容说不定就会用到，记录下。<br><span id="#1.2"></span></p>
+<h2 id="Unit-1-2-Boolean-Functions-Synthesis"><a href="#Unit-1-2-Boolean-Functions-Synthesis" class="headerlink" title="Unit 1.2 Boolean Functions Synthesis"></a><div id="#1.2">Unit 1.2 Boolean Functions Synthesis</div></h2><p>本小节主要讲了三点：</p>
+<ol>
+<li>如何根据真值表来反向构造布尔函数</li>
+<li>介绍了一个结论：任意布尔函数都能被与或非三种运算表示（Any Boolean function can be represented using an expression containing AND, OR and NOT operations.）</li>
+<li>接下来会用与非门（Nand）来构建其他逻辑门</li>
+</ol>
+<h2 id="Unit-1-3-Logic-gates"><a href="#Unit-1-3-Logic-gates" class="headerlink" title="Unit 1.3 Logic gates"></a>Unit 1.3 Logic gates</h2><p>本小节着重在说明一个问题，即：这门课程不会从物理层面深究这种逻辑门是怎样实现的，但是会探讨如何利用基础逻辑门来构建复合逻辑门。另外，还介绍了在这个课程中会见到的一些描述用语。<br>PS：God bless their souls. 感觉像是在嘲讽呢（笑）。</p>
+<h2 id="Unit-1-4-Hardware-Description-Language"><a href="#Unit-1-4-Hardware-Description-Language" class="headerlink" title="Unit 1.4 Hardware Description Language"></a>Unit 1.4 Hardware Description Language</h2><p>本小节主要在说明硬件描述语言（后面会简称 HDL）的语法规则，不多，建议直接自己看老师提供的手册，并试着写下代码，有了一定的感性认识后，再来听，可能会收获多一点。</p>
+<h2 id="Unit-1-5-Hardware-Simulation"><a href="#Unit-1-5-Hardware-Simulation" class="headerlink" title="Unit 1.5 Hardware Simulation"></a>Unit 1.5 Hardware Simulation</h2><p>本小节主要在讲如何使用课程提供的硬件模拟器和一些注意事项。</p>
+<h2 id="Unit-1-6-Multi-Bit-Buses"><a href="#Unit-1-6-Multi-Bit-Buses" class="headerlink" title="Unit 1.6 Multi Bit Buses"></a><div id="#1.2">Unit 1.6 Multi Bit Buses</div></h2><p>本小节主要在说明多位（bit）逻辑门在本课程所用的 HDL 中的用法，并顺便大致的说明了一下总线的含义，对后面构造位逻辑单元有一定帮助，特别是有 HDL 代码的地方，对后面的作业很有帮助。</p>
+<h2 id="Unit-1-7-Project-1-Overview"><a href="#Unit-1-7-Project-1-Overview" class="headerlink" title="Unit 1.7 Project 1 Overview"></a>Unit 1.7 Project 1 Overview</h2><p>本小节主要在介绍第一周的作业以及这周作业对于后续课程的意义。不得不说，国内老师从来不会跟你讲作业的意义，最多给你讲讲错题。</p>
+<p>扯远了，每周作业包括三个部分：代码源文件（.hdl）、测试脚本（.tst）和比对文件（.cmp）（其实就是程序正确的运行结果），每一个小作业（就是你要实现的每一个小芯片）都包含这三个文件。好消息是测试脚本跟正确答案老师都准备好了，坏消息是代码得自己写（其实也不算坏消息，本就是分内之事，笑），下面我们来完成这周的作业。</p>
+<p>PS：有一点要注意，下面这些逻辑门实现的方式不唯一，这也是老师一再强调的东西。</p>
+<h3 id="Not"><a href="#Not" class="headerlink" title="Not"></a>Not</h3><p>Nand 是我们在这个课程中可以直接使用的基本逻辑门，可以直接使用，Not 是我们要完成的第一个芯片，所以我们直接使用一个二元的与非门来实现一个一元的非门（The implementation of a unary Not gate from a binary Nand gate is simple.）。</p>
+<p>一元非门只有两种情况，二元与非门有四种情况，那么我们直接用与非门的其中两种情况来表示非门即可，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CHIP Not &#123;</span><br><span class="line">    IN in;</span><br><span class="line">    OUT out;</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    Nand(a=in, b=true, out=out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="And"><a href="#And" class="headerlink" title="And"></a>And</h3><p>一开始思考如何实现 And 时，有点无从下手的感觉后来，想了一会，想到了两种方法：</p>
+<ol>
+<li>使用 2 个 Nand</li>
+<li>使用 1 个 Nand，在使用 1 个 Not</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CHIP And &#123;</span><br><span class="line">    IN a, b;</span><br><span class="line">    OUT out;</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    /* method 1: use 2 Nand</span><br><span class="line">    Nand(a=a, b=b, out=c);</span><br><span class="line">    Nand(a=c, b=true, out=out);</span><br><span class="line">    */</span><br><span class="line">    /* method 2: use Nand and Not */</span><br><span class="line">    Nand(a=a, b=b, out=c);</span><br><span class="line">    Not(in=c, out=out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Or"><a href="#Or" class="headerlink" title="Or"></a>Or</h3><p>实现 And 之后，此时我们可以使用上面实现好了的逻辑门来帮助实现 Or。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CHIP Or &#123;</span><br><span class="line">    IN a, b;</span><br><span class="line">    OUT out;</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    Not(in=a, out=nota);</span><br><span class="line">    Not(in=b, out=notb);</span><br><span class="line">    And(a=nota, b=notb, out=e);</span><br><span class="line">    Not(in=e, out=out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Xor"><a href="#Xor" class="headerlink" title="Xor"></a>Xor</h3><p>异或运算有点特殊，同样还是用已经实现过的逻辑门来实现。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CHIP Xor &#123;</span><br><span class="line">    IN a, b;</span><br><span class="line">    OUT out;</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    Or(a=a, b=b, out=c);</span><br><span class="line">    Nand(a=a, b=b, out=d);</span><br><span class="line">    And(a=c, b=d, out=out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Mux"><a href="#Mux" class="headerlink" title="Mux"></a>Mux</h3><p>Mux 全称 Multiplexor，即多路复用器（大概是这个意思吧），这个东西应该是通信专业同学研究的东西，有三个输入：a，b 和 sel。规则就是根据 sel 的值来确定输出 a 还是 b，sel 有点像是校验码之类的东西吧。</p>
+<p>粗略分析一下，Mux 有八种情况，我们先观察一下它的真值表。<br>$$\begin{array}{ccc|c}<br>a &amp; b &amp; sel &amp; Mux \\<br>\hline<br>0 &amp; 0 &amp; 0   &amp; 0    \\<br>0 &amp; 1 &amp; 0   &amp; 0    \\<br>1 &amp; 0 &amp; 0   &amp; 1    \\<br>1 &amp; 1 &amp; 0   &amp; 1    \\<br>0 &amp; 0 &amp; 1   &amp; 0    \\<br>0 &amp; 1 &amp; 1   &amp; 1    \\<br>1 &amp; 0 &amp; 1   &amp; 0    \\<br>1 &amp; 1 &amp; 1   &amp; 1    \\<br>\end{array}$$<br>Mux 的结果中有 4 个值为真，仔细回想一下老师在 <a href="#1.2">1.2</a> 讲的有关反向构造布尔函数的知识，首先先列出所有真值的表达式，也就是上表中的第 3、4、6、8 行，可得：</p>
+<ul>
+<li>第 3 行：a and (not b) and (not sel)</li>
+<li>第 4 行：a and b and (not sel)</li>
+<li>第 6 行：not a and b and sel</li>
+<li>第 8 行：a and b and sel</li>
+</ul>
+<p>继而我们可以得到 Mux 的布尔函数式子：(a and (not b) and (not sel)) or (a and b and (not sel)) or ((not a) and b and sel) or (a and b and sel)。汗，真长，不过先不管，我们直接按照这个函数来写代码，可以得到以下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">CHIP Mux &#123;</span><br><span class="line">    IN a, b, sel;</span><br><span class="line">    OUT out;</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    Not(in=b, out=notb);</span><br><span class="line">    Not(in=sel, out=notsel);</span><br><span class="line">    Not(in=a, out=nota);</span><br><span class="line"></span><br><span class="line">    And(a=a, b=notb, out=u1);</span><br><span class="line">    And(a=u1, b=notsel, out=u2);</span><br><span class="line"></span><br><span class="line">    And(a=a, b=b, out=v1);</span><br><span class="line">    And(a=v1, b=notsel, out=v2);</span><br><span class="line"></span><br><span class="line">    And(a=nota, b=b, out=w1);</span><br><span class="line">    And(a=w1, b=sel, out=w2);</span><br><span class="line"></span><br><span class="line">    And(a=a, b=b, out=x1);</span><br><span class="line">    And(a=x1, b=sel, out=x2);</span><br><span class="line"></span><br><span class="line">    Or(a=u2, b=v2, out=y1);</span><br><span class="line">    Or(a=y1, b=w2, out=y2);</span><br><span class="line">    Or(a=y2, b=x2, out=out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>测试后结果是正确的，不过这显然不够老师说的 elegant（笑），我们来把布尔函数式根据运算规则化简一下，可得：(a and (not sel)) or (b and sel)，从而可得：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CHIP Mux &#123;</span><br><span class="line">    IN a, b, sel;</span><br><span class="line">    OUT out;</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    Not(in=sel, out=notsel);</span><br><span class="line">    And(a=a, b=notsel, out=u);</span><br><span class="line">    And(a=b, b=sel, out=v);</span><br><span class="line">    Or(a=u, b=v, out=out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>测试后结果依然正确，说明化简是正确的。<br><div class="note warning no-icon">
+            <p><strong>为什么要使用上面的方法来构造布尔函数？因为此时我们能用的逻辑门已经不仅仅只有 Nand，还有先前已经构造好了的 And、Not、Or、Xor，这些都可以直接拿来用了，那还费脑子死想干嘛呢。当然了，这也是老师强调过的思想</strong>。</p>
+          </div><br>另外，通过上面的计算过程和老师的讲解，我们可以得到反向构造布尔函数时的几个要点：</p>
+<ol>
+<li>选取结果序列中真值或假值<strong>较少</strong>的一方，上面的 Mux 中真假值都是 4 个，任取即可</li>
+<li>用每一个值写出的式子必须保证其中的每一子项皆为真或假，比如以上面第 3 行为例，a、not b 和 not sel 的值都是 1</li>
+<li>单个式子的每一子项要进行 and 运算，而每个式子之间则用 or 运算</li>
+</ol>
+<p>PS：有关逻辑式子化简的问题，应该属于离散数学的知识。</p>
+<h3 id="DMux"><a href="#DMux" class="headerlink" title="DMux"></a>DMux</h3><p>DMux，Demultiplexor，即解复用器，与 Mux 是一对，二者的功能也正好相反，但 DMux 的特殊性在于它有两个输出。我们还是按照上面的思路来构建，先看一下 DMux 的真值表<br>$$\begin{array}{c|cc}<br>sel &amp; a &amp; b     \\<br>\hline<br>0  &amp; in &amp; 0     \\<br>1  &amp; 0  &amp; in    \\<br>\end{array}$$<br>这是老师提供的资料上的真值表，好像不是很易于分析问题，那我们把详细的真值表整理出来：<br>$$\begin{array}{cc|cc}<br>sel &amp; in &amp; a &amp; b    \\<br>\hline<br>0   &amp;  0 &amp; 0 &amp; 0    \\<br>0   &amp;  1 &amp; 1 &amp; 0    \\<br>1   &amp;  0 &amp; 0 &amp; 0    \\<br>1   &amp;  1 &amp; 0 &amp; 1    \\<br>\end{array}$$<br>这样，我们在分析这个问题时，就可以单独考虑如何利用 sel 和 in 分别得到 a、b 这两列值，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CHIP DMux &#123;</span><br><span class="line">    IN in, sel;</span><br><span class="line">    OUT a, b;</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    Not(in=in, out=notin);</span><br><span class="line">    Or(a=sel, b=notin, out=v1);</span><br><span class="line">    Not(in=v1, out=a);</span><br><span class="line"></span><br><span class="line">    And(a=sel, b=in, out=b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Not16"><a href="#Not16" class="headerlink" title="Not16"></a>Not16</h3><p>多位逻辑门是老师在 <a href="#1.6">1.6</a> 讲过的内容，构造的基本思想就是每一位都用一个逻辑门来计算，组合在一起就可以了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">CHIP Not16 &#123;</span><br><span class="line">    IN in[16];</span><br><span class="line">    OUT out[16];</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    Not(in=in[0], out=out[0]);</span><br><span class="line">    Not(in=in[1], out=out[1]);</span><br><span class="line">    Not(in=in[2], out=out[2]);</span><br><span class="line">    Not(in=in[3], out=out[3]);</span><br><span class="line">    Not(in=in[4], out=out[4]);</span><br><span class="line">    Not(in=in[5], out=out[5]);</span><br><span class="line">    Not(in=in[6], out=out[6]);</span><br><span class="line">    Not(in=in[7], out=out[7]);</span><br><span class="line">    Not(in=in[8], out=out[8]);</span><br><span class="line">    Not(in=in[9], out=out[9]);</span><br><span class="line">    Not(in=in[10], out=out[10]);</span><br><span class="line">    Not(in=in[11], out=out[11]);</span><br><span class="line">    Not(in=in[12], out=out[12]);</span><br><span class="line">    Not(in=in[13], out=out[13]);</span><br><span class="line">    Not(in=in[14], out=out[14]);</span><br><span class="line">    Not(in=in[15], out=out[15]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="And16"><a href="#And16" class="headerlink" title="And16"></a>And16</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">CHIP And16 &#123;</span><br><span class="line">    IN a[16], b[16];</span><br><span class="line">    OUT out[16];</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    And(a=a[0], b=b[0], out=out[0]);</span><br><span class="line">    And(a=a[1], b=b[1], out=out[1]);</span><br><span class="line">    And(a=a[2], b=b[2], out=out[2]);</span><br><span class="line">    And(a=a[3], b=b[3], out=out[3]);</span><br><span class="line">    And(a=a[4], b=b[4], out=out[4]);</span><br><span class="line">    And(a=a[5], b=b[5], out=out[5]);</span><br><span class="line">    And(a=a[6], b=b[6], out=out[6]);</span><br><span class="line">    And(a=a[7], b=b[7], out=out[7]);</span><br><span class="line">    And(a=a[8], b=b[8], out=out[8]);</span><br><span class="line">    And(a=a[9], b=b[9], out=out[9]);</span><br><span class="line">    And(a=a[10], b=b[10], out=out[10]);</span><br><span class="line">    And(a=a[11], b=b[11], out=out[11]);</span><br><span class="line">    And(a=a[12], b=b[12], out=out[12]);</span><br><span class="line">    And(a=a[13], b=b[13], out=out[13]);</span><br><span class="line">    And(a=a[14], b=b[14], out=out[14]);</span><br><span class="line">    And(a=a[15], b=b[15], out=out[15]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Or16"><a href="#Or16" class="headerlink" title="Or16"></a>Or16</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">CHIP Or16 &#123;</span><br><span class="line">    IN a[16], b[16];</span><br><span class="line">    OUT out[16];</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    Or(a=a[0], b=b[0], out=out[0]);</span><br><span class="line">    Or(a=a[1], b=b[1], out=out[1]);</span><br><span class="line">    Or(a=a[2], b=b[2], out=out[2]);</span><br><span class="line">    Or(a=a[3], b=b[3], out=out[3]);</span><br><span class="line">    Or(a=a[4], b=b[4], out=out[4]);</span><br><span class="line">    Or(a=a[5], b=b[5], out=out[5]);</span><br><span class="line">    Or(a=a[6], b=b[6], out=out[6]);</span><br><span class="line">    Or(a=a[7], b=b[7], out=out[7]);</span><br><span class="line">    Or(a=a[8], b=b[8], out=out[8]);</span><br><span class="line">    Or(a=a[9], b=b[9], out=out[9]);</span><br><span class="line">    Or(a=a[10], b=b[10], out=out[10]);</span><br><span class="line">    Or(a=a[11], b=b[11], out=out[11]);</span><br><span class="line">    Or(a=a[12], b=b[12], out=out[12]);</span><br><span class="line">    Or(a=a[13], b=b[13], out=out[13]);</span><br><span class="line">    Or(a=a[14], b=b[14], out=out[14]);</span><br><span class="line">    Or(a=a[15], b=b[15], out=out[15]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Mux16"><a href="#Mux16" class="headerlink" title="Mux16"></a>Mux16</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">CHIP Mux16 &#123;</span><br><span class="line">    IN a[16], b[16], sel;</span><br><span class="line">    OUT out[16];</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    Mux(a=a[0], b=b[0], sel=sel, out=out[0]);</span><br><span class="line">    Mux(a=a[1], b=b[1], sel=sel, out=out[1]);</span><br><span class="line">    Mux(a=a[2], b=b[2], sel=sel, out=out[2]);</span><br><span class="line">    Mux(a=a[3], b=b[3], sel=sel, out=out[3]);</span><br><span class="line">    Mux(a=a[4], b=b[4], sel=sel, out=out[4]);</span><br><span class="line">    Mux(a=a[5], b=b[5], sel=sel, out=out[5]);</span><br><span class="line">    Mux(a=a[6], b=b[6], sel=sel, out=out[6]);</span><br><span class="line">    Mux(a=a[7], b=b[7], sel=sel, out=out[7]);</span><br><span class="line">    Mux(a=a[8], b=b[8], sel=sel, out=out[8]);</span><br><span class="line">    Mux(a=a[9], b=b[9], sel=sel, out=out[9]);</span><br><span class="line">    Mux(a=a[10], b=b[10], sel=sel, out=out[10]);</span><br><span class="line">    Mux(a=a[11], b=b[11], sel=sel, out=out[11]);</span><br><span class="line">    Mux(a=a[12], b=b[12], sel=sel, out=out[12]);</span><br><span class="line">    Mux(a=a[13], b=b[13], sel=sel, out=out[13]);</span><br><span class="line">    Mux(a=a[14], b=b[14], sel=sel, out=out[14]);</span><br><span class="line">    Mux(a=a[15], b=b[15], sel=sel, out=out[15]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Or8Way"><a href="#Or8Way" class="headerlink" title="Or8Way"></a>Or8Way</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CHIP Or8Way &#123;</span><br><span class="line">    IN in[8];</span><br><span class="line">    OUT out;</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    Or(a=in[0], b=in[1], out=v1);</span><br><span class="line">    Or(a=v1, b=in[2], out=v2);</span><br><span class="line">    Or(a=v2, b=in[3], out=v3);</span><br><span class="line">    Or(a=v3, b=in[4], out=v4);</span><br><span class="line">    Or(a=v4, b=in[5], out=v5);</span><br><span class="line">    Or(a=v5, b=in[6], out=v6);</span><br><span class="line">    Or(a=v6, b=in[7], out=out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Mux4Way16"><a href="#Mux4Way16" class="headerlink" title="Mux4Way16"></a>Mux4Way16</h3><p>4 路 Mux16 使用三个 Mux16 即可完成，可能会有人问为什么要先让 a 和 c 先通过一次 Mux16。因为 sel bits 是从右往左读的，若 a 和 b 先通过一次 Mux16，当 sel[1]=0 时，就无法得到正确的输出结果了（sel[0]=0，就输出 a，sel[0]=1，就输出 b，但第一次通过 Mux16 后已经过滤掉 a 或 b 了）。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CHIP Mux4Way16 &#123;</span><br><span class="line">    IN a[16], b[16], c[16], d[16], sel[2];</span><br><span class="line">    OUT out[16];</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    Mux16(a=a, b=c, sel=sel[1], out=v1);</span><br><span class="line">    Mux16(a=b, b=d, sel=sel[1], out=v2);</span><br><span class="line">    Mux16(a=v1, b=v2, sel=sel[0], out=out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Mux8Way16"><a href="#Mux8Way16" class="headerlink" title="Mux8Way16"></a>Mux8Way16</h3><p>在 Mux4Way16 的基础上构造就行了，注意一下这里的语法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CHIP Mux8Way16 &#123;</span><br><span class="line">    IN a[16], b[16], c[16], d[16],</span><br><span class="line">       e[16], f[16], g[16], h[16],</span><br><span class="line">       sel[3];</span><br><span class="line">    OUT out[16];</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    Mux4Way16(a=a, b=c, c=e, d=g, sel=sel[1..2], out=v1);</span><br><span class="line">    Mux4Way16(a=b, b=d, c=f, d=h, sel=sel[1..2], out=v2);</span><br><span class="line">    Mux16(a=v1, b=v2, sel=sel[0], out=out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="DMux4Way"><a href="#DMux4Way" class="headerlink" title="DMux4Way"></a>DMux4Way</h3><p>先用 sel[1] 来区分 a、b 和 c、d 两组，再用 sel[0] 在组内分别区分 a、b 和 c、d。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CHIP DMux4Way &#123;</span><br><span class="line">    IN in, sel[2];</span><br><span class="line">    OUT a, b, c, d;</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    DMux(in=in, sel=sel[1], a=u1, b=u2);</span><br><span class="line">    DMux(in=u1, sel=sel[0], a=a, b=b);</span><br><span class="line">    DMux(in=u2, sel=sel[0], a=c, b=d);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="DMux8Way"><a href="#DMux8Way" class="headerlink" title="DMux8Way"></a>DMux8Way</h3><p>在 DMux4Way 的基础上构建就行，思路是完全一致的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CHIP DMux8Way &#123;</span><br><span class="line">    IN in, sel[3];</span><br><span class="line">    OUT a, b, c, d, e, f, g, h;</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    DMux4Way(in=in, sel=sel[1..2], a=u1, b=u2, c=u3, d=u4);</span><br><span class="line">    DMux(in=u1, sel=sel[0], a=a, b=b);</span><br><span class="line">    DMux(in=u2, sel=sel[0], a=c, b=d);</span><br><span class="line">    DMux(in=u3, sel=sel[0], a=e, b=f);</span><br><span class="line">    DMux(in=u4, sel=sel[0], a=g, b=h);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Unit-1-8-Perspectives"><a href="#Unit-1-8-Perspectives" class="headerlink" title="Unit 1.8 Perspectives"></a>Unit 1.8 Perspectives</h2><p>本小节主要老师们回答学生在论坛区提出的一些典型问题，这次主要回答了 3 个问题：</p>
+<ol>
+<li>能否不用 Nand 而是用其他的基本逻辑门来构建一个计算机？<ul>
+<li>答案是 yes，这里我们不深究具体原因。</li>
+</ul>
+</li>
+<li>Nand gate 的具体工作原理<ul>
+<li>老师用电路图讲了一下，当然，这是电气工程师该干的活，就不具体讨论了</li>
+</ul>
+</li>
+<li>工业坏境下使用的 HDL 语言与课程使用的 HDL 语言有何差别<ul>
+<li>工业环境用的肯定功能更加强大，效率更高，学习的时间较长；而本课程的 HDL 语言只是为了满足教学使用，所以功能性会弱很多，但易于学习，且足够满足本课程的所有需要</li>
+</ul>
+</li>
+</ol>
+<p>本周内容过于底层，估计不少人觉得无聊，不过还好不是太难。当然，可能会有第一次使用这样的 HDL 语言和硬件模拟器而不熟悉的问题，不过老师提供的手册和视频的讲解帮助还是很大的。个人感觉老师给的手册如果能更详细一点，用例再多一点就更好了（主要还是自己太懒，笑）。</p>
+<hr>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Buy me a coffee ? :)</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="bachzart WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.png" alt="bachzart Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>bachzart</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    
+    <a href="http://bachzart.github.io/2020/09/20/Nand2Tetris-Part1-01/" title="Nand2Tetris_Part1_01">http://bachzart.github.io/2020/09/20/Nand2Tetris-Part1-01/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Nand2Tetris/" rel="tag"><i class="fa fa-tag"></i> Nand2Tetris</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/09/17/MathJax-语法快速指南/" rel="next" title="MathJax 语法快速指南">
+                <i class="fa fa-chevron-left"></i> MathJax 语法快速指南
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/09/21/Nand2Tetris-Part1-02/" rel="prev" title="Nand2Tetris_Part1_02">
+                Nand2Tetris_Part1_02 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="bachzart">
+            
+              <p class="site-author-name" itemprop="name">bachzart</p>
+              <p class="site-description motion-element" itemprop="description">I've been in my mind, it's such a fine line.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">163</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">49</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/bachzart" title="GitHub &rarr; https://github.com/bachzart" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:whistlesilp@gmail.com" title="E-Mail &rarr; mailto:whistlesilp@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/about/" title="/about/">About This Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/Book-List/" title="/Book-List/">Book List</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sudoku.name/index.php?ln=cn&ref=44355" title="https://www.sudoku.name/index.php?ln=cn&ref=44355" rel="noopener" target="_blank">Soduku Game</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://2048game.com/" title="https://2048game.com/" rel="noopener" target="_blank">2048 Game</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Boolean-Functions-and-Gate-Logic"><span class="nav-number">2.</span> <span class="nav-text">Boolean Functions and Gate Logic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Unit-1-1-Boolean-Logic"><span class="nav-number">2.1.</span> <span class="nav-text">Unit 1.1 Boolean Logic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unit-1-2-Boolean-Functions-Synthesis"><span class="nav-number">2.2.</span> <span class="nav-text">Unit 1.2 Boolean Functions Synthesis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unit-1-3-Logic-gates"><span class="nav-number">2.3.</span> <span class="nav-text">Unit 1.3 Logic gates</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unit-1-4-Hardware-Description-Language"><span class="nav-number">2.4.</span> <span class="nav-text">Unit 1.4 Hardware Description Language</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unit-1-5-Hardware-Simulation"><span class="nav-number">2.5.</span> <span class="nav-text">Unit 1.5 Hardware Simulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unit-1-6-Multi-Bit-Buses"><span class="nav-number">2.6.</span> <span class="nav-text">Unit 1.6 Multi Bit Buses</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unit-1-7-Project-1-Overview"><span class="nav-number">2.7.</span> <span class="nav-text">Unit 1.7 Project 1 Overview</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Not"><span class="nav-number">2.7.1.</span> <span class="nav-text">Not</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#And"><span class="nav-number">2.7.2.</span> <span class="nav-text">And</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Or"><span class="nav-number">2.7.3.</span> <span class="nav-text">Or</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Xor"><span class="nav-number">2.7.4.</span> <span class="nav-text">Xor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mux"><span class="nav-number">2.7.5.</span> <span class="nav-text">Mux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DMux"><span class="nav-number">2.7.6.</span> <span class="nav-text">DMux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Not16"><span class="nav-number">2.7.7.</span> <span class="nav-text">Not16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#And16"><span class="nav-number">2.7.8.</span> <span class="nav-text">And16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Or16"><span class="nav-number">2.7.9.</span> <span class="nav-text">Or16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mux16"><span class="nav-number">2.7.10.</span> <span class="nav-text">Mux16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Or8Way"><span class="nav-number">2.7.11.</span> <span class="nav-text">Or8Way</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mux4Way16"><span class="nav-number">2.7.12.</span> <span class="nav-text">Mux4Way16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mux8Way16"><span class="nav-number">2.7.13.</span> <span class="nav-text">Mux8Way16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DMux4Way"><span class="nav-number">2.7.14.</span> <span class="nav-text">DMux4Way</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DMux8Way"><span class="nav-number">2.7.15.</span> <span class="nav-text">DMux8Way</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unit-1-8-Perspectives"><span class="nav-number">2.8.</span> <span class="nav-text">Unit 1.8 Perspectives</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bachzart</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">1.4m</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total">188:51</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function(i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function(e) {
+        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('Copied');
+          else $(this).text('Copy failed');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function(e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function() {
+          $b.text('Copy');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+</body>
+</html>

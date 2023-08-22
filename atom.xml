@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-08-13T05:54:52.762Z</updated>
+  <updated>2023-08-22T15:05:34.868Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>typedef 关键字一些理解</title>
+    <link href="http://bachzart.github.io/2023/08/22/typedef-%E5%85%B3%E9%94%AE%E5%AD%97%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/"/>
+    <id>http://bachzart.github.io/2023/08/22/typedef-关键字一些理解/</id>
+    <published>2023-08-22T11:13:11.000Z</published>
+    <updated>2023-08-22T15:05:34.868Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;巩固一下&lt;code&gt;typedef&lt;/code&gt;关键字的用法...&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
+    
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
+    
+      <category term="typedef" scheme="http://bachzart.github.io/tags/typedef/"/>
+    
+  </entry>
   
   <entry>
     <title>C 语言中的回调函数</title>
@@ -428,28 +452,6 @@
     <summary type="html">
     
       &lt;p&gt;要过年啦~&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
-    
-      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
-    
-    
-      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2022_年末小结</title>
-    <link href="http://bachzart.github.io/2023/01/02/2022-%E5%B9%B4%E6%9C%AB%E5%B0%8F%E7%BB%93/"/>
-    <id>http://bachzart.github.io/2023/01/02/2022-年末小结/</id>
-    <published>2023-01-02T03:02:53.000Z</published>
-    <updated>2023-07-03T12:57:14.106Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;不知不觉，2022 已经过去了...&lt;br&gt;
     
     </summary>
     

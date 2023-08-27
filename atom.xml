@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-08-23T11:26:00.375Z</updated>
+  <updated>2023-08-27T15:10:12.397Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2023_08_月总结</title>
+    <link href="http://bachzart.github.io/2023/08/27/2023-08-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
+    <id>http://bachzart.github.io/2023/08/27/2023-08-月总结/</id>
+    <published>2023-08-27T14:21:57.000Z</published>
+    <updated>2023-08-27T15:10:12.397Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;周末正好是八月底呀~😎&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
+    
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C 语言与缓冲区</title>
+    <link href="http://bachzart.github.io/2023/08/24/C-%E8%AF%AD%E8%A8%80%E4%B8%8E%E7%BC%93%E5%86%B2%E5%8C%BA/"/>
+    <id>http://bachzart.github.io/2023/08/24/C-语言与缓冲区/</id>
+    <published>2023-08-24T11:16:47.000Z</published>
+    <updated>2023-08-27T09:29:17.508Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;有关缓冲区的概念和 C 语言中相关的内容...&lt;br&gt;
+    
+    </summary>
+    
+      <category term="[object Object]" scheme="http://bachzart.github.io/categories/object-Object/"/>
+    
+    
+      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
+    
+      <category term="buffer" scheme="http://bachzart.github.io/tags/buffer/"/>
+    
+  </entry>
   
   <entry>
     <title>typedef 关键字一些理解</title>
@@ -69,7 +113,7 @@
     <link href="http://bachzart.github.io/2023/07/30/2023-07-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
     <id>http://bachzart.github.io/2023/07/30/2023-07-月总结/</id>
     <published>2023-07-30T13:26:33.000Z</published>
-    <updated>2023-07-30T13:58:04.709Z</updated>
+    <updated>2023-08-27T14:22:21.638Z</updated>
     
     <summary type="html">
     
@@ -77,6 +121,12 @@
     
     </summary>
     
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
+    
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
     
   </entry>
   
@@ -417,50 +467,6 @@
       <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
     
       <category term="TinyHttpd" scheme="http://bachzart.github.io/tags/TinyHttpd/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++_类的简单构造案例</title>
-    <link href="http://bachzart.github.io/2023/02/12/C-%E7%B1%BB%E7%9A%84%E7%AE%80%E5%8D%95%E6%9E%84%E9%80%A0%E6%A1%88%E4%BE%8B/"/>
-    <id>http://bachzart.github.io/2023/02/12/C-类的简单构造案例/</id>
-    <published>2023-02-12T08:13:57.000Z</published>
-    <updated>2023-04-03T15:58:57.315Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这篇文章主要是介绍用 C++ 实现的一个简单数学类——分数类，其中包含了对应的基本运算规则。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
-    
-    
-      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2023_01_月总结</title>
-    <link href="http://bachzart.github.io/2023/02/12/2023-01-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
-    <id>http://bachzart.github.io/2023/02/12/2023-01-月总结/</id>
-    <published>2023-02-12T04:04:54.000Z</published>
-    <updated>2023-02-12T07:04:51.345Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;要过年啦~&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
-    
-      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
-    
-    
-      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
     
   </entry>
   

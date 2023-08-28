@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="有关缓冲区的概念和 C 语言中相关的内容...">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2023-08-27T09:29:17.508Z">
+<meta property="og:updated_time" content="2023-08-28T10:17:16.245Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C 语言与缓冲区">
 <meta name="twitter:description" content="有关缓冲区的概念和 C 语言中相关的内容...">
@@ -315,7 +315,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">29</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">28</span></a>
 
   </li>
         
@@ -484,7 +484,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2023-08-27 17:29:17" itemprop="dateModified" datetime="2023-08-27T17:29:17+08:00">2023-08-27</time>
+                <time title="Modified: 2023-08-28 18:17:16" itemprop="dateModified" datetime="2023-08-28T18:17:16+08:00">2023-08-28</time>
               
             
           </span>
@@ -501,7 +501,14 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/object-Object/" itemprop="url" rel="index"><span itemprop="name">[object Object]</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Programming/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a></span>
 
                 
                 
@@ -571,10 +578,10 @@
 <h2 id="全缓冲"><a href="#全缓冲" class="headerlink" title="全缓冲"></a>全缓冲</h2><p>全缓冲就是在缓冲区填满了之后，才执行 I/O 操作。测试代码：<br><figure class="highlight c"><figcaption><span>test1</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FILEPATH <span class="meta-string">"./tmp"</span></span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *<span class="built_in">string</span> = <span class="string">"ABCDEFG"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buff[<span class="number">1024</span>];</span><br><span class="line">    </span><br><span class="line">    FILE *fp = <span class="literal">NULL</span>;</span><br><span class="line">    fp = fopen(FILEPATH, <span class="string">"w+"</span>);</span><br><span class="line">    <span class="keyword">if</span>(fp == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        perror(<span class="string">"fopen() error!\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">    ret = setvbuf(fp, buff, _IOFBF, <span class="number">1024</span>);</span><br><span class="line">    <span class="keyword">if</span>(ret != <span class="number">0</span>) &#123;</span><br><span class="line">        perror(<span class="string">"setvbuf error!\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">fprintf</span>(fp, <span class="string">"%s"</span>, <span class="built_in">string</span>);</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>在上面的代码中，首先使用<code>fopen</code>函数在<code>w+</code>（读，若文件不存在则创建）的模式下打开文件，接着使用<code>setvbuf</code>函数设置缓冲模式为<code>_IOFBF</code>（全缓冲）。运行程序，在另一个终端中可以确认<code>tmp</code>文件已创建，然后键入<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> cat tmp</span><br></pre></td></tr></table></figure></p>
 <p>显示文件无内容。</p>
-<h2 id="行缓冲"><a href="#行缓冲" class="headerlink" title="行缓冲"></a>行缓冲</h2><p>行缓冲就是在遇到换行符（<code>\n</code>）时，执行 I/O 操作，典型代表就是标准输入的<code>scanf</code>函数，每次输入完数据后，还需要输入回车，才能看到效果。测试代码：<br><figure class="highlight c"><figcaption><span>test2</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FILEPATH <span class="meta-string">"./tmp"</span></span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *<span class="built_in">string</span> = <span class="string">"ABCDEFG\n"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buff[<span class="number">1024</span>];</span><br><span class="line">    FILE *fp = <span class="literal">NULL</span>;</span><br><span class="line">    fp = fopen(FILEPATH, <span class="string">"w+"</span>);</span><br><span class="line">    <span class="keyword">if</span>(fp == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        perror(<span class="string">"fopen() error!\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">    ret = setvbuf(fp, buff, _IOLBF, <span class="number">1024</span>);</span><br><span class="line">    <span class="keyword">if</span>(ret != <span class="number">0</span>) &#123;</span><br><span class="line">        perror(<span class="string">"setvbuf error!\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">fprintf</span>(fp, <span class="string">"%s"</span>, <span class="built_in">string</span>);</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="行缓冲"><a href="#行缓冲" class="headerlink" title="行缓冲"></a>行缓冲</h2><p>行缓冲就是在遇到换行符（<code>\n</code>）时，执行 I/O 操作，典型代表就是标准输入的<code>scanf</code>函数，每次输入完数据和回车后，才能看到效果。测试代码：<br><figure class="highlight c"><figcaption><span>test2</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FILEPATH <span class="meta-string">"./tmp"</span></span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *<span class="built_in">string</span> = <span class="string">"ABCDEFG\n"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buff[<span class="number">1024</span>];</span><br><span class="line">    FILE *fp = <span class="literal">NULL</span>;</span><br><span class="line">    fp = fopen(FILEPATH, <span class="string">"w+"</span>);</span><br><span class="line">    <span class="keyword">if</span>(fp == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        perror(<span class="string">"fopen() error!\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">    ret = setvbuf(fp, buff, _IOLBF, <span class="number">1024</span>);</span><br><span class="line">    <span class="keyword">if</span>(ret != <span class="number">0</span>) &#123;</span><br><span class="line">        perror(<span class="string">"setvbuf error!\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">fprintf</span>(fp, <span class="string">"%s"</span>, <span class="built_in">string</span>);</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>相比 test1，上面的代码有两个改动：</p>
 <ol>
-<li><code>const char *string = &quot;ABCDEFG\n;</code>，加入<code>\n</code>后，程序才会进行 I/O 操作</li>
+<li><code>const char *string = &quot;ABCDEFG\n&quot;;</code>，加入<code>\n</code>后，程序才会进行 I/O 操作</li>
 <li><code>ret = setvbuf(fp, buff, _IOLBF, 1024);</code>，修改为行缓冲模式</li>
 </ol>
 <p>同样的思路，运行程序，在另一个终端中可以确认<code>tmp</code>文件已创建，然后键入<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> cat tmp</span><br></pre></td></tr></table></figure></p>
@@ -843,9 +850,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -1102,7 +1107,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">189:51</span>
+    <span title="Reading time total">189:52</span>
   
 </div>
 

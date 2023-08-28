@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="巩固一下typedef关键字的用法...">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2023-08-23T11:26:00.375Z">
+<meta property="og:updated_time" content="2023-08-28T14:08:29.444Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="typedef 关键字一些理解">
 <meta name="twitter:description" content="巩固一下typedef关键字的用法...">
@@ -315,7 +315,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">29</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">28</span></a>
 
   </li>
         
@@ -484,7 +484,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2023-08-23 19:26:00" itemprop="dateModified" datetime="2023-08-23T19:26:00+08:00">2023-08-23</time>
+                <time title="Modified: 2023-08-28 22:08:29" itemprop="dateModified" datetime="2023-08-28T22:08:29+08:00">2023-08-28</time>
               
             
           </span>
@@ -537,7 +537,7 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                <span title="Symbols count in article">1.7k</span>
+                <span title="Symbols count in article">1.8k</span>
               
 
               
@@ -549,7 +549,7 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                <span title="Reading time">14 mins.</span>
+                <span title="Reading time">15 mins.</span>
               
             </div>
           
@@ -577,13 +577,13 @@
 <p>从语义的角度而言，在上述代码中，<code>Arr</code>是一种“新类型”（这里的新类型其实并不是真正意义上新类型），表示元素个数为 5 的<code>int</code>数组，对应的<code>a</code>是一个指向元素个数为 5 的<code>int</code>数组的数组指针。对比类型一样、用基本类型声明的数组指针<code>parr</code>，也可以看出使用<code>typedef</code>带来的便利性。<br>实际上，熟悉 C++ 的同学，可能会发现<code>typedef</code>和<code>using</code>的功能有点类似。</p>
 <p>类似的用法，还有定义函数指针的用法，如下：<br><figure class="highlight c"><figcaption><span>test5</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*pfun)</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>上述代码中，定义了一个返回值为<code>void</code>，参数为一个<code>int</code>的函数指针类型<code>pfun</code>。</p>
-<h1 id="陷阱"><a href="#陷阱" class="headerlink" title="陷阱"></a>陷阱</h1><p>这里，还需要提一下<code>typedef</code>和<code>const</code>关键字一起使用时的陷阱——<strong>千万不要把<code>typedef</code>和<code>#define</code>的文本替换混为一谈</strong>。<br>比如：<br><figure class="highlight c"><figcaption><span>test5</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> *pchar;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> s1[<span class="number">10</span>] = <span class="string">"hello"</span>;</span><br><span class="line">    <span class="keyword">char</span> s2[<span class="number">10</span>] = <span class="string">"world"</span>;</span><br><span class="line">    <span class="keyword">const</span> pchar str = s1;</span><br><span class="line"><span class="comment">//  str = s2;   // error</span></span><br><span class="line">    *str = <span class="string">'g'</span>;</span><br><span class="line">    <span class="built_in">puts</span>(s1);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> *pi = &amp;j;</span><br><span class="line">    pi = &amp;i;</span><br><span class="line"><span class="comment">//  *pi = 2;  // error</span></span><br><span class="line">    <span class="keyword">int</span> * <span class="keyword">const</span> ppi = &amp;i;</span><br><span class="line">    *ppi = <span class="number">3</span>;   <span class="comment">// correct</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, *pi);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">gello</span></span><br><span class="line"><span class="comment">3</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="陷阱"><a href="#陷阱" class="headerlink" title="陷阱"></a>陷阱</h1><p>这里，还需要提一下<code>typedef</code>和<code>const</code>关键字一起使用时的陷阱——<strong>千万不要把<code>typedef</code>和<code>#define</code>的文本替换混为一谈</strong>。<br>比如：<br><figure class="highlight c"><figcaption><span>test5</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> *pchar;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> s1[<span class="number">10</span>] = <span class="string">"hello"</span>;</span><br><span class="line">    <span class="keyword">char</span> s2[<span class="number">10</span>] = <span class="string">"world"</span>;</span><br><span class="line">    <span class="keyword">const</span> pchar str = s1;</span><br><span class="line"><span class="comment">//    str = s2;   // error</span></span><br><span class="line">    *str = <span class="string">'g'</span>;</span><br><span class="line">    <span class="built_in">puts</span>(s1);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *pc = s1;</span><br><span class="line">    pc = s2;</span><br><span class="line"><span class="comment">//    *pc = 'g'; // error</span></span><br><span class="line">    <span class="built_in">puts</span>(pc);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> *pi = &amp;j;</span><br><span class="line">    pi = &amp;i;</span><br><span class="line"><span class="comment">//    *pi = 2;  // error</span></span><br><span class="line">    <span class="keyword">int</span> * <span class="keyword">const</span> ppi = &amp;i;</span><br><span class="line">    *ppi = <span class="number">3</span>;   <span class="comment">// correct</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, *pi);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">gello</span></span><br><span class="line"><span class="comment">world</span></span><br><span class="line"><span class="comment">3</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
 <div class="note info">
-            <p>在阅读下面的讨论之前，需要理解<code>const type *</code>和<code>type * const</code>的区别。</p>
+            <p>在阅读下面的讨论之前，需要理解<code>const typename *</code>和<code>typename * const</code>的区别。</p>
           </div>
-<p>如果认为<code>typedef</code>是文本替换，那么<code>const pchar str</code>与<code>const char *str</code>一致，对应语句<code>*str = &#39;g&#39;;</code>就会出错，而<code>str = s2;</code>就会正常执行（可以对比下面<code>const int</code>相关的代码）。但事实上，结果正好相反，编译器认为<code>*str = &#39;g&#39;;</code>正确、<code>str = s2;</code>错误，这说明，编译器并不认为<code>str</code>是一个<code>const char *</code>。</p>
+<p>如果认为<code>typedef</code>是文本替换，那么<code>const pchar str</code>与<code>const char *str</code>一致，对应语句<code>*str = &#39;g&#39;;</code>就会出错，而<code>str = s2;</code>就会正常执行（可以对比下面<code>const char *</code>和<code>const int</code>相关的代码）。但事实上，结果正好相反，编译器认为<code>*str = &#39;g&#39;;</code>正确、<code>str = s2;</code>错误，这说明，编译器并不认为<code>str</code>是一个<code>const char *</code>。</p>
 <p>从语义的角度来理解，<code>pchar</code>的类型是<code>char</code>型的指针，在其前面加上一个<code>const</code>，表示这个指针是一个常量，所以<code>const pchar</code>的实际类型是<code>char * const</code>，而不是<code>const char *</code>，这点从后面的代码也可以对比出来。</p>
-<p>最后需要说明的是，<code>typedef</code>的用法是 C 的标准规定的，本文只是在验证如何使用，而不是在证明这是编译器的黑魔法😂。</p>
+<p>最后需要说明的是，<code>typedef</code>的用法是 C 的标准规定的，本文只是验证如何使用，而不是证明这是编译器的黑魔法😂。</p>
 <hr>
       
     </div>
@@ -828,9 +828,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -1087,7 +1085,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">189:51</span>
+    <span title="Reading time total">189:52</span>
   
 </div>
 

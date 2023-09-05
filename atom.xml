@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-08-27T15:10:12.397Z</updated>
+  <updated>2023-09-05T15:37:02.744Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HIT_CO_Week_1</title>
+    <link href="http://bachzart.github.io/2023/09/05/HIT-CO-Week-1/"/>
+    <id>http://bachzart.github.io/2023/09/05/HIT-CO-Week-1/</id>
+    <published>2023-09-05T13:13:37.000Z</published>
+    <updated>2023-09-05T15:37:02.744Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;从今天开始更新笔者在 MOOC 上自学哈工大计算机组成原理时的笔记，按照每一周的课程进行记录，每周对应一篇 Blog，算上上下两门课程，这个系列大概有个十来篇吧。🧐&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Computer Organization" scheme="http://bachzart.github.io/categories/CS/Computer-Organization/"/>
+    
+    
+      <category term="HIT_CO" scheme="http://bachzart.github.io/tags/HIT-CO/"/>
+    
+  </entry>
   
   <entry>
     <title>2023_08_月总结</title>
@@ -445,30 +467,6 @@
     
     
       <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>TinyHttpd_Reading_Notes</title>
-    <link href="http://bachzart.github.io/2023/02/20/TinyHttpd-Reading-Notes/"/>
-    <id>http://bachzart.github.io/2023/02/20/TinyHttpd-Reading-Notes/</id>
-    <published>2023-02-20T13:02:39.000Z</published>
-    <updated>2023-04-08T13:46:38.205Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;http://tinyhttpd.sourceforge.net&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;TinyHttpd&lt;/a&gt; 是 J. David Blackstone 于 1999 年写的一个 500 行左右的超轻量级 http server，用来学习服务器的工作原理十分不错。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
-    
-    
-      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
-    
-      <category term="TinyHttpd" scheme="http://bachzart.github.io/tags/TinyHttpd/"/>
     
   </entry>
   

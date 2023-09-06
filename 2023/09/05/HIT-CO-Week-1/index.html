@@ -149,7 +149,12 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_1/1_1.png">
 <meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_1/1_2.png">
-<meta property="og:updated_time" content="2023-09-05T15:37:02.744Z">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_1/1_4.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_1/1_3.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_1/1_5.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_1/1_6.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_1/1_7.png">
+<meta property="og:updated_time" content="2023-09-06T15:03:09.249Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HIT_CO_Week_1">
 <meta name="twitter:description" content="从今天开始更新笔者在 MOOC 上自学哈工大计算机组成原理时的笔记，按照每一周的课程进行记录，每周对应一篇 Blog，算上上下两门课程，这个系列大概有个十来篇吧。🧐">
@@ -470,12 +475,24 @@
                 
               
 
-              <time title="Created: 2023-09-05 21:13:37 / Modified: 23:37:02" itemprop="dateCreated datePublished" datetime="2023-09-05T21:13:37+08:00">2023-09-05</time>
+              <time title="Created: 2023-09-05 21:13:37" itemprop="dateCreated datePublished" datetime="2023-09-05T21:13:37+08:00">2023-09-05</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2023-09-06 23:03:09" itemprop="dateModified" datetime="2023-09-06T23:03:09+08:00">2023-09-06</time>
               
             
           </span>
@@ -528,7 +545,7 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                <span title="Symbols count in article">920</span>
+                <span title="Symbols count in article">2.3k</span>
               
 
               
@@ -540,7 +557,7 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                <span title="Reading time">8 mins.</span>
+                <span title="Reading time">20 mins.</span>
               
             </div>
           
@@ -568,10 +585,10 @@
 <li>基本部件和单元的设计思想</li>
 </ol>
 <p>这门课程对应的交材是<strong>唐朔飞老师编的那本《计算机组成原理》（第二版）</strong>，由高等教育出版社出版。另外，老师推荐了两本参考教材：</p>
-<ol>
-<li>Computer Organization &amp; Design: A Hardware/Software Interface, David A.Patterson. John L.Hennessy</li>
-<li>Digital Design and Computer Architecture. Morgan Kaufmann, 2007, David Harris, Sarah Harris</li>
-</ol>
+<ul>
+<li><strong><span class="label warning">Computer Organization & Design: A Hardware/Software Interface, David A.Patterson. John L.Hennessy</span></strong></li>
+<li><strong><span class="label warning">Digital Design and Computer Architecture. Morgan Kaufmann, 2007, David Harris, Sarah Harris</span></strong></li>
+</ul>
 <p>这门课总共有十章内容，上半部分课程会讲解前五章，主要内容为计算机组成原理中与机器相关的部分；下半部分课程会讲解后五章，主要内容为计算机组成原理中数据的存储、表示和运算以及 CPU 的设计思想。</p>
 <p>第一周的课程有点 boring🥱，主要讲解<em>计算机系统概论</em>，算是基本概念知识。</p>
 <h1 id="计算机系统概论"><a href="#计算机系统概论" class="headerlink" title="计算机系统概论"></a>计算机系统概论</h1><h2 id="计算机的软硬件概念"><a href="#计算机的软硬件概念" class="headerlink" title="计算机的软硬件概念"></a>计算机的软硬件概念</h2><p>这个地方其实没什么好说的，算是常识性的内容。</p>
@@ -591,6 +608,31 @@
 <li>以运算器为中心</li>
 </ol>
 <p><img src="/my_photo_gallery/HIT_CO_Week_1/1_2.png" alt="冯·诺依曼计算机硬件框图" title="冯·诺依曼计算机硬件框图"></p>
+<p>冯·诺依曼计算机存在一个缺陷，那就是运算器承担了很多工作，大部分事情都是亲力亲为，这就导致了运算器的速度直接成了整台电脑的速度（实际上就是木桶效应）。</p>
+<h2 id="计算机硬件框图"><a href="#计算机硬件框图" class="headerlink" title="计算机硬件框图"></a>计算机硬件框图</h2><p>针对冯·诺依曼计算机的改良措施就是将整个体系的中心从运算器换成了存储器。</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_1/1_4.png" alt="改良后的冯·诺依曼计算机硬件框图" title="改良后的冯·诺依曼计算机硬件框图"></p>
+<p>现代计算机也是按照上图中的结构搭建起来的，此时各部分硬件设备都有了自己的名字，从这里体现的设计思想就是前面提到的 3Y——层次化（Hierachy）、模块化（Modularity）和规则性（Regularity）。</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_1/1_3.png" alt="现代计算机硬件框图" title="现代计算机硬件框图"></p>
+<h2 id="存储器的基本组成"><a href="#存储器的基本组成" class="headerlink" title="存储器的基本组成"></a>存储器的基本组成</h2><p>存储器由<strong>主存储器（主存，内存条）</strong>和<strong>辅存储器（辅存，硬盘）</strong>。<br>主存储器由许多<strong>存储单元</strong>组成，每个存储单元包含若干个存储元件（也就是在 Nand2tetris 这门课中接触到的 Bit 芯片，可以用来存储一位二进制信息）。<br>这里还有一个存储字长的概念，也就是指存储单元中二进制代码的位数。</p>
+<p>除了存储单元外，主存储器还包括了<strong>地址寄存器（MAR）</strong>、<strong>数据寄存器（MDR）</strong>和一些逻辑电路。<br>地址寄存器（MAR）存放访存地址，经过地址译码后找到所选的存储单元，从而拿到数据（类比一下指针的概念）。MAR 用于寻址，故其位数对应着存储单元的个数<br>数据寄存器（MDR）是主存和其他部件的中介机构，用于暂存要从存储器中读或写的信息（类比临时变量）。MDR 的位数和存储字长相等。<br><div class="note info">
+            <p>现代 CPU 中的缓存（Cache）在概念上也是主存。</p>
+          </div></p>
+<h2 id="运算器的基本组成"><a href="#运算器的基本组成" class="headerlink" title="运算器的基本组成"></a>运算器的基本组成</h2><p>运算器的<strong>基本</strong>组成包括：算术逻辑单元（ALU）、累加器（ACC）、乘商寄存器（MQ）和操作数寄存器（X），各寄存器运算后存储的内容见下图：</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_1/1_5.png" alt="运算器中的寄存器" title="运算器中的寄存器"></p>
+<h2 id="控制器的基本组成"><a href="#控制器的基本组成" class="headerlink" title="控制器的基本组成"></a>控制器的基本组成</h2><p>控制器的<strong>基本</strong>组成包括：控制单元（CU）、程序计数器（IR）和指令寄存器（PC），各部分功能见下图：</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_1/1_6.png" alt="控制器" title="控制器"></p>
+<h1 id="计算机的性能指标"><a href="#计算机的性能指标" class="headerlink" title="计算机的性能指标"></a>计算机的性能指标</h1><p>这一部分又是一堆概念性的内容🤐：</p>
+<ol>
+<li>机器字长：CPU 一次能处理数据的位数与 CPU 中的寄存器位数有关</li>
+<li>CPU 主频、核心数、CPI（执行一条指令所需时钟周期数）、MIPS（每秒执行百万条指令）、FLOPS（每秒浮点运算次数）</li>
+<li>存储容量，包括主存容量和辅存容量</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>做了张思维导图：</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_1/1_7.png" alt="计算机系统概述" title="计算机系统概述"></p>
+<p>之前一直在听 Nand2tetris 的课，现在一时换回国内老师的课，听的还有点不习惯。哎，听完一周，这种为了应试而听课、学习的感觉又回来了。<br>相比之下，感觉国外课程往往把复杂的理论讲的很简单，在你理解的差不多了之后，会给你一个任务，让你通过实践来继续加深理解。但国内课程为了应试，在理论上的讲解往往就比较复杂...😓<br>仔细想了一下，国内的课程真的很容易打消学生的兴趣，当然如果能坚持下来，确实能获得不错的理论能力，但是没有实践还是不行啊，哎，原本之前在自学 Nand2tetris 时，就已经感慨过国外学生的实践能力很强，现在这种体会又加深了。</p>
+<p>不扯这些闲篇了...回过头来谈一谈这门课的感受，在学习《组成原理》之前一定要把 C 语言的指针、地址这两个概念玩明白个大概，不然，这些硬件的设计思想会非常难以理解。只要能理解硬件中地址的设计思想理解透彻，应该就不会有太大的问题了。</p>
+<p>另外，从国内应试（期末考、408 之类）的角度来讲，哈工大开的这门课讲的还是很清晰的，推荐学习，如果你听的过程中感觉很吃力，那说明可能对一些基础概念还不熟悉，还是先把基础打扎实。</p>
+<p>好了，这周还有一件事情，那就是把书上的题做完😑，卧槽，突然想起来，好久没写过作业了...🤣</p>
 <hr>
       
     </div>
@@ -1047,7 +1089,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#课程概貌"><span class="nav-number">1.</span> <span class="nav-text">课程概貌</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机系统概论"><span class="nav-number">2.</span> <span class="nav-text">计算机系统概论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机的软硬件概念"><span class="nav-number">2.1.</span> <span class="nav-text">计算机的软硬件概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机系统的层次结构"><span class="nav-number">2.2.</span> <span class="nav-text">计算机系统的层次结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机体系结构和计算机组成"><span class="nav-number">2.3.</span> <span class="nav-text">计算机体系结构和计算机组成</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机的基本组成"><span class="nav-number">3.</span> <span class="nav-text">计算机的基本组成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#冯·诺依曼计算机的特点"><span class="nav-number">3.1.</span> <span class="nav-text">冯·诺依曼计算机的特点</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#课程概貌"><span class="nav-number">1.</span> <span class="nav-text">课程概貌</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机系统概论"><span class="nav-number">2.</span> <span class="nav-text">计算机系统概论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机的软硬件概念"><span class="nav-number">2.1.</span> <span class="nav-text">计算机的软硬件概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机系统的层次结构"><span class="nav-number">2.2.</span> <span class="nav-text">计算机系统的层次结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机体系结构和计算机组成"><span class="nav-number">2.3.</span> <span class="nav-text">计算机体系结构和计算机组成</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机的基本组成"><span class="nav-number">3.</span> <span class="nav-text">计算机的基本组成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#冯·诺依曼计算机的特点"><span class="nav-number">3.1.</span> <span class="nav-text">冯·诺依曼计算机的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机硬件框图"><span class="nav-number">3.2.</span> <span class="nav-text">计算机硬件框图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储器的基本组成"><span class="nav-number">3.3.</span> <span class="nav-text">存储器的基本组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运算器的基本组成"><span class="nav-number">3.4.</span> <span class="nav-text">运算器的基本组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制器的基本组成"><span class="nav-number">3.5.</span> <span class="nav-text">控制器的基本组成</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机的性能指标"><span class="nav-number">4.</span> <span class="nav-text">计算机的性能指标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -1088,7 +1130,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">190:01</span>
+    <span title="Reading time total">190:12</span>
   
 </div>
 

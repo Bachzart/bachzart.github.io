@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-09-06T15:03:09.249Z</updated>
+  <updated>2023-09-14T15:23:06.325Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HIT_CO_Week_2</title>
+    <link href="http://bachzart.github.io/2023/09/08/HIT-CO-Week-2/"/>
+    <id>http://bachzart.github.io/2023/09/08/HIT-CO-Week-2/</id>
+    <published>2023-09-08T13:40:54.000Z</published>
+    <updated>2023-09-14T15:23:06.325Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;看了眼第二周的标题，好像还是概念性的内容啊...😐&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Computer Organization" scheme="http://bachzart.github.io/categories/CS/Computer-Organization/"/>
+    
+    
+      <category term="HIT_CO" scheme="http://bachzart.github.io/tags/HIT-CO/"/>
+    
+  </entry>
   
   <entry>
     <title>HIT_CO_Week_1</title>
@@ -436,28 +458,6 @@
     <summary type="html">
     
       &lt;p&gt;现在是 2023 年 3 月 5 日了...😑&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
-    
-      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
-    
-    
-      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>找房记</title>
-    <link href="http://bachzart.github.io/2023/02/28/%E6%89%BE%E6%88%BF%E8%AE%B0/"/>
-    <id>http://bachzart.github.io/2023/02/28/找房记/</id>
-    <published>2023-02-28T13:03:56.000Z</published>
-    <updated>2023-03-01T12:44:52.927Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;不知不觉来到上海已经五个月了，与朋友小 y 也一起度过了五个月...&lt;br&gt;
     
     </summary>
     

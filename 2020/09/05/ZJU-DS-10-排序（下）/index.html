@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="本周继续介绍排序算法。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-20T13:30:23.868Z">
+<meta property="og:updated_time" content="2023-09-16T08:24:13.921Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ZJU_DS_10-排序（下）">
 <meta name="twitter:description" content="本周继续介绍排序算法。">
@@ -296,7 +296,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">168</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">169</span></a>
 
   </li>
         
@@ -484,7 +484,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-09-20 21:30:23" itemprop="dateModified" datetime="2020-09-20T21:30:23+08:00">2020-09-20</time>
+                <time title="Modified: 2023-09-16 16:24:13" itemprop="dateModified" datetime="2023-09-16T16:24:13+08:00">2023-09-16</time>
               
             
           </span>
@@ -549,7 +549,7 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                <span title="Reading time">1:18</span>
+                <span title="Reading time">1:17</span>
               
             </div>
           
@@ -580,7 +580,7 @@
 <h2 id="选主元"><a href="#选主元" class="headerlink" title="选主元"></a>选主元</h2><p>那么主元应该怎么去选择呢？比较经典的方法就是取头、中、尾三个数（当然也可以五个数）的<strong>中位数（以序列{8, 12, 3}为例，它的中位数是8）</strong>，选主元时，可以顺便将待选的三位数进行排序，这样当选出主元后，也可以待排序列数据的总个数减少，基本代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ElementType <span class="title">Median3</span><span class="params">(ElementType A[], <span class="keyword">int</span> Left, <span class="keyword">int</span> Right)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> Center = (Left + Right)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(A[Left] &lt; A[Center]) Swap(&amp;A[Left], &amp;A[Center]);</span><br><span class="line">    <span class="keyword">if</span>(A[Left] &lt; A[Right]) Swap(&amp;A[Left], &amp;A[Right]);</span><br><span class="line">    <span class="keyword">if</span>(A[Center] &lt; A[Right]) Swap(&amp;A[Center], &amp;A[Right]);</span><br><span class="line">    <span class="comment">/*after finish swap, A[Left] &lt;= A[Center] &lt;= A[Right]*/</span></span><br><span class="line">    <span class="comment">/*put the pivot to A[Right-1], then only consider the sequence from</span></span><br><span class="line"><span class="comment">	 A[Left+1] to A[Right-2]*/</span></span><br><span class="line">    Swap(&amp;A[Center], &amp;A[Right<span class="number">-1</span>]);</span><br><span class="line">    <span class="keyword">return</span> A[Right<span class="number">-1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>按照上述代码，因为最后将<code>pivot</code>放到了<code>Right-1</code>位置，所以，另外两个元素的位置就可以不用在考虑了，只考虑区间$[Left+1, Right-1]$内的元素即可。</p>
 <h2 id="子集划分"><a href="#子集划分" class="headerlink" title="子集划分"></a>子集划分</h2><p>子集划分时，需要使用两个指针，一个首，一个尾，当尾指针小于首指针（两者已交叉）时，说明子集的划分已完成。在进行这个操作时，会存在一个问题，那就是遇到相等的元素怎么办？<br>以最坏的情况（序列元素全部相等）为例，如果采取直接交换元素的方法，那么首、尾指针的每一次变化，都需要交换一次元素，结束后，主元<code>pivot</code>会被放在中间的位置，这样下一次循环的时候就会将剩下的序列在等分成两个序列，这样时间复杂度就是$O(NlogN)$了；那如果跳过相等的元素呢？在最坏的情况下，会有一端的指针停滞不前，那么每次就只有一个指针在移动，这样每次得到的子序列就$N, N-1, N-2, \dots, 1$了，那样时间复杂度依然是$O(N^2)$，所以还是<strong>采取交换元素的方法</strong>。<br>另外，如果数据规模较小的话，，特别是数据总数连100都不到的时候，对于依然使用<strong>递归</strong>的快速排序而言，就不是那么划算了，所以需要做个判断，在数据规模较小的时候，采取其他的排序方式。</p>
-<h2 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h2><p>选好主元，明确子集的划分方法，就可以来构造算法了，基本代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">QuickSort</span><span class="params">(ElementType A[], <span class="keyword">int</span> Left, <span class="keyword">int</span> Right)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(Cutoff &lt;= Right-Left)&#123;</span><br><span class="line">        Pivot = Median3(A, Left, Right);</span><br><span class="line">        i = Left;</span><br><span class="line">        J = Right - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(; ; )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span>(A[++i] &lt; pivot);</span><br><span class="line">            <span class="keyword">while</span>(A[++j] &lt; pivot);</span><br><span class="line">            <span class="keyword">if</span>(i &lt;= j) Swap(&amp;A[i], &amp;A[j]);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Swap(&amp;A[i], &amp;A[Right<span class="number">-1</span>]);</span><br><span class="line">        QuickSort(A, Left, i<span class="number">-1</span>);</span><br><span class="line">        QuickSort(A, i+<span class="number">1</span>, Right);</span><br><span class="line">    &#125;<span class="keyword">else</span> Insertion_Sort(A+Left, Right-Left+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h2><p>选好主元，明确子集的划分方法，就可以来构造算法了，基本代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">QuickSort</span><span class="params">(ElementType A[], <span class="keyword">int</span> Left, <span class="keyword">int</span> Right)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(Cutoff &lt;= Right-Left)&#123;</span><br><span class="line">        Pivot = Median3(A, Left, Right);</span><br><span class="line">        i = Left;</span><br><span class="line">        j = Right - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(; ; )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span>(A[++i] &lt; pivot);</span><br><span class="line">            <span class="keyword">while</span>(A[--j] &gt; pivot);</span><br><span class="line">            <span class="keyword">if</span>(i &lt; j) Swap(&amp;A[i], &amp;A[j]);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Swap(&amp;A[i], &amp;A[Right<span class="number">-1</span>]);</span><br><span class="line">        QuickSort(A, Left, i<span class="number">-1</span>);</span><br><span class="line">        QuickSort(A, i+<span class="number">1</span>, Right);</span><br><span class="line">    &#125;<span class="keyword">else</span> Insertion_Sort(A+Left, Right-Left+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>上述代码的思路比较直观，先选好主元，在进行子集划分，然后将主元放到靠近中间的位置，此时主元的位置与最终结果序列的位置是一致的，这点与冒泡排序一样，每次都会有一个元素被排到最终位置。当待排元素小于阈值<code>Cutoff</code>时，直接使用插入排序解决剩下的元素序列。</p>
 <h1 id="表排序"><a href="#表排序" class="headerlink" title="表排序"></a>表排序</h1><p>表排序适用于待排元素不是简单的整数，而是复杂、庞大的元素的时候，因为这些复杂、庞大的元素的交换和移动会十分费时。也就是说，表排序在排序过程中不需要移动元素，只需要移动指针即可，这种不移动元素，只移动指针的排序方法称为<strong>间接排序</strong>。<br>定义一个指针数组作为<strong>“表”（table）</strong>，表排序算法的操作对象就是这个“表”了。</p>
 <h2 id="物理排序"><a href="#物理排序" class="headerlink" title="物理排序"></a>物理排序</h2><p>假若仍然需要移动实际的元素来完成排序，那么可以根据下面这个结论在线性的时间复杂度内完成这个操作。<br><div class="note success">
@@ -941,7 +941,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">168</span>
+                    <span class="site-state-item-count">169</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1269,7 +1269,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">190:27</span>
+    <span title="Reading time total">190:54</span>
   
 </div>
 

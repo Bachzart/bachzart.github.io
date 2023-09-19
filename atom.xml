@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-09-14T15:23:06.325Z</updated>
+  <updated>2023-09-19T15:42:45.583Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -17,11 +17,33 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>HIT_CO_Week_3</title>
+    <link href="http://bachzart.github.io/2023/09/15/HIT-CO-Week-3/"/>
+    <id>http://bachzart.github.io/2023/09/15/HIT-CO-Week-3/</id>
+    <published>2023-09-15T11:48:33.000Z</published>
+    <updated>2023-09-19T15:42:45.583Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这周存储器，不知道会不会有趣一点...😴&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Computer Organization" scheme="http://bachzart.github.io/categories/CS/Computer-Organization/"/>
+    
+    
+      <category term="HIT_CO" scheme="http://bachzart.github.io/tags/HIT-CO/"/>
+    
+  </entry>
+  
+  <entry>
     <title>HIT_CO_Week_2</title>
     <link href="http://bachzart.github.io/2023/09/08/HIT-CO-Week-2/"/>
     <id>http://bachzart.github.io/2023/09/08/HIT-CO-Week-2/</id>
     <published>2023-09-08T13:40:54.000Z</published>
-    <updated>2023-09-14T15:23:06.325Z</updated>
+    <updated>2023-09-15T11:48:53.777Z</updated>
     
     <summary type="html">
     
@@ -445,28 +467,6 @@
       <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
     
       <category term="Pointer" scheme="http://bachzart.github.io/tags/Pointer/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2023_02_月总结</title>
-    <link href="http://bachzart.github.io/2023/03/05/2023-02-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
-    <id>http://bachzart.github.io/2023/03/05/2023-02-月总结/</id>
-    <published>2023-03-05T13:19:41.000Z</published>
-    <updated>2023-04-01T11:40:10.876Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;现在是 2023 年 3 月 5 日了...😑&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
-    
-      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
-    
-    
-      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
     
   </entry>
   

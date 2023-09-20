@@ -162,7 +162,8 @@
 <meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_3/3_13.png">
 <meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_3/3_14.png">
 <meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_3/3_15.png">
-<meta property="og:updated_time" content="2023-09-19T15:42:45.583Z">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_3/3_16.png">
+<meta property="og:updated_time" content="2023-09-20T13:58:05.212Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HIT_CO_Week_3">
 <meta name="twitter:description" content="这周存储器，不知道会不会有趣一点...😴">
@@ -500,7 +501,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2023-09-19 23:42:45" itemprop="dateModified" datetime="2023-09-19T23:42:45+08:00">2023-09-19</time>
+                <time title="Modified: 2023-09-20 21:58:05" itemprop="dateModified" datetime="2023-09-20T21:58:05+08:00">2023-09-20</time>
               
             
           </span>
@@ -553,7 +554,7 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                <span title="Symbols count in article">3.3k</span>
+                <span title="Symbols count in article">3.5k</span>
               
 
               
@@ -565,7 +566,7 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                <span title="Reading time">28 mins.</span>
+                <span title="Reading time">29 mins.</span>
               
             </div>
           
@@ -636,7 +637,7 @@
 <p>$A_0 - A_3$作为地址码会被地址译码器解析为对应的字线，4 个 bit 正好对应 16 根线，还有 8 根位线连接在读/写控制电路上。</p>
 <h4 id="重合法"><a href="#重合法" class="headerlink" title="重合法"></a>重合法</h4><p>如下图所示：</p>
 <p><img src="/my_photo_gallery/HIT_CO_Week_3/3_8.png" alt="重合法" title="重合法"></p>
-<p>重合法感觉要简单一点，$A_0 - A_4$作为 X 地址码，5 个 bit 位对应 32 根线，$A_5 - A_9$作为 Y 地址码，也是 5 个 bit 位对应 32 根线，X、Y 实际上就可以当作是横纵坐标。</p>
+<p>重合法感觉要简单一点，$A_0 - A_4$作为 X 地址码，5 个 bit 位对应 32 根线，$A_5 - A_9$作为 Y 地址码，也是 5 个 bit 位，对应 32 根线，X、Y 实际上就可以当作是横纵坐标了。</p>
 <h2 id="RAM"><a href="#RAM" class="headerlink" title="RAM"></a>RAM</h2><p>随机存取存储器（RAM）分为两种：静态随机存取存储器（SRAM）和动态随机存取存储器（DRAM）。</p>
 <h3 id="SRAM"><a href="#SRAM" class="headerlink" title="SRAM"></a>SRAM</h3><p>静态随机存取存储器是由<strong>双稳态触发器</strong>组成，断电后会丢失信息，存取速度快，基本电路如下：</p>
 <p><img src="/my_photo_gallery/HIT_CO_Week_3/3_9.png" alt="SRAM 基本电路" title="SRAM 基本电路"></p>
@@ -648,7 +649,7 @@
 <p>最后提到了一个实际用重合法组成的芯片——Intel 2114，本质上是一个$64 \times 64$的矩阵，这里不做深究了。</p>
 <h3 id="DRAM"><a href="#DRAM" class="headerlink" title="DRAM"></a>DRAM</h3><p>动态随机存取存储器是由电容组成，同样断电后会丢失信息，速度比 SRAM 慢，基本电路如下：</p>
 <p><img src="/my_photo_gallery/HIT_CO_Week_3/3_12.png" alt="DRAM 基本电路" title="DRAM 基本电路"></p>
-<p>在上图中，左边是三管式存储电路，右边是单管式存储电路。</p>
+<p>在上图中，左边是<strong>三管式存储电路</strong>，右边是<strong>单管式存储电路</strong>。</p>
 <p>三管动态 RAM 芯片的读写操作过程是类似的，这里简单分析一下 Intel 1103 芯片的写操作，如下图：</p>
 <p><img src="/my_photo_gallery/HIT_CO_Week_3/3_13.png" alt="三管动态 RAM 芯片（Intel 1103）写操作" title="三管动态 RAM 芯片（Intel 1103）写操作"></p>
 <p>实际上就是下面两个要点：</p>
@@ -717,7 +718,10 @@
 </tr>
 </tbody>
 </table>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这周的内容依然是偏理论性质的，实在是谈不上有趣，只能耐着性子听下去😂。总体听下来，出现了很多和电路相关的术语，不得不说，与《组成原理》结合紧密的课程还得是《数字电路》。不过，单从原理的角度来讲，倒也可以用死记硬背来解决。<br>好了，这周的内容的思维导图如下：</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_3/3_16.png" alt="主存储器（上）" title="主存储器（上）"></p>
+<p>剩下的事情就是把题目解决了...😴</p>
+<hr>
       
     </div>
 
@@ -1214,7 +1218,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">190:54</span>
+    <span title="Reading time total">190:56</span>
   
 </div>
 

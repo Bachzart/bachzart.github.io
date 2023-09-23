@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-09-20T13:58:05.212Z</updated>
+  <updated>2023-09-23T15:01:51.447Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -17,11 +17,33 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>HIT_CO_Week_4</title>
+    <link href="http://bachzart.github.io/2023/09/23/HIT-CO-Week-4/"/>
+    <id>http://bachzart.github.io/2023/09/23/HIT-CO-Week-4/</id>
+    <published>2023-09-23T14:27:53.000Z</published>
+    <updated>2023-09-23T15:01:51.447Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这一周延续上周没讲完的主存储器的下半部分🤐...&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Computer Organization" scheme="http://bachzart.github.io/categories/CS/Computer-Organization/"/>
+    
+    
+      <category term="HIT_CO" scheme="http://bachzart.github.io/tags/HIT-CO/"/>
+    
+  </entry>
+  
+  <entry>
     <title>HIT_CO_Week_3</title>
     <link href="http://bachzart.github.io/2023/09/15/HIT-CO-Week-3/"/>
     <id>http://bachzart.github.io/2023/09/15/HIT-CO-Week-3/</id>
     <published>2023-09-15T11:48:33.000Z</published>
-    <updated>2023-09-20T13:58:05.212Z</updated>
+    <updated>2023-09-23T15:02:42.006Z</updated>
     
     <summary type="html">
     
@@ -443,30 +465,6 @@
       <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
     
       <category term="PAT" scheme="http://bachzart.github.io/tags/PAT/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C 语言函数指针的一些理解</title>
-    <link href="http://bachzart.github.io/2023/03/13/C-%E8%AF%AD%E8%A8%80%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/"/>
-    <id>http://bachzart.github.io/2023/03/13/C-语言函数指针的一些理解/</id>
-    <published>2023-03-13T12:33:41.000Z</published>
-    <updated>2023-03-28T13:45:30.164Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;函数指针属于 C 语言的进阶内容之一，前两天研究 tinyhttpd 时，碰到了函数指针，产生了一些疑问...&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
-    
-    
-      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
-    
-      <category term="Pointer" scheme="http://bachzart.github.io/tags/Pointer/"/>
     
   </entry>
   

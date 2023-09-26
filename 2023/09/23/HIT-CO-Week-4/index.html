@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="这一周延续上周没讲完的主存储器的下半部分🤐...">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2023-09-23T15:01:51.447Z">
+<meta property="og:updated_time" content="2023-09-26T14:03:03.939Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HIT_CO_Week_4">
 <meta name="twitter:description" content="这一周延续上周没讲完的主存储器的下半部分🤐...">
@@ -467,12 +467,24 @@
                 
               
 
-              <time title="Created: 2023-09-23 22:27:53 / Modified: 23:01:51" itemprop="dateCreated datePublished" datetime="2023-09-23T22:27:53+08:00">2023-09-23</time>
+              <time title="Created: 2023-09-23 22:27:53" itemprop="dateCreated datePublished" datetime="2023-09-23T22:27:53+08:00">2023-09-23</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2023-09-26 22:03:03" itemprop="dateModified" datetime="2023-09-26T22:03:03+08:00">2023-09-26</time>
               
             
           </span>
@@ -525,7 +537,7 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                <span title="Symbols count in article">566</span>
+                <span title="Symbols count in article">916</span>
               
 
               
@@ -537,7 +549,7 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                <span title="Reading time">5 mins.</span>
+                <span title="Reading time">8 mins.</span>
               
             </div>
           
@@ -559,7 +571,7 @@
       
         <p>这一周延续上周没讲完的主存储器的下半部分🤐...<br><a id="more"></a></p>
 <p>接着上周的内容，首先介绍的只读存储器（ROM）。</p>
-<h1 id="ROM"><a href="#ROM" class="headerlink" title="ROM"></a>ROM</h1><p>只读存储器（Read-Only Memory），顾名思义，就是只能读不能写的存储器，但现在的 ROM，基本都是可读可写的，仅仅只是速度比 RAM 慢而已。<br>实际上，早期的 ROM 设备确实是只能读，后来随着市场需求的改变，才诞生了可读可写的 ROM，并且 ROM 也不是一下子就可以写了，而是慢慢发展成目前的样子的。</p>
+<h1 id="ROM"><a href="#ROM" class="headerlink" title="ROM"></a>ROM</h1><p>只读存储器（Read-Only Memory），顾名思义，就是只能读不能写的存储器，但现在的 ROM，基本都是可读可写的，只是速度比 RAM 慢而已。<br>实际上，早期的 ROM 设备确实是只能读，后来随着市场需求的改变，才诞生了可读可写的 ROM，并且 ROM 也不是一下子就可以写了，而是慢慢发展成目前的样子的。</p>
 <p>按照书上的介绍，ROM 具体分为以下几种：</p>
 <ol>
 <li>掩膜 ROM（MROM）：行列选择线交叉处有 MOS 管为 1，无 MOS 管则为 0</li>
@@ -570,8 +582,10 @@
 </ol>
 <h1 id="存储器与-CPU-的连接"><a href="#存储器与-CPU-的连接" class="headerlink" title="存储器与 CPU 的连接"></a>存储器与 CPU 的连接</h1><p>这一块内容算是重点与难点内容了🤐。</p>
 <h2 id="存储器容量的扩展"><a href="#存储器容量的扩展" class="headerlink" title="存储器容量的扩展"></a>存储器容量的扩展</h2><p>首先是存储器容量的扩展，主要是三种方式：位扩展、字扩展和字位扩展。</p>
-<h3 id="位扩展"><a href="#位扩展" class="headerlink" title="位扩展"></a>位扩展</h3><p>位扩展其实就是增加存储字长，比如用 2 片$1 K \times 4$ 位存储芯片组成$1 K \times 8$ 位存储芯片</p>
-<hr>
+<h3 id="位扩展"><a href="#位扩展" class="headerlink" title="位扩展"></a>位扩展</h3><p><strong>位扩展其实就是增加存储字长</strong>，比如用 2 片 $1K \times 4$ 位存储芯片组成 $1K \times 8$ 位存储芯片，就只是把存储字长扩大了一倍。但不论是 2 片 $1K \times 4$ 位存储芯片还是 1 片 $1K \times 8$ 位存储芯片，总体的存储容量都是 $8K$ 位（这个说法可能不严谨，懂意思即可）。</p>
+<h3 id="字扩展"><a href="#字扩展" class="headerlink" title="字扩展"></a>字扩展</h3><p><strong>字扩展就是增加存储字的数量</strong>，比如用 2 片 $1K \times 8$ 位存储芯片组成 $2K \times 8$ 位存储芯片，本质上相当于是把存储单元的数目扩大了一倍。但不论是 2 片 $1K \times 8$ 位存储芯片还是 1 片$2K \times 8$ 位存储芯片，总体的存储容量都是 $16K$ 位。</p>
+<h3 id="字、位扩展"><a href="#字、位扩展" class="headerlink" title="字、位扩展"></a>字、位扩展</h3><p>字、位扩展就是字扩展与位扩展结合使用的方式，比如用 8 片 $1K \times 4$ 位存储芯片组成 $4K \times 8$ 位存储芯片。</p>
+<h2 id="与-CPU-的连接"><a href="#与-CPU-的连接" class="headerlink" title="与 CPU 的连接"></a>与 CPU 的连接</h2><hr>
       
     </div>
 
@@ -1027,7 +1041,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ROM"><span class="nav-number">1.</span> <span class="nav-text">ROM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储器与-CPU-的连接"><span class="nav-number">2.</span> <span class="nav-text">存储器与 CPU 的连接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#存储器容量的扩展"><span class="nav-number">2.1.</span> <span class="nav-text">存储器容量的扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#位扩展"><span class="nav-number">2.1.1.</span> <span class="nav-text">位扩展</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ROM"><span class="nav-number">1.</span> <span class="nav-text">ROM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储器与-CPU-的连接"><span class="nav-number">2.</span> <span class="nav-text">存储器与 CPU 的连接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#存储器容量的扩展"><span class="nav-number">2.1.</span> <span class="nav-text">存储器容量的扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#位扩展"><span class="nav-number">2.1.1.</span> <span class="nav-text">位扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字扩展"><span class="nav-number">2.1.2.</span> <span class="nav-text">字扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字、位扩展"><span class="nav-number">2.1.3.</span> <span class="nav-text">字、位扩展</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与-CPU-的连接"><span class="nav-number">2.2.</span> <span class="nav-text">与 CPU 的连接</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1068,7 +1082,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">191:01</span>
+    <span title="Reading time total">191:03</span>
   
 </div>
 

@@ -147,10 +147,14 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="这一周延续上周没讲完的主存储器的下半部分🤐...">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2023-09-26T14:03:03.939Z">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_4/4_1.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_4/4_2.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_4/4_2.png">
+<meta property="og:updated_time" content="2023-09-30T04:33:59.980Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HIT_CO_Week_4">
 <meta name="twitter:description" content="这一周延续上周没讲完的主存储器的下半部分🤐...">
+<meta name="twitter:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_4/4_1.png">
 
 
 
@@ -484,7 +488,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2023-09-26 22:03:03" itemprop="dateModified" datetime="2023-09-26T22:03:03+08:00">2023-09-26</time>
+                <time title="Modified: 2023-09-30 12:33:59" itemprop="dateModified" datetime="2023-09-30T12:33:59+08:00">2023-09-30</time>
               
             
           </span>
@@ -537,7 +541,7 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                <span title="Symbols count in article">916</span>
+                <span title="Symbols count in article">1.8k</span>
               
 
               
@@ -549,7 +553,7 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                <span title="Reading time">8 mins.</span>
+                <span title="Reading time">15 mins.</span>
               
             </div>
           
@@ -585,7 +589,48 @@
 <h3 id="位扩展"><a href="#位扩展" class="headerlink" title="位扩展"></a>位扩展</h3><p><strong>位扩展其实就是增加存储字长</strong>，比如用 2 片 $1K \times 4$ 位存储芯片组成 $1K \times 8$ 位存储芯片，就只是把存储字长扩大了一倍。但不论是 2 片 $1K \times 4$ 位存储芯片还是 1 片 $1K \times 8$ 位存储芯片，总体的存储容量都是 $8K$ 位（这个说法可能不严谨，懂意思即可）。</p>
 <h3 id="字扩展"><a href="#字扩展" class="headerlink" title="字扩展"></a>字扩展</h3><p><strong>字扩展就是增加存储字的数量</strong>，比如用 2 片 $1K \times 8$ 位存储芯片组成 $2K \times 8$ 位存储芯片，本质上相当于是把存储单元的数目扩大了一倍。但不论是 2 片 $1K \times 8$ 位存储芯片还是 1 片$2K \times 8$ 位存储芯片，总体的存储容量都是 $16K$ 位。</p>
 <h3 id="字、位扩展"><a href="#字、位扩展" class="headerlink" title="字、位扩展"></a>字、位扩展</h3><p>字、位扩展就是字扩展与位扩展结合使用的方式，比如用 8 片 $1K \times 4$ 位存储芯片组成 $4K \times 8$ 位存储芯片。</p>
-<h2 id="与-CPU-的连接"><a href="#与-CPU-的连接" class="headerlink" title="与 CPU 的连接"></a>与 CPU 的连接</h2><hr>
+<h2 id="与-CPU-的连接"><a href="#与-CPU-的连接" class="headerlink" title="与 CPU 的连接"></a>与 CPU 的连接</h2><p>存储器与 CPU 的连接主要包括六个部分：</p>
+<ol>
+<li>地址线的连接</li>
+<li>数据线的连接</li>
+<li>读/写命令线的连接</li>
+<li>片选线的连接</li>
+<li>合理选择存储芯片</li>
+<li>其他芯片或控制电路，如时序、负载</li>
+</ol>
+<p>以书上的例题 4.1 和 4.2 作为例子，老师讲的很清楚，书上写的也很清楚，这里不再赘述了，只记录下主要的解题步骤是：</p>
+<ol>
+<li>写出相应的二进制地址码</li>
+<li>确定芯片的数量及类型</li>
+<li>分配地址线</li>
+<li>确定片选信号</li>
+</ol>
+<h1 id="存储器的校验"><a href="#存储器的校验" class="headerlink" title="存储器的校验"></a>存储器的校验</h1><p>存储器的校验是通过一系列的编码方法来完成的，这一章主要介绍<a href="https://baike.baidu.com/item/%E6%B1%89%E6%98%8E%E7%A0%81/3226749?fr=ge_ala" target="_blank" rel="noopener">汉明码</a>。<br>首先要明确汉明码中码距的概念，也即<strong>两个合法代码对应位上编码不同的位数称为码距</strong>。编码的纠错、检错能力与编码的最小距离有关，而汉明码是具有一位纠错能力的编码。</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_4/4_1.png" alt="编码的纠错、检错能力与码距的关系" title="编码的纠错、检错能力与码距的关系"></p>
+<p>需要注意以下汉明码组成的三要素，如下图：</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_4/4_2.png" alt="汉明码三要素" title="汉明码三要素"></p>
+<p>汉明码的配置、检错过程，这里就不再赘述了，老师讲解的很清晰，书上也解释很清楚。</p>
+<h1 id="提高访存速度的措施"><a href="#提高访存速度的措施" class="headerlink" title="提高访存速度的措施"></a>提高访存速度的措施</h1><p>按照老师的讲解，提高访存速度的思路就是三个方面：</p>
+<ol>
+<li>采用高速器件</li>
+<li>采用层次结构，比如 Cache-主存</li>
+<li>调整主存结构</li>
+</ol>
+<p>前两点已经在前面提到过了，这里在提一下第三个思路，主要有两个方式：</p>
+<ol>
+<li>单体多字系统，本质是增加存储器带宽</li>
+<li>多体并行系统，分为两种方式：<strong>高位交叉、顺序编址（各个体并行工作）</strong>和<strong>低位交叉、各个体轮流编址（在不改变存取周期的前提下，增加存储器的带宽）</strong>。</li>
+</ol>
+<p>最后的内容就是几种高性能存储芯片：</p>
+<ol>
+<li>SDRAM（同步 DRAM），在系统时钟的控制下进行读出和写入，CPU 无须等待，也就是现代计算机的内存条</li>
+<li>RDRAM，由 Rambus 开发，主要解决存储器带宽问题</li>
+<li>带 Cache 的 DRAM，在 DRAM 的芯片内集成了一个由 SRAM 组成的 Cache，有利于猝发式读取</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在上周基础上添加本周内容后的思维导图：</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_4/4_2.png" alt="存储器（中）" title="存储器（中）"></p>
+<p>本周的重点内容在存储器与 CPU 的连接部分，从应试的角度来讲，这块内容应该很容易出综合大题，因为这里可以把 CPU 和 总线的内容结合起来，所以最好把书上的几个例题吃透。还有一个选择题考点，估计是汉明码，这块知识点，要是不理解，做题估计还是错。<br>好消息是，我不用考试了，只要理解大部分知识点就可以了😂。</p>
+<hr>
       
     </div>
 
@@ -1041,7 +1086,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ROM"><span class="nav-number">1.</span> <span class="nav-text">ROM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储器与-CPU-的连接"><span class="nav-number">2.</span> <span class="nav-text">存储器与 CPU 的连接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#存储器容量的扩展"><span class="nav-number">2.1.</span> <span class="nav-text">存储器容量的扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#位扩展"><span class="nav-number">2.1.1.</span> <span class="nav-text">位扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字扩展"><span class="nav-number">2.1.2.</span> <span class="nav-text">字扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字、位扩展"><span class="nav-number">2.1.3.</span> <span class="nav-text">字、位扩展</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与-CPU-的连接"><span class="nav-number">2.2.</span> <span class="nav-text">与 CPU 的连接</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ROM"><span class="nav-number">1.</span> <span class="nav-text">ROM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储器与-CPU-的连接"><span class="nav-number">2.</span> <span class="nav-text">存储器与 CPU 的连接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#存储器容量的扩展"><span class="nav-number">2.1.</span> <span class="nav-text">存储器容量的扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#位扩展"><span class="nav-number">2.1.1.</span> <span class="nav-text">位扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字扩展"><span class="nav-number">2.1.2.</span> <span class="nav-text">字扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字、位扩展"><span class="nav-number">2.1.3.</span> <span class="nav-text">字、位扩展</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与-CPU-的连接"><span class="nav-number">2.2.</span> <span class="nav-text">与 CPU 的连接</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储器的校验"><span class="nav-number">3.</span> <span class="nav-text">存储器的校验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#提高访存速度的措施"><span class="nav-number">4.</span> <span class="nav-text">提高访存速度的措施</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -1082,7 +1127,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">191:03</span>
+    <span title="Reading time total">191:11</span>
   
 </div>
 

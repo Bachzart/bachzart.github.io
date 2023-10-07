@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-10-04T14:50:28.363Z</updated>
+  <updated>2023-10-07T13:48:39.035Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HIT_CO_Week_5</title>
+    <link href="http://bachzart.github.io/2023/10/07/HIT-CO-Week-5/"/>
+    <id>http://bachzart.github.io/2023/10/07/HIT-CO-Week-5/</id>
+    <published>2023-10-07T13:29:49.000Z</published>
+    <updated>2023-10-07T13:48:39.035Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;假期结束，学习继续🤓&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Computer Organization" scheme="http://bachzart.github.io/categories/CS/Computer-Organization/"/>
+    
+    
+      <category term="HIT_CO" scheme="http://bachzart.github.io/tags/HIT-CO/"/>
+    
+  </entry>
   
   <entry>
     <title>2023_09_月总结</title>
@@ -439,30 +461,6 @@
     
     
       <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C 语言数组与指针的深入理解</title>
-    <link href="http://bachzart.github.io/2023/03/28/C-%E8%AF%AD%E8%A8%80%E6%95%B0%E7%BB%84%E4%B8%8E%E6%8C%87%E9%92%88%E7%9A%84%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/"/>
-    <id>http://bachzart.github.io/2023/03/28/C-语言数组与指针的深入理解/</id>
-    <published>2023-03-28T13:42:18.000Z</published>
-    <updated>2023-03-30T12:57:28.776Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;来深入理解一下数组与指针吧~&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
-    
-    
-      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
-    
-      <category term="Pointer" scheme="http://bachzart.github.io/tags/Pointer/"/>
     
   </entry>
   

@@ -147,10 +147,15 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="假期结束，学习继续🤓">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2023-10-07T13:48:39.035Z">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_5/5_1.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_5/5_2.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_5/5_3.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_5/5_4.png">
+<meta property="og:updated_time" content="2023-10-09T11:46:05.664Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HIT_CO_Week_5">
 <meta name="twitter:description" content="假期结束，学习继续🤓">
+<meta name="twitter:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_5/5_1.png">
 
 
 
@@ -467,12 +472,24 @@
                 
               
 
-              <time title="Created: 2023-10-07 21:29:49 / Modified: 21:48:39" itemprop="dateCreated datePublished" datetime="2023-10-07T21:29:49+08:00">2023-10-07</time>
+              <time title="Created: 2023-10-07 21:29:49" itemprop="dateCreated datePublished" datetime="2023-10-07T21:29:49+08:00">2023-10-07</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2023-10-09 19:46:05" itemprop="dateModified" datetime="2023-10-09T19:46:05+08:00">2023-10-09</time>
               
             
           </span>
@@ -525,7 +542,7 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                <span title="Symbols count in article">238</span>
+                <span title="Symbols count in article">989</span>
               
 
               
@@ -537,7 +554,7 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                <span title="Reading time">2 mins.</span>
+                <span title="Reading time">8 mins.</span>
               
             </div>
           
@@ -564,7 +581,21 @@
           </div>
 <p>答案很简单，目的是为了避免 CPU “空等”现象，弥补 CPU 和主存（DRAM）的速度差异，使计算机能以更高的效率进行工作。</p>
 <p>另外，还得提一下<a href="https://baike.baidu.com/item/%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%B1%80%E9%83%A8%E6%80%A7%E5%8E%9F%E7%90%86/8412331?fr=ge_ala" target="_blank" rel="noopener">程序的局部性原理</a>，具体点击参考百度，这里不赘述了。</p>
-<h3 id="Cache-的工作原理"><a href="#Cache-的工作原理" class="headerlink" title="Cache 的工作原理"></a>Cache 的工作原理</h3><h2 id="Cache-主存的地址映射"><a href="#Cache-主存的地址映射" class="headerlink" title="Cache-主存的地址映射"></a>Cache-主存的地址映射</h2><h2 id="替换算法"><a href="#替换算法" class="headerlink" title="替换算法"></a>替换算法</h2><hr>
+<h3 id="Cache-的工作原理"><a href="#Cache-的工作原理" class="headerlink" title="Cache 的工作原理"></a>Cache 的工作原理</h3><p>主存和缓存的编址见下图：</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_5/5_1.png" alt="主存和缓存的编址" title="主存和缓存的编址"></p>
+<p>主存和缓存的块内地址完全一样，假设缓存共分为 C 块，主存共分为 M 块，那么 M 是远大于 C 的。此时，主存块会调入缓存中（这样主存块就与缓存块建立了对应关系），同时利用<strong>标记</strong>记录与某缓存块建立对应关系的主存块号，这样就称缓存块命中了主存块。相反，如果主存块未调入缓存中，那么主存块与缓存块就不存在对应关系，也就是未命中了。</p>
+<p>由此，Cache 会产生一个叫做<strong>命中率($h$)</strong>的参数，也即：<br>$$<br>h = \frac {N_c} {N_c + N_m}<br>$$<br>上述式子中，$N_c$ 表示 Cache 完成存取的总次数，$N_m$ 表示主存完成存取的总次数。</p>
+<p>对应的，Cache-主存系统的效率见下图：</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_5/5_2.png" alt="Cache-主存系统的效率" title="Cache-主存系统的效率"></p>
+<p>再看一下 Cache 的基本结构：</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_5/5_3.png" alt="Cache 的基本结构" title="Cache 的基本结构"></p>
+<p>Cache 的读操作只有一种：<br><img src="/my_photo_gallery/HIT_CO_Week_5/5_4.png" alt="Cache 的读操作" title="Cache 的读操作"></p>
+<p>Cache 的写操作要复杂一些（因为需要考虑 Cache 和主存的一致性问题），有两种：</p>
+<ol>
+<li>写直达法（Write-through）：写操作时数据既写入 Cache 又写入主存，这样能保证 Cache 和主存一致，但可能造成 CPU 对同一内存单元重复写的问题。<strong>写操作时间就是访问主存的时间</strong>，Cache 块退出时，不需要对主存执行写操作，更新策略比较容易实现。</li>
+<li>写回法（Write-back）：写操作时只把数据写入 Cache 而不写入主存，当 Cache 数据被替换出去时才写回主存。此法不能保证 Cache 和主存实时一致，同时因为多核 CPU 的存在，不同核心对应的 Cache 可能不同，由此会导致不同 Cache 中同时存在主存的某一个副本，而且这些副本还不能确定是否一致。另外，<strong>写操作时间就是访问 Cache 的时间</strong>，Cache 块退出时，被替换的块需写回主存，增加了 Cache 的复杂性。</li>
+</ol>
+<h2 id="Cache-主存的地址映射"><a href="#Cache-主存的地址映射" class="headerlink" title="Cache-主存的地址映射"></a>Cache-主存的地址映射</h2><h2 id="替换算法"><a href="#替换算法" class="headerlink" title="替换算法"></a>替换算法</h2><hr>
       
     </div>
 
@@ -1061,7 +1092,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">191:23</span>
+    <span title="Reading time total">191:29</span>
   
 </div>
 

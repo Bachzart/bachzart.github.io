@@ -151,7 +151,7 @@
 <meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_5/5_2.png">
 <meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_5/5_3.png">
 <meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_5/5_4.png">
-<meta property="og:updated_time" content="2023-10-09T11:46:05.664Z">
+<meta property="og:updated_time" content="2023-10-10T11:05:48.257Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HIT_CO_Week_5">
 <meta name="twitter:description" content="假期结束，学习继续🤓">
@@ -489,7 +489,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2023-10-09 19:46:05" itemprop="dateModified" datetime="2023-10-09T19:46:05+08:00">2023-10-09</time>
+                <time title="Modified: 2023-10-10 19:05:48" itemprop="dateModified" datetime="2023-10-10T19:05:48+08:00">2023-10-10</time>
               
             
           </span>
@@ -542,7 +542,7 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                <span title="Symbols count in article">989</span>
+                <span title="Symbols count in article">1.1k</span>
               
 
               
@@ -554,7 +554,7 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                <span title="Reading time">8 mins.</span>
+                <span title="Reading time">9 mins.</span>
               
             </div>
           
@@ -594,6 +594,11 @@
 <ol>
 <li>写直达法（Write-through）：写操作时数据既写入 Cache 又写入主存，这样能保证 Cache 和主存一致，但可能造成 CPU 对同一内存单元重复写的问题。<strong>写操作时间就是访问主存的时间</strong>，Cache 块退出时，不需要对主存执行写操作，更新策略比较容易实现。</li>
 <li>写回法（Write-back）：写操作时只把数据写入 Cache 而不写入主存，当 Cache 数据被替换出去时才写回主存。此法不能保证 Cache 和主存实时一致，同时因为多核 CPU 的存在，不同核心对应的 Cache 可能不同，由此会导致不同 Cache 中同时存在主存的某一个副本，而且这些副本还不能确定是否一致。另外，<strong>写操作时间就是访问 Cache 的时间</strong>，Cache 块退出时，被替换的块需写回主存，增加了 Cache 的复杂性。</li>
+</ol>
+<p>为了提高 Cache 的效率，针对 Cache 还有一些改进措施：</p>
+<ol>
+<li>增加 Cache 的技术，如片载（片内）Cache，片外 Cache。</li>
+<li>统一缓存和分立缓存，如指令 Cache 和数据 Cache，具体与指令执行的控制方式有关。</li>
 </ol>
 <h2 id="Cache-主存的地址映射"><a href="#Cache-主存的地址映射" class="headerlink" title="Cache-主存的地址映射"></a>Cache-主存的地址映射</h2><h2 id="替换算法"><a href="#替换算法" class="headerlink" title="替换算法"></a>替换算法</h2><hr>
       
@@ -1092,7 +1097,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">191:29</span>
+    <span title="Reading time total">191:30</span>
   
 </div>
 

@@ -148,10 +148,13 @@
 <meta property="og:description" content="十月底在“打渔”😂，没怎么学习，要赶紧把上部分搞定，开始下部分。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_6/6_1.png">
-<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_6/6_1.png">
-<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_6/6_1.png">
-<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_6/6_1.png">
-<meta property="og:updated_time" content="2023-11-05T15:04:25.504Z">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_6/6_2.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_6/6_3.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_6/6_4.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_6/6_5.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_6/6_6.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_6/6_7.png">
+<meta property="og:updated_time" content="2023-11-06T15:06:24.762Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HIT_CO_Week_6">
 <meta name="twitter:description" content="十月底在“打渔”😂，没怎么学习，要赶紧把上部分搞定，开始下部分。">
@@ -489,7 +492,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2023-11-05 23:04:25" itemprop="dateModified" datetime="2023-11-05T23:04:25+08:00">2023-11-05</time>
+                <time title="Modified: 2023-11-06 23:06:24" itemprop="dateModified" datetime="2023-11-06T23:06:24+08:00">2023-11-06</time>
               
             
           </span>
@@ -542,7 +545,7 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                <span title="Symbols count in article">1k</span>
+                <span title="Symbols count in article">1.5k</span>
               
 
               
@@ -554,7 +557,7 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                <span title="Reading time">9 mins.</span>
+                <span title="Reading time">13 mins.</span>
               
             </div>
           
@@ -634,10 +637,26 @@
 <p><img src="/my_photo_gallery/HIT_CO_Week_6/6_1.png" alt="I/O 接口的基本组成" title="I/O 接口的基本组成"></p>
 <p>I/O 接口分类方式比较多，这里不赘述了，非重点。</p>
 <h1 id="程序查询方式"><a href="#程序查询方式" class="headerlink" title="程序查询方式"></a>程序查询方式</h1><p>程序查询方式的流程主要分两个部分：查询流程和程序流程，这里不详细描述了，总之记住这种方式最大的特点：串行工作。</p>
-<p><img src="/my_photo_gallery/HIT_CO_Week_6/6_1.png" alt="查询流程" title="查询流程"></p>
-<p><img src="/my_photo_gallery/HIT_CO_Week_6/6_1.png" alt="程序流程" title="程序流程"></p>
-<p><img src="/my_photo_gallery/HIT_CO_Week_6/6_1.png" alt="程序查询方式的接口电路" title="程序查询方式的接口电路"></p>
-<h1 id="程序中断方式"><a href="#程序中断方式" class="headerlink" title="程序中断方式"></a>程序中断方式</h1><h1 id="DMA-方式"><a href="#DMA-方式" class="headerlink" title="DMA 方式"></a>DMA 方式</h1><hr>
+<p><img src="/my_photo_gallery/HIT_CO_Week_6/6_2.png" alt="查询流程" title="查询流程"></p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_6/6_3.png" alt="程序流程" title="程序流程"></p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_6/6_4.png" alt="程序查询方式的接口电路" title="程序查询方式的接口电路"></p>
+<h1 id="程序中断方式"><a href="#程序中断方式" class="headerlink" title="程序中断方式"></a>程序中断方式</h1><p>中断的概念，可以参考百科——<a href="https://baike.baidu.com/item/%E4%B8%AD%E6%96%AD/3933007?fr=ge_ala" target="_blank" rel="noopener">中断</a>。<br>实际上，简单理解起来就是打断 CPU 的工作，执行完成其他的指令后，继续执行原指令。从宏观上看，CPU 和其他设备是在并行工作。</p>
+<p>程序中断方式的接口电路主要由中断请求触发器、中断屏蔽触发器、排队器、中断向量地址形成部件等组成，如下图所示：</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_6/6_5.png" alt="程序中断方式接口电路的基本组成" title="程序中断方式接口电路的基本组成"></p>
+<p>上图中，完成触发器 D 受设备本身控制；中断屏蔽触发器 MASK 为 1 时，屏蔽中断信号；中断请求触发器 INTR 为 1 时，表示有中断请求。<br>另外，排队器分为软件和硬件，其内部的中断请求优先级按降序排列。中断向量地址可由硬件产生，也可由软件产生，这个地址可以理解为要执行的程序的地址的地址？</p>
+<p>I/O 中断处理过程，如下图：</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_6/6_6.png" alt="I/O 中断处理过程" title="I/O 中断处理过程"></p>
+<p>中断服务程序的流程：</p>
+<ol>
+<li>保护现场：包括程序断电的保护（中断隐指令完成）和寄存器内容的保护（进栈指令）</li>
+<li>中断服务：对不同的 I/O 设备具有不同内容的设备服务</li>
+<li>恢复现场：出栈指令</li>
+<li>中断返回：中断返回指令</li>
+</ol>
+<p>中断还分为单重中断（不允许中断现行的中断服务程序）和多重中断（允许级别更高的中断源中断现行的服务程序），二者的区别如下图：</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_6/6_7.png" alt="单重中断和多重中断的区别" title="单重中断和多重中断的区别"></p>
+<p>最后，需要说明的是，<strong>在宏观上 CPU 和 I/O 并行工作，但在微观上，CPU 中断现行程序为 I/O 服务</strong>。</p>
+<h1 id="DMA-方式"><a href="#DMA-方式" class="headerlink" title="DMA 方式"></a>DMA 方式</h1><hr>
       
     </div>
 
@@ -1134,7 +1153,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">191:51</span>
+    <span title="Reading time total">191:55</span>
   
 </div>
 

@@ -154,7 +154,14 @@
 <meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_6/6_5.png">
 <meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_6/6_6.png">
 <meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_6/6_7.png">
-<meta property="og:updated_time" content="2023-11-06T15:06:24.762Z">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_6/6_8.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_6/6_9.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_6/6_12.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_6/6_10.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_6/6_11.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_6/6_13.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_6/6_14.png">
+<meta property="og:updated_time" content="2023-11-08T15:18:41.784Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HIT_CO_Week_6">
 <meta name="twitter:description" content="十月底在“打渔”😂，没怎么学习，要赶紧把上部分搞定，开始下部分。">
@@ -492,7 +499,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2023-11-06 23:06:24" itemprop="dateModified" datetime="2023-11-06T23:06:24+08:00">2023-11-06</time>
+                <time title="Modified: 2023-11-08 23:18:41" itemprop="dateModified" datetime="2023-11-08T23:18:41+08:00">2023-11-08</time>
               
             
           </span>
@@ -545,7 +552,7 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                <span title="Symbols count in article">1.5k</span>
+                <span title="Symbols count in article">2.6k</span>
               
 
               
@@ -557,7 +564,7 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                <span title="Reading time">13 mins.</span>
+                <span title="Reading time">21 mins.</span>
               
             </div>
           
@@ -655,8 +662,89 @@
 </ol>
 <p>中断还分为单重中断（不允许中断现行的中断服务程序）和多重中断（允许级别更高的中断源中断现行的服务程序），二者的区别如下图：</p>
 <p><img src="/my_photo_gallery/HIT_CO_Week_6/6_7.png" alt="单重中断和多重中断的区别" title="单重中断和多重中断的区别"></p>
-<p>最后，需要说明的是，<strong>在宏观上 CPU 和 I/O 并行工作，但在微观上，CPU 中断现行程序为 I/O 服务</strong>。</p>
-<h1 id="DMA-方式"><a href="#DMA-方式" class="headerlink" title="DMA 方式"></a>DMA 方式</h1><hr>
+<p>最后，需要再次强调的是，<strong>在宏观上 CPU 和 I/O 并行工作，但在微观上，CPU 中断现行程序为 I/O 服务</strong>。</p>
+<h1 id="DMA-方式"><a href="#DMA-方式" class="headerlink" title="DMA 方式"></a>DMA 方式</h1><h2 id="DMA-方式的特点"><a href="#DMA-方式的特点" class="headerlink" title="DMA 方式的特点"></a>DMA 方式的特点</h2><p>程序中断方式的数据传送通路需要经过 CPU，但 DMA 方式的数据传送通路不需要经过 CPU，外部设备与主存直接通过 DMA 接口即可进行数据交换。</p>
+<p>DMA 与主存交换数据的方式有三种：</p>
+<ol>
+<li>停止 CPU 访问主存，这种方式控制简单，但在数据传送的过程中，CPU 处于不工作状态或保持状态，不能充分发挥 CPU 对主存的利用率。</li>
+<li>周期挪用（也叫周期窃取），这里提到的周期就是指访存周期（存取周期）。所谓周期挪用，其实就是指在 DMA 接口开始进行数据传送时，CPU 放弃对主存的占用，待 DMA 接口完成数据传送后，CPU 再进行对主存访问。此时存在三种可能：CPU 此时不访存、CPU 正在访存、CPU 和 DMA 同时请求访存（此时 CPU 将总线控制权让给 DMA）。</li>
+<li>DMA 与 CPU 交替访问，将 CPU 工作周期分为 $C_1$（专供 DMA 访存）和 $C_2$（专供 CPU 访存）。</li>
+</ol>
+<h2 id="DMA-接口的功能"><a href="#DMA-接口的功能" class="headerlink" title="DMA 接口的功能"></a>DMA 接口的功能</h2><p>主要是以下五点：</p>
+<ol>
+<li>向 CPU 申请 DMA 传送</li>
+<li>处理总线控制权的转交</li>
+<li>管理系统总线、控制数据传送</li>
+<li>确定数据传送的首地址和长度，修正传送过程中的数据地址和长度</li>
+<li>DMA 传送结束时，给出操作完成信号</li>
+</ol>
+<h2 id="DMA-接口组成"><a href="#DMA-接口组成" class="headerlink" title="DMA 接口组成"></a>DMA 接口组成</h2><p>参考下图：<br><img src="/my_photo_gallery/HIT_CO_Week_6/6_8.png" alt="DMA 接口组成" title="DMA 接口组成"></p>
+<h2 id="DMA-工作过程"><a href="#DMA-工作过程" class="headerlink" title="DMA 工作过程"></a>DMA 工作过程</h2><h3 id="DMA-传送过程"><a href="#DMA-传送过程" class="headerlink" title="DMA 传送过程"></a>DMA 传送过程</h3><p>DMA 传送过程依次是预处理、数据传送和后处理。</p>
+<h4 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h4><p>通过几条输入输出指令预置如下信息：</p>
+<ul>
+<li>通知 DMA 控制逻辑传送方向（入/出）</li>
+<li>设备地址 DMA 的 DAR</li>
+<li>主存地址 DMA 的 AR</li>
+<li>传送字数 DMA 的 WC</li>
+</ul>
+<h4 id="数据传送"><a href="#数据传送" class="headerlink" title="数据传送"></a>数据传送</h4><p><img src="/my_photo_gallery/HIT_CO_Week_6/6_9.png" alt="DMA 传送过程示意" title="DMA 传送过程示意"></p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_6/6_12.png" alt="数据传送过程（输出）" title="数据传送过程（输出）"></p>
+<h4 id="后处理"><a href="#后处理" class="headerlink" title="后处理"></a>后处理</h4><p>后处理主要完成以下三个任务：</p>
+<ol>
+<li>校验送入主存的数是否正确</li>
+<li>是否继续用 DMA</li>
+<li>测试传送过程是否正确，错则转诊断程序</li>
+</ol>
+<p>注意，后处理过程都是由中断服务程序完成。</p>
+<h3 id="DMA-接口与系统的连接方式"><a href="#DMA-接口与系统的连接方式" class="headerlink" title="DMA 接口与系统的连接方式"></a>DMA 接口与系统的连接方式</h3><p>主要是两种方式：具有公共请求线的 DMA 请求和独立的 DMA 请求，这有点像是并联和串联的差异？😦</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_6/6_10.png" alt="具有公共请求线的 DMA 请求" title="具有公共请求线的 DMA 请求"></p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_6/6_11.png" alt="独立的 DMA 请求" title="独立的 DMA 请求"></p>
+<h3 id="DMA-方式与程序中断方式的比较"><a href="#DMA-方式与程序中断方式的比较" class="headerlink" title="DMA 方式与程序中断方式的比较"></a>DMA 方式与程序中断方式的比较</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">类别</th>
+<th style="text-align:center">中断方式</th>
+<th style="text-align:center">DMA方式、</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">数据传送</td>
+<td style="text-align:center">程序</td>
+<td style="text-align:center">硬件</td>
+</tr>
+<tr>
+<td style="text-align:center">响应时间</td>
+<td style="text-align:center">指令执行结束</td>
+<td style="text-align:center">存取周期结束</td>
+</tr>
+<tr>
+<td style="text-align:center">处理异常情况</td>
+<td style="text-align:center">能</td>
+<td style="text-align:center">不能</td>
+</tr>
+<tr>
+<td style="text-align:center">中断请求</td>
+<td style="text-align:center">传送数据</td>
+<td style="text-align:center">后处理</td>
+</tr>
+<tr>
+<td style="text-align:center">优先级</td>
+<td style="text-align:center">低</td>
+<td style="text-align:center">高</td>
+</tr>
+</tbody>
+</table>
+<h2 id="DMA-接口的类型"><a href="#DMA-接口的类型" class="headerlink" title="DMA 接口的类型"></a>DMA 接口的类型</h2><p>也就是下面两种：</p>
+<blockquote>
+<p>选择型： 在物理上连接<strong>多个</strong>设备，在逻辑上只允许连接<strong>一个</strong>设备。</p>
+</blockquote>
+<p><img src="/my_photo_gallery/HIT_CO_Week_6/6_13.png" alt="选择型" title="选择型"></p>
+<blockquote>
+<p>多路型：在物理上连接<strong>多个</strong>设备，在逻辑上允许连接<strong>多个</strong>设备。</p>
+</blockquote>
+<p><img src="/my_photo_gallery/HIT_CO_Week_6/6_14.png" alt="多路型" title="多路型"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><hr>
       
     </div>
 
@@ -1112,7 +1200,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#I-O-设备"><span class="nav-number">2.</span> <span class="nav-text">I/O 设备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#I-O-接口"><span class="nav-number">3.</span> <span class="nav-text">I/O 接口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序查询方式"><span class="nav-number">4.</span> <span class="nav-text">程序查询方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序中断方式"><span class="nav-number">5.</span> <span class="nav-text">程序中断方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DMA-方式"><span class="nav-number">6.</span> <span class="nav-text">DMA 方式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#I-O-设备"><span class="nav-number">2.</span> <span class="nav-text">I/O 设备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#I-O-接口"><span class="nav-number">3.</span> <span class="nav-text">I/O 接口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序查询方式"><span class="nav-number">4.</span> <span class="nav-text">程序查询方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序中断方式"><span class="nav-number">5.</span> <span class="nav-text">程序中断方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DMA-方式"><span class="nav-number">6.</span> <span class="nav-text">DMA 方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DMA-方式的特点"><span class="nav-number">6.1.</span> <span class="nav-text">DMA 方式的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DMA-接口的功能"><span class="nav-number">6.2.</span> <span class="nav-text">DMA 接口的功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DMA-接口组成"><span class="nav-number">6.3.</span> <span class="nav-text">DMA 接口组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DMA-工作过程"><span class="nav-number">6.4.</span> <span class="nav-text">DMA 工作过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DMA-传送过程"><span class="nav-number">6.4.1.</span> <span class="nav-text">DMA 传送过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#预处理"><span class="nav-number">6.4.1.1.</span> <span class="nav-text">预处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据传送"><span class="nav-number">6.4.1.2.</span> <span class="nav-text">数据传送</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后处理"><span class="nav-number">6.4.1.3.</span> <span class="nav-text">后处理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DMA-接口与系统的连接方式"><span class="nav-number">6.4.2.</span> <span class="nav-text">DMA 接口与系统的连接方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DMA-方式与程序中断方式的比较"><span class="nav-number">6.4.3.</span> <span class="nav-text">DMA 方式与程序中断方式的比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DMA-接口的类型"><span class="nav-number">6.5.</span> <span class="nav-text">DMA 接口的类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -1153,7 +1241,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">191:55</span>
+    <span title="Reading time total">192:04</span>
   
 </div>
 

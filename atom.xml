@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-11-11T14:56:05.916Z</updated>
+  <updated>2023-11-19T11:09:01.034Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HIT_CO_Week_7</title>
+    <link href="http://bachzart.github.io/2023/11/13/HIT-CO-Week-7/"/>
+    <id>http://bachzart.github.io/2023/11/13/HIT-CO-Week-7/</id>
+    <published>2023-11-13T14:33:29.000Z</published>
+    <updated>2023-11-19T11:09:01.034Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;继续学习下册...&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Computer Organization" scheme="http://bachzart.github.io/categories/CS/Computer-Organization/"/>
+    
+    
+      <category term="HIT_CO" scheme="http://bachzart.github.io/tags/HIT-CO/"/>
+    
+  </entry>
   
   <entry>
     <title>HIT_CO_Week_6</title>
@@ -439,28 +461,6 @@
       <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
     
       <category term="Memory alignment" scheme="http://bachzart.github.io/tags/Memory-alignment/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>浅析快速幂算法</title>
-    <link href="http://bachzart.github.io/2023/04/03/%E6%B5%85%E6%9E%90%E5%BF%AB%E9%80%9F%E5%B9%82%E7%AE%97%E6%B3%95/"/>
-    <id>http://bachzart.github.io/2023/04/03/浅析快速幂算法/</id>
-    <published>2023-04-03T11:25:14.000Z</published>
-    <updated>2023-04-08T13:45:53.966Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;上周做了一道简单 C 语言练习题，做完了才反应过来是&lt;strong&gt;快速幂&lt;/strong&gt;...😶&lt;br&gt;
-    
-    </summary>
-    
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
-    
-      <category term="Data Structures and Algorithms" scheme="http://bachzart.github.io/categories/CS/Data-Structures-and-Algorithms/"/>
-    
-    
-      <category term="Binary Exponentiation" scheme="http://bachzart.github.io/tags/Binary-Exponentiation/"/>
     
   </entry>
   

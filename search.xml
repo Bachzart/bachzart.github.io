@@ -509,9 +509,9 @@
         <category>C/C++</category>
       </categories>
       <tags>
-        <tag>C/C++</tag>
         <tag>STL</tag>
         <tag>Set</tag>
+        <tag>C/C++</tag>
       </tags>
   </entry>
   <entry>
@@ -595,8 +595,8 @@
         <category>C/C++</category>
       </categories>
       <tags>
-        <tag>C/C++</tag>
         <tag>STL</tag>
+        <tag>C/C++</tag>
         <tag>Vector</tag>
       </tags>
   </entry>
@@ -1599,8 +1599,8 @@
         <category>C/C++</category>
       </categories>
       <tags>
-        <tag>C/C++</tag>
         <tag>STL</tag>
+        <tag>C/C++</tag>
         <tag>Stack</tag>
         <tag>Queue</tag>
       </tags>
@@ -1614,8 +1614,8 @@
         <category>C/C++</category>
       </categories>
       <tags>
-        <tag>C/C++</tag>
         <tag>STL</tag>
+        <tag>C/C++</tag>
         <tag>String</tag>
       </tags>
   </entry>

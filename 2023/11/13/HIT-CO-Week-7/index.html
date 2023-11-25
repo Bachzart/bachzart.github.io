@@ -147,7 +147,7 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="继续学习下册...">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2023-11-19T11:09:01.034Z">
+<meta property="og:updated_time" content="2023-11-25T12:43:58.938Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HIT_CO_Week_7">
 <meta name="twitter:description" content="继续学习下册...">
@@ -484,7 +484,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2023-11-19 19:09:01" itemprop="dateModified" datetime="2023-11-19T19:09:01+08:00">2023-11-19</time>
+                <time title="Modified: 2023-11-25 20:43:58" itemprop="dateModified" datetime="2023-11-25T20:43:58+08:00">2023-11-25</time>
               
             
           </span>
@@ -537,7 +537,7 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                <span title="Symbols count in article">1.1k</span>
+                <span title="Symbols count in article">3k</span>
               
 
               
@@ -549,7 +549,7 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                <span title="Reading time">9 mins.</span>
+                <span title="Reading time">25 mins.</span>
               
             </div>
           
@@ -580,6 +580,9 @@
           </div>
 <h2 id="有符号数"><a href="#有符号数" class="headerlink" title="有符号数"></a>有符号数</h2><p><a href="https://baike.baidu.com/item/%E6%9C%89%E7%AC%A6%E5%8F%B7%E6%95%B0?fromModule=lemma_search-box" target="_blank" rel="noopener">有符号数</a>就比较复杂了，分为整数和小数，下面要介绍的各种表示法都是从这两个方面展开的。</p>
 <h3 id="机器数与真值"><a href="#机器数与真值" class="headerlink" title="机器数与真值"></a>机器数与真值</h3><p>首先要明确的两个概念是：机器数与真值。<br>所谓<a href="https://baike.baidu.com/item/%E6%9C%BA%E5%99%A8%E6%95%B0?fromModule=lemma_search-box" target="_blank" rel="noopener">机器数</a>，简单理解就是计算机内存储的数，这个数跟现实中的数是存在差异的；而这里的真值不是<code>true</code>和<code>false</code>，只是现实中的有大小和正负的数，它可以是十进制的也可以是二进制的。</p>
+<div class="note warning">
+            <p>以下数学定义部分，$x$ 都为真值，$n$ 为整数或小数的位数。</p>
+          </div>
 <h3 id="原码表示法"><a href="#原码表示法" class="headerlink" title="原码表示法"></a>原码表示法</h3><p>包含两个部分：整数和小数。</p>
 <h4 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h4><p>首先是定义：<br>$$<br>[x]_原 =<br>\begin{cases}<br>0,x &amp; 2^n &gt; x \geqslant 0 \\<br>2^n-x &amp; 0 \geqslant x &gt; -2^n \\<br>\end{cases}$$</p>
 <p>比如：$x = +1110$，$[x]_原 = 0,1110$；$x = -1110$，$[x]_原 = 2^4 + 1110 = 1,1110$。实际上，$2^4$其实就是$10000$，写成指数形式更贴近定义中的公式，可千万别以为是新东西。</p>
@@ -591,10 +594,30 @@
 <div class="note success">
             <p>与上述一样，机器字长默认为 5 位，小数点用来隔开符号位和数值部分。</p>
           </div>
-<!--
-求原码中的 0，并总结原码的部分规律。
-
- -->
+<p>最后，还要把特殊的 0 单独拿出来讨论下，按照原码小数的定义，有：<br><code>+0</code>：$x = +0.0000，[+0.0000]_原 = 0.0000$<br><code>-0</code>：$x = -0.0000，[-0.0000]_原 = 1.0000$<br>同理，对于整数，就有：<br><code>+0</code>：$[+0]_原 = 0,0000$<br><code>-0</code>：$[-0]_原 = 1,0000$<br>综上，<strong><code>+0</code>和<code>-0</code>的原码不同</strong>。</p>
+<h3 id="补码表示法"><a href="#补码表示法" class="headerlink" title="补码表示法"></a>补码表示法</h3><p>补码的概念有点类似于<a href="https://baike.baidu.com/item/%E6%A8%A1%E8%BF%90%E7%AE%97/4376110" target="_blank" rel="noopener">模运算</a>中的补数，不复杂，但是日常生活中用的不多。</p>
+<h4 id="整数-1"><a href="#整数-1" class="headerlink" title="整数"></a>整数</h4><p>定义：<br>$$<br>[x]_补 =<br>\begin{cases}<br>0,x &amp; 2^n &gt; x \geqslant 0 \\<br>2^{n+1}+x &amp; 0 &gt; x \geqslant -2^n (mod\ 2^{n+1})\\<br>\end{cases}$$</p>
+<p>比如：$x = +1010$，$[x]_补 = 0,1010$；$x = -1011000$，$[x]_补 = 2^{7+1} + (-1011000) = 1,0101000$。</p>
+<h4 id="小数-1"><a href="#小数-1" class="headerlink" title="小数"></a>小数</h4><p>定义：<br>$$<br>[x]_补 =<br>\begin{cases}<br>x &amp; 1 &gt; x \geqslant 0 \\<br>2+x &amp; 0 &gt; x \geqslant -1 (mod\ 2)\\<br>\end{cases}$$</p>
+<p>比如：$x = +0.1110$，$[x]_补 = 0.1110$；$x = -0.1100000$，$[x]_补 = 2 + (-0.1100000) = 1.0100000$。</p>
+<p>实际上，关于补码有一些规律：</p>
+<ol>
+<li>正数的补码就是其本身</li>
+<li>负数的补码可用其原码除符号位，每位取反，末位加 1 求得</li>
+</ol>
+<p>同样，补码也存在 0 这个特殊情况，按照补码小数的定义：<br><code>+0</code>：$x = +0.0000，[+0.0000]_补 = 0.0000$<br><code>-0</code>：$x = -0.0000，[-0.0000]_补 = 1.0000$<br>同理，对于整数，就有：<br><code>+0</code>：$[+0]_补 = 0,0000$<br><code>-0</code>：$[-0]_补 = 1,0000$<br>综上，<strong><code>+0</code>和<code>-0</code>的补码相同</strong>。</p>
+<h3 id="反码表示法"><a href="#反码表示法" class="headerlink" title="反码表示法"></a>反码表示法</h3><h4 id="整数-2"><a href="#整数-2" class="headerlink" title="整数"></a>整数</h4><p>定义：<br>$$<br>[x]_反 =<br>\begin{cases}<br>0,x &amp; 2^n &gt; x \geqslant 0 \\<br>(2^{n+1}-1)+x &amp; 0 &gt; x \geqslant -2^n (mod\ 2^{n+1}-1)\\<br>\end{cases}$$</p>
+<p>比如：$x = +1101$，$[x]_反 = 0,1101$；$x = -1101$，$[x]_反 = (2^{4+1}-1) - 1101 = 1,0010$。</p>
+<h4 id="小数-2"><a href="#小数-2" class="headerlink" title="小数"></a>小数</h4><p>定义：<br>$$<br>[x]_反 =<br>\begin{cases}<br>x &amp; 1 &gt; x \geqslant 0 \\<br>(2-2^{-n})+x &amp; 0 \geqslant x &gt; -1 (mod\ 2-2^{-n})\\<br>\end{cases}$$</p>
+<p>比如：$x = +0.1101$，$[x]_反 = 0.1101$；$x = -0.1010$，$[x]_反 = (2-2^{-4} - 0.1010) = 1.0101$。</p>
+<p>同样，反码也存在 0 这个特殊情况，按照反码小数的定义：<br><code>+0</code>：$x = +0.0000，[+0.0000]_补 = 0.0000$<br><code>-0</code>：$x = -0.0000，[-0.0000]_补 = 1.1111$<br>同理，对于整数，就有：<br><code>+0</code>：$[+0]_补 = 0,0000$<br><code>-0</code>：$[-0]_补 = 1,1111$<br>综上，<strong><code>+0</code>和<code>-0</code>的反码不同</strong>。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>总结一下三种机器数的规律：</p>
+<ol>
+<li>对于正数，原码 = 补码 = 反码</li>
+<li>对于负数，符号位为 1，其原码除符号位外每位取反，末位加 1 可得补码；其原码除符号位每位取反，可得反码</li>
+</ol>
+<h3 id="移码表示法"><a href="#移码表示法" class="headerlink" title="移码表示法"></a>移码表示法</h3><p>补码无法直接判断两个符号不同的整数的大小关系，由此产生的就是<a href="https://baike.baidu.com/item/%E7%A7%BB%E7%A0%81/10165919?fr=ge_ala" target="_blank" rel="noopener">移码</a>。<br>移码定义：<br>$$<br>[x]_移 =<br>\begin{cases}<br>2^n+x &amp; 2^n &gt; x \geqslant -2^n \\<br>\end{cases}$$</p>
+<p>比如：$x = 10100$，$[x]_移 = 2^5 + 10100 = 1,10100$；$x = -10100$，$[x]_移 = 2^5 - 10100 = 0,01100$。<br>实际上，<strong>移码与补码只差了一个符号位：正数的移码的符号位为 1，负数的移码的符号位为 0</strong>。最小真值的移码为全 0，同时<code>+0</code>和<code>-0</code>的移码也是相等的（与补码一致）。移码的用途就是用来表示浮点数的阶码，这样可以很方便的判断浮点数阶码大小。</p>
 <hr>
       
     </div>
@@ -1051,7 +1074,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#无符号数和有符号数"><span class="nav-number">1.</span> <span class="nav-text">无符号数和有符号数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无符号数"><span class="nav-number">1.1.</span> <span class="nav-text">无符号数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有符号数"><span class="nav-number">1.2.</span> <span class="nav-text">有符号数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#机器数与真值"><span class="nav-number">1.2.1.</span> <span class="nav-text">机器数与真值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原码表示法"><span class="nav-number">1.2.2.</span> <span class="nav-text">原码表示法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整数"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">整数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小数"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">小数</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#无符号数和有符号数"><span class="nav-number">1.</span> <span class="nav-text">无符号数和有符号数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无符号数"><span class="nav-number">1.1.</span> <span class="nav-text">无符号数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有符号数"><span class="nav-number">1.2.</span> <span class="nav-text">有符号数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#机器数与真值"><span class="nav-number">1.2.1.</span> <span class="nav-text">机器数与真值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原码表示法"><span class="nav-number">1.2.2.</span> <span class="nav-text">原码表示法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整数"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">整数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小数"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">小数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补码表示法"><span class="nav-number">1.2.3.</span> <span class="nav-text">补码表示法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整数-1"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">整数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小数-1"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">小数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反码表示法"><span class="nav-number">1.2.4.</span> <span class="nav-text">反码表示法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整数-2"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">整数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小数-2"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">小数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">1.2.5.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移码表示法"><span class="nav-number">1.2.6.</span> <span class="nav-text">移码表示法</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1092,7 +1115,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">192:15</span>
+    <span title="Reading time total">192:31</span>
   
 </div>
 

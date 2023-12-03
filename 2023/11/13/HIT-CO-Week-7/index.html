@@ -147,10 +147,14 @@
 <meta property="og:site_name" content="bachzart&#39;s Blog">
 <meta property="og:description" content="继续学习下册...">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2023-11-25T12:43:58.938Z">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_7/7_1.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_7/7_2.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_7/7_3.png">
+<meta property="og:updated_time" content="2023-12-03T15:13:37.349Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HIT_CO_Week_7">
 <meta name="twitter:description" content="继续学习下册...">
+<meta name="twitter:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_7/7_1.png">
 
 
 
@@ -484,7 +488,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2023-11-25 20:43:58" itemprop="dateModified" datetime="2023-11-25T20:43:58+08:00">2023-11-25</time>
+                <time title="Modified: 2023-12-03 23:13:37" itemprop="dateModified" datetime="2023-12-03T23:13:37+08:00">2023-12-03</time>
               
             
           </span>
@@ -537,7 +541,7 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                <span title="Symbols count in article">3k</span>
+                <span title="Symbols count in article">3.3k</span>
               
 
               
@@ -549,7 +553,7 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                <span title="Reading time">25 mins.</span>
+                <span title="Reading time">28 mins.</span>
               
             </div>
           
@@ -618,6 +622,22 @@
 </ol>
 <h3 id="移码表示法"><a href="#移码表示法" class="headerlink" title="移码表示法"></a>移码表示法</h3><p>补码无法直接判断两个符号不同的整数的大小关系，由此产生的就是<a href="https://baike.baidu.com/item/%E7%A7%BB%E7%A0%81/10165919?fr=ge_ala" target="_blank" rel="noopener">移码</a>。<br>移码定义：<br>$$<br>[x]_移 =<br>\begin{cases}<br>2^n+x &amp; 2^n &gt; x \geqslant -2^n \\<br>\end{cases}$$</p>
 <p>比如：$x = 10100$，$[x]_移 = 2^5 + 10100 = 1,10100$；$x = -10100$，$[x]_移 = 2^5 - 10100 = 0,01100$。<br>实际上，<strong>移码与补码只差了一个符号位：正数的移码的符号位为 1，负数的移码的符号位为 0</strong>。最小真值的移码为全 0，同时<code>+0</code>和<code>-0</code>的移码也是相等的（与补码一致）。移码的用途就是用来表示浮点数的阶码，这样可以很方便的判断浮点数阶码大小。</p>
+<h1 id="数的定点表示和浮点表示"><a href="#数的定点表示和浮点表示" class="headerlink" title="数的定点表示和浮点表示"></a>数的定点表示和浮点表示</h1><h2 id="定点表示"><a href="#定点表示" class="headerlink" title="定点表示"></a>定点表示</h2><p>按照小数点的位置有两种表示方法，一种是小数点在数符之后（小数定点机），另一种是小数点在数值之后（整数定点机），具体如下图：</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_7/7_1.png" alt="小数的定点表示" title="小数的定点表示"></p>
+<h2 id="浮点表示"><a href="#浮点表示" class="headerlink" title="浮点表示"></a>浮点表示</h2><p>引入浮点数的目的是为了方便科学计算，其一般形式为：<br>$$<br>N = S \times r^j<br>$$</p>
+<p>其中，$S$ 为尾数，是数的小数部分，可正可负；$j$ 为阶码，是基值的指数部分，可正可负；$r$ 尾数的基值，也就是进制数。</p>
+<p>具体来讲，在计算机存储的浮点数包含了五个部分，如下图：</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_7/7_2.png" alt="小数的浮点表示" title="小数的浮点表示"></p>
+<p>最后需要指出的是浮点数的表示范围，如下图：</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_7/7_3.png" alt="浮点数表示范围" title="浮点数表示范围"></p>
+<p>注意上图中的范围，发生<strong>下溢</strong>时，按照<strong>机器零</strong>处理；发生上溢时，按照<strong>计算出错</strong>处理。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>总体来说，这章的内容不难，但是很繁琐，只是需要做好区分和总结。</p>
+<!--
+然后是这一章的思维导图：
+
+![浮点数表示范围](/my_photo_gallery/HIT_CO_Week_7/7_3.png "浮点数表示范围")
+
+-->
 <hr>
       
     </div>
@@ -1074,7 +1094,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#无符号数和有符号数"><span class="nav-number">1.</span> <span class="nav-text">无符号数和有符号数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无符号数"><span class="nav-number">1.1.</span> <span class="nav-text">无符号数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有符号数"><span class="nav-number">1.2.</span> <span class="nav-text">有符号数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#机器数与真值"><span class="nav-number">1.2.1.</span> <span class="nav-text">机器数与真值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原码表示法"><span class="nav-number">1.2.2.</span> <span class="nav-text">原码表示法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整数"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">整数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小数"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">小数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补码表示法"><span class="nav-number">1.2.3.</span> <span class="nav-text">补码表示法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整数-1"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">整数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小数-1"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">小数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反码表示法"><span class="nav-number">1.2.4.</span> <span class="nav-text">反码表示法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整数-2"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">整数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小数-2"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">小数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">1.2.5.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移码表示法"><span class="nav-number">1.2.6.</span> <span class="nav-text">移码表示法</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#无符号数和有符号数"><span class="nav-number">1.</span> <span class="nav-text">无符号数和有符号数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无符号数"><span class="nav-number">1.1.</span> <span class="nav-text">无符号数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有符号数"><span class="nav-number">1.2.</span> <span class="nav-text">有符号数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#机器数与真值"><span class="nav-number">1.2.1.</span> <span class="nav-text">机器数与真值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原码表示法"><span class="nav-number">1.2.2.</span> <span class="nav-text">原码表示法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整数"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">整数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小数"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">小数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补码表示法"><span class="nav-number">1.2.3.</span> <span class="nav-text">补码表示法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整数-1"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">整数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小数-1"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">小数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反码表示法"><span class="nav-number">1.2.4.</span> <span class="nav-text">反码表示法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整数-2"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">整数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小数-2"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">小数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">1.2.5.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移码表示法"><span class="nav-number">1.2.6.</span> <span class="nav-text">移码表示法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数的定点表示和浮点表示"><span class="nav-number">2.</span> <span class="nav-text">数的定点表示和浮点表示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定点表示"><span class="nav-number">2.1.</span> <span class="nav-text">定点表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浮点表示"><span class="nav-number">2.2.</span> <span class="nav-text">浮点表示</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -1115,7 +1135,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">192:31</span>
+    <span title="Reading time total">192:34</span>
   
 </div>
 

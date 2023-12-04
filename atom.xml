@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-12-03T15:13:37.349Z</updated>
+  <updated>2023-12-04T14:42:01.295Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -17,11 +17,33 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>2023_11_月总结</title>
+    <link href="http://bachzart.github.io/2023/12/04/2023-11-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
+    <id>http://bachzart.github.io/2023/12/04/2023-11-月总结/</id>
+    <published>2023-12-04T14:02:32.000Z</published>
+    <updated>2023-12-04T14:42:01.295Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天已经是 12 月 4 日了...&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
+    
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
+    
+  </entry>
+  
+  <entry>
     <title>HIT_CO_Week_7</title>
     <link href="http://bachzart.github.io/2023/11/13/HIT-CO-Week-7/"/>
     <id>http://bachzart.github.io/2023/11/13/HIT-CO-Week-7/</id>
     <published>2023-11-13T14:33:29.000Z</published>
-    <updated>2023-12-03T15:13:37.349Z</updated>
+    <updated>2023-12-04T14:02:08.327Z</updated>
     
     <summary type="html">
     
@@ -437,30 +459,6 @@
     
     
       <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关于 C 语言内存对齐的思考</title>
-    <link href="http://bachzart.github.io/2023/04/05/%E5%85%B3%E4%BA%8E-C-%E8%AF%AD%E8%A8%80%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E7%9A%84%E6%80%9D%E8%80%83/"/>
-    <id>http://bachzart.github.io/2023/04/05/关于-C-语言内存对齐的思考/</id>
-    <published>2023-04-05T06:28:23.000Z</published>
-    <updated>2023-05-18T12:53:05.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;内存对齐又是 C 语言的经典问题了...&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
-    
-    
-      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
-    
-      <category term="Memory alignment" scheme="http://bachzart.github.io/tags/Memory-alignment/"/>
     
   </entry>
   

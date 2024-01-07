@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2023-12-04T14:42:01.295Z</updated>
+  <updated>2024-01-07T10:18:49.642Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2023_年末小结</title>
+    <link href="http://bachzart.github.io/2024/01/07/2023-%E5%B9%B4%E6%9C%AB%E5%B0%8F%E7%BB%93/"/>
+    <id>http://bachzart.github.io/2024/01/07/2023-年末小结/</id>
+    <published>2024-01-07T07:38:43.000Z</published>
+    <updated>2024-01-07T10:18:49.642Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;现在是 2024 了哦🎉~&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
+    
+    
+      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
+    
+  </entry>
   
   <entry>
     <title>2023_11_月总结</title>
@@ -437,28 +459,6 @@
     
     
       <category term="Nand2Tetris" scheme="http://bachzart.github.io/tags/Nand2Tetris/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2023_04_月总结</title>
-    <link href="http://bachzart.github.io/2023/05/04/2023-04-%E6%9C%88%E6%80%BB%E7%BB%93/"/>
-    <id>http://bachzart.github.io/2023/05/04/2023-04-月总结/</id>
-    <published>2023-05-04T11:47:33.000Z</published>
-    <updated>2023-05-04T12:53:11.835Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;五一假期过的真快啊😪~&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Life" scheme="http://bachzart.github.io/categories/Life/"/>
-    
-      <category term="Jottings" scheme="http://bachzart.github.io/categories/Life/Jottings/"/>
-    
-    
-      <category term="Jottings" scheme="http://bachzart.github.io/tags/Jottings/"/>
     
   </entry>
   

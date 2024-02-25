@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2024-01-08T12:29:23.581Z</updated>
+  <updated>2024-02-25T09:02:08.933Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -15,6 +15,22 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2024_1-2月总结</title>
+    <link href="http://bachzart.github.io/2024/02/25/2024-1-2%E6%9C%88%E6%80%BB%E7%BB%93/"/>
+    <id>http://bachzart.github.io/2024/02/25/2024-1-2月总结/</id>
+    <published>2024-02-25T08:06:04.000Z</published>
+    <updated>2024-02-25T09:02:08.933Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天 SH 竟然下了一会小雪，可惜没过多久就花完了...&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>2023_年末小结</title>
@@ -437,28 +453,6 @@
     
     
       <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Nand2Tetris_Part1_06</title>
-    <link href="http://bachzart.github.io/2023/05/05/Nand2Tetris-Part1-06/"/>
-    <id>http://bachzart.github.io/2023/05/05/Nand2Tetris-Part1-06/</id>
-    <published>2023-05-05T12:10:57.000Z</published>
-    <updated>2023-08-12T08:28:34.846Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;好几年了，上册终于要学完了🤣...&lt;br&gt;
-    
-    </summary>
-    
-      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
-    
-      <category term="Computer Organization" scheme="http://bachzart.github.io/categories/CS/Computer-Organization/"/>
-    
-    
-      <category term="Nand2Tetris" scheme="http://bachzart.github.io/tags/Nand2Tetris/"/>
     
   </entry>
   

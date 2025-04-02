@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/acoustic_guitar_128px.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/acoustic_guitar_32px.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/acoustic_guitar_16px.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/uploads/acoustic_guitar.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="之前研究过 base64 编码，但是 blog 一直放着没写，现在把它完结了吧~">
+<meta name="keywords" content="base64">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅析 base64 编码">
+<meta property="og:url" content="http://bachzart.github.io/2025/03/31/浅析-base64-编码/index.html">
+<meta property="og:site_name" content="bachzart&#39;s Blog">
+<meta property="og:description" content="之前研究过 base64 编码，但是 blog 一直放着没写，现在把它完结了吧~">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2025-04-02T09:20:23.012Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅析 base64 编码">
+<meta name="twitter:description" content="之前研究过 base64 编码，但是 blog 一直放着没写，现在把它完结了吧~">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="bachzart's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://bachzart.github.io/2025/03/31/浅析-base64-编码/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>浅析 base64 编码 | bachzart's Blog</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3eb545f7f54637f67ed532005e0261f7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">bachzart's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">183</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">28</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">56</span></a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/bachzart" class="github-corner" title="Follow me on GitHub :)" aria-label="Follow me on GitHub :)" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2025/03/31/浅析-base64-编码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="我即世界，世界即我">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">浅析 base64 编码
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2025-03-31 21:54:48" itemprop="dateCreated datePublished" datetime="2025-03-31T21:54:48+08:00">2025-03-31</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2025-04-02 17:20:23" itemprop="dateModified" datetime="2025-04-02T17:20:23+08:00">2025-04-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/Computer-Organization/" itemprop="url" rel="index"><span itemprop="name">Computer Organization</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="Symbols count in article">6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="Reading time">50 mins.</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前研究过 base64 编码，但是 blog 一直放着没写，现在把它完结了吧~<br><a id="more"></a></p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p><a href="https://baike.baidu.com/item/base64/8545775" target="_blank" rel="noopener">base64</a> 是一种简单又常用的编码方式，通常用于传输一些数据（可以是文本也可以是图片）。</p>
+<p>之前在工作中，有看到相关的应用，有点好奇它的原理，就分析了一下。</p>
+<h1 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h1><p>简而言之，base64 编码的过程就是将源字符串每 3 个字符扩展为 4 个编码表字符，从而组成一个新的字符串，其中 3 个字符对应 24 位，若取 6 位为一个编码字符，则正好对应 4 个字符。如果剩下的字符不足 3 个字符，那么就用“=”进行替代，所以，base64 编码后的字符串，可能会出现 0 个、1 个或 2 个“=”。</p>
+<p>从这里也可以看出，因为是按 6 位进行编码的，所以这也是叫 base64 的由来😂。</p>
+<p>对应的编码表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">码值</th>
+<th style="text-align:center">字符</th>
+<th style="text-align:center">码值</th>
+<th style="text-align:center">字符</th>
+<th style="text-align:center">码值</th>
+<th style="text-align:center">字符</th>
+<th style="text-align:center">码值</th>
+<th style="text-align:center">字符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">A</td>
+<td style="text-align:center">16</td>
+<td style="text-align:center">Q</td>
+<td style="text-align:center">32</td>
+<td style="text-align:center">g</td>
+<td style="text-align:center">48</td>
+<td style="text-align:center">w</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">B</td>
+<td style="text-align:center">17</td>
+<td style="text-align:center">R</td>
+<td style="text-align:center">33</td>
+<td style="text-align:center">h</td>
+<td style="text-align:center">49</td>
+<td style="text-align:center">x </td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">C</td>
+<td style="text-align:center">18</td>
+<td style="text-align:center">S</td>
+<td style="text-align:center">34</td>
+<td style="text-align:center">i</td>
+<td style="text-align:center">50</td>
+<td style="text-align:center">y</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">D</td>
+<td style="text-align:center">19</td>
+<td style="text-align:center">T</td>
+<td style="text-align:center">35</td>
+<td style="text-align:center">j</td>
+<td style="text-align:center">51</td>
+<td style="text-align:center">z</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">E</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">U</td>
+<td style="text-align:center">36</td>
+<td style="text-align:center">k</td>
+<td style="text-align:center">52</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">F</td>
+<td style="text-align:center">21</td>
+<td style="text-align:center">V</td>
+<td style="text-align:center">37</td>
+<td style="text-align:center">l</td>
+<td style="text-align:center">53</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">G</td>
+<td style="text-align:center">22</td>
+<td style="text-align:center">W</td>
+<td style="text-align:center">38</td>
+<td style="text-align:center">m</td>
+<td style="text-align:center">54</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">H</td>
+<td style="text-align:center">23</td>
+<td style="text-align:center">X</td>
+<td style="text-align:center">39</td>
+<td style="text-align:center">n</td>
+<td style="text-align:center">55</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">I</td>
+<td style="text-align:center">24</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">40</td>
+<td style="text-align:center">o</td>
+<td style="text-align:center">56</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td style="text-align:center">J</td>
+<td style="text-align:center">25</td>
+<td style="text-align:center">Z</td>
+<td style="text-align:center">41</td>
+<td style="text-align:center">p</td>
+<td style="text-align:center">57</td>
+<td style="text-align:center">5</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">K</td>
+<td style="text-align:center">26</td>
+<td style="text-align:center">a</td>
+<td style="text-align:center">42</td>
+<td style="text-align:center">q</td>
+<td style="text-align:center">58</td>
+<td style="text-align:center">6</td>
+</tr>
+<tr>
+<td style="text-align:center">11</td>
+<td style="text-align:center">L</td>
+<td style="text-align:center">27</td>
+<td style="text-align:center">b</td>
+<td style="text-align:center">43</td>
+<td style="text-align:center">r</td>
+<td style="text-align:center">59</td>
+<td style="text-align:center">7</td>
+</tr>
+<tr>
+<td style="text-align:center">12</td>
+<td style="text-align:center">M</td>
+<td style="text-align:center">28</td>
+<td style="text-align:center">c</td>
+<td style="text-align:center">44</td>
+<td style="text-align:center">s</td>
+<td style="text-align:center">60</td>
+<td style="text-align:center">8</td>
+</tr>
+<tr>
+<td style="text-align:center">13</td>
+<td style="text-align:center">N</td>
+<td style="text-align:center">29</td>
+<td style="text-align:center">d</td>
+<td style="text-align:center">45</td>
+<td style="text-align:center">t</td>
+<td style="text-align:center">61</td>
+<td style="text-align:center">9</td>
+</tr>
+<tr>
+<td style="text-align:center">14</td>
+<td style="text-align:center">O</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">e</td>
+<td style="text-align:center">46</td>
+<td style="text-align:center">u</td>
+<td style="text-align:center">62</td>
+<td style="text-align:center">+</td>
+</tr>
+<tr>
+<td style="text-align:center">15</td>
+<td style="text-align:center">P</td>
+<td style="text-align:center">31</td>
+<td style="text-align:center">f</td>
+<td style="text-align:center">47</td>
+<td style="text-align:center">v</td>
+<td style="text-align:center">63</td>
+<td style="text-align:center">/</td>
+</tr>
+</tbody>
+</table>
+<p>有了编码表之后，就可以进行编码操作了，以“A”这个单字符组成的字符串为例，字符“A”的二进制形式为：<br>$$ (0100 0001)_2 $$</p>
+<p>取出前六位：<br>$$(0100 00)_2$$</p>
+<p>按照<strong>编码表</strong>就等于：<br>$$(16)_{10} = Q$$</p>
+<p>这样，就得到了编码后的第一个字符。但此时会发现，字符“A”还剩下“01”两位没有用到，这里直接在后面补零就好，可得<code>0100 00</code>这六位，对应编码同样还是<code>Q</code>。</p>
+<p>这时，得到了由<code>Q</code>这个字符构成的字符串<code>QQ</code>，离目标 4 个字符还差两个，这里再直接用“=”补齐，就得到：<code>QQ==</code>这个编码后的字符串了。</p>
+<p>整体来看，编码过程并不复杂，对吧，下面再来实现它。</p>
+<h1 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h1><p>考虑到整个编码过程中，存在着大量的取位操作，直接使用位运算取出特定的位，然后根据编码表转换为特定的字符会比较方便，所以我们直接使用 C 语言的位运算来实现，测试代码如下：<br><figure class="highlight c"><figcaption><span>Ver1</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> enc_map[] = <span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">base64_enc</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *src, <span class="keyword">int</span> src_len, <span class="keyword">char</span> *enc)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(; i &lt; src_len - src_len % <span class="number">3</span>; i += <span class="number">3</span>) &#123;</span><br><span class="line">        enc[j++] = enc_map[(src[i] &gt;&gt; <span class="number">2</span>) &amp; <span class="number">0x3F</span>];</span><br><span class="line">        enc[j++] = enc_map[((src[i] &lt;&lt; <span class="number">4</span>) &amp; <span class="number">0x30</span>) + ((src[i + <span class="number">1</span>] &gt;&gt; <span class="number">4</span>) &amp; <span class="number">0xF</span>)];</span><br><span class="line">        enc[j++] = enc_map[((src[i + <span class="number">1</span>] &lt;&lt; <span class="number">2</span>) &amp; <span class="number">0x3C</span>) + ((src[i + <span class="number">2</span>] &gt;&gt; <span class="number">6</span>) &amp; <span class="number">0x3</span>)];</span><br><span class="line">        enc[j++] = enc_map[src[i + <span class="number">2</span>] &amp; <span class="number">0x3F</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(src_len % <span class="number">3</span> == <span class="number">1</span>) &#123;</span><br><span class="line">        enc[j++] = enc_map[(src[i] &gt;&gt; <span class="number">2</span>) &amp; <span class="number">0x3F</span>];</span><br><span class="line">        enc[j++] = enc_map[(src[i] &lt;&lt; <span class="number">4</span>) &amp; <span class="number">0x30</span>];</span><br><span class="line">        enc[j++] = <span class="string">'='</span>;</span><br><span class="line">        enc[j++] = <span class="string">'='</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(src_len % <span class="number">3</span> == <span class="number">2</span>) &#123;</span><br><span class="line">        enc[j++] = enc_map[(src[i] &gt;&gt; <span class="number">2</span>) &amp; <span class="number">0x3F</span>];</span><br><span class="line">        enc[j++] = enc_map[((src[i] &lt;&lt; <span class="number">4</span>) &amp; <span class="number">0x30</span>) + ((src[i + <span class="number">1</span>] &gt;&gt; <span class="number">4</span>) &amp; <span class="number">0xF</span>)];</span><br><span class="line">        enc[j++] = enc_map[(src[i + <span class="number">1</span>] &lt;&lt; <span class="number">2</span>) &amp; <span class="number">0x3C</span>];</span><br><span class="line">        enc[j++] = <span class="string">'='</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> *strSrc[<span class="number">10</span>] = &#123;<span class="string">"A"</span>, <span class="string">"AB"</span>, <span class="string">"ABC"</span>, <span class="string">"ABCD"</span>, <span class="string">"Killing"</span>&#125;;</span><br><span class="line">    <span class="keyword">char</span> strEnc[<span class="number">1024</span>];</span><br><span class="line">    <span class="built_in">memset</span>(strEnc, <span class="number">0</span>, <span class="keyword">sizeof</span>(strEnc));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i) &#123;</span><br><span class="line">        base64_enc(strSrc[i], <span class="built_in">strlen</span>(strSrc[i]), strEnc);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%s\n%s\n"</span>, strSrc[i], strEnc, strDec);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">output:</span></span><br><span class="line"><span class="comment">A</span></span><br><span class="line"><span class="comment">QQ==</span></span><br><span class="line"><span class="comment">AB</span></span><br><span class="line"><span class="comment">QUI=</span></span><br><span class="line"><span class="comment">ABC</span></span><br><span class="line"><span class="comment">QUJD</span></span><br><span class="line"><span class="comment">ABCD</span></span><br><span class="line"><span class="comment">QUJDRA==</span></span><br><span class="line"><span class="comment">Killing</span></span><br><span class="line"><span class="comment">S2lsbGluZw==</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="解码"><a href="#解码" class="headerlink" title="解码"></a>解码</h1><p>学会如何编码之后，对应的解码自然也不在话下了，只需要按照对应的解码表进行解码即可，我们直接在上面的代码中修改：<br><figure class="highlight c"><figcaption><span>Ver2</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> enc_map[] = <span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"</span>;</span><br><span class="line"><span class="keyword">char</span> dec_map[<span class="number">256</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> idx = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">strlen</span>(enc_map); ++i)</span><br><span class="line">        dec_map[enc_map[i]] = idx++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">base64_enc</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *src, <span class="keyword">int</span> src_len, <span class="keyword">char</span> *enc)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(; i &lt; src_len - src_len % <span class="number">3</span>; i += <span class="number">3</span>) &#123;</span><br><span class="line">        enc[j++] = enc_map[(src[i] &gt;&gt; <span class="number">2</span>) &amp; <span class="number">0x3F</span>];</span><br><span class="line">        enc[j++] = enc_map[((src[i] &lt;&lt; <span class="number">4</span>) &amp; <span class="number">0x30</span>) + ((src[i + <span class="number">1</span>] &gt;&gt; <span class="number">4</span>) &amp; <span class="number">0xF</span>)];</span><br><span class="line">        enc[j++] = enc_map[((src[i + <span class="number">1</span>] &lt;&lt; <span class="number">2</span>) &amp; <span class="number">0x3C</span>) + ((src[i + <span class="number">2</span>] &gt;&gt; <span class="number">6</span>) &amp; <span class="number">0x3</span>)];</span><br><span class="line">        enc[j++] = enc_map[src[i + <span class="number">2</span>] &amp; <span class="number">0x3F</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(src_len % <span class="number">3</span> == <span class="number">1</span>) &#123;</span><br><span class="line">        enc[j++] = enc_map[(src[i] &gt;&gt; <span class="number">2</span>) &amp; <span class="number">0x3F</span>];</span><br><span class="line">        enc[j++] = enc_map[(src[i] &lt;&lt; <span class="number">4</span>) &amp; <span class="number">0x30</span>];</span><br><span class="line">        enc[j++] = <span class="string">'='</span>;</span><br><span class="line">        enc[j++] = <span class="string">'='</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(src_len % <span class="number">3</span> == <span class="number">2</span>) &#123;</span><br><span class="line">        enc[j++] = enc_map[(src[i] &gt;&gt; <span class="number">2</span>) &amp; <span class="number">0x3F</span>];</span><br><span class="line">        enc[j++] = enc_map[((src[i] &lt;&lt; <span class="number">4</span>) &amp; <span class="number">0x30</span>) + ((src[i + <span class="number">1</span>] &gt;&gt; <span class="number">4</span>) &amp; <span class="number">0xF</span>)];</span><br><span class="line">        enc[j++] = enc_map[(src[i + <span class="number">1</span>] &lt;&lt; <span class="number">2</span>) &amp; <span class="number">0x3C</span>];</span><br><span class="line">        enc[j++] = <span class="string">'='</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">base64_dec</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *enc, <span class="keyword">int</span> enc_len, <span class="keyword">char</span> *dec)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(enc_len % <span class="number">4</span> != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"encoding str is valid.\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(; i &lt; enc_len; i += <span class="number">4</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!dec_map[enc[i]] || !dec_map[enc[i + <span class="number">1</span>]] || !dec_map[enc[i + <span class="number">2</span>]] || !dec_map[enc[i + <span class="number">3</span>]])</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        dec[j++] = (dec_map[enc[i]] &lt;&lt; <span class="number">2</span>) + ((dec_map[enc[i + <span class="number">1</span>]] &gt;&gt; <span class="number">4</span>) &amp; <span class="number">0x3</span>);</span><br><span class="line">        dec[j++] = ((dec_map[enc[i + <span class="number">1</span>]] &lt;&lt; <span class="number">4</span>) &amp; <span class="number">0xF0</span>) + ((dec_map[enc[i + <span class="number">2</span>]] &gt;&gt; <span class="number">2</span>) &amp; <span class="number">0xF</span>);</span><br><span class="line">        dec[j++] = ((dec_map[enc[i + <span class="number">2</span>]] &lt;&lt; <span class="number">6</span>) &amp; <span class="number">0xC0</span>) + (dec_map[enc[i + <span class="number">3</span>]] &amp; <span class="number">0x3F</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(i &lt; enc_len) &#123;</span><br><span class="line">        <span class="keyword">if</span>(enc[i + <span class="number">2</span>] == <span class="string">'='</span> &amp;&amp; enc[i + <span class="number">3</span>] == <span class="string">'='</span>) &#123;</span><br><span class="line">            dec[j] = (dec_map[enc[i]] &lt;&lt; <span class="number">2</span>) + ((dec_map[enc[i + <span class="number">1</span>]] &gt;&gt; <span class="number">4</span>) &amp; <span class="number">0x3</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(enc[i + <span class="number">3</span>] == <span class="string">'='</span>) &#123;</span><br><span class="line">            dec[j++] = (dec_map[enc[i]]  &lt;&lt; <span class="number">2</span>) + ((dec_map[enc[i + <span class="number">1</span>]] &gt;&gt; <span class="number">4</span>) &amp; <span class="number">0x3</span>);</span><br><span class="line">            dec[j++] = ((dec_map[enc[i + <span class="number">1</span>]] &lt;&lt; <span class="number">2</span>) &amp; <span class="number">0xF0</span>) + ((dec_map[enc[i + <span class="number">2</span>]] &gt;&gt; <span class="number">2</span>) &amp; <span class="number">0xF</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    init();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span> *strSrc[<span class="number">10</span>] = &#123;<span class="string">"A"</span>, <span class="string">"AB"</span>, <span class="string">"ABC"</span>, <span class="string">"ABCD"</span>, <span class="string">"Killing"</span>&#125;;</span><br><span class="line">    <span class="keyword">char</span> strEnc[<span class="number">1024</span>], strDec[<span class="number">1024</span>];</span><br><span class="line">    <span class="built_in">memset</span>(strEnc, <span class="number">0</span>, <span class="keyword">sizeof</span>(strEnc));</span><br><span class="line">    <span class="built_in">memset</span>(strDec, <span class="number">0</span>, <span class="keyword">sizeof</span>(strDec));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i) &#123;</span><br><span class="line">        base64_enc(strSrc[i], <span class="built_in">strlen</span>(strSrc[i]), strEnc);</span><br><span class="line">        base64_dec(strEnc, <span class="built_in">strlen</span>(strEnc), strDec);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%s\n%s\n%s\n"</span>, strSrc[i], strEnc, strDec);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">output:</span></span><br><span class="line"><span class="comment">A</span></span><br><span class="line"><span class="comment">QQ==</span></span><br><span class="line"><span class="comment">A</span></span><br><span class="line"><span class="comment">AB</span></span><br><span class="line"><span class="comment">QUI=</span></span><br><span class="line"><span class="comment">AR</span></span><br><span class="line"><span class="comment">ABC</span></span><br><span class="line"><span class="comment">QUJD</span></span><br><span class="line"><span class="comment">ABC</span></span><br><span class="line"><span class="comment">ABCD</span></span><br><span class="line"><span class="comment">QUJDRA==</span></span><br><span class="line"><span class="comment">ABCD</span></span><br><span class="line"><span class="comment">Killing</span></span><br><span class="line"><span class="comment">S2lsbGluZw==</span></span><br><span class="line"><span class="comment">Killing</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>这篇文章重点分析了 base64 编码、解码的过程，并用 C 语言简单实现了一个 demo 程序。总体来看，base64 编码的过程并不复杂，作为理解计算机编码方式的练习来讲，还不错。</p>
+<p>PS：欠了一年的 blog 终于水完了~😂</p>
+<hr>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Buy me a coffee ? :)</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="bachzart WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.png" alt="bachzart Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>bachzart</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    
+    <a href="http://bachzart.github.io/2025/03/31/浅析-base64-编码/" title="浅析 base64 编码">http://bachzart.github.io/2025/03/31/浅析-base64-编码/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/base64/" rel="tag"><i class="fa fa-tag"></i> base64</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2025/03/28/2024-回望录/" rel="next" title="2024_回望录">
+                <i class="fa fa-chevron-left"></i> 2024_回望录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="bachzart">
+            
+              <p class="site-author-name" itemprop="name">bachzart</p>
+              <p class="site-description motion-element" itemprop="description">我即世界，世界即我</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">183</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">53</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/bachzart" title="GitHub &rarr; https://github.com/bachzart" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:whistlesilp@gmail.com" title="E-Mail &rarr; mailto:whistlesilp@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/about/" title="/about/">About This Blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/Book-List/" title="/Book-List/">Book List</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sudoku.name/index.php?ln=cn&ref=44355" title="https://www.sudoku.name/index.php?ln=cn&ref=44355" rel="noopener" target="_blank">Soduku Game</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://2048game.com/" title="https://2048game.com/" rel="noopener" target="_blank">2048 Game</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#规则"><span class="nav-number">2.</span> <span class="nav-text">规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编码"><span class="nav-number">3.</span> <span class="nav-text">编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解码"><span class="nav-number">4.</span> <span class="nav-text">解码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结语"><span class="nav-number">5.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bachzart</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">1.4m</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total">195:15</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function(i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function(e) {
+        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('Copied');
+          else $(this).text('Copy failed');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function(e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function() {
+          $b.text('Copy');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+</body>
+</html>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bachzart.github.io/"/>
-  <updated>2025-03-28T15:58:28.305Z</updated>
+  <updated>2025-04-02T09:20:23.012Z</updated>
   <id>http://bachzart.github.io/</id>
   
   <author>
@@ -17,11 +17,33 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>浅析 base64 编码</title>
+    <link href="http://bachzart.github.io/2025/03/31/%E6%B5%85%E6%9E%90-base64-%E7%BC%96%E7%A0%81/"/>
+    <id>http://bachzart.github.io/2025/03/31/浅析-base64-编码/</id>
+    <published>2025-03-31T13:54:48.000Z</published>
+    <updated>2025-04-02T09:20:23.012Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前研究过 base64 编码，但是 blog 一直放着没写，现在把它完结了吧~&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CS" scheme="http://bachzart.github.io/categories/CS/"/>
+    
+      <category term="Computer Organization" scheme="http://bachzart.github.io/categories/CS/Computer-Organization/"/>
+    
+    
+      <category term="base64" scheme="http://bachzart.github.io/tags/base64/"/>
+    
+  </entry>
+  
+  <entry>
     <title>2024_回望录</title>
     <link href="http://bachzart.github.io/2025/03/28/2024-%E5%9B%9E%E6%9C%9B%E5%BD%95/"/>
     <id>http://bachzart.github.io/2025/03/28/2024-回望录/</id>
     <published>2025-03-28T09:51:52.000Z</published>
-    <updated>2025-03-28T15:58:28.305Z</updated>
+    <updated>2025-03-28T15:59:41.896Z</updated>
     
     <summary type="html">
     
@@ -429,30 +451,6 @@
       <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
     
       <category term="typedef" scheme="http://bachzart.github.io/tags/typedef/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C 语言中的回调函数</title>
-    <link href="http://bachzart.github.io/2023/08/12/C-%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"/>
-    <id>http://bachzart.github.io/2023/08/12/C-语言中的回调函数/</id>
-    <published>2023-08-12T11:00:48.000Z</published>
-    <updated>2023-08-13T05:54:52.762Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;很久没有写 blog 了，这次写一点与回调函数相关的内容...🧐&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Programming" scheme="http://bachzart.github.io/categories/Programming/"/>
-    
-      <category term="C/C++" scheme="http://bachzart.github.io/categories/Programming/C-C/"/>
-    
-    
-      <category term="C/C++" scheme="http://bachzart.github.io/tags/C-C/"/>
-    
-      <category term="callback_function" scheme="http://bachzart.github.io/tags/callback-function/"/>
     
   </entry>
   

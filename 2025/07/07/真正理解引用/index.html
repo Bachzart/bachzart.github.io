@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/acoustic_guitar_128px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/acoustic_guitar_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/acoustic_guitar_16px.png">
+  <link rel="mask-icon" href="/uploads/acoustic_guitar.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https:/fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bachzart.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="频繁使用的引用，到底是什么呢❓">
+<meta property="og:type" content="article">
+<meta property="og:title" content="真正理解引用">
+<meta property="og:url" content="http://bachzart.github.io/2025/07/07/%E7%9C%9F%E6%AD%A3%E7%90%86%E8%A7%A3%E5%BC%95%E7%94%A8/index.html">
+<meta property="og:site_name" content="bachzart&#39;s Blog">
+<meta property="og:description" content="频繁使用的引用，到底是什么呢❓">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-07T04:12:40.000Z">
+<meta property="article:modified_time" content="2026-05-09T09:26:52.804Z">
+<meta property="article:author" content="bachzart">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="reference">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://bachzart.github.io/2025/07/07/%E7%9C%9F%E6%AD%A3%E7%90%86%E8%A7%A3%E5%BC%95%E7%94%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>真正理解引用 | bachzart's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">bachzart's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">133</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/bachzart" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2025/07/07/%E7%9C%9F%E6%AD%A3%E7%90%86%E8%A7%A3%E5%BC%95%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="我即世界，世界即我">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          真正理解引用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-07-07 12:12:40" itemprop="dateCreated datePublished" datetime="2025-07-07T12:12:40+08:00">2025-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-05-09 17:26:52" itemprop="dateModified" datetime="2026-05-09T17:26:52+08:00">2026-05-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>频繁使用的引用，到底是什么呢❓</p>
+<span id="more"></span>
+
+<div class="note success">
+            <p><strong>前排提示：本文所讨论的引用都是 C&#x2F;C++ 中的引用。</strong></p>
+          </div>
+
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>还是一样，我们需要先明确**引用（reference）**的概念到底是什么，我们会从两个层面来讨论引用的概念。</p>
+<h2 id="语言规范层面（抽象层）"><a href="#语言规范层面（抽象层）" class="headerlink" title="语言规范层面（抽象层）"></a>语言规范层面（抽象层）</h2><p>注意到我们的标题，可能会有人疑惑语言规范层面（抽象层）是什么意思？<br>所谓语言规范层面，其实就是指 C++ 标准委员会规定的 C++ 标准，它是人为规定的，可能会与实际相同也可能完全不是一回事。换句话说，这是高级语言的设计者对高级语言底层实现的抽象，可以帮助使用高级语言的开发者更好的使用高级语言进行开发工作。</p>
+<p>那么好了，引用在这个层面上的概念又是怎样的呢？<br>在 C++ 标准中，规定：</p>
+<ol>
+<li>引用是已存在对象的别名，比如：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span>&amp; ri = i; <span class="comment">// ri 是 i 的别名</span></span><br><span class="line"><span class="comment">// 此时对`ri`的操作都会直接作用在`i`上</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>引用不是独立对象，不存在“引用的存储空间”概念，所以也就不能创建引用的引用（这里在设计时应该是想避免类似指针的套娃吧😂），比如：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span>&amp; ri = i; <span class="comment">// 左值引用</span></span><br><span class="line"><span class="built_in">sizeof</span>(ri); <span class="comment">// 等价于 sizeof(i)</span></span><br><span class="line">&amp;ri; <span class="comment">// 等价于 &amp;i</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>引用在定义时，必须要赋初始值，编译器会把引用和它的初始值绑定在一起，且无法再改变绑定。</li>
+</ol>
+<p>尽管我们在前面提到了这些都是抽象出来的概念，想必也有一些同学看的很困惑。特别是像引用不存在存储空间，这些概念，计算机内还有不需要存储空间的内容吗？下面我们就从编译器的角度来看看这些概念。</p>
+<h2 id="底层实现层面（编译器角度）"><a href="#底层实现层面（编译器角度）" class="headerlink" title="底层实现层面（编译器角度）"></a>底层实现层面（编译器角度）</h2><p>实际上，<strong>在汇编层面，编译器可能会将引用当作指针来解释。注意这句话的用词，首先是状语——“在汇编层面”，限制了范围，接着我们说引用可能会被当作指针来解释，也就是说编译器如何解释引用是编译器开发人员决定的，他可以当作指针解释，也可以用别的其他手段，只要实现了即可。所以，引用和指针并不是同样的东西，要注意区分。</strong><br>了解 C 语言的同学此时也会发现，有些引用（比如左值引用）在使用时和指针常量的行为很相似，比如必须要有初始值，或一旦指向某个内容，就无法再改变等。<br>同时关于不存在“引用的存储空间”的概念，我们也可以使用一些技巧来得到引用的存储空间大小：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">    <span class="type">int</span>&amp; r;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">sizeof</span>(Test);</span><br></pre></td></tr></table></figure>
+<p>在上面的代码中，我们根本没有为引用赋初始值，可这段代码在 C++ 中是不会报错的。但这也只是在这种情况下，我们通过一些小花招得到了“引用的大小”。在使用引用的其他情况下，编译器到底做了什么优化，我们是没办法完全清楚的。特别是在一些简单使用的场景，比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span>&amp; ra = a;</span><br><span class="line">std::cout &lt;&lt; ra &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
+<p>此时，编译器是否直接把第三行代码中的<code>ra</code>优化成<code>a</code>的值，或者直接优化成<code>10</code>，我们是不清楚的，可能有的编译器没有直接优化掉，有的直接优化掉了，这取决于具体编译器的实现。</p>
+<p>那话又说回来了，为什么要这么规定呢？这个问题得问 C++ 的设计者们了...😂这里就不深究了。<br>总而言之，就是一句话，抽象层的概念与底层的实现细节需要区分开来，特别是对于 C++ 而言。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>现在，我们先来总结下我们的疑问以及得到的答案：</p>
+<ol>
+<li>引用是不是指针？<br>从抽象层语义上看，<strong>二者是完全不同的东西，指针是存储地址的变量，是一种对象，但引用不是对象，也不具有存储空间</strong>。从底层的实现上看，二者是类似的，但也仅仅是类似，编译器可能会对指针和引用做完全不同的事情。</li>
+<li>引用不存在存储空间吗？<br>显然底层实现是存在存储空间的，且与指针的大小应该一致。但是在抽象层上（也就是我们使用的时候），我们可以认为引用不存在存储空间。</li>
+<li>为什么引用需要绑定初始值？<br>因为从抽象层语义上讲，规定就是这样，遵守就行了。</li>
+<li>为什么不存在引用的引用？<br>尽管存在指针的指针，但语言本身规定引用不是对象，也不存在存储空间，那就不存在引用的引用了，这样设计的目的应该是为了简化引用的使用。</li>
+<li>为什么要这么设计呢？<br>我想可能是因为 C++ 标准允许编译器开发人员对底层实现进行最大限度的优化导致的。而对用户而言，只要在抽象层上使用即可。</li>
+</ol>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>明确引用的概念后，我们还需要探究一下如何使用，这部分我们会从左值引用、右值引用和常引用来深入。</p>
+<h2 id="左值引用"><a href="#左值引用" class="headerlink" title="左值引用"></a>左值引用</h2><p>左值引用（可以简单理解为左值的引用，但这又会衍生出另外一个问题：什么是左值？）是 C++ 中最常见的引用类型，之所以叫做左值引用，一方面是因为所引用的对象都是左值，另一方面也是为了与 C++11 引入的右值引用区分开（实际上，C++11 之前，大家理解的引用基本都是左值引用）。它的用法也比较简单直观，使用一个<code>&amp;</code>来获取，我们前面已经提到了引用是已存在对象的别名，这里我们再简单的举几个例子：</p>
+<ol>
+<li>函数传参时，避免拷贝，替代指针，比如：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap</span><span class="params">(<span class="type">int</span>&amp; a, <span class="type">int</span>&amp; b)</span></span>;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>与指针一样，引用也支持多态，且使用起来比指针简单。</li>
+<li>C++11 引用语义对容器元素的访问，比如：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;<span class="type">int</span>&gt; v&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span>&amp; i: v) &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="右值引用"><a href="#右值引用" class="headerlink" title="右值引用"></a>右值引用</h2><p>右值引用是 C++11 引入的概念，它同样可以简单理解为右值的引用（同样会衍生出问题：什么是右值？），所以初始化时它必须绑定到右值。与左值引用一样，它也是某个右值对象的别名。同时，右值引用只能绑定到一个将要销毁的对象（也叫将亡值，也可以绑定到临时对象或者字面量等其他右值），并且这些对象的生命周期会延长到与右值引用一致。与左值引用类似，我们使用<code>&amp;&amp;</code>来获取右值引用，比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">10</span>; <span class="comment">// 初始化变量 i</span></span><br><span class="line"><span class="type">int</span>&amp; ri = i; <span class="comment">// 左值引用</span></span><br><span class="line"><span class="type">int</span>&amp;&amp; rri = <span class="number">10</span>; <span class="comment">// 右值引用</span></span><br><span class="line"><span class="type">int</span>&amp;&amp; rri2 = std::<span class="built_in">move</span>(ri) <span class="comment">// 使用 std::move 函数可以将左值转化为右值</span></span><br></pre></td></tr></table></figure>
+<p>那么右值引用一般有什么用途呢？这里，我们只简单的举一些例子：</p>
+<ol>
+<li>引用匿名对象，或者说延长临时对象生命周期，比如：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">A</span>() &#123; &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    A&amp;&amp; rra = <span class="built_in">A</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>实现移动语义和完美转发，避免多余的深拷贝操作（这里暂时不深入探讨，不然又可以引出一大堆内容...😴）。</li>
+</ol>
+<h2 id="常引用"><a href="#常引用" class="headerlink" title="常引用"></a>常引用</h2><p>所谓常引用，其实也可以理解成常量的引用，也就是对<code>const</code>修饰的对象的引用，这种情况在 C++11 中也叫做<strong>常量左值引用（const T&amp;）</strong>。同时在 C++11 中，既然有右值引用，那也肯定有<strong>常量右值引用（const T&amp;&amp;）</strong>。针对常量左值引用，常见的用法比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">10</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span>&amp; ri = i;</span><br><span class="line">ri = <span class="number">20</span>; <span class="comment">// 错误，不能通过常引用修改被引用对象的值</span></span><br></pre></td></tr></table></figure>
+<p>类似地，我们也简单的提供一些例子：</p>
+<ol>
+<li>函数传参使用引用，避免拷贝的同时也能避免被修改：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">const</span> <span class="type">int</span>&amp; a)</span></span>;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>与右值引用类似，也可以引用临时对象、将亡值或字面量：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> std::string&amp; s = <span class="string">&quot;hello&quot;</span>;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>常引用既可以绑定非常量，也可以绑定常量，还可以绑定左值和右值，简直是万能的：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span>&amp; ri = i;</span><br><span class="line"><span class="type">int</span>&amp;&amp; rri = <span class="number">5</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> j = <span class="number">20</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span>&amp; ri1 = i; <span class="comment">// 绑定非常量左值</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>&amp; ri2 = <span class="number">20</span>; <span class="comment">// 绑定字面量（也是右值）</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>&amp; ri3 = j; <span class="comment">// 绑定常量左值</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>&amp; ri4 = ri; <span class="comment">// 绑定左值引用</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>&amp; ri5 = rri; <span class="comment">// 绑定右值引用</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>&amp; ri6 = <span class="number">1</span> + <span class="number">2</span>; <span class="comment">// 绑定表达式</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>&amp; ri7 = i + <span class="number">1</span>;</span><br><span class="line"><span class="type">double</span> f = <span class="number">3.14</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span>&amp; rf = f; <span class="comment">// 绑定不同类型</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">这里编译器会做一个转换的过程</span></span><br><span class="line"><span class="comment">double f = 3.14;</span></span><br><span class="line"><span class="comment">-&gt; const int temp = f;</span></span><br><span class="line"><span class="comment">const int&amp; rf = temp;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>而常量右值引用一般很少使用，这里就不深入了。</p>
+<h2 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h2><p>到目前为止，我们讨论了左值引用、右值引用和常引用（包括常量左值引用和常量右值引用）。现在，我们总结一下各种引用可以引用的类型：</p>
+<table>
+<thead>
+<tr>
+<th align="left">引用类型</th>
+<th align="center">非常量左值</th>
+<th align="center">常量左值</th>
+<th align="center">非常量右值</th>
+<th align="center">常量右值</th>
+<th align="center">用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">非常量左值引用</td>
+<td align="center">Y</td>
+<td align="center">N</td>
+<td align="center">N</td>
+<td align="center">N</td>
+<td align="center">修改外部变量&#x2F;避免拷贝</td>
+</tr>
+<tr>
+<td align="left">常量左值引用</td>
+<td align="center">Y</td>
+<td align="center">Y</td>
+<td align="center">Y</td>
+<td align="center">Y</td>
+<td align="center">万能类型，安全访问</td>
+</tr>
+<tr>
+<td align="left">非常量右值引用</td>
+<td align="center">N</td>
+<td align="center">N</td>
+<td align="center">Y</td>
+<td align="center">N</td>
+<td align="center">用于移动语义&#x2F;完美转发</td>
+</tr>
+<tr>
+<td align="left">常量右值引用</td>
+<td align="center">N</td>
+<td align="center">N</td>
+<td align="center">Y</td>
+<td align="center">Y</td>
+<td align="center">用途很少</td>
+</tr>
+</tbody></table>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>现在回到文章本身，我们文章的标题是『真正的理解引用』。在文章中，我们明确了引用的概念（不仅从语言规范层面和底层实现层面，包括 C++11 之前和之后的概念差异也有所提及），理解了引用的部分设计理念；同时，我们还明确了常见的引用类型（左值引用、右值引用和常引用）的基本使用场景和使用方法，当然我们并没有很深入（有些只是一笔带过）。实际上，关于引用，还存在<strong>转发引用、引用折叠</strong>等概念。总之，要想真正的理解引用，还需要大量的实践，但目前这些应该也已经勉强够用了。而需要深入的部分，就留给日后遇见了再说吧😛。</p>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><h2 id="type-traits"><a href="#type-traits" class="headerlink" title="type_traits"></a>type_traits</h2><p>有时候，我们可能不知道一个引用到底是左值引用还是右值引用，为此 C++ 11 引入了<code>&lt;type_traits&gt;</code>来帮助我们解决这个问题。这个头文件提供了三个类模板来帮助我们判断：<code>is_rvalue_reference</code>、<code>is_lvalue_reference</code>和<code>is_reference</code>。</p>
+<h2 id="std-move"><a href="#std-move" class="headerlink" title="std::move"></a>std::move</h2><p>在 C++11 中，标准库在<code>&lt;utility&gt;</code>中提供了一个叫做<code>std::move</code>的函数，这里我们先不做过多介绍，只需要知道这个函数以一个左值作为参数，可以得到一个<strong>将亡值（xvalue）表达式</strong>，且在这个过程中不会创建新对象。比如下面这段代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;utility&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">A</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;A constructor&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">A</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;A destructor&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    A&amp;&amp; rra = std::<span class="built_in">move</span>(<span class="built_in">A</span>());</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;-----&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    A a;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">A constructor</span></span><br><span class="line"><span class="comment">A destructor</span></span><br><span class="line"><span class="comment">-----</span></span><br><span class="line"><span class="comment">A constructor</span></span><br><span class="line"><span class="comment">A destructor</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>观察结果会发现，尽管我们企图使用右值引用<code>rra</code>绑定临时对象，但临时对象却被析构掉了，这好像与我们知道的延长临时对象生命周期存在冲突。实际上，<strong>C++ 规定临时对象的生命周期仅限于创建它的完整表达式结束前</strong>。换句话说，表达式<code>std::move(A())</code>中，<code>A()</code>创建临时对象，<code>std::move(A())</code>表达式开始执行，结束后临时对象会被立即销毁。对应地，由<code>std::move(A())</code>这个表达式返回的将亡值也就没有了实际的意义。而<code>rra</code>这个引用就变成了<strong>悬垂引用（Dangling references，指针中也有类似的概念）</strong>，继续使用就是未定义行为了。<br>所以，我们应当避免中间函数，直接使用右值引用绑定临时对象：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A&amp;&amp; rra = <span class="built_in">A</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="转发引用-引用折叠"><a href="#转发引用-引用折叠" class="headerlink" title="转发引用&#x2F;引用折叠"></a>转发引用&#x2F;引用折叠</h2><p>由于 C++11 还引入了两个关于引用的新概念：转发引用（Forwarding references）和引用折叠（Reference collapsing）。<br>转发引用常用在模板的类型自动推导中，比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注意：这是 C++11 的用法</span></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(T&amp;&amp; param)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">gfunc</span>(std::forward&lt;T&gt;(x));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注意：这是 C++14 的特性</span></span><br><span class="line"><span class="keyword">auto</span> lambda = [](<span class="keyword">auto</span>&amp;&amp; param) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 注意：这是 C++20 的特性</span></span><br><span class="line"><span class="type">void</span> <span class="built_in">func</span>(<span class="keyword">auto</span>&amp;&amp; param) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>转发引用的形式与右值引用有点类似，都需要使用<code>&amp;&amp;</code>，但其前面需要模板参数或<code>auto</code>关键字来修饰，而且二者也完全不是一回事。在使用时，根据传入参数的值类别，自动推导值类别并按照原样传递。</p>
+<p><strong>最直观来说，引用折叠其实就是为了解决引用的引用是什么而存在的</strong>，比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> T = <span class="type">int</span>&amp;;</span><br><span class="line">T&amp;&amp; t; <span class="comment">// 等价于 int&amp; &amp;&amp; t，如何解释这种类型？</span></span><br></pre></td></tr></table></figure>
+<p>此时，<code>t</code>会被当作<code>int&amp;</code>。<br>上述只是一个简单的例子，实际情况可以以下面的表格内为准：</p>
+<table>
+<thead>
+<tr>
+<th align="left">模板类型</th>
+<th align="center">T 的类型</th>
+<th align="center">最终类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">T&amp;</td>
+<td align="center">R</td>
+<td align="center">R&amp;</td>
+</tr>
+<tr>
+<td align="left">T&amp;</td>
+<td align="center">R&amp;</td>
+<td align="center">R&amp;</td>
+</tr>
+<tr>
+<td align="left">T&amp;</td>
+<td align="center">R&amp;&amp;</td>
+<td align="center">R&amp;</td>
+</tr>
+<tr>
+<td align="left">T&amp;&amp;</td>
+<td align="center">R</td>
+<td align="center">R&amp;&amp;</td>
+</tr>
+<tr>
+<td align="left">T&amp;&amp;</td>
+<td align="center">R&amp;</td>
+<td align="center">R&amp;</td>
+</tr>
+<tr>
+<td align="left">T&amp;&amp;</td>
+<td align="center">R&amp;&amp;</td>
+<td align="center">R&amp;&amp;</td>
+</tr>
+</tbody></table>
+<p>这个表格的记忆方法就是：<strong>一左则左，也就是说，类型模板和<code>T</code>实际类型中有一个是左值引用，那么最终类型就是左值引用，否则若没有左值引用，但有一个是右值引用，那么最终类型就是右值引用</strong>。</p>
+<hr>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>bachzart
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://bachzart.github.io/2025/07/07/%E7%9C%9F%E6%AD%A3%E7%90%86%E8%A7%A3%E5%BC%95%E7%94%A8/" title="真正理解引用">http://bachzart.github.io/2025/07/07/真正理解引用/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C-C/" rel="tag"># C/C++</a>
+              <a href="/tags/reference/" rel="tag"># reference</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/07/07/%E5%B7%A6%E5%80%BC%E4%B8%8E%E5%8F%B3%E5%80%BC/" rel="prev" title="左值与右值">
+      <i class="fa fa-chevron-left"></i> 左值与右值
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/07/09/%E6%9C%89%E5%85%B3%E6%A8%A1%E6%9D%BF%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AC%94%E8%AE%B0/" rel="next" title="有关模板的一些笔记">
+      有关模板的一些笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80%E8%A7%84%E8%8C%83%E5%B1%82%E9%9D%A2%EF%BC%88%E6%8A%BD%E8%B1%A1%E5%B1%82%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">语言规范层面（抽象层）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%B1%82%E9%9D%A2%EF%BC%88%E7%BC%96%E8%AF%91%E5%99%A8%E8%A7%92%E5%BA%A6%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">底层实现层面（编译器角度）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">1.3.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8"><span class="nav-number">2.1.</span> <span class="nav-text">左值引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text">右值引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E5%BC%95%E7%94%A8"><span class="nav-number">2.3.</span> <span class="nav-text">常引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93-1"><span class="nav-number">2.4.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">4.</span> <span class="nav-text">补充</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#type-traits"><span class="nav-number">4.1.</span> <span class="nav-text">type_traits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-move"><span class="nav-number">4.2.</span> <span class="nav-text">std::move</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AC%E5%8F%91%E5%BC%95%E7%94%A8-%E5%BC%95%E7%94%A8%E6%8A%98%E5%8F%A0"><span class="nav-number">4.3.</span> <span class="nav-text">转发引用&#x2F;引用折叠</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bachzart"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">bachzart</p>
+  <div class="site-description" itemprop="description">我即世界，世界即我</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bachzart" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bachzart" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bachzart@163.com" title="E-Mail → mailto:bachzart@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="/about/" title="&#x2F;about&#x2F;">About This Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/Book-List/" title="&#x2F;Book-List&#x2F;">Book List</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.sudoku.name/index.php?ln=cn&ref=44355" title="https:&#x2F;&#x2F;www.sudoku.name&#x2F;index.php?ln&#x3D;cn&amp;ref&#x3D;44355" rel="noopener" target="_blank">Soduku Game</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://2048game.com/" title="https:&#x2F;&#x2F;2048game.com&#x2F;" rel="noopener" target="_blank">2048 Game</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bachzart</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

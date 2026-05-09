@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/acoustic_guitar_128px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/acoustic_guitar_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/acoustic_guitar_16px.png">
+  <link rel="mask-icon" href="/uploads/acoustic_guitar.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https:/fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bachzart.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="左值与右值，很早就知道了，但是一致没具体的搞清楚到底怎么回事儿，这次深入探究一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="左值与右值">
+<meta property="og:url" content="http://bachzart.github.io/2025/07/07/%E5%B7%A6%E5%80%BC%E4%B8%8E%E5%8F%B3%E5%80%BC/index.html">
+<meta property="og:site_name" content="bachzart&#39;s Blog">
+<meta property="og:description" content="左值与右值，很早就知道了，但是一致没具体的搞清楚到底怎么回事儿，这次深入探究一下。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-07T03:11:01.000Z">
+<meta property="article:modified_time" content="2026-05-09T09:26:52.796Z">
+<meta property="article:author" content="bachzart">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="lvalue&amp;rvalue">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://bachzart.github.io/2025/07/07/%E5%B7%A6%E5%80%BC%E4%B8%8E%E5%8F%B3%E5%80%BC/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>左值与右值 | bachzart's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">bachzart's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">133</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/bachzart" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2025/07/07/%E5%B7%A6%E5%80%BC%E4%B8%8E%E5%8F%B3%E5%80%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="我即世界，世界即我">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          左值与右值
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-07-07 11:11:01" itemprop="dateCreated datePublished" datetime="2025-07-07T11:11:01+08:00">2025-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-05-09 17:26:52" itemprop="dateModified" datetime="2026-05-09T17:26:52+08:00">2026-05-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>左值与右值，很早就知道了，但是一致没具体的搞清楚到底怎么回事儿，这次深入探究一下。</p>
+<span id="more"></span>
+
+<h1 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h1><p>据说左值和右值是从 C 语言带来的概念，原本的用途是用来帮助记忆：赋值语句左边的就是左值，右边的就是右值😂。但在 C++ 中，就完全不是这么一回事了。<br>尽管大家都是在 C&#x2F;C++ 中议论这俩概念，但个人看来，这个概念应该也可以从其他高级程序语言中体现出来。那为什么有些其他语言基本没有强调这个内容呢？显然，语言本身肯定是越简单越好的，用户只需要学习他需要的、且能使用的概念就行了。<br>至于在 C&#x2F;C++ 中，为什么要学习那么多的概念、语法。显然，是为了避免写出 BUG😑。<br>好了，闲话少说，我们一个一个来。</p>
+<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>首先应该明确的是，在 C++11 中，每个表达式（运算符及其操作数、字面量、变量名等）都有两个*<em>独立（意味着二者无关）的属性描述：<em>类型（type）<em>和</em>值类别（value category）</em></em>*。注意这句话，类型和值类别无关，且都是表达式的属性描述。也就是说，类型和值类别是在不同层面上对表达式进行属性描述。而且，我们同时还限定了是在 C++11 中，这意味着，在 C++11 之前，C++ 没有明确清晰的左右值概念。</p>
+<h1 id="类型（type）"><a href="#类型（type）" class="headerlink" title="类型（type）"></a>类型（type）</h1><p>类型，我们很容易理解，比如我们常说的这个变量是<code>int</code>类型的等等。而一般来讲，C++ 类型系统可以分成两类：</p>
+<ol>
+<li>基本类型，诸如<code>int</code>、<code>double</code>、<code>char</code>等。</li>
+<li>复合类型，诸如指针、引用、数组、各种容器、用户自定义类等。</li>
+</ol>
+<p>这块内容都是稍微熟悉一点的内容，不是本文的重点，就不继续介绍了。</p>
+<h1 id="值类别（value-category）"><a href="#值类别（value-category）" class="headerlink" title="值类别（value category）"></a>值类别（value category）</h1><p>在 C++11 之前，值类别这个概念就已经出现了，直到 C++11 才正式引入。值类别将表达式的属性主要分为三类：</p>
+<ol>
+<li>纯右值（prvalue）</li>
+<li>将亡值（xvalue）</li>
+<li>左值（lvalue）</li>
+</ol>
+<p>下面我们分别来看一下。</p>
+<h1 id="左值"><a href="#左值" class="headerlink" title="左值"></a>左值</h1><p>左值一般指的是<strong>指向内存位置的表达式（有明确地址），且能长期存在（生命周期超过单个表达式）。</strong><br>PS：虽然有内存位置，但不一定能通过<code>&amp;</code>得到，比如下面会提到的右值引用。<br>我们可以举一些常见的例子：</p>
+<ol>
+<li>变量、函数或数据成员的名称，即便<strong>变量的类型是右值引用</strong>，由其名称组成的表达式也是左值表达式，比如：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a; <span class="comment">// a 是左值</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123;&#125; <span class="comment">// func 是左值，因为 &amp;func　可以得到函数的地址</span></span><br><span class="line"><span class="type">int</span>&amp;&amp; rra = a; <span class="comment">// rra 是右值引用，但也是左值</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>函数调用或重载运算符表达式，其返回类型是左值引用，比如：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::cout &lt;&lt; <span class="number">1</span>; <span class="comment">// std::cout &lt;&lt; 1 这个表达式返回的值也是左值</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>所有内置类型的赋值和符合赋值表达式，比如：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = b</span><br><span class="line">a += b</span><br><span class="line">a %= b</span><br><span class="line"><span class="comment">// PS：因为 a = b 表达式式左值，所以它支持 a = b = c = ... 类似这样的表达式</span></span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>内置类型和迭代器的前置自增、前置自减运算符的求值结果也依然是左值，比如：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a;</span><br><span class="line">++a</span><br><span class="line">--a</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>解引用运算符<code>*</code>、下标运算符<code>[]</code>、迭代器解引用运算符的求值结果都是左值，比如：<code>*p</code>、<code>arr[]</code>等。</li>
+<li>内置的指针成员、对象成员表达式，比如：<code>p-&gt;</code>、<code>a.xx</code>、<code>p-&gt;*mp</code>等。</li>
+<li>逗号表达式和三目表达式则以最后结果的值类别作为整个表达式的值类别，比如：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a, b <span class="comment">// b 是左值，则结果为左值</span></span><br><span class="line">a ? b : c <span class="comment">// b 和 c 是左值，则结果一定为左值</span></span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li><strong>特别指出：字符串字面量是左值</strong>，比如：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::string s = <span class="string">&quot;hello&quot;</span>; <span class="comment">// &quot;hello&quot; 就是左值，注意说的是 hello 不是 std::string 类型的变量 s</span></span><br></pre></td></tr></table></figure>
+<ol start="9">
+<li>还有其他情况…</li>
+</ol>
+<p>情况很多，不推荐死记，遇到了，查阅资料，结合具体代码分析即可。</p>
+<h1 id="纯右值"><a href="#纯右值" class="headerlink" title="纯右值"></a>纯右值</h1><p>纯右值一般是指<strong>不可修改、无持久内存地址的临时值</strong>。<br>我们也举一些常见的例子：</p>
+<ol>
+<li>字面量（除字符串外），比如：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">42</span>; <span class="comment">// 42 是纯右值</span></span><br><span class="line"><span class="type">bool</span> flag = <span class="literal">false</span>; <span class="comment">// false 是纯右值</span></span><br><span class="line"><span class="type">int</span>* p = <span class="literal">nullptr</span>; <span class="comment">// nullptr 是纯右值</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>函数调用或重载运算符表达式，其返回类型是非引用，比如：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::string s, ss;</span><br><span class="line">s.<span class="built_in">substr</span>(<span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line">s + ss</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>内置类型的后缀递增、递减表达式，比如：<code>a++</code>、<code>a--</code>。</li>
+<li>内置类型的算术表达式、逻辑表达式、比较表达式、取地址表达式，比如：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a, b;</span><br><span class="line"><span class="comment">// 算术表达式</span></span><br><span class="line">a + b</span><br><span class="line">a - b</span><br><span class="line">a % b</span><br><span class="line">a &amp; b</span><br><span class="line"><span class="comment">// 逻辑表达式</span></span><br><span class="line">a &amp;&amp; b</span><br><span class="line">a || b</span><br><span class="line">!b</span><br><span class="line"><span class="comment">// 比较表达式</span></span><br><span class="line">a &gt; b</span><br><span class="line">a &lt; b</span><br><span class="line">a &lt;= b</span><br><span class="line"><span class="comment">// 取地址表达式</span></span><br><span class="line">&amp;a</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>对象成员表达式中成员为成员枚举数或非静态成员函数，比如：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// m 为成员枚举数或非静态成员函数</span></span><br><span class="line">a.m </span><br><span class="line">p-&gt;m</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>对象成员指针表达式中成员为指向成员函数的指针，比如：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// m 指向成员函数的指针</span></span><br><span class="line">a.*m </span><br><span class="line">p-&gt;*m</span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li>上面提到过的逗号表达式和三目表达式、<code>this</code>指针。</li>
+<li>还有很多其他情况...</li>
+</ol>
+<p>一样，不要死记，遇到了，查阅资料，结合具体代码分析即可。</p>
+<h1 id="将亡值"><a href="#将亡值" class="headerlink" title="将亡值"></a>将亡值</h1><p>将亡值一般是指<strong>即将被销毁但可重用其资源的对象</strong>。这个含义有两层意思：<strong>即将被销毁（说明也是临时值）<strong>和</strong>资源可重用</strong>。<br>我们还是举一些常见的例子：</p>
+<ol>
+<li>对象成员表达式和对象成员指针表达式，比如：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a.m <span class="comment">// a 是右值，m 是对象类型的非静态数据成员</span></span><br><span class="line">a.*mp <span class="comment">// a 是右值，mp 是指向数据成员的指针</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>逗号表达式和三目表达式，比如：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a, b <span class="comment">// b 是将亡值</span></span><br><span class="line">a ? b : c <span class="comment">// 最终表达式的结果取决于 b c</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><code>return</code>语句，比如：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">type <span class="title">func</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> expression; <span class="comment">// expression 的值会被隐式转换为函数返回值类型，最终得到一个将亡值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>还有其他情况...</li>
+</ol>
+<p>同样，还是不推荐记忆，遇到问题，查文档，结合具体代码分析即可。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>最后，我们总结下文章的内容。<br>在这篇文章中，我们讨论了 C++ 中左值右值的来历，知道了从 C++11 版本开始引入值类别的概念，且它并不是类型的补充，二者都是表达式属性的独立描述。<br>但我们在文章中介绍的是左值、纯右值和将亡值，并没有介绍右值，那右值具体是什么呢？<br>实际上，将亡值可以是左值，也可以是右值。何时为左值，何时为右值取决于具体的情况，需要结合具体代码分析。</p>
+<p>另外，还想说的是：<strong>千万不要太过于纠结这些令人困惑的东西，不要陷入语言的语法陷阱中，至少从个人的角度来看，这纯纯是设计的问题。有些地方其实也不需要去理解，把它当作语言特性就可以了，就像英语里面的固定搭配一样😑。</strong><br>最后，附上<a target="_blank" rel="noopener" href="https://cppreference.cn/w/cpp/language/value_category">CPPReference 中文参考手册</a>😴。</p>
+<hr>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>bachzart
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://bachzart.github.io/2025/07/07/%E5%B7%A6%E5%80%BC%E4%B8%8E%E5%8F%B3%E5%80%BC/" title="左值与右值">http://bachzart.github.io/2025/07/07/左值与右值/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C-C/" rel="tag"># C/C++</a>
+              <a href="/tags/lvalue-rvalue/" rel="tag"># lvalue&rvalue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/07/06/%E6%9C%89%E5%85%B3%E5%AE%8F%E7%9A%84%E5%86%85%E5%AE%B9/" rel="prev" title="有关宏的内容">
+      <i class="fa fa-chevron-left"></i> 有关宏的内容
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/07/07/%E7%9C%9F%E6%AD%A3%E7%90%86%E8%A7%A3%E5%BC%95%E7%94%A8/" rel="next" title="真正理解引用">
+      真正理解引用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B5%B7%E6%BA%90"><span class="nav-number">1.</span> <span class="nav-text">起源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%EF%BC%88type%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">类型（type）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%80%BC%E7%B1%BB%E5%88%AB%EF%BC%88value-category%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">值类别（value category）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A6%E5%80%BC"><span class="nav-number">5.</span> <span class="nav-text">左值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%AF%E5%8F%B3%E5%80%BC"><span class="nav-number">6.</span> <span class="nav-text">纯右值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%86%E4%BA%A1%E5%80%BC"><span class="nav-number">7.</span> <span class="nav-text">将亡值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bachzart"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">bachzart</p>
+  <div class="site-description" itemprop="description">我即世界，世界即我</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bachzart" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bachzart" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bachzart@163.com" title="E-Mail → mailto:bachzart@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="/about/" title="&#x2F;about&#x2F;">About This Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/Book-List/" title="&#x2F;Book-List&#x2F;">Book List</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.sudoku.name/index.php?ln=cn&ref=44355" title="https:&#x2F;&#x2F;www.sudoku.name&#x2F;index.php?ln&#x3D;cn&amp;ref&#x3D;44355" rel="noopener" target="_blank">Soduku Game</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://2048game.com/" title="https:&#x2F;&#x2F;2048game.com&#x2F;" rel="noopener" target="_blank">2048 Game</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bachzart</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

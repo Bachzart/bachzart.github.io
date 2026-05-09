@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/acoustic_guitar_128px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/acoustic_guitar_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/acoustic_guitar_16px.png">
+  <link rel="mask-icon" href="/uploads/acoustic_guitar.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https:/fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bachzart.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="整理下 C++ 智能指针的用法...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学会使用智能指针">
+<meta property="og:url" content="http://bachzart.github.io/2025/07/11/%E5%AD%A6%E4%BC%9A%E4%BD%BF%E7%94%A8%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/index.html">
+<meta property="og:site_name" content="bachzart&#39;s Blog">
+<meta property="og:description" content="整理下 C++ 智能指针的用法...">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-11T14:45:53.000Z">
+<meta property="article:modified_time" content="2026-05-09T09:26:52.795Z">
+<meta property="article:author" content="bachzart">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="smart_pointer">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://bachzart.github.io/2025/07/11/%E5%AD%A6%E4%BC%9A%E4%BD%BF%E7%94%A8%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>学会使用智能指针 | bachzart's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">bachzart's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">133</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/bachzart" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2025/07/11/%E5%AD%A6%E4%BC%9A%E4%BD%BF%E7%94%A8%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="我即世界，世界即我">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          学会使用智能指针
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-07-11 22:45:53" itemprop="dateCreated datePublished" datetime="2025-07-11T22:45:53+08:00">2025-07-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-05-09 17:26:52" itemprop="dateModified" datetime="2026-05-09T17:26:52+08:00">2026-05-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>整理下 C++ 智能指针的用法...</p>
+<span id="more"></span>
+
+<p>老规矩，在研究一些东西之前，我们得先明白问题的起源和过程。</p>
+<div class="note info">
+            <p>PS：本文的目的是学会使用智能指针，可能会插播一点理论。</p>
+          </div>
+
+<h1 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h1><p>在由 C++ 开发的大型项目中，使用**原生指针（C 中的指针）**进行开发工作是一件让人心力交瘁的事情，时不时出现的内存问题让人备受折磨。于是为了减轻在内存管理方面的工作量，提高内存安全性，智能指针就出现了。</p>
+<p>**智能指针（smart pointer）**最早出现于 C++98 中，是 C++ 标准委员会对 C++ 资源管理的改进。当时提出的智能指针叫做<code>auto_ptr</code>，本质是一个类模板，其通过 **RAII（Resource Acquisition Is Initialization）**机制实现资源自动释放，但存在一些使用上的问题。<br>后来 <strong>boost</strong> 库改进了这个方案，实现了其他种类的智能指针。<br>再之后 C++11 标准采纳了 boost 库的改进方案，将智能指针具体地分为了三种类型：<code>unique_ptr</code>、<code>shared_ptr</code>和<code>weak_ptr</code>，并沿用至今。<br>好了，闲话就说这么多。</p>
+<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>如前面所说，我们可以把出现过的智能指针全部列举出来，并整理成下面的表格：</p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="center">引入版本</th>
+<th align="center">所有权</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>auto_ptr</code></td>
+<td align="center">C++98</td>
+<td align="center">独占</td>
+<td align="center">C++11 弃用，C++17 移除</td>
+</tr>
+<tr>
+<td align="left"><code>shared_ptr</code></td>
+<td align="center">C++11</td>
+<td align="center">共享</td>
+<td align="center">无</td>
+</tr>
+<tr>
+<td align="left"><code>unique_ptr</code></td>
+<td align="center">C++11</td>
+<td align="center">独占</td>
+<td align="center">无</td>
+</tr>
+<tr>
+<td align="left"><code>weak_ptr</code></td>
+<td align="center">C++11</td>
+<td align="center">无所有权</td>
+<td align="center">无</td>
+</tr>
+</tbody></table>
+<p>下面我们逐个来总结。</p>
+<div class="note success">
+            <p>因为<code>auto_ptr</code>在 C++11 中已经被弃用了，所以本文也就不再记录了。另外，<strong>记得使用智能指针时需要引入头文件<code>memory</code></strong>。</p>
+          </div>
+
+<h1 id="shared-ptr"><a href="#shared-ptr" class="headerlink" title="shared_ptr"></a>shared_ptr</h1><p><code>shared_ptr</code>是一种多个智能指针可以同时指向同一个对象的智能指针，使用的方式与原生指针类似。前面我们已经提到了，所有的智能指针都是类模板。所以，使用它们的方法也与使用<code>vector</code>、<code>stack</code>等 STL 容器类似，比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义一个指向内置类型 int 的智能指针 p1，但并未初始化指向哪个对象</span></span><br><span class="line">std::shared_ptr&lt;<span class="type">int</span>&gt; p1;</span><br><span class="line"><span class="comment">// 定义一个指向 vector&lt;int&gt; 容器的智能指针 p2，但并未初始化指向哪个对象</span></span><br><span class="line">std::shared_ptr&lt;std::vector&lt;<span class="type">int</span>&gt;&gt; p2;</span><br><span class="line"><span class="comment">// 初始化一个指向 vector&lt;int&gt; 容器的智能指针 p3</span></span><br><span class="line">std::shared_ptr&lt;std::vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">p3</span>(<span class="keyword">new</span> vector&lt;<span class="type">int</span>&gt;);</span><br><span class="line"><span class="comment">// 初始化一个指向 vector&lt;int&gt; 容器的智能指针 p4</span></span><br><span class="line">std::shared_ptr&lt;std::vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">p4</span>(std::make_shared&lt;std::vector&lt;<span class="type">int</span>&gt;&gt;());</span><br><span class="line"><span class="comment">// 初始化一个指向 string 容器的智能指针 p5，同时提供初始化 string 对象需要的参数</span></span><br><span class="line"><span class="comment">// 此时编译器会自动调用 string 的构造函数</span></span><br><span class="line">std::shared_ptr&lt;std::string&gt; p5 = std::<span class="built_in">make_shared</span>&lt;std::string&gt;(<span class="number">10</span>, <span class="string">&#x27;1&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>习惯使用 STL 容器的同学对上面的写法应该没有任何压力，<strong>推荐直接初始化一个智能指针，而不是仅仅定义就结束了，千万不要留下野指针</strong>。<br>使用的方法与原生指针类似，<code>shared_ptr</code>也可以使用<code>*</code>和<code>-&gt;</code>运算符，比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::shared_ptr&lt;std::vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">p6</span>(<span class="keyword">new</span> vector&lt;<span class="type">int</span>&gt;);</span><br><span class="line">p6-&gt;<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">(*p6).<span class="built_in">push_back</span>(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<p>另外，<code>shared_ptr</code>还可以多个智能指针指向同一个对象，比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   </span><br><span class="line">    <span class="function">std::shared_ptr&lt;std::string&gt; <span class="title">p6</span><span class="params">(std::make_shared&lt;std::string&gt;(<span class="number">10</span>, <span class="string">&#x27;1&#x27;</span>))</span></span>;</span><br><span class="line">    <span class="function">std::shared_ptr&lt;std::string&gt; <span class="title">p7</span><span class="params">(p6)</span></span>;</span><br><span class="line">    <span class="comment">// 若是不初始化 p7，使用下面的赋值语句，也会使 shared_ptr 的内置计数器加 1</span></span><br><span class="line">    <span class="comment">// p7 = p6;</span></span><br><span class="line">    std::cout &lt;&lt; p<span class="number">7.</span><span class="built_in">use_count</span>() &lt;&lt; std::endl;</span><br><span class="line">    </span><br><span class="line">    p<span class="number">6.</span><span class="built_in">reset</span>();</span><br><span class="line">    std::cout &lt;&lt; p<span class="number">7.</span><span class="built_in">use_count</span>() &lt;&lt; std::endl;</span><br><span class="line">    </span><br><span class="line">    <span class="type">const</span> std::string* s = p<span class="number">7.</span><span class="built_in">get</span>(); </span><br><span class="line">    std::cout &lt;&lt; *s &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">1111111111</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>同时，使用<code>use_count()</code>函数可以获取指向该对象的<code>shared_ptr</code>的总数，使用<code>reset()</code>函数可以使智能指针释放指向的对象，使用<code>get()</code>函数可以获取指向源对象的原生指针。</p>
+<h1 id="unique-ptr"><a href="#unique-ptr" class="headerlink" title="unique_ptr"></a>unique_ptr</h1><p>一个<code>unique_ptr</code>“独占”它所指向的对象，这意味着在某个时刻，只能有一个<code>unique_ptr</code>指向一个给定对象。对应的用法与<code>shared_ptr</code>有些类似：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义一个指向 vector&lt;int&gt; 容器的 unique_ptr 指针 p1，但并未初始化指向哪个对象</span></span><br><span class="line">std::unique_ptr&lt;std::vector&lt;<span class="type">int</span>&gt;&gt; p1;</span><br><span class="line"><span class="comment">// 初始化一个指向 vector&lt;int&gt; 容器的 unique_ptr 指针 p2</span></span><br><span class="line">std::unique_ptr&lt;std::vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">p2</span>(<span class="keyword">new</span> std::vector&lt;<span class="type">int</span>&gt;);</span><br><span class="line"><span class="comment">// 初始化一个指向 vector&lt;int&gt; 容器的 unique_ptr 指针 p3</span></span><br><span class="line">std::unique_ptr&lt;std::vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">p3</span>(std::make_unique&lt;std::vector&lt;<span class="type">int</span>&gt;&gt;());</span><br><span class="line"><span class="comment">// 初始化一个指向 vector&lt;int&gt; 容器的 unique_ptr 指针 p4  </span></span><br><span class="line">std::unique_ptr&lt;std::vector&lt;<span class="type">int</span>&gt;&gt; p4 = std::make_unique&lt;std::vector&lt;<span class="type">int</span>&gt;&gt;();</span><br><span class="line"><span class="comment">// 初始化一个指向 string 容器的 unique_ptr p5，同时提供初始化 string 对象需要的参数</span></span><br><span class="line"><span class="comment">// 此时编译器会自动调用 string 的构造函数 </span></span><br><span class="line">std::unique_ptr&lt;std::string&gt; p5 = std::<span class="built_in">make_unique</span>&lt;std::string&gt;(<span class="number">10</span>, <span class="string">&#x27;1&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，<code>make_unique</code>函数在 <strong>C++14</strong> 才被引入标准库。<code>unique_ptr</code>也可以当作原生指针进行使用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::unique_ptr&lt;std::string&gt; p5 = std::<span class="built_in">make_unique</span>&lt;std::string&gt;(<span class="number">10</span>, <span class="string">&#x27;1&#x27;</span>);</span><br><span class="line">std::cout &lt;&lt; *p5 &lt;&lt; std::endl;</span><br><span class="line">std::cout &lt;&lt; p5-&gt;<span class="built_in">length</span>() &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
+<p>对比<code>shared_ptr</code>，<code>unique_ptr</code>没有<code>use_count()</code>函数，因为它只允许独占一个对象。但它依然可以使用<code>get()</code>函数获取原生指针，同时它还支持<code>reset()</code>和<code>release()</code>函数，对应的用法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   </span><br><span class="line">    std::unique_ptr&lt;std::string&gt; p = std::<span class="built_in">make_unique</span>&lt;std::string&gt;(<span class="number">10</span>, <span class="string">&#x27;x&#x27;</span>);</span><br><span class="line">    <span class="comment">// 依然可以使用原生指针的运算符</span></span><br><span class="line">    std::cout &lt;&lt; *p &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; p-&gt;<span class="built_in">length</span>() &lt;&lt; std::endl;</span><br><span class="line">    <span class="comment">// 调用 release 函数会让 p 置空，并返回该对象的原生指针</span></span><br><span class="line">    std::string* ps = p.<span class="built_in">release</span>();</span><br><span class="line">    <span class="comment">// 调用 reset 函数时提供了对象指针，那么 p 会指向这个对象</span></span><br><span class="line">    p.<span class="built_in">reset</span>(<span class="keyword">new</span> std::<span class="built_in">string</span>(<span class="string">&quot;xx&quot;</span>));</span><br><span class="line">    <span class="comment">// 调用不提供参数的 reset 函数，会将 p 置为空并释放其所指对象，该对象也会被自动析构掉</span></span><br><span class="line">    p.<span class="built_in">reset</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">xxxxxxxxxx 10</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="weak-ptr"><a href="#weak-ptr" class="headerlink" title="weak_ptr"></a>weak_ptr</h1><p>在前面的表格中，我们指出了<code>weak_ptr</code>是无占有权的，这意味着它可以指向一个对象，但是无法控制该对象的生命周期。<br>具体而言，<code>weak_ptr</code>它指向由一个<code>shared_ptr</code>管理的对象。将一个<code>weak_ptr</code>绑定到一个<code>shared_ptr</code>上不会改变<code>shared_ptr</code>的引用计数。因此，当最后一个指向对象的<code>shared_ptr</code>被销毁时，对象就会被自动释放（析构）掉了。此时，如果强行使用<code>weak_ptr</code>指针，就会产生未定义行为了。<br><code>weak_ptr</code>提供的方法要少一点（功能相对单一），对应的用法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   </span><br><span class="line">    std::shared_ptr&lt;std::vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">p</span>(<span class="keyword">new</span> std::vector&lt;<span class="type">int</span>&gt;&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;);</span><br><span class="line">    <span class="comment">// 初始化一个指向 vector&lt;int&gt; 容器的 weak_ptr 指针 wp</span></span><br><span class="line">    std::weak_ptr&lt;std::vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">wp</span>(p);</span><br><span class="line">    <span class="comment">// weak_ptr 只提供不带参数的 reset 函数，此处功能是将 wp 置空</span></span><br><span class="line">    wp.<span class="built_in">reset</span>();</span><br><span class="line">    <span class="comment">// weak_ptr 支持赋值操作</span></span><br><span class="line">    wp = p;</span><br><span class="line">    <span class="comment">// weak_ptr 也提供 use_count 函数，此处会返回与 wp 共享对象的 shared_ptr 的数量 </span></span><br><span class="line">    std::cout &lt;&lt; wp.<span class="built_in">use_count</span>() &lt;&lt; std::endl;</span><br><span class="line">    <span class="comment">// 若 use_count 返回为 0，返回 true，否则返回 false</span></span><br><span class="line">    std::cout &lt;&lt; wp.<span class="built_in">expired</span>() &lt;&lt; std::endl;</span><br><span class="line">    <span class="comment">// 若 expired 返回为 true，返回一个空的 shared_ptr，否则返回一个与 wp 指向相同的 shared_ptr</span></span><br><span class="line">    <span class="keyword">auto</span> p2 = wp.<span class="built_in">lock</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">0</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>另外，<code>weak_ptr</code>不支持<code>*</code>和<code>-&gt;</code>运算符，一般会配合<code>shared_ptr</code>一起使用。</p>
+<h1 id="关于-auto-ptr"><a href="#关于-auto-ptr" class="headerlink" title="关于 auto_ptr"></a>关于 auto_ptr</h1><p>想了想，还是提一下<code>auto_ptr</code>。<br>它的特性有点类似<code>weak_ptr</code>，但不是全部。为了兼容老版本的代码，在 STL 中还保存了有关<code>auto_ptr</code>的代码。如果强行使用，其实也是可以使用的，但 C++11 已经明确弃用<code>auto_ptr</code>了，C++17 更是直接移除了。<br>尽管说了很多遍会弃用<code>auto_ptr</code>，但并没有说为什么要弃用。<br>原因实际上很简单，就是存在设计缺陷。当我们使用一个<code>auto_ptr</code><strong>拷贝构造</strong>和<strong>赋值构造</strong>另一个<code>auto_ptr</code>时，源<code>auto_ptr</code>会失去对资源的所有权，并将其转移给目标<code>auto_ptr</code>，同时源<code>auto_ptr</code>会被置为<code>nullptr</code>。这样就会导致一些问题，比如：</p>
+<ol>
+<li>资源被提前释放，类似下面的代码：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(std::auto_ptr&lt;<span class="type">int</span>&gt; pp)</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   </span><br><span class="line">    <span class="function">std::auto_ptr&lt;<span class="type">int</span>&gt; <span class="title">p</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">10</span>))</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">func</span>(p);</span><br><span class="line">    <span class="comment">// 函数 func 执行完成后，函数形参 pp 就会被析构掉，对应其指向的对象也会被析构掉</span></span><br><span class="line">    <span class="comment">// 同时 pp 指向的对象与 p 指向的对象是相同的，此时对 p 解引用程序就会异常终止</span></span><br><span class="line">    std::cout &lt;&lt; *p &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>没办法与标准库的容器兼容，比如：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   </span><br><span class="line">    std::vector&lt;std::auto_ptr&lt;<span class="type">int</span>&gt;&gt; v1;</span><br><span class="line">    std::vector&lt;std::auto_ptr&lt;<span class="type">int</span>&gt;&gt; v2;</span><br><span class="line">    <span class="comment">// 指向下面的代码后，会导致 v1 内的所有 auto_ptr 的指向为空</span></span><br><span class="line">    <span class="comment">// 这与常规的拷贝操作不符</span></span><br><span class="line">    v2 = v1;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><code>auto_ptr</code>使用<code>delete</code>释放资源，所以只能释放单个对象，无法管理对象数组，因为数组需要<code>delete[]</code>释放。</li>
+</ol>
+<div class="note warning">
+            <p><strong>从语义的角度来理解就是，<code>auto_ptr</code>将原本的值语义（value sematics）改变成了移动语义（move sematics）。</strong></p>
+          </div>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文介绍了<code>shared_ptr</code>、<code>unique_ptr</code>和<code>weak_ptr</code>的基本使用方法，并解释了<code>auto_ptr</code>存在的设计缺陷。作为学会使用智能指针的第一步，应该算是合格了。<br>最后，我们说说为什么智能指针可以更安全的管理内存，其实也很简单，可以按照下面的步骤来进行理解：</p>
+<ol>
+<li>首先应该知道，<strong>所谓的智能指针其实并不是一个“指针”，至少不是原生指针（C 中的指针）。那它是什么？其实就是一种对象，只是这个对象它具备了原生指针的性质（解引用、保存了指向对象的地址等）。</strong></li>
+<li>其次应该明白，直接定义的对象或内置类型的内存，是编译器负责回收的；而整个程序执行完成后，其所占用的内存是由操作系统回收的。比如下面这段代码：</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">func</span>();</span><br><span class="line">    <span class="comment">// func 函数执行完成后，其内部定义的局部变量 a 的内存会被编译器自动回收掉</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>现在回忆一下智能指针的定义方式，本质上与直接定义的变量有区别吗？答案是没有，所以我们定义的<strong>智能指针对象</strong>所占用的内存也会被编译器或操作系统回收掉。而这个时候，会调用对应的析构函数来析构智能指针对象。如果我们自定义析构函数，并在这个析构函数中使用<code>delete</code>（或<code>delete[]</code>）释放掉所指向的对象，就可以完成对象内存的自动回收了。</li>
+</ol>
+<p><strong>上面的过程，我们总结一下就是：智能指针是通过将动态分配对象的生命周期与智能指针对象绑定在一起来完成自动管理内存资源的。或者再说的更理论化一点就是：智能指针是​​利用栈对象的确定性析构来管理堆上分配的内存资源（最典型的就是动态分配的内存对象）。这种在对象构造时初始化获取资源，并在对象生命周期结束析构时释放资源的机制，叫做 RAII（Resource Acquisition Is Initialization）,也称为“资源获取就是初始化”，由 C++ 之父 Bjarne Stroustrup 提出。</strong></p>
+<p>好了，暂时就这样吧。</p>
+<hr>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>bachzart
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://bachzart.github.io/2025/07/11/%E5%AD%A6%E4%BC%9A%E4%BD%BF%E7%94%A8%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" title="学会使用智能指针">http://bachzart.github.io/2025/07/11/学会使用智能指针/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C-C/" rel="tag"># C/C++</a>
+              <a href="/tags/smart-pointer/" rel="tag"># smart_pointer</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/07/09/%E6%9C%89%E5%85%B3%E6%A8%A1%E6%9D%BF%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AC%94%E8%AE%B0/" rel="prev" title="有关模板的一些笔记">
+      <i class="fa fa-chevron-left"></i> 有关模板的一些笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/07/13/%E7%90%86%E8%A7%A3%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/" rel="next" title="理解移动语义">
+      理解移动语义 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B5%B7%E6%BA%90"><span class="nav-number">1.</span> <span class="nav-text">起源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shared-ptr"><span class="nav-number">3.</span> <span class="nav-text">shared_ptr</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#unique-ptr"><span class="nav-number">4.</span> <span class="nav-text">unique_ptr</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#weak-ptr"><span class="nav-number">5.</span> <span class="nav-text">weak_ptr</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E-auto-ptr"><span class="nav-number">6.</span> <span class="nav-text">关于 auto_ptr</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bachzart"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">bachzart</p>
+  <div class="site-description" itemprop="description">我即世界，世界即我</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bachzart" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bachzart" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bachzart@163.com" title="E-Mail → mailto:bachzart@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="/about/" title="&#x2F;about&#x2F;">About This Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/Book-List/" title="&#x2F;Book-List&#x2F;">Book List</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.sudoku.name/index.php?ln=cn&ref=44355" title="https:&#x2F;&#x2F;www.sudoku.name&#x2F;index.php?ln&#x3D;cn&amp;ref&#x3D;44355" rel="noopener" target="_blank">Soduku Game</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://2048game.com/" title="https:&#x2F;&#x2F;2048game.com&#x2F;" rel="noopener" target="_blank">2048 Game</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bachzart</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

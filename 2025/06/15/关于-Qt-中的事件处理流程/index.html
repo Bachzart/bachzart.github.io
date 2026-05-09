@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/acoustic_guitar_128px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/acoustic_guitar_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/acoustic_guitar_16px.png">
+  <link rel="mask-icon" href="/uploads/acoustic_guitar.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https:/fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bachzart.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="梳理一下 Qt 中关于事件的知识。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于 Qt 中的事件处理流程">
+<meta property="og:url" content="http://bachzart.github.io/2025/06/15/%E5%85%B3%E4%BA%8E-Qt-%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B/index.html">
+<meta property="og:site_name" content="bachzart&#39;s Blog">
+<meta property="og:description" content="梳理一下 Qt 中关于事件的知识。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-06-15T06:24:48.000Z">
+<meta property="article:modified_time" content="2026-05-09T09:26:52.791Z">
+<meta property="article:author" content="bachzart">
+<meta property="article:tag" content="Qt">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://bachzart.github.io/2025/06/15/%E5%85%B3%E4%BA%8E-Qt-%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>关于 Qt 中的事件处理流程 | bachzart's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">bachzart's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">133</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/bachzart" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2025/06/15/%E5%85%B3%E4%BA%8E-Qt-%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="我即世界，世界即我">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          关于 Qt 中的事件处理流程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-06-15 14:24:48" itemprop="dateCreated datePublished" datetime="2025-06-15T14:24:48+08:00">2025-06-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-05-09 17:26:52" itemprop="dateModified" datetime="2026-05-09T17:26:52+08:00">2026-05-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>梳理一下 Qt 中关于事件的知识。</p>
+<span id="more"></span>
+
+<p>这篇文章会从 Qt 的事件处理流程来简单探讨下 Qt 的事件机制。</p>
+<h1 id="事件产生"><a href="#事件产生" class="headerlink" title="事件产生"></a>事件产生</h1><p>首先要解决的问题是事件如何产生的，这部分暂时只简单的说明一下由来（且不考虑 Qt 自定义事件），不做深入。</p>
+<p>以常见的鼠标事件和键盘事件为例，用户在点击之后，操作系统会收到对应的指令，然后 Qt 框架会通过操作系统接口来获取这些不同的事件，然后转换为 Qt 中的事件类型，再转发给指定的<strong>接收者（这里姑且这么称呼吧）</strong>。</p>
+<p>那么，此时又会产生其他的问题，比如这两个非细节性问题：</p>
+<ol>
+<li>操作系统是如何收到的？</li>
+<li>操作系统如何发送给 Qt 的？</li>
+</ol>
+<p>针对第一个问题，了解底层的同学会很容易想到，有些事件是通过<strong>硬件的中断</strong>产生的。对应的驱动程序会收到这些中断，然后封装成操作系统能识别的信号后发给操作系统。</p>
+<p>第二个问题以 windows 为例，windows 是使用消息队列系统来处理事件，上一个问题中的驱动程序将事件传递到 windows 内核后，内核再生成对应事件的消息类型，并把这些消息发到对应的消息队列中。最终，Qt 收到这个消息后，又会转化为 Qt 内部的事件类型，并转发给对应的接收者。</p>
+<p>就简单的解释一下吧，如果深入的话，能思考的东西又太多了。😂</p>
+<h1 id="Qt-的处理流程"><a href="#Qt-的处理流程" class="headerlink" title="Qt 的处理流程"></a>Qt 的处理流程</h1><p>在这部分中，为了方便讨论，我们忽略掉前面操作系统的细节，并简单地把 Qt 作为一切事件产生的源头。<br>此时，事件的具体处理过程就是：<br><strong>事件派发 -&gt; 事件过滤 -&gt; 事件分发 -&gt; 事件处理</strong></p>
+<p>另外，还有一些基础概念需要明确：</p>
+<ol>
+<li>Qt 的事件处理流程是一个基于**事件循环（Event Loop）**的核心机制，负责协调和管理应用程序中的所有事件。</li>
+<li>不同类型的事件有不同的事件队列进行处理。</li>
+<li>Qt 会对不同的事件队列进行优化（这些事件队列都是线程安全的），比如绘图事件队列。</li>
+</ol>
+<h2 id="事件产生-1"><a href="#事件产生-1" class="headerlink" title="事件产生"></a>事件产生</h2><p>现在，我们面对的第一个问题依然是事件的产生。<br>在 Qt 中，事件的类型可以分为（<strong>这里只是简单的按照是否是用户自定义来划分</strong>）：</p>
+<ol>
+<li>系统事件，包括鼠标事件、键盘事件、窗口重绘事件等等</li>
+<li>用户自定义事件</li>
+</ol>
+<p>系统事件的产生，比较容易理解，比如按一下键盘、鼠标，最小化、最大化窗口等等；而用户自定义事件需要调用<code>QApplication::postEvent()</code>或<code>QApplication::sendEvent()</code>函数来完成，前者会将自定义事件加入事件队列，逐步处理，后者会直接发送自定义事件，Qt 会立即处理这个事件。</p>
+<p>另外，每一个 Qt 应用程序都对应唯一一个 QApplication 应用程序对象，然后调用这个对象的<code>exec()</code>函数，开始事件循环。</p>
+<h2 id="事件过滤"><a href="#事件过滤" class="headerlink" title="事件过滤"></a>事件过滤</h2><p>事件产生后，Qt 就会按照事件队列派发给各个接收者，那么首先要经过的地方，就是事件过滤器。</p>
+<p>当然，事件过滤生效的前提是需要先给指定的对象安装事件过滤器。而事件过滤器又分为两种：</p>
+<ol>
+<li>全局事件过滤器</li>
+<li>对象事件过滤器</li>
+</ol>
+<p>二者本质没有区别，只看是为谁安装。顾名思义，全局事件过滤器就是为整个应用程序安装事件过滤器，对象事件过滤器就是为指定对象安装事件过滤器。<br>在二者都被安装的情况下，全局事件过滤器优先执行，对象事件过滤器的执行顺序遵循 Qt 的对象树系统，父对象优先执行，子对象后续执行。但如果是为一个对象安装多个事件过滤器，那执行顺序就是安装顺序。</p>
+<p>此时，我们可以通过重写事件过滤器的<code>eventFilter()</code>函数来完成对某些事件的优先处理或屏蔽，比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">GlobalFilter::eventFilter</span><span class="params">(QObject *watched, QEvent *event)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (event-&gt;<span class="built_in">type</span>() == QEvent::KeyPress) &#123;</span><br><span class="line">        <span class="comment">// 如果是键盘事件，do something...</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">// 拦截事件</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 默认 false 不拦截</span></span><br><span class="line">    <span class="comment">// 对象事件过滤器也可以直接调用父对象的时间过滤函数，应该也是直接返回 false</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述功能，也可以通过直接重写父窗口的<code>eventFilter()</code>函数，并为子对象安装父对象作为事件过滤器。这也是 Qt 中的常规做法。</p>
+<h2 id="事件分发"><a href="#事件分发" class="headerlink" title="事件分发"></a>事件分发</h2><p>事件分发是由目标对象来完成的，目标对象通过事件分发将对应的事件分发给特定的事件处理器。如果需要提前处理，那么就需要重写目标对象的<code>event()</code>函数，比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MyWidget 是继承自 Widget 的子类</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">MyWidget::event</span><span class="params">(QEvent *e)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (e-&gt;<span class="built_in">type</span>() == QEvent::MouseButtonPress) &#123;</span><br><span class="line">        <span class="comment">// 如果是鼠标按键按下事件，do something...</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">// 事件已处理</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 这里一定要调用父类的事件分发函数</span></span><br><span class="line">    <span class="comment">// 不然其他类型的事件，可能无法被转发给指定的事件处理器</span></span><br><span class="line">    <span class="keyword">return</span> QWidget::<span class="built_in">event</span>(e); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h2><p>事件处理是由目标对象的事件处理器来完成的，如果用户需要在发生这些事件之后有一些对应的操作，那么重写对应事件处理器函数就行了，比如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">MyWidget::mousePressEvent</span><span class="params">(QMouseEvent *e)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 具体事件处理，do something...</span></span><br><span class="line">    QWidget::<span class="built_in">mousePressEvent</span>(e); <span class="comment">// 调用父类实现（可选）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码中，重写了鼠标按下事件，当用户按下鼠标按钮后，程序会执行我们设置的代码。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Qt 事件的处理流程：<br><strong>事件派发 -&gt; 事件过滤 -&gt; 事件分发 -&gt; 事件处理</strong></p>
+<p>其中，事件过滤可以分为：全局事件过滤和对象事件过滤，全局事件过滤的处理顺序先于对象事件过滤。<br>我们可以在事件过滤和事件分发过程中，拦截并处理指定事件；在事件处理过程中，完成我们想要的操作。</p>
+<hr>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>bachzart
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://bachzart.github.io/2025/06/15/%E5%85%B3%E4%BA%8E-Qt-%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B/" title="关于 Qt 中的事件处理流程">http://bachzart.github.io/2025/06/15/关于-Qt-中的事件处理流程/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Qt/" rel="tag"># Qt</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/06/07/%E5%A6%82%E4%BD%95%E5%9C%A8-Qt-Creator-%E5%92%8C-VS-%E4%B8%AD%E9%85%8D%E7%BD%AE-OpenCV/" rel="prev" title="如何在 Qt Creator 和 VS 中配置 OpenCV">
+      <i class="fa fa-chevron-left"></i> 如何在 Qt Creator 和 VS 中配置 OpenCV
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/07/02/C-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E7%AC%94%E8%AE%B0/" rel="next" title="C++_类型转换笔记">
+      C++_类型转换笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E4%BA%A7%E7%94%9F"><span class="nav-number">1.</span> <span class="nav-text">事件产生</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Qt-%E7%9A%84%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">Qt 的处理流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E4%BA%A7%E7%94%9F-1"><span class="nav-number">2.1.</span> <span class="nav-text">事件产生</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E8%BF%87%E6%BB%A4"><span class="nav-number">2.2.</span> <span class="nav-text">事件过滤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91"><span class="nav-number">2.3.</span> <span class="nav-text">事件分发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86"><span class="nav-number">2.4.</span> <span class="nav-text">事件处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bachzart"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">bachzart</p>
+  <div class="site-description" itemprop="description">我即世界，世界即我</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bachzart" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bachzart" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bachzart@163.com" title="E-Mail → mailto:bachzart@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="/about/" title="&#x2F;about&#x2F;">About This Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/Book-List/" title="&#x2F;Book-List&#x2F;">Book List</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.sudoku.name/index.php?ln=cn&ref=44355" title="https:&#x2F;&#x2F;www.sudoku.name&#x2F;index.php?ln&#x3D;cn&amp;ref&#x3D;44355" rel="noopener" target="_blank">Soduku Game</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://2048game.com/" title="https:&#x2F;&#x2F;2048game.com&#x2F;" rel="noopener" target="_blank">2048 Game</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bachzart</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

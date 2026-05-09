@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/acoustic_guitar_128px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/acoustic_guitar_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/acoustic_guitar_16px.png">
+  <link rel="mask-icon" href="/uploads/acoustic_guitar.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https:/fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bachzart.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="记录一些与 VBS 相关的东西。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VBS_Basic">
+<meta property="og:url" content="http://bachzart.github.io/2022/11/14/VBS-basic/index.html">
+<meta property="og:site_name" content="bachzart&#39;s Blog">
+<meta property="og:description" content="记录一些与 VBS 相关的东西。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-11-14T07:14:13.000Z">
+<meta property="article:modified_time" content="2026-05-09T09:26:52.778Z">
+<meta property="article:author" content="bachzart">
+<meta property="article:tag" content="VBS">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://bachzart.github.io/2022/11/14/VBS-basic/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>VBS_Basic | bachzart's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">bachzart's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">133</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/bachzart" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2022/11/14/VBS-basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="我即世界，世界即我">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VBS_Basic
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-11-14 15:14:13" itemprop="dateCreated datePublished" datetime="2022-11-14T15:14:13+08:00">2022-11-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-05-09 17:26:52" itemprop="dateModified" datetime="2026-05-09T17:26:52+08:00">2026-05-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/VBS/" itemprop="url" rel="index"><span itemprop="name">VBS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>记录一些与 VBS 相关的东西。</p>
+<span id="more"></span>
+
+<h1 id="什么是-VBS"><a href="#什么是-VBS" class="headerlink" title="什么是 VBS"></a>什么是 VBS</h1><p>VBScript 是微软出品的脚本语言,是 ASP（Active Server Pages）默认使用的脚本语言。<br>VBS 是一个动态脚本语言，也是 VB 的轻量版本，IE 使用 VBS 的地方比较多（好像只有 IE 支持了😂），这应该也是今后的工作内容了。</p>
+<h1 id="VBS-的第一个例子"><a href="#VBS-的第一个例子" class="headerlink" title="VBS 的第一个例子"></a>VBS 的第一个例子</h1><p>Internet Explorer 支持 VBScript，所以可以在 IE 浏览器中执行 VBS 脚本。</p>
+<p>注意由于新版 IE 也已经不再支持 VBScript 了，所以要在前端执行 VBScript 脚本就必须使用老版本的 IE（😓这技术栈也太老了吧）。<br>比如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/vbscript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;Hello World!&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>以上面这段代码为例，编辑保存为 HTML 文件，再用 IE 打开无法直接显示，需要打开 IE 的开发者模式，将文档模式改为小于 10 才能显示...<br>换句话说，最新的 IE11 已经不支持 VBScript 了，IE10 及以下版本才能正常显示...<br>这个真的太老了吧，我怎么感觉我在给地级市、县级市的银行 ATM 机写代码...<br>扯远了...</p>
+<h1 id="如何使用-VBS"><a href="#如何使用-VBS" class="headerlink" title="如何使用 VBS"></a>如何使用 VBS</h1><p>话说回来，看来用到 VBS 的场景主要就是在 IE 浏览器上就一些与用户交互的事情了？<br>也就是说，实际上就是往网页里面写脚本🤣，用的还不是 JavaScript 这种用的多的脚本语言，用的还是 VBS 这种...</p>
+<p>在 HTML 中，<code>&lt;script&gt;</code>用来向 HTML 中插入 VBScript。换句话说，写好的 VBS 脚本必须写在<code>&lt;script&gt;</code>和<code>&lt;/script&gt;</code>，并且需要使用<code>type</code>属性来定义脚本语言的类型为<code>text/vbscript</code>。另外，需要注意的是，vbscript 是不区分大小写的，是否需要大小写要按照工作要求来定。</p>
+<h2 id="VBS-输出"><a href="#VBS-输出" class="headerlink" title="VBS 输出"></a>VBS 输出</h2><p>当 VBScript 被用在 Web 服务器上的 ASP 页面时，语句<code>response.write()</code>产生输出；当使用 IE 来测试时，语句<code>document.write()</code>来产生输出（这点好像与 JavaScript 是类似的）。不同类型的变量在输出时需要用到<code>&amp;</code>和<code>&quot;&quot;</code>符号，比如：</p>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Dim</span> name</span><br><span class="line">name=<span class="string">&quot;xxx&quot;</span></span><br><span class="line">document.write(<span class="string">&quot;My name is:&quot;</span>&amp;name)</span><br></pre></td></tr></table></figure>
+<p>简而言之，字符串需要用<code>&quot;&quot;</code>括起来，<code>&amp;</code>用来连接两个不同的变量。</p>
+<h2 id="VBS-变量"><a href="#VBS-变量" class="headerlink" title="VBS 变量"></a>VBS 变量</h2><p>VBScript 使用<code>Dim</code>关键字来声明（创建）一个变量，注意大小写，比如：</p>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Dim</span> x</span><br><span class="line"><span class="keyword">Dim</span> carname</span><br><span class="line">carname=<span class="string">&quot;Volvo&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>有时可能会写错变量的名字，如<code>carname</code>写成<code>carnime</code>，此时脚本会自动创建一个<code>carnime</code>的变量。为了避免不必要的错误，可以在脚本的顶端写上：<code>Option Explicit</code>，比如：</p>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Option</span> <span class="keyword">Explicit</span></span><br><span class="line"><span class="keyword">Dim</span> carname</span><br><span class="line">carname=value</span><br></pre></td></tr></table></figure>
+
+<p>这样脚本就只能使用声明后的变量了。<br><code>Dim</code>声明的变量既可以赋数字，也可以赋为字符串。</p>
+<h2 id="VBS-数组"><a href="#VBS-数组" class="headerlink" title="VBS 数组"></a>VBS 数组</h2><p>用法类似 C 语言，如下：</p>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Dim</span> names(<span class="number">2</span>)</span><br><span class="line">names(<span class="number">0</span>)=<span class="string">&quot;Tove&quot;</span></span><br><span class="line">names(<span class="number">1</span>)=<span class="string">&quot;Jani&quot;</span></span><br><span class="line">names(<span class="number">2</span>)=<span class="string">&quot;Stale&quot;</span></span><br><span class="line">mother=names(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>注意与 C 语言差异的地方在于，<code>Dim names(2)</code>中的数字为 2，表示数组的下标从 0 开始，因此该数组包含 3 个元素。<br>多维数组的声明方法也是类似的，比如声明一个 5 行 7 列的多维数组：</p>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Dim</span> table(<span class="number">4</span>, <span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+
+<p>再看下面多维数组的实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/vbscript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="title class_">Dim</span> <span class="title function_">x</span>(<span class="number">2</span>,<span class="number">2</span>)</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">x</span>(<span class="number">0</span>,<span class="number">0</span>)=<span class="string">&quot;Volvo&quot;</span></span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">x</span>(<span class="number">0</span>,<span class="number">1</span>)=<span class="string">&quot;BMW&quot;</span></span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">x</span>(<span class="number">0</span>,<span class="number">2</span>)=<span class="string">&quot;Ford&quot;</span></span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">x</span>(<span class="number">1</span>,<span class="number">0</span>)=<span class="string">&quot;Apple&quot;</span></span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">x</span>(<span class="number">1</span>,<span class="number">1</span>)=<span class="string">&quot;Orange&quot;</span></span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">x</span>(<span class="number">1</span>,<span class="number">2</span>)=<span class="string">&quot;Banana&quot;</span></span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">x</span>(<span class="number">2</span>,<span class="number">0</span>)=<span class="string">&quot;Coke&quot;</span></span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">x</span>(<span class="number">2</span>,<span class="number">1</span>)=<span class="string">&quot;Pepsi&quot;</span></span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">x</span>(<span class="number">2</span>,<span class="number">2</span>)=<span class="string">&quot;Sprite&quot;</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">for</span> i=<span class="number">0</span> to <span class="number">2</span></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;&lt;p&gt;&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">for</span> j=<span class="number">0</span> to <span class="number">2</span></span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="title function_">x</span>(i,j) &amp; <span class="string">&quot;&lt;br&gt;&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">                next</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;&lt;/p&gt;&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">        next</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="VBS-程序"><a href="#VBS-程序" class="headerlink" title="VBS 程序"></a>VBS 程序</h2><p>VBScript 可使用两种程序：子程序和函数。</p>
+<h3 id="子程序"><a href="#子程序" class="headerlink" title="子程序"></a>子程序</h3><p>VBScript 中的子程序是一系列语句，被封装在<code>Sub</code>和<code>End Sub</code>语句内，可以执行某些操作，但是不会返回值，并且可以带有参数。比如：</p>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> mysub()</span><br><span class="line">some statements</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> mysub(argument1, argument2)</span><br><span class="line">some statements</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>VBScript 中的函数与 C&#x2F;C++ 中的函数类似，执行一系列操作并返回结果，写法与子程序类似，将函数体封装在<code>Function</code>和<code>End Function</code>之中就可以了。可以参考下面这个例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/vbscript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="title class_">Function</span> <span class="title function_">myfunction</span>(a, b)</span></span><br><span class="line"><span class="language-javascript">            myfunction = a + b</span></span><br><span class="line"><span class="language-javascript">            <span class="title class_">End</span> <span class="title class_">Function</span></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="title function_">myfunction</span>(<span class="number">5</span>, <span class="number">9</span>))</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="VBS-条件"><a href="#VBS-条件" class="headerlink" title="VBS 条件"></a>VBS 条件</h2><p>与其他程序语言类似，VBScript 使用<code>If</code>、<code>Then</code>、<code>Else</code>、<code>ElseIf</code>和<code>Select Case</code>来作为条件控制语句，用法也是与其他语言类似的，直接看 3 个例子。<br>第一个：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/vbscript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    i = <span class="title function_">hour</span>(time)</span></span><br><span class="line"><span class="language-javascript">    <span class="title class_">If</span> i &lt; <span class="number">10</span> <span class="title class_">Then</span></span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;Good Morning!&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">    <span class="title class_">Else</span></span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;Have a nice day!&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">    <span class="title class_">End</span> <span class="title class_">If</span></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在上面的代码中，<code>hour</code>是 vbscript 自带的函数，返回一天中当前的小时数（0 - 23）。与 C&#x2F;C++ 有差别的地方在于条件语句需要用<code>End If</code>来表示结束。<br>第二个：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/vbscript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            i = <span class="title function_">hour</span>(time)</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">if</span> i = <span class="number">9</span> then</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;Just started...!&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">            elseif i = <span class="number">11</span> then</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;Hungry!&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">            elseif i = <span class="number">12</span> then</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;Ah, lunch-time!&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">            elseif i = <span class="number">17</span> then</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;Time to go home!&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">else</span> </span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;Unknow&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">            end <span class="keyword">if</span></span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>第三个：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/vbscript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            d = <span class="title function_">weekday</span>(<span class="title class_">Date</span>)</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">document</span>.<span class="title function_">write</span>(d &amp; <span class="string">&quot;&lt;br&gt;&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">            select <span class="keyword">case</span> d</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">case</span> <span class="number">1</span></span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;Sleepy Sunday&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">case</span> <span class="number">2</span></span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;Monday again!&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">case</span> <span class="number">3</span></span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;Just Tuesday!&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">case</span> <span class="number">4</span></span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;Wednesday!&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">case</span> <span class="number">5</span></span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;Thursday...&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">case</span> <span class="number">6</span></span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;Finally Friday!&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">case</span> <span class="keyword">else</span></span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;Super Saturday!!!&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">                end select</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>相比 C&#x2F;C++ 中的<code>switch</code>，这里不用写很多<code>break</code>是一件很不错的事情。不过说句题外话，为什么周二的数字要设置成 3 ？</p>
+<h2 id="VBS-循环"><a href="#VBS-循环" class="headerlink" title="VBS 循环"></a>VBS 循环</h2><p>在 VBS 中，可以使用四种循环：<code>For...Next</code>、<code>For Each...Next</code>、<code>Do...Loop</code>和<code>While...Wend</code>。</p>
+<h3 id="For…Next"><a href="#For…Next" class="headerlink" title="For…Next"></a>For…Next</h3><p><code>For</code>语句规定计数变量<code>i</code>以及它的初始值和结束值，<code>Next</code>语句会以 1 作为步进值来递增变量<code>i</code>。比如下面这个例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/vbscript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">for</span> i = <span class="number">0</span> to <span class="number">5</span></span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;The number is &quot;</span> &amp; i &amp; <span class="string">&quot;&lt;br&gt;&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">            next</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">The number is 0</span><br><span class="line">The number is 1</span><br><span class="line">The number is 2</span><br><span class="line">The number is 3</span><br><span class="line">The number is 4</span><br><span class="line">The number is 5</span><br></pre></td></tr></table></figure>
+
+<p>看来，<code>0 to 5</code>是从 0 到 5，得运行 6 次。如果为了在不改变边界条件的情况下，减少循环次数，可以使用<code>Step</code>关键字来完成，看下面这个例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/vbscript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">for</span> i = <span class="number">0</span> to <span class="number">5</span> step <span class="number">2</span></span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;The number is &quot;</span> &amp; i &amp; <span class="string">&quot;&lt;br&gt;&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">            next</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">The number is 0</span><br><span class="line">The number is 2</span><br><span class="line">The number is 4</span><br></pre></td></tr></table></figure>
+<p>对应的，当<code>Step</code>后的数字为复数时，就可以使循环变量递减了。<br>如果有时候要在循环运行到一定程度的时候退出循环呢？此时可以使用<code>Exit For</code>关键字，比如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/vbscript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">for</span> i = <span class="number">1</span> to <span class="number">10</span></span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;The number is &quot;</span> &amp; i &amp; <span class="string">&quot;&lt;br&gt;&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">if</span> i = <span class="number">5</span> then exit <span class="keyword">for</span></span></span><br><span class="line"><span class="language-javascript">            next</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">The number is 1</span><br><span class="line">The number is 2</span><br><span class="line">The number is 3</span><br><span class="line">The number is 4</span><br><span class="line">The number is 5</span><br></pre></td></tr></table></figure>
+<h3 id="For-Each…Next"><a href="#For-Each…Next" class="headerlink" title="For Each…Next"></a>For Each…Next</h3><p><code>For Each...Next</code>针对集合中的每个项目或者数组中的每个元素来重复运行某段代码，直接看下面这个例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/vbscript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            dim <span class="title function_">cars</span>(<span class="number">2</span>)</span></span><br><span class="line"><span class="language-javascript">            <span class="title function_">cars</span>(<span class="number">0</span>) = <span class="string">&quot;Volvo&quot;</span></span></span><br><span class="line"><span class="language-javascript">            <span class="title function_">cars</span>(<span class="number">1</span>) = <span class="string">&quot;Saab&quot;</span></span></span><br><span class="line"><span class="language-javascript">            <span class="title function_">cars</span>(<span class="number">2</span>) = <span class="string">&quot;BMW&quot;</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">for</span> each x <span class="keyword">in</span> cars</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">document</span>.<span class="title function_">write</span>(x &amp; <span class="string">&quot;&lt;br&gt;&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">            next</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Do…Loop"><a href="#Do…Loop" class="headerlink" title="Do…Loop"></a>Do…Loop</h3><p>类似 C 语言的<code>do-while</code>，直接看例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/vbscript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            i = <span class="number">0</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">do</span> <span class="keyword">while</span> i &lt; <span class="number">10</span></span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">document</span>.<span class="title function_">write</span>(i &amp; <span class="string">&quot;&lt;br&gt;&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">                i = i + <span class="number">1</span></span></span><br><span class="line"><span class="language-javascript">            loop</span></span><br><span class="line"><span class="language-javascript">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">0</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td></tr></table></figure>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>到这里为止，与 VBScript 相关的基础内容学习就算是完成了。接下来要做的事情，是做一些 VBS 实例，学习一下 VBS 的内建函数（可能就是以后的生产力工具）。</p>
+<hr>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>bachzart
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://bachzart.github.io/2022/11/14/VBS-basic/" title="VBS_Basic">http://bachzart.github.io/2022/11/14/VBS-basic/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/VBS/" rel="tag"># VBS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/11/2022-10-%E6%9C%88%E6%80%BB%E7%BB%93/" rel="prev" title="2022_10_月总结">
+      <i class="fa fa-chevron-left"></i> 2022_10_月总结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/11/15/VBS-%E7%AE%80%E5%8D%95%E5%AE%9E%E4%BE%8B/" rel="next" title="VBS_简单实例">
+      VBS_简单实例 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-VBS"><span class="nav-number">1.</span> <span class="nav-text">什么是 VBS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VBS-%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90"><span class="nav-number">2.</span> <span class="nav-text">VBS 的第一个例子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-VBS"><span class="nav-number">3.</span> <span class="nav-text">如何使用 VBS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#VBS-%E8%BE%93%E5%87%BA"><span class="nav-number">3.1.</span> <span class="nav-text">VBS 输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VBS-%E5%8F%98%E9%87%8F"><span class="nav-number">3.2.</span> <span class="nav-text">VBS 变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VBS-%E6%95%B0%E7%BB%84"><span class="nav-number">3.3.</span> <span class="nav-text">VBS 数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VBS-%E7%A8%8B%E5%BA%8F"><span class="nav-number">3.4.</span> <span class="nav-text">VBS 程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E7%A8%8B%E5%BA%8F"><span class="nav-number">3.4.1.</span> <span class="nav-text">子程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">3.4.2.</span> <span class="nav-text">函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VBS-%E6%9D%A1%E4%BB%B6"><span class="nav-number">3.5.</span> <span class="nav-text">VBS 条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VBS-%E5%BE%AA%E7%8E%AF"><span class="nav-number">3.6.</span> <span class="nav-text">VBS 循环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#For%E2%80%A6Next"><span class="nav-number">3.6.1.</span> <span class="nav-text">For…Next</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#For-Each%E2%80%A6Next"><span class="nav-number">3.6.2.</span> <span class="nav-text">For Each…Next</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Do%E2%80%A6Loop"><span class="nav-number">3.6.3.</span> <span class="nav-text">Do…Loop</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bachzart"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">bachzart</p>
+  <div class="site-description" itemprop="description">我即世界，世界即我</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bachzart" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bachzart" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bachzart@163.com" title="E-Mail → mailto:bachzart@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="/about/" title="&#x2F;about&#x2F;">About This Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/Book-List/" title="&#x2F;Book-List&#x2F;">Book List</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.sudoku.name/index.php?ln=cn&ref=44355" title="https:&#x2F;&#x2F;www.sudoku.name&#x2F;index.php?ln&#x3D;cn&amp;ref&#x3D;44355" rel="noopener" target="_blank">Soduku Game</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://2048game.com/" title="https:&#x2F;&#x2F;2048game.com&#x2F;" rel="noopener" target="_blank">2048 Game</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bachzart</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

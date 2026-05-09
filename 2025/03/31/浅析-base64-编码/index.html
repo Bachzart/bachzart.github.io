@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/acoustic_guitar_128px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/acoustic_guitar_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/acoustic_guitar_16px.png">
+  <link rel="mask-icon" href="/uploads/acoustic_guitar.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https:/fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bachzart.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="之前研究过 base64 编码，但是 blog 一直放着没写，现在把它完结了吧~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅析 base64 编码">
+<meta property="og:url" content="http://bachzart.github.io/2025/03/31/%E6%B5%85%E6%9E%90-base64-%E7%BC%96%E7%A0%81/index.html">
+<meta property="og:site_name" content="bachzart&#39;s Blog">
+<meta property="og:description" content="之前研究过 base64 编码，但是 blog 一直放着没写，现在把它完结了吧~">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-31T13:54:48.000Z">
+<meta property="article:modified_time" content="2026-05-09T09:26:52.802Z">
+<meta property="article:author" content="bachzart">
+<meta property="article:tag" content="base64">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://bachzart.github.io/2025/03/31/%E6%B5%85%E6%9E%90-base64-%E7%BC%96%E7%A0%81/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>浅析 base64 编码 | bachzart's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">bachzart's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">133</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/bachzart" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2025/03/31/%E6%B5%85%E6%9E%90-base64-%E7%BC%96%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="我即世界，世界即我">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          浅析 base64 编码
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-03-31 21:54:48" itemprop="dateCreated datePublished" datetime="2025-03-31T21:54:48+08:00">2025-03-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-05-09 17:26:52" itemprop="dateModified" datetime="2026-05-09T17:26:52+08:00">2026-05-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/Data-Structures-and-Algorithms/" itemprop="url" rel="index"><span itemprop="name">Data Structures and Algorithms</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>之前研究过 base64 编码，但是 blog 一直放着没写，现在把它完结了吧~</p>
+<span id="more"></span>
+
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/base64/8545775">base64</a> 是一种简单又常用的编码方式，通常用于传输一些数据（可以是文本也可以是图片）。</p>
+<p>之前在工作中，有看到相关的应用，有点好奇它的原理，就分析了一下。</p>
+<h1 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h1><p>简而言之，base64 编码的过程就是将源字符串每 3 个字符扩展为 4 个编码表字符，从而组成一个新的字符串，其中 3 个字符对应 24 位，若取 6 位为一个编码字符，则正好对应 4 个字符。如果剩下的字符不足 3 个字符，那么就用“&#x3D;”进行替代，所以，base64 编码后的字符串，可能会出现 0 个、1 个或 2 个“&#x3D;”。</p>
+<p>从这里也可以看出，因为是按 6 位进行编码的，所以这也是叫 base64 的由来😂。</p>
+<p>对应的编码表：</p>
+<table>
+<thead>
+<tr>
+<th align="center">码值</th>
+<th align="center">字符</th>
+<th align="center">码值</th>
+<th align="center">字符</th>
+<th align="center">码值</th>
+<th align="center">字符</th>
+<th align="center">码值</th>
+<th align="center">字符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">A</td>
+<td align="center">16</td>
+<td align="center">Q</td>
+<td align="center">32</td>
+<td align="center">g</td>
+<td align="center">48</td>
+<td align="center">w</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">B</td>
+<td align="center">17</td>
+<td align="center">R</td>
+<td align="center">33</td>
+<td align="center">h</td>
+<td align="center">49</td>
+<td align="center">x</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">C</td>
+<td align="center">18</td>
+<td align="center">S</td>
+<td align="center">34</td>
+<td align="center">i</td>
+<td align="center">50</td>
+<td align="center">y</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">D</td>
+<td align="center">19</td>
+<td align="center">T</td>
+<td align="center">35</td>
+<td align="center">j</td>
+<td align="center">51</td>
+<td align="center">z</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">E</td>
+<td align="center">20</td>
+<td align="center">U</td>
+<td align="center">36</td>
+<td align="center">k</td>
+<td align="center">52</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">F</td>
+<td align="center">21</td>
+<td align="center">V</td>
+<td align="center">37</td>
+<td align="center">l</td>
+<td align="center">53</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">G</td>
+<td align="center">22</td>
+<td align="center">W</td>
+<td align="center">38</td>
+<td align="center">m</td>
+<td align="center">54</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">H</td>
+<td align="center">23</td>
+<td align="center">X</td>
+<td align="center">39</td>
+<td align="center">n</td>
+<td align="center">55</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">I</td>
+<td align="center">24</td>
+<td align="center">Y</td>
+<td align="center">40</td>
+<td align="center">o</td>
+<td align="center">56</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">J</td>
+<td align="center">25</td>
+<td align="center">Z</td>
+<td align="center">41</td>
+<td align="center">p</td>
+<td align="center">57</td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">K</td>
+<td align="center">26</td>
+<td align="center">a</td>
+<td align="center">42</td>
+<td align="center">q</td>
+<td align="center">58</td>
+<td align="center">6</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center">L</td>
+<td align="center">27</td>
+<td align="center">b</td>
+<td align="center">43</td>
+<td align="center">r</td>
+<td align="center">59</td>
+<td align="center">7</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td align="center">M</td>
+<td align="center">28</td>
+<td align="center">c</td>
+<td align="center">44</td>
+<td align="center">s</td>
+<td align="center">60</td>
+<td align="center">8</td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td align="center">N</td>
+<td align="center">29</td>
+<td align="center">d</td>
+<td align="center">45</td>
+<td align="center">t</td>
+<td align="center">61</td>
+<td align="center">9</td>
+</tr>
+<tr>
+<td align="center">14</td>
+<td align="center">O</td>
+<td align="center">30</td>
+<td align="center">e</td>
+<td align="center">46</td>
+<td align="center">u</td>
+<td align="center">62</td>
+<td align="center">+</td>
+</tr>
+<tr>
+<td align="center">15</td>
+<td align="center">P</td>
+<td align="center">31</td>
+<td align="center">f</td>
+<td align="center">47</td>
+<td align="center">v</td>
+<td align="center">63</td>
+<td align="center">&#x2F;</td>
+</tr>
+</tbody></table>
+<p>有了编码表之后，就可以进行编码操作了，以“A”这个单字符组成的字符串为例，字符“A”的二进制形式为：<br>$$ (0100 0001)_2 $$</p>
+<p>取出前六位：<br>$$(0100 00)_2$$</p>
+<p>按照<strong>编码表</strong>就等于：<br>$$(16)_{10} &#x3D; Q$$</p>
+<p>这样，就得到了编码后的第一个字符。但此时会发现，字符“A”还剩下“01”两位没有用到，这里直接在后面补零就好，可得<code>0100 00</code>这六位，对应编码同样还是<code>Q</code>。</p>
+<p>这时，得到了由<code>Q</code>这个字符构成的字符串<code>QQ</code>，离目标 4 个字符还差两个，这里再直接用“&#x3D;”补齐，就得到：<code>QQ==</code>这个编码后的字符串了。</p>
+<p>整体来看，编码过程并不复杂，对吧，下面再来实现它。</p>
+<h1 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h1><p>考虑到整个编码过程中，存在着大量的取位操作，直接使用位运算取出特定的位，然后根据编码表转换为特定的字符会比较方便，所以我们直接使用 C 语言的位运算来实现，测试代码如下：</p>
+<figure class="highlight c"><figcaption><span>Ver1</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">char</span> enc_map[] = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">base64_enc</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *src, <span class="type">int</span> src_len, <span class="type">char</span> *enc)</span> &#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(; i &lt; src_len - src_len % <span class="number">3</span>; i += <span class="number">3</span>) &#123;</span><br><span class="line">        enc[j++] = enc_map[(src[i] &gt;&gt; <span class="number">2</span>) &amp; <span class="number">0x3F</span>];</span><br><span class="line">        enc[j++] = enc_map[((src[i] &lt;&lt; <span class="number">4</span>) &amp; <span class="number">0x30</span>) + ((src[i + <span class="number">1</span>] &gt;&gt; <span class="number">4</span>) &amp; <span class="number">0xF</span>)];</span><br><span class="line">        enc[j++] = enc_map[((src[i + <span class="number">1</span>] &lt;&lt; <span class="number">2</span>) &amp; <span class="number">0x3C</span>) + ((src[i + <span class="number">2</span>] &gt;&gt; <span class="number">6</span>) &amp; <span class="number">0x3</span>)];</span><br><span class="line">        enc[j++] = enc_map[src[i + <span class="number">2</span>] &amp; <span class="number">0x3F</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(src_len % <span class="number">3</span> == <span class="number">1</span>) &#123;</span><br><span class="line">        enc[j++] = enc_map[(src[i] &gt;&gt; <span class="number">2</span>) &amp; <span class="number">0x3F</span>];</span><br><span class="line">        enc[j++] = enc_map[(src[i] &lt;&lt; <span class="number">4</span>) &amp; <span class="number">0x30</span>];</span><br><span class="line">        enc[j++] = <span class="string">&#x27;=&#x27;</span>;</span><br><span class="line">        enc[j++] = <span class="string">&#x27;=&#x27;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(src_len % <span class="number">3</span> == <span class="number">2</span>) &#123;</span><br><span class="line">        enc[j++] = enc_map[(src[i] &gt;&gt; <span class="number">2</span>) &amp; <span class="number">0x3F</span>];</span><br><span class="line">        enc[j++] = enc_map[((src[i] &lt;&lt; <span class="number">4</span>) &amp; <span class="number">0x30</span>) + ((src[i + <span class="number">1</span>] &gt;&gt; <span class="number">4</span>) &amp; <span class="number">0xF</span>)];</span><br><span class="line">        enc[j++] = enc_map[(src[i + <span class="number">1</span>] &lt;&lt; <span class="number">2</span>) &amp; <span class="number">0x3C</span>];</span><br><span class="line">        enc[j++] = <span class="string">&#x27;=&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> *strSrc[<span class="number">10</span>] = &#123;<span class="string">&quot;A&quot;</span>, <span class="string">&quot;AB&quot;</span>, <span class="string">&quot;ABC&quot;</span>, <span class="string">&quot;ABCD&quot;</span>, <span class="string">&quot;Killing&quot;</span>&#125;;</span><br><span class="line">    <span class="type">char</span> strEnc[<span class="number">1024</span>];</span><br><span class="line">    <span class="built_in">memset</span>(strEnc, <span class="number">0</span>, <span class="keyword">sizeof</span>(strEnc));</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i) &#123;</span><br><span class="line">        base64_enc(strSrc[i], <span class="built_in">strlen</span>(strSrc[i]), strEnc);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s\n%s\n&quot;</span>, strSrc[i], strEnc, strDec);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">output:</span></span><br><span class="line"><span class="comment">A</span></span><br><span class="line"><span class="comment">QQ==</span></span><br><span class="line"><span class="comment">AB</span></span><br><span class="line"><span class="comment">QUI=</span></span><br><span class="line"><span class="comment">ABC</span></span><br><span class="line"><span class="comment">QUJD</span></span><br><span class="line"><span class="comment">ABCD</span></span><br><span class="line"><span class="comment">QUJDRA==</span></span><br><span class="line"><span class="comment">Killing</span></span><br><span class="line"><span class="comment">S2lsbGluZw==</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="解码"><a href="#解码" class="headerlink" title="解码"></a>解码</h1><p>学会如何编码之后，对应的解码自然也不在话下了，只需要按照对应的解码表进行解码即可，我们直接在上面的代码中修改：</p>
+<figure class="highlight c"><figcaption><span>Ver2</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">char</span> enc_map[] = <span class="string">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</span>;</span><br><span class="line"><span class="type">char</span> dec_map[<span class="number">256</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> idx = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">unsigned</span> <span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">strlen</span>(enc_map); ++i)</span><br><span class="line">        dec_map[enc_map[i]] = idx++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">base64_enc</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *src, <span class="type">int</span> src_len, <span class="type">char</span> *enc)</span> &#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(; i &lt; src_len - src_len % <span class="number">3</span>; i += <span class="number">3</span>) &#123;</span><br><span class="line">        enc[j++] = enc_map[(src[i] &gt;&gt; <span class="number">2</span>) &amp; <span class="number">0x3F</span>];</span><br><span class="line">        enc[j++] = enc_map[((src[i] &lt;&lt; <span class="number">4</span>) &amp; <span class="number">0x30</span>) + ((src[i + <span class="number">1</span>] &gt;&gt; <span class="number">4</span>) &amp; <span class="number">0xF</span>)];</span><br><span class="line">        enc[j++] = enc_map[((src[i + <span class="number">1</span>] &lt;&lt; <span class="number">2</span>) &amp; <span class="number">0x3C</span>) + ((src[i + <span class="number">2</span>] &gt;&gt; <span class="number">6</span>) &amp; <span class="number">0x3</span>)];</span><br><span class="line">        enc[j++] = enc_map[src[i + <span class="number">2</span>] &amp; <span class="number">0x3F</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(src_len % <span class="number">3</span> == <span class="number">1</span>) &#123;</span><br><span class="line">        enc[j++] = enc_map[(src[i] &gt;&gt; <span class="number">2</span>) &amp; <span class="number">0x3F</span>];</span><br><span class="line">        enc[j++] = enc_map[(src[i] &lt;&lt; <span class="number">4</span>) &amp; <span class="number">0x30</span>];</span><br><span class="line">        enc[j++] = <span class="string">&#x27;=&#x27;</span>;</span><br><span class="line">        enc[j++] = <span class="string">&#x27;=&#x27;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(src_len % <span class="number">3</span> == <span class="number">2</span>) &#123;</span><br><span class="line">        enc[j++] = enc_map[(src[i] &gt;&gt; <span class="number">2</span>) &amp; <span class="number">0x3F</span>];</span><br><span class="line">        enc[j++] = enc_map[((src[i] &lt;&lt; <span class="number">4</span>) &amp; <span class="number">0x30</span>) + ((src[i + <span class="number">1</span>] &gt;&gt; <span class="number">4</span>) &amp; <span class="number">0xF</span>)];</span><br><span class="line">        enc[j++] = enc_map[(src[i + <span class="number">1</span>] &lt;&lt; <span class="number">2</span>) &amp; <span class="number">0x3C</span>];</span><br><span class="line">        enc[j++] = <span class="string">&#x27;=&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">base64_dec</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *enc, <span class="type">int</span> enc_len, <span class="type">char</span> *dec)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(enc_len % <span class="number">4</span> != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;encoding str is valid.\n&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(; i &lt; enc_len; i += <span class="number">4</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!dec_map[enc[i]] || !dec_map[enc[i + <span class="number">1</span>]] || !dec_map[enc[i + <span class="number">2</span>]] || !dec_map[enc[i + <span class="number">3</span>]])</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        dec[j++] = (dec_map[enc[i]] &lt;&lt; <span class="number">2</span>) + ((dec_map[enc[i + <span class="number">1</span>]] &gt;&gt; <span class="number">4</span>) &amp; <span class="number">0x3</span>);</span><br><span class="line">        dec[j++] = ((dec_map[enc[i + <span class="number">1</span>]] &lt;&lt; <span class="number">4</span>) &amp; <span class="number">0xF0</span>) + ((dec_map[enc[i + <span class="number">2</span>]] &gt;&gt; <span class="number">2</span>) &amp; <span class="number">0xF</span>);</span><br><span class="line">        dec[j++] = ((dec_map[enc[i + <span class="number">2</span>]] &lt;&lt; <span class="number">6</span>) &amp; <span class="number">0xC0</span>) + (dec_map[enc[i + <span class="number">3</span>]] &amp; <span class="number">0x3F</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(i &lt; enc_len) &#123;</span><br><span class="line">        <span class="keyword">if</span>(enc[i + <span class="number">2</span>] == <span class="string">&#x27;=&#x27;</span> &amp;&amp; enc[i + <span class="number">3</span>] == <span class="string">&#x27;=&#x27;</span>) &#123;</span><br><span class="line">            dec[j] = (dec_map[enc[i]] &lt;&lt; <span class="number">2</span>) + ((dec_map[enc[i + <span class="number">1</span>]] &gt;&gt; <span class="number">4</span>) &amp; <span class="number">0x3</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(enc[i + <span class="number">3</span>] == <span class="string">&#x27;=&#x27;</span>) &#123;</span><br><span class="line">            dec[j++] = (dec_map[enc[i]]  &lt;&lt; <span class="number">2</span>) + ((dec_map[enc[i + <span class="number">1</span>]] &gt;&gt; <span class="number">4</span>) &amp; <span class="number">0x3</span>);</span><br><span class="line">            dec[j++] = ((dec_map[enc[i + <span class="number">1</span>]] &lt;&lt; <span class="number">2</span>) &amp; <span class="number">0xF0</span>) + ((dec_map[enc[i + <span class="number">2</span>]] &gt;&gt; <span class="number">2</span>) &amp; <span class="number">0xF</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    init();</span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> *strSrc[<span class="number">10</span>] = &#123;<span class="string">&quot;A&quot;</span>, <span class="string">&quot;AB&quot;</span>, <span class="string">&quot;ABC&quot;</span>, <span class="string">&quot;ABCD&quot;</span>, <span class="string">&quot;Killing&quot;</span>&#125;;</span><br><span class="line">    <span class="type">char</span> strEnc[<span class="number">1024</span>], strDec[<span class="number">1024</span>];</span><br><span class="line">    <span class="built_in">memset</span>(strEnc, <span class="number">0</span>, <span class="keyword">sizeof</span>(strEnc));</span><br><span class="line">    <span class="built_in">memset</span>(strDec, <span class="number">0</span>, <span class="keyword">sizeof</span>(strDec));</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i) &#123;</span><br><span class="line">        base64_enc(strSrc[i], <span class="built_in">strlen</span>(strSrc[i]), strEnc);</span><br><span class="line">        base64_dec(strEnc, <span class="built_in">strlen</span>(strEnc), strDec);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s\n%s\n%s\n&quot;</span>, strSrc[i], strEnc, strDec);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">output:</span></span><br><span class="line"><span class="comment">A</span></span><br><span class="line"><span class="comment">QQ==</span></span><br><span class="line"><span class="comment">A</span></span><br><span class="line"><span class="comment">AB</span></span><br><span class="line"><span class="comment">QUI=</span></span><br><span class="line"><span class="comment">AR</span></span><br><span class="line"><span class="comment">ABC</span></span><br><span class="line"><span class="comment">QUJD</span></span><br><span class="line"><span class="comment">ABC</span></span><br><span class="line"><span class="comment">ABCD</span></span><br><span class="line"><span class="comment">QUJDRA==</span></span><br><span class="line"><span class="comment">ABCD</span></span><br><span class="line"><span class="comment">Killing</span></span><br><span class="line"><span class="comment">S2lsbGluZw==</span></span><br><span class="line"><span class="comment">Killing</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>这篇文章重点分析了 base64 编码、解码的过程，并用 C 语言简单实现了一个 demo 程序。总体来看，base64 编码的过程并不复杂，作为理解计算机编码方式的练习来讲，还不错。</p>
+<p>PS：欠了一年的 blog 终于水完了~😂</p>
+<hr>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>bachzart
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://bachzart.github.io/2025/03/31/%E6%B5%85%E6%9E%90-base64-%E7%BC%96%E7%A0%81/" title="浅析 base64 编码">http://bachzart.github.io/2025/03/31/浅析-base64-编码/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/base64/" rel="tag"># base64</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/03/28/2024-%E5%9B%9E%E6%9C%9B%E5%BD%95/" rel="prev" title="2024_回望录">
+      <i class="fa fa-chevron-left"></i> 2024_回望录
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/04/14/Qt-%E5%A6%82%E4%BD%95%E8%BF%9E%E6%8E%A5-MySQL-%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="next" title="Qt 如何连接 MySQL 数据库">
+      Qt 如何连接 MySQL 数据库 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%84%E5%88%99"><span class="nav-number">2.</span> <span class="nav-text">规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E7%A0%81"><span class="nav-number">4.</span> <span class="nav-text">解码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">5.</span> <span class="nav-text">结语</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bachzart"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">bachzart</p>
+  <div class="site-description" itemprop="description">我即世界，世界即我</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bachzart" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bachzart" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bachzart@163.com" title="E-Mail → mailto:bachzart@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="/about/" title="&#x2F;about&#x2F;">About This Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/Book-List/" title="&#x2F;Book-List&#x2F;">Book List</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.sudoku.name/index.php?ln=cn&ref=44355" title="https:&#x2F;&#x2F;www.sudoku.name&#x2F;index.php?ln&#x3D;cn&amp;ref&#x3D;44355" rel="noopener" target="_blank">Soduku Game</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://2048game.com/" title="https:&#x2F;&#x2F;2048game.com&#x2F;" rel="noopener" target="_blank">2048 Game</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bachzart</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

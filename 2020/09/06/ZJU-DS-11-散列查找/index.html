@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/acoustic_guitar_128px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/acoustic_guitar_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/acoustic_guitar_16px.png">
+  <link rel="mask-icon" href="/uploads/acoustic_guitar.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https:/fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bachzart.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本周将介绍散列查找">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ZJU_DS_11-散列查找">
+<meta property="og:url" content="http://bachzart.github.io/2020/09/06/ZJU-DS-11-%E6%95%A3%E5%88%97%E6%9F%A5%E6%89%BE/index.html">
+<meta property="og:site_name" content="bachzart&#39;s Blog">
+<meta property="og:description" content="本周将介绍散列查找">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-06T02:41:45.000Z">
+<meta property="article:modified_time" content="2026-05-09T09:26:52.786Z">
+<meta property="article:author" content="bachzart">
+<meta property="article:tag" content="ZJU_DS">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://bachzart.github.io/2020/09/06/ZJU-DS-11-%E6%95%A3%E5%88%97%E6%9F%A5%E6%89%BE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>ZJU_DS_11-散列查找 | bachzart's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">bachzart's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">133</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/bachzart" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2020/09/06/ZJU-DS-11-%E6%95%A3%E5%88%97%E6%9F%A5%E6%89%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="我即世界，世界即我">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ZJU_DS_11-散列查找
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-09-06 10:41:45" itemprop="dateCreated datePublished" datetime="2020-09-06T10:41:45+08:00">2020-09-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-05-09 17:26:52" itemprop="dateModified" datetime="2026-05-09T17:26:52+08:00">2026-05-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/Data-Structures-and-Algorithms/" itemprop="url" rel="index"><span itemprop="name">Data Structures and Algorithms</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>本周将介绍散列查找</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h1><p>先来回顾一下其他的查找方法：</p>
+<table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">时间复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">顺序查找</td>
+<td align="center">$O(N)$</td>
+</tr>
+<tr>
+<td align="center">二分查找（静态查找）</td>
+<td align="center">$O(log_2N)$</td>
+</tr>
+<tr>
+<td align="center">二叉搜索树</td>
+<td align="center">$O(h), h$为树高</td>
+</tr>
+<tr>
+<td align="center">平衡二叉树</td>
+<td align="center">$O(log_2N)$</td>
+</tr>
+<tr>
+<td align="center">上表中的查找方法都是建立在容易比较关键字的情况下，如果关键字不容易比较呢？</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h1 id="散列查找"><a href="#散列查找" class="headerlink" title="散列查找"></a>散列查找</h1><p>散列查找所要解决的问题就是：</p>
+<div class="note success">
+            <ol><li>计算位置：构造散列函数确定关键词存储位置</li><li>解决冲突：应用某种策略解决多个关键词位置相同的问题</li></ol>
+          </div>
+<p>按照散列查找的做法，每次查找只进行计算就够了，时间复杂度为$O(1)$，也就是说查找时间与问题规模无关！</p>
+<h2 id="抽象数据类型描述"><a href="#抽象数据类型描述" class="headerlink" title="抽象数据类型描述"></a>抽象数据类型描述</h2><p>类型名称：符号集（Symbol Table）<br>数据对象集：符号表是“名字（Name）- 属性（Attribute）”对的集合<br>操作集：Table ∈ Symbol Table, Name ∈ NameType, Attr ∈ AttributeType</p>
+<ol>
+<li><code>SymbolTable InitializeTable(int TableSize)</code>，创建一个长度为<code>TableSize</code>的符号表</li>
+<li><code>Boolean IsIn(SymbolTable Table, NameType Name)</code>，查找特定的名字<code>Name</code>是否在符号表<code>Table</code>中</li>
+<li><code>AttributeType Find(SymbolTable Table, NameType Name)</code>，获取<code>Table</code>中指定名字<code>Name</code>对应的属性</li>
+<li><code>SymbolTable Modefy(SymbolTable Table, NameType Name, AttributeType Attr)</code>，将<code>Table</code>中指定名字<code>Name</code>的属性修改为<code>Attr</code></li>
+<li><code>SymbolTable Insert(SymbolTable Table, NameType Name, AttributeType Attr)</code>，向<code>Table</code>中插入一个新名字<code>Name</code>及其属性<code>Attr</code></li>
+<li><code>SymbolTable Delete(SymbolTable Table, NameType Name)</code>，从<code>Table</code>中删除一个名字<code>Name</code>及其属性</li>
+</ol>
+<h2 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h2><p>散列（Hashing）的基本思想如下：</p>
+<ol>
+<li>以关键字**$key$<strong>为自变量，通过</strong>散列函数$h$<strong>，计算出对应的</strong>函数值$h(k)$**，作为数据对象的存储地址。</li>
+<li>可能不同关键字会映射到同一散列地址上，这种情况称为<strong>冲突（Collision）</strong>，这需要某种冲突解决策略。</li>
+</ol>
+<p>这里引入装填因子(Loading Factor)的概念，即：散列表内元素个数（$n$）与散列表空间（$m$）的比值，即$\alpha &#x3D; n &#x2F; m$。</p>
+<h2 id="散列函数"><a href="#散列函数" class="headerlink" title="散列函数"></a>散列函数</h2><p>按照前面的思路，在构造散列函数时需要注意两点：</p>
+<ol>
+<li>计算简单，以便提高地址转换速度</li>
+<li>关键词对应的地址空间分布均匀，以尽量减少冲突</li>
+</ol>
+<p>根据数据元素的不同，可以分为以<strong>数字关键词</strong>和<strong>字符关键词</strong>构造的散列函数。</p>
+<h3 id="数字关键词"><a href="#数字关键词" class="headerlink" title="数字关键词"></a>数字关键词</h3><p>以数字为关键词的散列函数构造方法又有多种，依次如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">散列函数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">直接定址法</td>
+<td align="center">$h(key) &#x3D; a \times key + b, a, b$为常数</td>
+</tr>
+<tr>
+<td align="center">除留余数法</td>
+<td align="center">$h(key) &#x3D; key mod p, p$取素数</td>
+</tr>
+<tr>
+<td align="center">数字分析法</td>
+<td align="center">$h(key) &#x3D; atoi(key + 7)$</td>
+</tr>
+<tr>
+<td align="center">折叠法</td>
+<td align="center">关键词分割成位数相同的几个部分叠加</td>
+</tr>
+<tr>
+<td align="center">平方取中法</td>
+<td align="center">关键字平方后取其中几位</td>
+</tr>
+</tbody></table>
+<h3 id="字符关键词"><a href="#字符关键词" class="headerlink" title="字符关键词"></a>字符关键词</h3><p>以字符为关键词的散列函数构造也有多种，依次如下：</p>
+<div class="tabs" id="third-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#third-unique-name-1">ASCII码加和法</a></li><li class="tab"><a href="#third-unique-name-2">前3个字符移位法</a></li><li class="tab"><a href="#third-unique-name-3">移位法</a></li></ul><div class="tab-content"><div class="tab-pane active" id="third-unique-name-1"><p>散列函数：$h(key) &#x3D; (\sum key[i])\ mod\ TableSize$，此法产生的冲突较为严重</p></div><div class="tab-pane" id="third-unique-name-2"><p>散列函数：$h(key) &#x3D; (key[0] \times 27^2 + key[1] \times 27 + key[2])\ mod\ TableSize$，这里看作 27 进制数，依然存在冲突，</p></div><div class="tab-pane" id="third-unique-name-3"><p>散列函数：$h(key) &#x3D; (\sum_{i&#x3D;0}^{i-1} key[n-i-1] \times 32^i)\ mod\ TableSize$，看作 32 进制数涉及关键词，所有<strong>n</strong>个字符，并且分布比较均匀</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Index <span class="title function_">Hash</span><span class="params">(<span class="type">const</span> <span class="type">char</span> \*Key, <span class="type">int</span> TableSize)</span> &#123;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">int</span> h = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(\*Key != <span class="string">&#x27;\0&#x27;</span>) &#123;</span><br><span class="line">		h = (h &lt;&lt; <span class="number">5</span>) + \*Key++;	<span class="comment">// h &lt;&lt; 5 &lt;==&gt; h\*32</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> h%TableSize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div></div>
+
+<h2 id="冲突处理方法"><a href="#冲突处理方法" class="headerlink" title="冲突处理方法"></a>冲突处理方法</h2><p>对于散列查找而言，产生冲突必定会影响效率，那么如何处理冲突呢？</p>
+<h3 id="开放定址法"><a href="#开放定址法" class="headerlink" title="开放定址法"></a>开放定址法</h3><p>开放定址法的思路比较简单，说白了，就是这个不行换另外一个，一旦产生了冲突（该地址已有其它元素），就按照某种规则寻找另一个空的地址。<br>按照这种思路，寻找下一空地址的过程，称为<strong>探测</strong>，而它也有多种不同的探测方法。</p>
+<h4 id="线性探测"><a href="#线性探测" class="headerlink" title="线性探测"></a>线性探测</h4><p>顾名思义，线性探测法就是线性的探测法（说了没说系列？😏），也即以增量序列${1, 2, \ldots}（TableSize - 1）$<strong>循环</strong>试探下一个地址，也就是检测到冲突了，下标加一试试下一个地址，注意循环到末尾后若还没有空位置，则继续从头部开始循环，此法容易产生“聚集”现象。</p>
+<h4 id="平方探测"><a href="#平方探测" class="headerlink" title="平方探测"></a>平方探测</h4><p>平方探测也叫二次探测，以<strong>增量序列${1^2, -1^2, 2^2, -2^2, \ldots, q*2, -q^2}, q \le \lfloor TableSize \rfloor$</strong>，循环试探下一个存储地址，此法与线性探测唯一的区别只是增量序列不同而已。但平方探测存在一个很严重的问题，就是“抖动”现象，明明有空位置，但是就是无法探测到散列表的空位置，不过好在可以借助下面这个定理（感谢数学家🙇‍）。</p>
+<blockquote>
+<p>定理：如果散列表长度<strong>TableSize</strong>是某个**$4k+3$（$k$是正整数）形式的素数**时，平方探测就可以探查到整个散列表空间。</p>
+</blockquote>
+<h4 id="双散列"><a href="#双散列" class="headerlink" title="双散列"></a>双散列</h4><p>顾名思义，双散列，就是产生冲突了，再进行一次散列，两次散列的散列函数不同，而是第一次散列的结果将作为第二次散列的<strong>key</strong>，也即$d_i$为$i \times h_2(key)$，其探测序列为$h_2(key),\ 2h_2(key),\ 3h_2(key), \ldots$，很明显，对任意的<strong>key</strong>，$h_2(key) \neq 0$，为保证所有的散列存储单元都可以被探测到，$h_2$选为$h_2(key) &#x3D; p - (key\ mod\ p)$，$p,\ TableSize$都是素数。</p>
+<h4 id="再散列"><a href="#再散列" class="headerlink" title="再散列"></a>再散列</h4><p>当散列表元素太多（即装填因子$\alpha$太大）时，查找效率会下降，实际最大装填因子一般取$0.5 \le \alpha \le 0.85 $，对应的解决办法就是加倍扩大散列表，这个过程就叫做**“再散列（Rehashing）”**，注意，再散列时，原先的散列序列不是简单的复制，而是要重新计算。</p>
+<h3 id="分离链接法"><a href="#分离链接法" class="headerlink" title="分离链接法"></a>分离链接法</h3><p>分离链接法最终产生的结构有点类似图的邻接表，其基本思想就是将相应位置上冲突的所有关键词存储在同一个单链表中，也就是说这种结构需要一个数组，并且数组内每个元素除了表示关键字还得有一个指针域，用来将链表串起来。</p>
+<h2 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h2><p>对于查找而言，衡量其效率的指标，依然是<strong>平均查找长度（ASL，分查找成功和不成功两种）</strong>，平均查找长度的计算方法要视具体的散列方法而定。另外，影响产生冲突多少有以下三个因素：</p>
+<ol>
+<li>散列函数是否军运</li>
+<li>处理冲突的方法</li>
+<li>散列表的装填因子$\alpha$</li>
+</ol>
+<p>下面直接给出其期望探测次数 p，不做深入的数学探讨。</p>
+<div class="note success">
+            <ul><li><strong>线性探测法：</strong><br>$p &#x3D;<br>\begin{cases} \frac{1} {2} [1+\frac{1} {(1-\alpha)^2}],<br>&amp; \text {对插入和不成功查找而言} \<br>\frac{1}{2}[1+\frac{1}{(1-\alpha)}],<br>&amp; \text {对成功查找而言}<br>\end{cases}$</li><li><strong>平方探测法：</strong><br>$p &#x3D;<br>\begin{cases} \frac{1} {(1-\alpha)},<br>&amp; \text {对插入和不成功查找而言} \<br>\frac{-1} {\alpha} ln(1-\alpha),<br>&amp; \text {对成功查找而言}<br>\end{cases}$</li><li><strong>分离链接法：</strong><br>$p &#x3D;<br>\begin{cases} \alpha + e^{-\alpha},<br>&amp; \text {对插入和不成功查找而言} \<br>1+ \frac{\alpha} {2},<br>&amp; \text {对成功查找而言}<br>\end{cases}$</li></ul>
+          </div>
+
+<p>根据上面的公式我们可以得出下面几点结论：</p>
+<div class="note primary">
+            <ol><li>当装填因子$\alpha &lt; 0.5$时，各种探测法的期望探测次数都不大</li><li>随着$\alpha$的增大，线性探测法的期望探测次数增加较快，<strong>不成功查找和插入操作</strong>的期望探测次数比<strong>成功查找</strong>的期望探测次数要大</li><li>合理的最大装填因子$\alpha$应该不超过<strong>0.85</strong></li></ol>
+          </div>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>散列查找的优点很明显，选择合适的散列函数，散列查找效率的期望是常数$O(1)$，它几乎与关键字的空间的大小$n$无关，也适合于关键字直接比较计算量过大的问题；但它是以<strong>较小的$\alpha$<strong>为前提，是一个以空间换时间的查找方法；另外，它对关键字的存储是随机的，不便于</strong>顺序查找</strong>关键字，也不适合于<strong>范围查找</strong>，或<strong>最大、最小值查找</strong>。</p>
+<p>开放定址法的存储效率很高，但是存在“聚集”现象；分离链接法是顺序存储和链式存储的结合，链表部分的存储效率和查找效率都比较低，关键字的删除不需要“懒惰删除（不断链，只标记为空）”，从而没有存储“垃圾”，但太小的$\alpha$可能导致空间浪费，大的$\alpha$又将付出更多的时间代价，且不均匀的链表长度会导致时间效率的严重下降。</p>
+<h1 id="Homework"><a href="#Homework" class="headerlink" title="Homework"></a>Homework</h1><h2 id="11-1-电话聊天狂人"><a href="#11-1-电话聊天狂人" class="headerlink" title="11-1 电话聊天狂人"></a>11-1 电话聊天狂人</h2><p>这个题姥姥已经讲过了，直接用姥姥的代码有点麻烦，借助 C++ 的 MAP 和散列的思想，可以很轻松的解决这个问题。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">2000000</span> + <span class="number">5</span>;</span><br><span class="line">map&lt;string, <span class="type">int</span>&gt; phonenum2num;</span><br><span class="line">map&lt;<span class="type">int</span>, string&gt; num2phonenum;</span><br><span class="line"><span class="type">int</span> times[maxn] = &#123; <span class="number">0</span> &#125;, n, index = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin &gt;&gt; n;</span><br><span class="line">	string num;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span> * n; i++) &#123;</span><br><span class="line">		cin &gt;&gt; num;</span><br><span class="line">		<span class="type">int</span> tmp = phonenum2num.<span class="built_in">find</span>(num)-&gt;second;</span><br><span class="line">		<span class="keyword">if</span> (!tmp) &#123;</span><br><span class="line">			phonenum2num[num] = index;</span><br><span class="line">			num2phonenum[index] = num;</span><br><span class="line">			times[index] = <span class="number">1</span>;</span><br><span class="line">			index++;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			times[tmp]++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> max = times[<span class="number">1</span>], maxindex = <span class="number">1</span>, count = <span class="number">1</span>;</span><br><span class="line">	string madman = num2phonenum.<span class="built_in">find</span>(<span class="number">1</span>)-&gt;second;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt; index; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (times[i] &gt; max) &#123;</span><br><span class="line">			max = times[i];</span><br><span class="line">			maxindex = i;</span><br><span class="line">			madman = num2phonenum.<span class="built_in">find</span>(i)-&gt;second;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (times[i] == max) &#123;</span><br><span class="line">			<span class="keyword">if</span> (num2phonenum.<span class="built_in">find</span>(i)-&gt;second &lt; num2phonenum.<span class="built_in">find</span>(maxindex)-&gt;second) &#123;</span><br><span class="line">				maxindex = i;</span><br><span class="line">				madman = num2phonenum.<span class="built_in">find</span>(i)-&gt;second;</span><br><span class="line">			&#125;</span><br><span class="line">			count++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (count == <span class="number">1</span>) cout &lt;&lt; madman &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; max;</span><br><span class="line">	<span class="keyword">else</span> cout &lt;&lt; madman &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; max &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; count;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">samples:</span></span><br><span class="line"><span class="comment">in:</span></span><br><span class="line"><span class="comment">4</span></span><br><span class="line"><span class="comment">13005711862 13588625832</span></span><br><span class="line"><span class="comment">13505711862 13088625832</span></span><br><span class="line"><span class="comment">13588625832 18087925832</span></span><br><span class="line"><span class="comment">15005713862 13588625832</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">13588625832 3</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="11-2-Hashing"><a href="#11-2-Hashing" class="headerlink" title="11-2 Hashing"></a>11-2 Hashing</h2><p>本题考察散列查找的冲突处理方法，题目很直白的告诉了处理冲突的方法是平方探测法，但题目要求的平方探测只会用正整数探测。这方面的知识，课上何老师已经讲的很清楚了，不过这个题的难点在于如何处理无法进行散列的数。</p>
+<p>由于题目告诉了只会用正整数探测，其实算是变相的告诉你了，只要经过散列函数得到的下标值大于散列表长度，就认为无法存放了，也就是说并不会循环试探，明白这点后就好办了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">20000</span> + <span class="number">10</span>;</span><br><span class="line"><span class="type">bool</span> hashTable[maxn] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isprime</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (n &lt;= <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="type">int</span> tmp = (<span class="type">int</span>)<span class="built_in">sqrt</span>(n);</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= tmp; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (n % i == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">nextprime</span><span class="params">(<span class="type">int</span> m)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (!<span class="built_in">isprime</span>(m)) m++;</span><br><span class="line">	<span class="keyword">return</span> m;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">hashfunc</span><span class="params">(<span class="type">int</span> num, <span class="type">int</span> hashkey)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> num % hashkey;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> m, n, tmp;</span><br><span class="line">	cin &gt;&gt; m &gt;&gt; n;</span><br><span class="line">	m = <span class="built_in">nextprime</span>(m);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">		cin &gt;&gt; tmp;</span><br><span class="line">		<span class="type">int</span> index = <span class="built_in">hashfunc</span>(tmp, m);</span><br><span class="line">		<span class="keyword">if</span> (hashTable[index] == <span class="literal">false</span>) &#123;</span><br><span class="line">			hashTable[index] = <span class="literal">true</span>;</span><br><span class="line">			<span class="keyword">if</span> (i == <span class="number">0</span>) cout &lt;&lt; index;</span><br><span class="line">			<span class="keyword">else</span> cout &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; index;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="type">int</span> step;</span><br><span class="line">			<span class="keyword">for</span> (step = <span class="number">1</span>; step &lt; m; step++) &#123;</span><br><span class="line">				index = <span class="built_in">hashfunc</span>(tmp + step * step, m);</span><br><span class="line">				<span class="keyword">if</span> (hashTable[index] == <span class="literal">false</span>) &#123;</span><br><span class="line">					hashTable[index] = <span class="literal">true</span>;</span><br><span class="line">					<span class="keyword">if</span> (i == <span class="number">0</span>) cout &lt;&lt; index;</span><br><span class="line">					<span class="keyword">else</span> cout &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; index;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (step &gt;= m) &#123;</span><br><span class="line">				<span class="keyword">if</span> (i &gt; <span class="number">0</span>) cout &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">				cout &lt;&lt; <span class="string">&#x27;-&#x27;</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">samples:</span></span><br><span class="line"><span class="comment">in:</span></span><br><span class="line"><span class="comment">4 4</span></span><br><span class="line"><span class="comment">10 6 4 15</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">0 1 4 -</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">in:</span></span><br><span class="line"><span class="comment">5 5</span></span><br><span class="line"><span class="comment">10 6 4 15 25</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">0 1 4 - -</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">in:</span></span><br><span class="line"><span class="comment">5 5</span></span><br><span class="line"><span class="comment">5 10 6 4 15 </span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">0 1 2 4 -</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">in:</span></span><br><span class="line"><span class="comment">1 1</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="11-3-QQ-账户的申请与登陆"><a href="#11-3-QQ-账户的申请与登陆" class="headerlink" title="11-3 QQ 账户的申请与登陆"></a>11-3 QQ 账户的申请与登陆</h2><p>这题用 MAP 简直太容易了，要是全部自己写，代码量略大。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">map&lt;string, string&gt; qqnum;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> n;</span><br><span class="line">	<span class="type">char</span> ope;</span><br><span class="line">	cin &gt;&gt; n;</span><br><span class="line">	string tmp_num, tmp_pass;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">		cin &gt;&gt; ope &gt;&gt; tmp_num &gt;&gt; tmp_pass;</span><br><span class="line">		map&lt;string, string&gt;::iterator it;</span><br><span class="line">		it = qqnum.<span class="built_in">find</span>(tmp_num);</span><br><span class="line">		<span class="keyword">switch</span> (ope) &#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">&#x27;L&#x27;</span>: &#123;</span><br><span class="line">				<span class="keyword">if</span> (it == qqnum.<span class="built_in">end</span>()) &#123;</span><br><span class="line">					cout &lt;&lt; <span class="string">&quot;ERROR: Not Exist&quot;</span> &lt;&lt; endl;</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">					<span class="keyword">if</span> (it-&gt;second == tmp_pass) &#123;</span><br><span class="line">						cout &lt;&lt; <span class="string">&quot;Login: OK&quot;</span> &lt;&lt; endl;</span><br><span class="line">					&#125; <span class="keyword">else</span> cout &lt;&lt; <span class="string">&quot;ERROR: Wrong PW&quot;</span> &lt;&lt; endl;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">&#x27;N&#x27;</span>: &#123;</span><br><span class="line">				<span class="keyword">if</span> (it != qqnum.<span class="built_in">end</span>()) &#123;</span><br><span class="line">					cout &lt;&lt; <span class="string">&quot;ERROR: Exist&quot;</span> &lt;&lt; endl;</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">					qqnum[tmp_num] = tmp_pass;</span><br><span class="line">					cout &lt;&lt; <span class="string">&quot;New: OK&quot;</span> &lt;&lt; endl;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">default</span>: <span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">samples:</span></span><br><span class="line"><span class="comment">in:</span></span><br><span class="line"><span class="comment">5</span></span><br><span class="line"><span class="comment">L 1234567890 myQQ@qq.com</span></span><br><span class="line"><span class="comment">N 1234567890 myQQ@qq.com</span></span><br><span class="line"><span class="comment">N 1234567890 myQQ@qq.com</span></span><br><span class="line"><span class="comment">L 1234567890 myQQ@qq</span></span><br><span class="line"><span class="comment">L 1234567890 myQQ@qq.com</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">ERROR: Not Exist</span></span><br><span class="line"><span class="comment">New: OK</span></span><br><span class="line"><span class="comment">ERROR: Exist</span></span><br><span class="line"><span class="comment">ERROR: Wrong PW</span></span><br><span class="line"><span class="comment">Login: OK</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="11-4-Hashing-Hard-Version"><a href="#11-4-Hashing-Hard-Version" class="headerlink" title="11-4 Hashing - Hard Version"></a>11-4 Hashing - Hard Version</h2><p>这个题的意思很直观，就是给定一个用线性探测法构建的散列表，然后要根据这个得到数字序列的输入顺序。</p>
+<p>这个题看起来很容易，其实有点难想。因为就样例而言，33 和 1 都有可能是第一个输入的，该怎么确定数字的输入顺序其实就是难点。</p>
+<p>一般而言，做一道题时，想到的都是跟这个题相关的知识。但是这个题，确定输入顺序其实需要用到拓扑排序的知识。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> maxn = <span class="number">1000</span> + <span class="number">3</span>;</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; AdjL[maxn];</span><br><span class="line"><span class="type">int</span> n, hashTable[maxn], elements = <span class="number">0</span>;</span><br><span class="line"><span class="type">bool</span> isvis[maxn] = &#123;<span class="literal">false</span>&#125;;</span><br><span class="line">map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; value2index;</span><br><span class="line">map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; index2value;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">toposort</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> indegree[maxn] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> v = <span class="number">0</span>; v &lt; n; v++) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> w = <span class="number">0</span>; w &lt; AdjL[v].<span class="built_in">size</span>(); w++) &#123;</span><br><span class="line">			indegree[AdjL[v][w]]++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	priority_queue&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;, greater&lt;<span class="type">int</span>&gt; &gt; q;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span>(indegree[i] == <span class="number">0</span> &amp;&amp; hashTable[i] &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">			q.<span class="built_in">push</span>(hashTable[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">		<span class="type">int</span> tmp = q.<span class="built_in">top</span>();</span><br><span class="line">		q.<span class="built_in">pop</span>();</span><br><span class="line">		cout &lt;&lt; tmp;</span><br><span class="line">		<span class="keyword">if</span>(count &lt; elements - <span class="number">1</span>) &#123;</span><br><span class="line">			cout &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">			count++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="type">int</span> v = value2index[tmp];</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> w = <span class="number">0</span>; w &lt; AdjL[v].<span class="built_in">size</span>(); w++) &#123;</span><br><span class="line">			indegree[AdjL[v][w]]--;</span><br><span class="line">			<span class="keyword">if</span>(indegree[AdjL[v][w]] == <span class="number">0</span>) q.<span class="built_in">push</span>(hashTable[AdjL[v][w]]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cin &gt;&gt; n;</span><br><span class="line">	<span class="built_in">memset</span>(hashTable, <span class="number">-1</span>, <span class="built_in">sizeof</span>(hashTable));</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">		cin &gt;&gt; hashTable[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span>(hashTable[i] &lt; <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">		value2index[hashTable[i]] = i;</span><br><span class="line">		index2value[i] = hashTable[i];</span><br><span class="line">		elements++;</span><br><span class="line">		<span class="type">int</span> tmp = hashTable[i];</span><br><span class="line">		<span class="type">int</span> index = tmp % n;</span><br><span class="line">		<span class="keyword">if</span>(hashTable[index] == hashTable[i] &amp;&amp; index == i) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">else</span> &#123;	</span><br><span class="line">			<span class="type">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">			queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">			<span class="keyword">for</span>(; index &lt; n || flag; index++) &#123;</span><br><span class="line">				<span class="keyword">if</span>(flag &amp;&amp; index &gt;= n) &#123;</span><br><span class="line">					index %= n;</span><br><span class="line">					flag = <span class="literal">false</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">if</span>(hashTable[index] == tmp) <span class="keyword">break</span>;</span><br><span class="line">				q.<span class="built_in">push</span>(index);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span>(!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">				<span class="type">int</span> front = q.<span class="built_in">front</span>();</span><br><span class="line">				q.<span class="built_in">pop</span>();</span><br><span class="line">				AdjL[front].<span class="built_in">push_back</span>(index); </span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">toposort</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<hr>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>bachzart
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://bachzart.github.io/2020/09/06/ZJU-DS-11-%E6%95%A3%E5%88%97%E6%9F%A5%E6%89%BE/" title="ZJU_DS_11-散列查找">http://bachzart.github.io/2020/09/06/ZJU-DS-11-散列查找/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ZJU-DS/" rel="tag"># ZJU_DS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/05/ZJU-DS-10-%E6%8E%92%E5%BA%8F%EF%BC%88%E4%B8%8B%EF%BC%89/" rel="prev" title="ZJU_DS_10-排序（下）">
+      <i class="fa fa-chevron-left"></i> ZJU_DS_10-排序（下）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/15/ZJU-DS-12-KMP/" rel="next" title="ZJU_DS_12-KMP">
+      ZJU_DS_12-KMP <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E5%AD%90"><span class="nav-number">1.</span> <span class="nav-text">引子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%A3%E5%88%97%E6%9F%A5%E6%89%BE"><span class="nav-number">2.</span> <span class="nav-text">散列查找</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%8F%8F%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">抽象数据类型描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3"><span class="nav-number">2.2.</span> <span class="nav-text">基本思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">散列函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E5%85%B3%E9%94%AE%E8%AF%8D"><span class="nav-number">2.3.1.</span> <span class="nav-text">数字关键词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E5%85%B3%E9%94%AE%E8%AF%8D"><span class="nav-number">2.3.2.</span> <span class="nav-text">字符关键词</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95"><span class="nav-number">2.4.</span> <span class="nav-text">冲突处理方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E6%94%BE%E5%AE%9A%E5%9D%80%E6%B3%95"><span class="nav-number">2.4.1.</span> <span class="nav-text">开放定址法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%8E%A2%E6%B5%8B"><span class="nav-number">2.4.1.1.</span> <span class="nav-text">线性探测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%B3%E6%96%B9%E6%8E%A2%E6%B5%8B"><span class="nav-number">2.4.1.2.</span> <span class="nav-text">平方探测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8C%E6%95%A3%E5%88%97"><span class="nav-number">2.4.1.3.</span> <span class="nav-text">双散列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%8D%E6%95%A3%E5%88%97"><span class="nav-number">2.4.1.4.</span> <span class="nav-text">再散列</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%A6%BB%E9%93%BE%E6%8E%A5%E6%B3%95"><span class="nav-number">2.4.2.</span> <span class="nav-text">分离链接法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="nav-number">2.5.</span> <span class="nav-text">性能分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.6.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Homework"><span class="nav-number">3.</span> <span class="nav-text">Homework</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11-1-%E7%94%B5%E8%AF%9D%E8%81%8A%E5%A4%A9%E7%8B%82%E4%BA%BA"><span class="nav-number">3.1.</span> <span class="nav-text">11-1 电话聊天狂人</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-2-Hashing"><span class="nav-number">3.2.</span> <span class="nav-text">11-2 Hashing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-3-QQ-%E8%B4%A6%E6%88%B7%E7%9A%84%E7%94%B3%E8%AF%B7%E4%B8%8E%E7%99%BB%E9%99%86"><span class="nav-number">3.3.</span> <span class="nav-text">11-3 QQ 账户的申请与登陆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-4-Hashing-Hard-Version"><span class="nav-number">3.4.</span> <span class="nav-text">11-4 Hashing - Hard Version</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bachzart"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">bachzart</p>
+  <div class="site-description" itemprop="description">我即世界，世界即我</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bachzart" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bachzart" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bachzart@163.com" title="E-Mail → mailto:bachzart@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="/about/" title="&#x2F;about&#x2F;">About This Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/Book-List/" title="&#x2F;Book-List&#x2F;">Book List</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.sudoku.name/index.php?ln=cn&ref=44355" title="https:&#x2F;&#x2F;www.sudoku.name&#x2F;index.php?ln&#x3D;cn&amp;ref&#x3D;44355" rel="noopener" target="_blank">Soduku Game</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://2048game.com/" title="https:&#x2F;&#x2F;2048game.com&#x2F;" rel="noopener" target="_blank">2048 Game</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bachzart</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

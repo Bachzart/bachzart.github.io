@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/acoustic_guitar_128px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/acoustic_guitar_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/acoustic_guitar_16px.png">
+  <link rel="mask-icon" href="/uploads/acoustic_guitar.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https:/fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bachzart.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="💡 理解移动语义后，趁热打铁，继续理解完美转发。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解完美转发">
+<meta property="og:url" content="http://bachzart.github.io/2025/07/14/%E7%90%86%E8%A7%A3%E5%AE%8C%E7%BE%8E%E8%BD%AC%E5%8F%91/index.html">
+<meta property="og:site_name" content="bachzart&#39;s Blog">
+<meta property="og:description" content="💡 理解移动语义后，趁热打铁，继续理解完美转发。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-14T14:42:18.000Z">
+<meta property="article:modified_time" content="2026-05-09T09:26:52.803Z">
+<meta property="article:author" content="bachzart">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="perfect_forwarding">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://bachzart.github.io/2025/07/14/%E7%90%86%E8%A7%A3%E5%AE%8C%E7%BE%8E%E8%BD%AC%E5%8F%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>理解完美转发 | bachzart's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">bachzart's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">133</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/bachzart" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2025/07/14/%E7%90%86%E8%A7%A3%E5%AE%8C%E7%BE%8E%E8%BD%AC%E5%8F%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="我即世界，世界即我">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          理解完美转发
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-07-14 22:42:18" itemprop="dateCreated datePublished" datetime="2025-07-14T22:42:18+08:00">2025-07-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-05-09 17:26:52" itemprop="dateModified" datetime="2026-05-09T17:26:52+08:00">2026-05-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>💡 理解移动语义后，趁热打铁，继续理解完美转发。</p>
+<span id="more"></span>
+
+<p>在<a href="https://bachzart.github.io/2025/07/07/%E7%9C%9F%E6%AD%A3%E7%90%86%E8%A7%A3%E5%BC%95%E7%94%A8/#more">真正理解引用</a>这篇 blog 中，我们在补充内容中简单地提到了转发引用和引用折叠的概念。<br>实际上，所谓的<strong>完美转发（Perfect Forwarding）就是基于转发引用（Forwarding references）、引用折叠（Reference collapsing）和类型推导（这不是这篇 blog 的重点）实现的。</strong><br>那么，我们先回忆一下转发引用和引用折叠。</p>
+<h1 id="转发引用"><a href="#转发引用" class="headerlink" title="转发引用"></a>转发引用</h1><p>**转发引用（Forwarding references）是一种特殊的引用，它保留了函数实参的值类别，从而使用<code>std::forward</code>转发它。**注意这句话中的隐藏信息：</p>
+<ol>
+<li>转发引用与右值引用的地位是一样的，也是一种特殊的引用。</li>
+<li>它保留了函数实参的值类别，注意是函数实参。</li>
+<li>需要使用<code>std::forward</code>来转发它。</li>
+</ol>
+<p>按照这些信息，我们可以完善一下在之前文章中给出的示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里必须是函数模板，T 必须是模板类型参数</span></span><br><span class="line"><span class="comment">// 如果是类模板，则不存在这样的情况</span></span><br><span class="line"><span class="comment">// 因为类模板的参数在一开始定义的时候就被使用者显式指定了比如：std::vector&lt;int&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(T&amp;&amp; param)</span> </span>&#123; <span class="comment">// 此时 param 是一个转发引用</span></span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">gfunc</span>(std::forward&lt;T&gt;(x));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或者：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这是 C++14 的特性</span></span><br><span class="line"><span class="keyword">auto</span> lambda = [](<span class="keyword">auto</span>&amp;&amp; param) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 这是 C++20 的特性</span></span><br><span class="line"><span class="type">void</span> <span class="built_in">func</span>(<span class="keyword">auto</span>&amp;&amp; param) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="引用折叠"><a href="#引用折叠" class="headerlink" title="引用折叠"></a>引用折叠</h1><p>我们在之前的 blog 中简单的说过，引用折叠（Reference collapsing）是为了解决引用的引用是什么而存在的，并举了一个简单的例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> T = <span class="type">int</span>&amp;;</span><br><span class="line">T&amp;&amp; t; <span class="comment">// 等价于 int&amp; &amp;&amp; t，进而等价于 int&amp; t</span></span><br></pre></td></tr></table></figure>
+<p>其实，这个例子只解释了一半。实际上，引用折叠要解决的问题有两个：</p>
+<ol>
+<li><code>typedef</code>或<code>using</code>自定义的类型形成的引用的引用，比如上面的例子。</li>
+<li>模板参数自动推导出来的类型形成的引用的引用，比如转发引用中的模板例子中的模板类型参数<code>T</code>，编译器可能推导出<code>&amp;</code>，也可能推导出<code>&amp;&amp;</code>。</li>
+</ol>
+<p>对此 C++11 的解决方案就是引用折叠，对应的行为特征就是我们前面提到的表格，也一并抄过来：</p>
+<table>
+<thead>
+<tr>
+<th align="left">模板类型</th>
+<th align="center">T 的类型</th>
+<th align="center">最终类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">T&amp;</td>
+<td align="center">R</td>
+<td align="center">R&amp;</td>
+</tr>
+<tr>
+<td align="left">T&amp;</td>
+<td align="center">R&amp;</td>
+<td align="center">R&amp;</td>
+</tr>
+<tr>
+<td align="left">T&amp;</td>
+<td align="center">R&amp;&amp;</td>
+<td align="center">R&amp;</td>
+</tr>
+<tr>
+<td align="left">T&amp;&amp;</td>
+<td align="center">R</td>
+<td align="center">R&amp;&amp;</td>
+</tr>
+<tr>
+<td align="left">T&amp;&amp;</td>
+<td align="center">R&amp;</td>
+<td align="center">R&amp;</td>
+</tr>
+<tr>
+<td align="left">T&amp;&amp;</td>
+<td align="center">R&amp;&amp;</td>
+<td align="center">R&amp;&amp;</td>
+</tr>
+</tbody></table>
+<p>在回顾完之前的内容后，我们再开始看完美转发。🧐</p>
+<h1 id="为什么需要完美转发？"><a href="#为什么需要完美转发？" class="headerlink" title="为什么需要完美转发？"></a>为什么需要完美转发？</h1><p>还是一样，我们需要先思考一下为什么需要完美转发。其实，答案就是为了<strong>将传递给函数模板的函数实参以其原本的值类别转发给其他函数</strong>。<br>下面我们举一个简单的例子，逐步分析。一开始，我们的需求是这样的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span>&amp; i)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;lvalue&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span>&amp;&amp; i)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;rvalue&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dofunc</span><span class="params">(<span class="type">int</span>&amp; i)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">func</span>(i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dofunc</span><span class="params">(<span class="type">int</span>&amp;&amp; i)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">func</span>(i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">dofunc</span>(i);</span><br><span class="line">    <span class="built_in">dofunc</span>(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">lvalue</span></span><br><span class="line"><span class="comment">lvalue</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>在上述代码中，我们有一个函数<code>func</code>和它的重载版本，不同之处在于一个是以左值引用为参数，另一个是以右值引用为参数，期望输出传入值的值类别。然后，我们用类似的方法得到了两个相似的函数且也构成重载的同名函数<code>dofunc</code>，作用是来调用<code>func</code>。</p>
+<h1 id="使用模板简化"><a href="#使用模板简化" class="headerlink" title="使用模板简化"></a>使用模板简化</h1><p>可是，上述代码的输出结果并不符合我们的预期，而且写了很多不必要的重复代码，我们可以先考虑使用模板来简化，并结合我们上面提到的转发引用，就可以得到：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span>&amp; i)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;lvalue&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span>&amp;&amp; i)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;rvalue&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dofunc</span><span class="params">(T&amp;&amp; i)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">func</span>(i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">dofunc</span>(i);</span><br><span class="line">    <span class="built_in">dofunc</span>(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">lvalue</span></span><br><span class="line"><span class="comment">lvalue</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>在上述代码中，我们把<code>dofunc</code>函数变为了一个函数模板，这样即便有新的<code>func</code>函数，我们也不需要改动<code>dofunc</code>。可最关键的问题——输出结果不合预期，仍然没有解决。</p>
+<h1 id="问题产生的原因"><a href="#问题产生的原因" class="headerlink" title="问题产生的原因"></a>问题产生的原因</h1><p>观察输出结果，我们发现，不管传入的是左值<code>i</code>还是纯右值<code>10</code>，最终输出的结果都是<code>lvalue</code>。这意味着，我们最终只调用了<code>void func(int&amp; i)</code>这个函数。可我们明明给函数传递的值类别是正确的啊？为什么不会调用呢？<br>实际上，我们唯一能确定的就是值类别一定发生了改变，且都成了左值，所以都调用的第一个<code>func</code>函数。<br>现在我们来分析究竟是哪里发生了改变，首先我们知道，这里是一个函数模板，模板会自动推导参数的类型。在上面的例子中：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dofunc</span>(i); <span class="comment">// 会把 T 推导为 int&amp;</span></span><br><span class="line"><span class="built_in">dofunc</span>(<span class="number">10</span>); <span class="comment">// 会把 T 推导为 int</span></span><br></pre></td></tr></table></figure>
+<p>关于模板参数类型自动推导的话题，这里不做深究，我们只需要知道**编译器在做类型推导时，会将绑定左值的 T 推导为左值引用类型，将绑定右值的 T 推导为原基本类型。**那么，最终我们的函数模板中<code>i</code>的类型就是：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dofunc</span>(i); <span class="comment">// T = int&amp;, i = int&amp; &amp;&amp;</span></span><br><span class="line"><span class="built_in">dofunc</span>(<span class="number">10</span>); <span class="comment">// T = int, i = int &amp;&amp;</span></span><br></pre></td></tr></table></figure>
+<p>再按照我们上面提到的引用折叠的规则，继续推导可得：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dofunc</span>(i); <span class="comment">// T = int&amp; =&gt; i = int&amp; &amp;&amp; = int&amp;</span></span><br><span class="line"><span class="built_in">dofunc</span>(<span class="number">10</span>); <span class="comment">// T = int =&gt; i = int &amp;&amp; = int&amp;&amp;</span></span><br></pre></td></tr></table></figure>
+<p>看着好像很完美，最终一个类型是左值引用，一个是右值引用，按理说应该是可以输出符合预期的结果的。为什么还是有问题呢？再回顾前面讨论的<a href="https://bachzart.github.io/2025/07/07/%E5%B7%A6%E5%80%BC%E4%B8%8E%E5%8F%B3%E5%80%BC/#more">左值与右值</a>，我们知道由右值引用变量组成的表达式也是左值表达式，所以我们在<code>dofunc</code>中传递给<code>func</code>的右值引用变量依然是一个左值，最终调用的还是左值版本的<code>func</code>。<br>现在，问题我们已经清楚了，如何解决呢？</p>
+<h1 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h1><p>答案很简单，就是使用<code>std::forward</code>，正如我们在转发引用中举的例子那样：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span>&amp; i)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;lvalue&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span>&amp;&amp; i)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;rvalue&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dofunc</span><span class="params">(T&amp;&amp; i)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">func</span>(std::forward&lt;T&gt;(i));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">dofunc</span>(i);</span><br><span class="line">    <span class="built_in">dofunc</span>(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">lvalue</span></span><br><span class="line"><span class="comment">rvalue</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>现在，我们就可以得到符合预期的结果了。🎉<br>而且，回过头来思考，我们那个没有使用模板的例子，其实也是因为值类别不匹配导致的错误结果，我们也可以做一些简单的修改，从而得到正确的结果：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span>&amp; i)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;lvalue&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span>&amp;&amp; i)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;rvalue&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dofunc</span><span class="params">(<span class="type">int</span>&amp; i)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">func</span>(i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dofunc</span><span class="params">(<span class="type">int</span>&amp;&amp; i)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 这里是因为右值引用变量组成的表达式也是左值表达式</span></span><br><span class="line">    <span class="comment">// 所以最开始还是调用的 func(int&amp;)</span></span><br><span class="line"><span class="comment">//    func(i);</span></span><br><span class="line">    <span class="comment">// 下面两种方法都可以得到需要的结果</span></span><br><span class="line">    <span class="built_in">func</span>(std::<span class="built_in">move</span>(i));</span><br><span class="line">    <span class="built_in">func</span>(std::forward&lt;<span class="type">int</span>&amp;&amp;&gt;(i));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">dofunc</span>(i);</span><br><span class="line">    <span class="built_in">dofunc</span>(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">lvalue</span></span><br><span class="line"><span class="comment">rvalue</span></span><br><span class="line"><span class="comment">rvalue</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>在上述代码中，我们分别<code>std::move</code>和<code>std::forward</code>得到了预期结果，这两种方式都可以。同时，这两个函数的用法，目前我们也都有了一定的认识，就不再赘述了。<br>到此，我们的问题就算是完全解决了。😴</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>现在再来总结一下所有的内容：</p>
+<ol>
+<li><strong>我们明白了完美转发至少由三部分构成：转发引用、引用折叠和<code>std::forward</code>。</strong></li>
+<li><strong>我们明白了转发引用、引用折叠的由来和用途，知道了这俩究竟是什么。</strong></li>
+<li><strong>我们明白了完美转发的用途（或者说意义），那就是<em>将传递给函数模板的函数实参以其原本的值类别转发给其他函数</em>。</strong></li>
+</ol>
+<p>好了，到此为止，这篇 blog 到这里就结束了，理论已经分析完毕，剩下的就是实践了。</p>
+<hr>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>bachzart
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://bachzart.github.io/2025/07/14/%E7%90%86%E8%A7%A3%E5%AE%8C%E7%BE%8E%E8%BD%AC%E5%8F%91/" title="理解完美转发">http://bachzart.github.io/2025/07/14/理解完美转发/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C-C/" rel="tag"># C/C++</a>
+              <a href="/tags/perfect-forwarding/" rel="tag"># perfect_forwarding</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/07/14/%E4%B8%89%E4%BA%94%E6%B3%95%E5%88%99/" rel="prev" title="三五法则">
+      <i class="fa fa-chevron-left"></i> 三五法则
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/07/22/%E6%9C%89%E5%85%B3-pthread-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AC%94%E8%AE%B0/" rel="next" title="有关 pthread 的一些笔记">
+      有关 pthread 的一些笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BD%AC%E5%8F%91%E5%BC%95%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">转发引用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E6%8A%98%E5%8F%A0"><span class="nav-number">2.</span> <span class="nav-text">引用折叠</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%AE%8C%E7%BE%8E%E8%BD%AC%E5%8F%91%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">为什么需要完美转发？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A8%A1%E6%9D%BF%E7%AE%80%E5%8C%96"><span class="nav-number">4.</span> <span class="nav-text">使用模板简化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BA%A7%E7%94%9F%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">5.</span> <span class="nav-text">问题产生的原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">解决问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bachzart"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">bachzart</p>
+  <div class="site-description" itemprop="description">我即世界，世界即我</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bachzart" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bachzart" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bachzart@163.com" title="E-Mail → mailto:bachzart@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="/about/" title="&#x2F;about&#x2F;">About This Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/Book-List/" title="&#x2F;Book-List&#x2F;">Book List</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.sudoku.name/index.php?ln=cn&ref=44355" title="https:&#x2F;&#x2F;www.sudoku.name&#x2F;index.php?ln&#x3D;cn&amp;ref&#x3D;44355" rel="noopener" target="_blank">Soduku Game</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://2048game.com/" title="https:&#x2F;&#x2F;2048game.com&#x2F;" rel="noopener" target="_blank">2048 Game</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bachzart</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

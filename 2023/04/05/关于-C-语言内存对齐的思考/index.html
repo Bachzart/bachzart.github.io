@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/acoustic_guitar_128px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/acoustic_guitar_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/acoustic_guitar_16px.png">
+  <link rel="mask-icon" href="/uploads/acoustic_guitar.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https:/fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bachzart.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="内存对齐又是 C 语言的经典问题了...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于 C 语言内存对齐的思考">
+<meta property="og:url" content="http://bachzart.github.io/2023/04/05/%E5%85%B3%E4%BA%8E-C-%E8%AF%AD%E8%A8%80%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E7%9A%84%E6%80%9D%E8%80%83/index.html">
+<meta property="og:site_name" content="bachzart&#39;s Blog">
+<meta property="og:description" content="内存对齐又是 C 语言的经典问题了...">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-04-05T06:28:23.000Z">
+<meta property="article:modified_time" content="2026-05-09T09:26:52.791Z">
+<meta property="article:author" content="bachzart">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="memory_alignment">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://bachzart.github.io/2023/04/05/%E5%85%B3%E4%BA%8E-C-%E8%AF%AD%E8%A8%80%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E7%9A%84%E6%80%9D%E8%80%83/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>关于 C 语言内存对齐的思考 | bachzart's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">bachzart's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">133</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/bachzart" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2023/04/05/%E5%85%B3%E4%BA%8E-C-%E8%AF%AD%E8%A8%80%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E7%9A%84%E6%80%9D%E8%80%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="我即世界，世界即我">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          关于 C 语言内存对齐的思考
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-04-05 14:28:23" itemprop="dateCreated datePublished" datetime="2023-04-05T14:28:23+08:00">2023-04-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-05-09 17:26:52" itemprop="dateModified" datetime="2026-05-09T17:26:52+08:00">2026-05-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>内存对齐又是 C 语言的经典问题了...</p>
+<span id="more"></span>
+
+<h1 id="intro"><a href="#intro" class="headerlink" title="intro"></a>intro</h1><p>首先应该明确的是**内存对齐（Memory alignment）**是一个概念，不能把它仅仅局限在 C 语言中（尽管总是会出现在 C 语言面试题中😂），<strong>它其实是一种和硬件相关的计算机系统结构设计思想，本质就是空间换时间</strong>。<br>其次，与其说内存对齐是一个很难理解的概念，不如说是一个很麻烦的概念。换句话说，只要对齐的过程理清楚了，就不难了。<br>当然了，本篇文章不会深入的讨论这些理论，还是重点介绍 C 语言中和内存对齐相关的知识。</p>
+<h1 id="struct"><a href="#struct" class="headerlink" title="struct"></a>struct</h1><p>结构体（struct）是一种构造类型，其对齐规则如下：</p>
+<ol>
+<li><strong>结构体中，第一个数据成员放在 offset 为 0 的地方，以后每个数据成员按其类型大小和默认对齐参数（32 位系统默认按照 4 字节对齐，64 位系统默认按照 8 字节对齐）中较小的一个对齐，且需要满足<code>addr % size == 0</code>，其中<code>addr</code>是当前数据成员的起始地址，<code>size</code>是当前数据成员的对齐值，否则补空直至满足条件。</strong></li>
+<li><strong>结构体本身也需要对齐，最终<code>sizeof</code>的结果必须是系统默认的对齐长度和成员中最长类型二者之中最小值的整数倍。</strong></li>
+<li><strong>如果存在结构体嵌套，则内层的结构体成员默认按照规则 1 进行对齐。</strong></li>
+</ol>
+<p>接下来，通过一些的例子来理解这些规则。</p>
+<figure class="highlight c"><figcaption><span>eg1</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> c1;</span><br><span class="line">    <span class="type">short</span> s;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;sizeof(struct A) = %d\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> A));</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">A</span> <span class="title">a</span>;</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;a.c1 = %p\n&quot;</span>, &amp;a.c1);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;a.s = %p\n&quot;</span>, &amp;a.s);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">sizeof(struct A) = 4</span></span><br><span class="line"><span class="comment">&amp;a.c1 = 000000834ddffbcc</span></span><br><span class="line"><span class="comment">&amp;a.s = 000000834ddffbce</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>这个例子按照规则 1 理解即可。</p>
+<figure class="highlight c"><figcaption><span>eg2</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> c1;</span><br><span class="line">    <span class="type">short</span> s;</span><br><span class="line">    <span class="type">char</span> c2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;sizeof(struct A) = %d\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> A));</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">A</span> <span class="title">a</span>;</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;a.c1 = %p\n&quot;</span>, &amp;a.c1);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;a.s = %p\n&quot;</span>, &amp;a.s);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;a.c2 = %p\n&quot;</span>, &amp;a.c2);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">sizeof(struct A) = 6</span></span><br><span class="line"><span class="comment">&amp;a.c1 = 000000016c7ffb3a</span></span><br><span class="line"><span class="comment">&amp;a.s = 000000016c7ffb3c</span></span><br><span class="line"><span class="comment">&amp;a.c2 = 000000016c7ffb3e</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>这个例子需要用规则 1 和规则 2 来理解，<code>c1</code>只需要一个字节，但<code>s</code>需要 2 个字节，而<code>000000016c7ffb3b % 2 != 0</code>，所以补 1 个字节，故<code>s</code>从<code>000000016c7ffb3c</code>开始存；对应的，<code>c2</code>按照顺序存储在<code>000000016c7ffb3e</code>，但由于此时结构体的总大小是 5，整个结构体的大小必须要是 2（这个结构体的对齐值）的倍数，所以又补齐了 1 个字节，最终的大小就是 6。</p>
+<figure class="highlight c"><figcaption><span>eg3</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> c1;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">double</span> d;</span><br><span class="line">    <span class="type">char</span> c2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">char</span> c1;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">A</span> <span class="title">sa</span>;</span></span><br><span class="line">    <span class="type">char</span> c2;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;sizeof(struct A) = %d\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> A));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;sizeof(struct B) = %d\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> B));</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">B</span> <span class="title">b</span>;</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;b.a = %p\n&quot;</span>, &amp;b.a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;b.c1 = %p\n&quot;</span>, &amp;b.c1);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;b.sa = %p\n&quot;</span>, &amp;b.sa);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;b.sa.c1 = %p\n&quot;</span>, &amp;b.sa.c1);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;b.sa.i = %p\n&quot;</span>, &amp;b.sa.i);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;b.sa.d = %p\n&quot;</span>, &amp;b.sa.d);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;b.sa.c2 = %p\n&quot;</span>, &amp;b.sa.c2);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;&amp;b.c2 = %p\n&quot;</span>, &amp;b.c2);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">sizeof(struct A) = 24</span></span><br><span class="line"><span class="comment">sizeof(struct B) = 40</span></span><br><span class="line"><span class="comment">&amp;b.a = 0000003dd87ff6a0</span></span><br><span class="line"><span class="comment">&amp;b.c1 = 0000003dd87ff6a4</span></span><br><span class="line"><span class="comment">&amp;b.sa = 0000003dd87ff6a8</span></span><br><span class="line"><span class="comment">&amp;b.sa.c1 = 0000003dd87ff6a8</span></span><br><span class="line"><span class="comment">&amp;b.sa.i = 0000003dd87ff6ac</span></span><br><span class="line"><span class="comment">&amp;b.sa.d = 0000003dd87ff6b0</span></span><br><span class="line"><span class="comment">&amp;b.sa.c2 = 0000003dd87ff6b8</span></span><br><span class="line"><span class="comment">&amp;b.c2 = 0000003dd87ff6c0</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>这个例子需要用规则 1、规则 2 和规则 3 来理解。首先在<code>struct A</code>中，<code>b.sa.c2</code>放在第 17 个地址处，为了满足规则 3，又补了 7 个字节，所以<code>sizeof(struct A)</code>最终结果是 24；而<code>b.sa.c1</code>和<code>b.sa.i</code>只需要满足<code>addr % size == 0</code>（规则 1）即可；最后在<code>struct B</code>中，<code>b.c2</code>放在第 33 个地址处，为了满足规则 2，又补了 7 个字节。</p>
+<h1 id="union"><a href="#union" class="headerlink" title="union"></a>union</h1><p>在<code>union</code>关键字中，<strong>其实没有“对齐”这个概念，但是有“内存”的概念（实际上，C 语言总是与内存联系紧密）</strong>，相比于<code>struct</code>而言，<code>union</code>关键字的内存规则要简单上许多。另外，之所以会把<code>union</code>的内容放在内存对齐这里，也是为了与<code>struct</code>进行对比，更容易熟悉二者的联系与差别。</p>
+<p><code>union</code>的规则如下：</p>
+<ol>
+<li><strong><code>union</code>中能够定义多个成员，整个<code>union</code>的大小由最大的成员的大小决定</strong>。</li>
+<li><strong><code>union</code>成员共享同一块大小的内存，一次仅仅能使用当中的一个成员</strong>。</li>
+<li><strong>对某一个成员赋值，会覆盖掉其它成员的值。这是由于这些变量共享一块内存，但当成员所占字节数不一致时，仅仅会覆盖对应字节上的值，比如对<code>char</code>成员赋值并不会把整个<code>int</code>成员覆盖掉，因为<code>char</code>只占一个字节，而<code>int</code>占四个字节</strong>。</li>
+<li><strong><code>union</code>的存放顺序是全部成员都从低地址开始存放的</strong>。</li>
+</ol>
+<p>还是直接看代码来理解：</p>
+<figure class="highlight c"><figcaption><span>eg4</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">union</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> c;</span><br><span class="line">    <span class="type">short</span> i;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">union</span> <span class="title">B</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">float</span> f;</span><br><span class="line">    <span class="type">double</span> d;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;sizeof(union A) = %d\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="keyword">union</span> A));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;sizeof(union B) = %d\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="keyword">union</span> B));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">sizeof(union A) = 2</span></span><br><span class="line"><span class="comment">sizeof(union B) = 8</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>从输出结果看，<code>union</code>的规则很容易理解，这里不再赘述。</p>
+<h1 id="bit-field"><a href="#bit-field" class="headerlink" title="bit field"></a>bit field</h1><p>写到这里，不得不再提一下位域（也叫位字段，bit field）。<br>位域其实就是人为划分好的二进制位区域，并且每个区域都有域名和具体的位数，比如下面这种形式：</p>
+<figure class="highlight c"><figcaption><span>eg5</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> a: <span class="number">1</span>;</span><br><span class="line">    <span class="type">char</span> b: <span class="number">2</span>;</span><br><span class="line">    <span class="type">char</span> c: <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> i: <span class="number">1</span>;</span><br><span class="line">&#125; b;</span><br></pre></td></tr></table></figure>
+<p>以上是用<code>struct</code>关键字声明位域，需要指出的是位域中无法使用浮点型关键字声明位域名，如<code>float f: 1;</code>和<code>double d: 2;</code>等。<br>如果需要某些位（bit）在特定位置，可以用未命名的字段进行分隔，比如：</p>
+<figure class="highlight c"><figcaption><span>eg7</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> a: <span class="number">32</span>;</span><br><span class="line">    <span class="type">char</span>  : <span class="number">2</span>;</span><br><span class="line">    <span class="type">char</span> c: <span class="number">1</span>;</span><br><span class="line">&#125; b;</span><br></pre></td></tr></table></figure>
+<p>当然了，未命名的位域字段是无法使用的。<br>最后，在举一个位域的实际例子，计算 16 进制数相加：</p>
+<figure class="highlight c"><figcaption><span>eg8</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">        <span class="type">uint16_t</span> i;</span><br><span class="line">        <span class="type">uint16_t</span> j;</span><br><span class="line">    &#125; x;</span><br><span class="line">    <span class="type">uint32_t</span> y;</span><br><span class="line">&#125; a;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    a.y = <span class="number">0x11223344</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%x\n&quot;</span>, a.x.i + a.x.j);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">4466</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>在上面的代码中，<code>x</code>和<code>y</code>共用一块 4 字节内存，对<code>y</code>赋值也相当于对<code>x</code>的成员<code>i</code>、<code>j</code>赋值，所以后面直接相加，就可以将两个十六进制数相加。</p>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>有关 C 语言内存对齐的一些思考，到这里就暂时结束了。实际上，个人认为在 C 语言中，掌握对应规则，知道有这个“特性”存在，并能善于利用即可。真碰到了笔试题时，一个一个算，其实没有太大意义😶。因为本身 C 语言就提供了自定义内存对齐值的功能，比如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> pack(n)</span></span><br></pre></td></tr></table></figure>
+<p>这个编译指令可以指定有效对齐值为 n。<br>也可以指定某个结构体不进行内存对齐，如：</p>
+<figure class="highlight c"><figcaption><span>eg9</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">double</span> d;</span><br><span class="line">    <span class="type">char</span> c;</span><br><span class="line">&#125;__attribute__((packed));</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;sizeof(struct A) = %d\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> A));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">sizeof(struct A) = 13</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>此时结构体的大小，就是其成员大小之和。<br>另外，还有一个原因是 C11 提供了查看对齐值的宏<code>_Alignof</code>（需要包含头文件<code>stdalign.h</code>，且在 C++ 中是<code>alignof</code>运算符），以上面的代码为例，可以得到：</p>
+<figure class="highlight c"><figcaption><span>eg10</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdalign.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    <span class="type">double</span> d;</span><br><span class="line">    <span class="type">char</span> c;</span><br><span class="line">&#125;__attribute__((packed));</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;sizeof(struct A) = %d\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> A));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, <span class="keyword">_Alignof</span>(<span class="keyword">struct</span> A));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">out:</span></span><br><span class="line"><span class="comment">sizeof(struct A) = 13</span></span><br><span class="line"><span class="comment">1</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>从输出结果也可以看出，指定结构不对齐其实就是按 1 字节进行对齐😂。<br>总而言之，对于内存对齐，只要掌握分析的方法，再掌握分析的思路，并熟练灵活运用就可以了，死记硬背过考试题、面试题，真的不是好事情...<br>好了，又扯了这么多，关于内存对齐，暂时就到这里了。<br>PS：写了好几天，终于勉强算是完成了，累😴。</p>
+<hr>
+
+<div class="note success no-icon">
+            <p>参考内容：<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30007037#:~:text=%E6%AF%8F%E4%B8%AA%E7%89%B9%E5%AE%9A%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8%E9%83%BD%E6%9C%89%E8%87%AA%E5%B7%B1%E7%9A%84%E9%BB%98%E8%AE%A4%E2%80%9C%E5%AF%B9%E9%BD%90%E7%B3%BB%E6%95%B0%E2%80%9D%EF%BC%88%E4%B9%9F%E5%8F%AB%E5%AF%B9%E9%BD%90%E6%A8%A1%E6%95%B0%EF%BC%89%E3%80%82%20gcc%E4%B8%AD%E9%BB%98%E8%AE%A4%23pragma%20pack%20%284%29%EF%BC%8C%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87%E9%A2%84%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4%23pragma,pack%20%28n%29%EF%BC%8Cn%20%3D%201%2C2%2C4%2C8%2C16%E6%9D%A5%E6%94%B9%E5%8F%98%E8%BF%99%E4%B8%80%E7%B3%BB%E6%95%B0%E3%80%82">1. C&#x2F;C++内存对齐详解</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/511367744">2. 基础（一）结构体内存对齐</a><br><a target="_blank" rel="noopener" href="https://guyutongxue.gitee.io/cppref/zh/cpp/language/alignof.html">3. alignof 运算符(C++11 起)</a><br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/cpp/cpp/alignof-operator?view=msvc-170">4. alignof 运算符</a></p>
+          </div>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>bachzart
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://bachzart.github.io/2023/04/05/%E5%85%B3%E4%BA%8E-C-%E8%AF%AD%E8%A8%80%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E7%9A%84%E6%80%9D%E8%80%83/" title="关于 C 语言内存对齐的思考">http://bachzart.github.io/2023/04/05/关于-C-语言内存对齐的思考/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C-C/" rel="tag"># C/C++</a>
+              <a href="/tags/memory-alignment/" rel="tag"># memory_alignment</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/03/%E6%B5%85%E6%9E%90%E5%BF%AB%E9%80%9F%E5%B9%82%E7%AE%97%E6%B3%95/" rel="prev" title="浅析快速幂算法">
+      <i class="fa fa-chevron-left"></i> 浅析快速幂算法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/05/04/2023-04-%E6%9C%88%E6%80%BB%E7%BB%93/" rel="next" title="2023_04_月总结">
+      2023_04_月总结 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#intro"><span class="nav-number">1.</span> <span class="nav-text">intro</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#struct"><span class="nav-number">2.</span> <span class="nav-text">struct</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#union"><span class="nav-number">3.</span> <span class="nav-text">union</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bit-field"><span class="nav-number">4.</span> <span class="nav-text">bit field</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Summary"><span class="nav-number">5.</span> <span class="nav-text">Summary</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bachzart"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">bachzart</p>
+  <div class="site-description" itemprop="description">我即世界，世界即我</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bachzart" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bachzart" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bachzart@163.com" title="E-Mail → mailto:bachzart@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="/about/" title="&#x2F;about&#x2F;">About This Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/Book-List/" title="&#x2F;Book-List&#x2F;">Book List</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.sudoku.name/index.php?ln=cn&ref=44355" title="https:&#x2F;&#x2F;www.sudoku.name&#x2F;index.php?ln&#x3D;cn&amp;ref&#x3D;44355" rel="noopener" target="_blank">Soduku Game</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://2048game.com/" title="https:&#x2F;&#x2F;2048game.com&#x2F;" rel="noopener" target="_blank">2048 Game</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bachzart</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

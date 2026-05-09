@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/acoustic_guitar_128px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/acoustic_guitar_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/acoustic_guitar_16px.png">
+  <link rel="mask-icon" href="/uploads/acoustic_guitar.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https:/fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bachzart.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="整理一下单例模式的笔记。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单例模式笔记">
+<meta property="og:url" content="http://bachzart.github.io/2025/07/04/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="bachzart&#39;s Blog">
+<meta property="og:description" content="整理一下单例模式的笔记。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-04T02:52:13.000Z">
+<meta property="article:modified_time" content="2026-05-09T09:26:52.793Z">
+<meta property="article:author" content="bachzart">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="Design_Patterns">
+<meta property="article:tag" content="singleton">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://bachzart.github.io/2025/07/04/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>单例模式笔记 | bachzart's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">bachzart's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">133</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/bachzart" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2025/07/04/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="我即世界，世界即我">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          单例模式笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-07-04 10:52:13" itemprop="dateCreated datePublished" datetime="2025-07-04T10:52:13+08:00">2025-07-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-05-09 17:26:52" itemprop="dateModified" datetime="2026-05-09T17:26:52+08:00">2026-05-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/Design-Patterns/" itemprop="url" rel="index"><span itemprop="name">Design_Patterns</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>整理一下单例模式的笔记。</p>
+<span id="more"></span>
+
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>先明确一下单例模式的概念，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/5946627">单例模式</a>是创建类型设计模式中的一种。通过单例模式创建的类在当前进程中只有一个实例。<br>说到这里，可能会想到使用<code>static</code>关键字创建的静态局部变量，这也算是一种单例模式的简单应用，但我们还是应该从面对对象的角度来进一步理解这种设计模式。</p>
+<p>按照单例模式的概念，单例模式的要点有三个：</p>
+<ol>
+<li>这个类只能有一个实例，且只能被创建一次。</li>
+<li>这个类必须自己创建这个实例，无法通过其他类来创建。</li>
+<li>这个类必须要向整个系统提供这个实例。</li>
+</ol>
+<p>那么下面按照这些要求实现这个类，这里我选择使用 C++ 来描述单例模式，由于 C++11 与其之前语言标准存在一定程度上的差异，本文也会从两个角度进行讨论。</p>
+<h1 id="C-11-之前"><a href="#C-11-之前" class="headerlink" title="C++11 之前"></a>C++11 之前</h1><p>由于单例模式又分为懒汉式和饿汉式，所以我们分别描述。</p>
+<h2 id="饿汉式"><a href="#饿汉式" class="headerlink" title="饿汉式"></a>饿汉式</h2><p>那么什么是饿汉式单例模式呢？其实就是在程序执行开始时，立即创建单例，那么按照前面提到的规则，我们可以写出下面的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> Singleton* <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> m_singleton;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">destoryInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(m_singleton != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">delete</span> m_singleton;</span><br><span class="line">            m_singleton = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;do something...&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">Singleton</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;singleton create.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">Singleton</span>(<span class="type">const</span> Singleton&amp;);</span><br><span class="line">    Singleton&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Singleton&amp;);</span><br><span class="line">    ~<span class="built_in">Singleton</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;singleton delete.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="type">static</span> Singleton* m_singleton;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Singleton* Singleton::m_singleton = <span class="keyword">new</span> Singleton;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Singleton* s1 = Singleton::<span class="built_in">getInstance</span>();</span><br><span class="line">    Singleton* s2 = Singleton::<span class="built_in">getInstance</span>();</span><br><span class="line">    </span><br><span class="line">    s1-&gt;<span class="built_in">doSomething</span>();</span><br><span class="line">    s2-&gt;<span class="built_in">doSomething</span>();</span><br><span class="line">    </span><br><span class="line">    std::cout &lt;&lt; s1 &lt;&lt; std::endl &lt;&lt; s2 &lt;&lt; std::endl;</span><br><span class="line">    </span><br><span class="line">    s1-&gt;<span class="built_in">destoryInstance</span>();</span><br><span class="line">    s2-&gt;<span class="built_in">destoryInstance</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码中，注意一下几个要点：</p>
+<ol>
+<li>为了保证单例的唯一性，需要私有化构造函数、析构函数、拷贝构造函数和拷贝赋值运算符来禁止在类外其他地方创建单例。</li>
+<li>使用静态成员变量的方式来创建单例对象，有人可能会疑惑为什么可以在类外调用私有构造函数。实际上，C++ 要求静态成员变量在类外初始化，但由于我们加上了<code>Singleton::</code>，所以后面对私有构造函数的调用依然是在类的作用域内进行的（同时也是由类的内部成员调用）。</li>
+<li>提供了唯一全局接口<code>getInstance()</code>访问单例，同时由于析构函数私有，为了防止内存写漏，又提供了<code>destoryInstance()</code>函数释放资源。</li>
+<li>饿汉式单例的优点是线程安全（因为使用之前就已被创建且只创建一个，后续访问无需改动），但会带来一定程度上的性能开销。</li>
+</ol>
+<h2 id="懒汉式"><a href="#懒汉式" class="headerlink" title="懒汉式"></a>懒汉式</h2><p>懒汉式单例其实就是<strong>只有在使用时，才创建单例对象</strong>，这点从名字上也可以得到体现。有了前面饿汉式单例的铺垫，我们很容易写出下面的懒汉式单例代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> Singleton* <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(m_singleton == <span class="literal">NULL</span>) </span><br><span class="line">            m_singleton = <span class="keyword">new</span> Singleton;</span><br><span class="line">        <span class="keyword">return</span> m_singleton;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">destoryInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(m_singleton != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">delete</span> m_singleton;</span><br><span class="line">            m_singleton = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;do something...&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">Singleton</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;singleton create.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">Singleton</span>(<span class="type">const</span> Singleton&amp;);</span><br><span class="line">    Singleton&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Singleton&amp;);</span><br><span class="line">    ~<span class="built_in">Singleton</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;singleton delete.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="type">static</span> Singleton* m_singleton;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不要忘记静态成员变量需要在类外定义</span></span><br><span class="line">Singleton* Singleton::m_singleton = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Singleton* s1 = Singleton::<span class="built_in">getInstance</span>();</span><br><span class="line">    Singleton* s2 = Singleton::<span class="built_in">getInstance</span>();</span><br><span class="line">    </span><br><span class="line">    s1-&gt;<span class="built_in">doSomething</span>();</span><br><span class="line">    s2-&gt;<span class="built_in">doSomething</span>();</span><br><span class="line">    </span><br><span class="line">    std::cout &lt;&lt; s1 &lt;&lt; std::endl &lt;&lt; s2 &lt;&lt; std::endl;</span><br><span class="line">    </span><br><span class="line">    s1-&gt;<span class="built_in">destoryInstance</span>();</span><br><span class="line">    s2-&gt;<span class="built_in">destoryInstance</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是观察代码，会发现存在线程不安全的问题。那对应的解决方式是什么呢？显然可以通过加锁的方式解决，但 C++11 之前标准库是没有相关的类可以使用的，所以还得借助第三方库来完成，老式的库其实已经没有太大的探究意义了，这里就不继续讨论了。</p>
+<h1 id="C-11"><a href="#C-11" class="headerlink" title="C++11"></a>C++11</h1><h2 id="饿汉式-1"><a href="#饿汉式-1" class="headerlink" title="饿汉式"></a>饿汉式</h2><p>有了前面的铺垫，我们很容易得到下面的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> Singleton* <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> m_singleton;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">destoryInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(m_singleton != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            <span class="keyword">delete</span> m_singleton;</span><br><span class="line">            m_singleton = <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;do something...&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">Singleton</span>(<span class="type">const</span> Singleton&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">    Singleton&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Singleton&amp;) = <span class="keyword">delete</span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">Singleton</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;singleton create.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;;</span><br><span class="line">    ~<span class="built_in">Singleton</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;singleton delete.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="type">static</span> Singleton* m_singleton;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Singleton* Singleton::m_singleton = <span class="keyword">new</span> Singleton;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Singleton* s1 = Singleton::<span class="built_in">getInstance</span>();</span><br><span class="line">    Singleton* s2 = Singleton::<span class="built_in">getInstance</span>();</span><br><span class="line">    </span><br><span class="line">    s1-&gt;<span class="built_in">doSomething</span>();</span><br><span class="line">    s2-&gt;<span class="built_in">doSomething</span>();</span><br><span class="line">    </span><br><span class="line">    std::cout &lt;&lt; s1 &lt;&lt; std::endl &lt;&lt; s2 &lt;&lt; std::endl;</span><br><span class="line">    </span><br><span class="line">    s1-&gt;<span class="built_in">destoryInstance</span>();</span><br><span class="line">    s2-&gt;<span class="built_in">destoryInstance</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码中，我们使用 C++11 的新特性，直接显式的删除拷贝构造函数和拷贝赋值运算符。同时，我们依然保留了单例对象的创建和删除，这也是线程安全的。<br>实际上，在 C++11 新特性中，规定了静态局部变量的初始化是线程安全的。编译器会为静态局部变量的初始化加上锁，确保只有一个线程可以进行初始化，其他线程会等待初始化完成后再使用。根据这个特性，我们可以继续简化代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> Singleton* <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="type">static</span> Singleton singleton;</span><br><span class="line">        <span class="keyword">return</span> &amp;singleton;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;do something...&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">Singleton</span>(<span class="type">const</span> Singleton&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">    Singleton&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Singleton&amp;) = <span class="keyword">delete</span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">Singleton</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;singleton create.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;;</span><br><span class="line">    ~<span class="built_in">Singleton</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;singleton delete.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Singleton* s1 = Singleton::<span class="built_in">getInstance</span>();</span><br><span class="line">    Singleton* s2 = Singleton::<span class="built_in">getInstance</span>();</span><br><span class="line">    </span><br><span class="line">    s1-&gt;<span class="built_in">doSomething</span>();</span><br><span class="line">    s2-&gt;<span class="built_in">doSomething</span>();</span><br><span class="line">    </span><br><span class="line">    std::cout &lt;&lt; s1 &lt;&lt; std::endl &lt;&lt; s2 &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上述代码中，我们使用静态局部变量替换掉了静态成员变量，这样做的好处是显而易见的：</p>
+<ol>
+<li>依然是线程安全的，不需要考虑其他线程的情况。</li>
+<li>静态局部变量会在离开作用域后自动析构掉（代码中是程序执行结束时自动析构），不需要在考虑何时析构的问题。</li>
+</ol>
+<h2 id="懒汉式-1"><a href="#懒汉式-1" class="headerlink" title="懒汉式"></a>懒汉式</h2><p>接着，我们再看看懒汉式，先简化一下之前的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> Singleton* <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(m_singleton == <span class="literal">nullptr</span>) </span><br><span class="line">            m_singleton = <span class="keyword">new</span> Singleton;</span><br><span class="line">        <span class="keyword">return</span> m_singleton;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">destoryInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(m_singleton != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            <span class="keyword">delete</span> m_singleton;</span><br><span class="line">            m_singleton = <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;do something...&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">Singleton</span>(<span class="type">const</span> Singleton&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">    Singleton&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Singleton&amp;) = <span class="keyword">delete</span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">Singleton</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;singleton create.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;;</span><br><span class="line">    ~<span class="built_in">Singleton</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;singleton delete.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="type">static</span> Singleton* m_singleton;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不要忘记静态成员变量需要在类外定义</span></span><br><span class="line">Singleton* Singleton::m_singleton = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Singleton* s1 = Singleton::<span class="built_in">getInstance</span>();</span><br><span class="line">    Singleton* s2 = Singleton::<span class="built_in">getInstance</span>();</span><br><span class="line">    </span><br><span class="line">    s1-&gt;<span class="built_in">doSomething</span>();</span><br><span class="line">    s2-&gt;<span class="built_in">doSomething</span>();</span><br><span class="line">    </span><br><span class="line">    std::cout &lt;&lt; s1 &lt;&lt; std::endl &lt;&lt; s2 &lt;&lt; std::endl;</span><br><span class="line">    </span><br><span class="line">    s1-&gt;<span class="built_in">destoryInstance</span>();</span><br><span class="line">    s2-&gt;<span class="built_in">destoryInstance</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上述代码中，我们只是简单显式删除拷贝构造函数和拷贝赋值运算符，并没有解决前面提到的线程安全的问题。下面我们使用 C++11 提供的<code>mutex</code>来解决这个问题：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mutex&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> Singleton* <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        m_mutex.<span class="built_in">lock</span>();</span><br><span class="line">        <span class="keyword">if</span> (m_singleton == <span class="literal">nullptr</span>)</span><br><span class="line">            m_singleton = <span class="keyword">new</span> Singleton;</span><br><span class="line">        m_mutex.<span class="built_in">unlock</span>();</span><br><span class="line">        <span class="keyword">return</span> m_singleton;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">destoryInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        m_mutex.<span class="built_in">lock</span>();</span><br><span class="line">        <span class="keyword">if</span> (m_singleton != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            <span class="keyword">delete</span> m_singleton;</span><br><span class="line">            m_singleton = <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        m_mutex.<span class="built_in">unlock</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;do something...&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">Singleton</span>(<span class="type">const</span> Singleton&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">    Singleton&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Singleton&amp;) = <span class="keyword">delete</span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">Singleton</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;singleton create.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;;</span><br><span class="line">    ~<span class="built_in">Singleton</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;singleton delete.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="type">static</span> Singleton* m_singleton;</span><br><span class="line">    <span class="type">static</span> std::mutex m_mutex;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不要忘记静态成员变量需要在类外定义</span></span><br><span class="line">Singleton* Singleton::m_singleton = <span class="literal">nullptr</span>;</span><br><span class="line">std::mutex Singleton::m_mutex;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Singleton* s1 = Singleton::<span class="built_in">getInstance</span>();</span><br><span class="line">    Singleton* s2 = Singleton::<span class="built_in">getInstance</span>();</span><br><span class="line"></span><br><span class="line">    s1-&gt;<span class="built_in">doSomething</span>();</span><br><span class="line">    s2-&gt;<span class="built_in">doSomething</span>();</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; s1 &lt;&lt; std::endl &lt;&lt; s2 &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    s1-&gt;<span class="built_in">destoryInstance</span>();</span><br><span class="line">    s2-&gt;<span class="built_in">destoryInstance</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们解决了线程安全问题，但是由于锁的出现，如果同时存在大量进程访问，就会产生大量的阻塞现象，这样会带来很多不必要的消耗，导致效率太低。对于这个问题，可以通过<strong>双重检查锁定</strong>来解决：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mutex&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> Singleton* <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (m_singleton == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            m_mutex.<span class="built_in">lock</span>();</span><br><span class="line">            <span class="keyword">if</span> (m_singleton == <span class="literal">nullptr</span>)</span><br><span class="line">                m_singleton = <span class="keyword">new</span> Singleton;</span><br><span class="line">            m_mutex.<span class="built_in">unlock</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> m_singleton;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">destoryInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (m_singleton != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            m_mutex.<span class="built_in">lock</span>();</span><br><span class="line">            <span class="keyword">if</span> (m_singleton != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">                <span class="keyword">delete</span> m_singleton;</span><br><span class="line">                m_singleton = <span class="literal">nullptr</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            m_mutex.<span class="built_in">unlock</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;do something...&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">Singleton</span>(<span class="type">const</span> Singleton&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">    Singleton&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Singleton&amp;) = <span class="keyword">delete</span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">Singleton</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;singleton create.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;;</span><br><span class="line">    ~<span class="built_in">Singleton</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;singleton delete.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="type">static</span> Singleton* m_singleton;</span><br><span class="line">    <span class="type">static</span> std::mutex m_mutex;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不要忘记静态成员变量需要在类外定义</span></span><br><span class="line">Singleton* Singleton::m_singleton = <span class="literal">nullptr</span>;</span><br><span class="line">std::mutex Singleton::m_mutex;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Singleton* s1 = Singleton::<span class="built_in">getInstance</span>();</span><br><span class="line">    Singleton* s2 = Singleton::<span class="built_in">getInstance</span>();</span><br><span class="line"></span><br><span class="line">    s1-&gt;<span class="built_in">doSomething</span>();</span><br><span class="line">    s2-&gt;<span class="built_in">doSomething</span>();</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; s1 &lt;&lt; std::endl &lt;&lt; s2 &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    s1-&gt;<span class="built_in">destoryInstance</span>();</span><br><span class="line">    s2-&gt;<span class="built_in">destoryInstance</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>观察上述代码，可以发现我们所做的事情，其实就是在不同进程获取锁之前先判断单例对象是否已经创建，如果创建就直接返回。这样做之后，尽管第一次访问时仍然会造成阻塞，但后续的访问都不会造成阻塞。这样看起来好像皆大欢喜了，可惜的是<strong>双重检查锁定</strong>又会产生新的问题😓。<br>由于 C++ 编译器支持指令重排（优化指令顺序以提高性能），所以在执行<code>new</code>操作后，对应的对象并不是一定就已经构造好了，可能编译器只是分配了内存并返回了对应的地址而已。这时，第一个进程解锁后，第二个进程就会直接返回整个地址了，可这时单例对象并没有构造好，又怎么访问呢？<br>所以，这里我们还需要想办法确保这块代码操作的<strong>原子性</strong>，好消息是别人已经想到这个问题了😂。<br>C++ 提供了<code>atomic</code>类来帮助我们解决这个问题：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mutex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;atomic&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">static</span> Singleton* <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		Singleton* singleton = m_singleton.<span class="built_in">load</span>();</span><br><span class="line">		<span class="keyword">if</span> (singleton == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">			m_mutex.<span class="built_in">lock</span>();</span><br><span class="line">			singleton = m_singleton.<span class="built_in">load</span>();</span><br><span class="line">			<span class="keyword">if</span> (singleton == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">				singleton = <span class="keyword">new</span> Singleton;</span><br><span class="line">				m_singleton.<span class="built_in">store</span>(singleton);</span><br><span class="line">			&#125;</span><br><span class="line">			m_mutex.<span class="built_in">unlock</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> singleton;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">destoryInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		Singleton* singleton = m_singleton.<span class="built_in">load</span>();</span><br><span class="line">		<span class="keyword">if</span> (singleton != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">			m_mutex.<span class="built_in">lock</span>();</span><br><span class="line">			singleton = m_singleton.<span class="built_in">load</span>();</span><br><span class="line">			<span class="keyword">if</span> (singleton != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">				<span class="keyword">delete</span> singleton;</span><br><span class="line">				singleton = <span class="literal">nullptr</span>;</span><br><span class="line">				m_singleton.<span class="built_in">store</span>(singleton);</span><br><span class="line">			&#125;</span><br><span class="line">			m_mutex.<span class="built_in">unlock</span>();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;do something...&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">Singleton</span>(<span class="type">const</span> Singleton&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">	Singleton&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Singleton&amp;) = <span class="keyword">delete</span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="built_in">Singleton</span>() &#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;singleton create.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">	&#125;;</span><br><span class="line">	~<span class="built_in">Singleton</span>() &#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;singleton delete.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="type">static</span> std::mutex m_mutex;</span><br><span class="line">	<span class="type">static</span> std::atomic&lt;Singleton*&gt; m_singleton;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不要忘记静态成员变量需要在类外定义</span></span><br><span class="line">std::mutex Singleton::m_mutex;</span><br><span class="line">std::atomic&lt;Singleton*&gt; Singleton::m_singleton;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	Singleton* s1 = Singleton::<span class="built_in">getInstance</span>();</span><br><span class="line">	Singleton* s2 = Singleton::<span class="built_in">getInstance</span>();</span><br><span class="line">	</span><br><span class="line">	s1-&gt;<span class="built_in">doSomething</span>();</span><br><span class="line">	s2-&gt;<span class="built_in">doSomething</span>();</span><br><span class="line">	</span><br><span class="line">	std::cout &lt;&lt; s1 &lt;&lt; std::endl &lt;&lt; s2 &lt;&lt; std::endl;</span><br><span class="line">	</span><br><span class="line">	s1-&gt;<span class="built_in">destoryInstance</span>();</span><br><span class="line">	s2-&gt;<span class="built_in">destoryInstance</span>();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上面的代码中，我们使用<code>atomic</code>类保存了一个<code>Singleton*</code>的指针，并创建了一个对应类型的静态成员对象<code>m_singleton</code>，这个对象读取指针时会确保读取操作的原子性。换句话说，就是会保证使用<code>load()</code>函数读取指针时，不会被其他线程干扰。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>前面说了那么多，其实会发现最好且简单的方法就只有一种：使用静态局部对象，饿汉式创建单例。这种模式既简单，又不存在线程安全的问题，使用起来还很方便，唯一不足的就是会带来性能消耗。但对比整个工程而言，局部单例模式所消耗的性能估计不值一提，当然前提是使用的次数不多😂。<br>另外，单例模式通常用于需要控制对象资源的开发场景，一个类只创建一个对象的设计，既可以避免创建过多副本所造成的资源浪费现象，又可以避免引发数据一致性等问题。在数据库连接、线程池设计、日志系统设计等开发场景，经常使用单例模式来创建对象，可以有效地降低对内存资源的占用。<br>PS：之前一直不清楚构造函数私有化的应用场景，现在这个就是，看来还是自己懂得太少😓...</p>
+<h1 id="简单应用"><a href="#简单应用" class="headerlink" title="简单应用"></a>简单应用</h1><p>下面我们按照<strong>饿汉式单例模式</strong>的思路，实现一个简单的消息队列。<br>思路也比较简单，我们直接套用上面的代码即可。但我们需要思考，如何存储消息，存储什么样的消息。这里，为了简单起见，就用普通的队列作为消息的容器，而消息由整数代替即可，那么我们可以使用<code>queue&lt;int&gt;</code>来存储消息。对应的，我们需要提供一系列的函数供<strong>生产者</strong>和<strong>消费者</strong>调用，比如生产者向消息队列中放入消息，消费者从消息队列中取出消息。<br>按照上面的思路，我们可以得到下面的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">messageQueue</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">static</span> messageQueue* <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="type">static</span> messageQueue mq;</span><br><span class="line">		<span class="keyword">return</span> &amp;mq;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="type">bool</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="type">bool</span> flag = m_q.<span class="built_in">empty</span>();</span><br><span class="line">		<span class="keyword">return</span> flag;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">pushMsg</span><span class="params">(<span class="type">int</span> msg)</span> </span>&#123;</span><br><span class="line">		m_q.<span class="built_in">push</span>(msg);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="type">bool</span> <span class="title">popMsg</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(m_q.<span class="built_in">empty</span>()) </span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		m_q.<span class="built_in">pop</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="type">int</span> <span class="title">topMsg</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(m_q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="type">int</span> msg = m_q.<span class="built_in">front</span>();</span><br><span class="line">		<span class="keyword">return</span> msg;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">messageQueue</span>(<span class="type">const</span> messageQueue&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">	messageQueue&amp; <span class="keyword">operator</span>=(<span class="type">const</span> messageQueue&amp;) = <span class="keyword">delete</span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="built_in">messageQueue</span>() &#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;message queue created. &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">	&#125;;</span><br><span class="line">	~<span class="built_in">messageQueue</span>() &#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;message queue deleted. &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">	&#125;;</span><br><span class="line">	std::queue&lt;<span class="type">int</span>&gt; m_q;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	messageQueue* mq1 = messageQueue::<span class="built_in">getInstance</span>();</span><br><span class="line">	messageQueue* mq2 = messageQueue::<span class="built_in">getInstance</span>();</span><br><span class="line">	</span><br><span class="line">	std::cout &lt;&lt; mq1 &lt;&lt; std::endl &lt;&lt; mq2 &lt;&lt; std::endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">output:</span></span><br><span class="line"><span class="comment">message queue created.</span></span><br><span class="line"><span class="comment">0x7ff6474b40e0</span></span><br><span class="line"><span class="comment">0x7ff6474b40e0</span></span><br><span class="line"><span class="comment">message queue deleted.</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>根据执行代码后的结果，这个消息队列的单例模式就被我们创建好了，访问单例对象也是也没有问题的。前面我们提到了生产者和消费者会对消息队列内存储的消息进行操作，若假设由不同的进程分别扮演生产者和消费者的角色，那么势必也会产生资源抢占的情况。也就是说，不同进程通过我们提供的<code>pushMsg()</code>等函数，操作消息队列内部数据时，还需要加锁来保证资源不会产生抢占。那么，我们可以进一步优化我们的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mutex&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">messageQueue</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">static</span> messageQueue* <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="type">static</span> messageQueue mq;</span><br><span class="line">		<span class="keyword">return</span> &amp;mq;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="type">bool</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">locker</span><span class="params">(m_m)</span></span>;</span><br><span class="line">		<span class="type">bool</span> flag = m_q.<span class="built_in">empty</span>();</span><br><span class="line">		<span class="keyword">return</span> flag;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">pushMsg</span><span class="params">(<span class="type">int</span> msg)</span> </span>&#123;</span><br><span class="line">		<span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">locker</span><span class="params">(m_m)</span></span>;</span><br><span class="line">		m_q.<span class="built_in">push</span>(msg);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="type">bool</span> <span class="title">popMsg</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">locker</span><span class="params">(m_m)</span></span>;</span><br><span class="line">		<span class="keyword">if</span>(m_q.<span class="built_in">empty</span>()) </span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		m_q.<span class="built_in">pop</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="type">int</span> <span class="title">topMsg</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">locker</span><span class="params">(m_m)</span></span>;</span><br><span class="line">		<span class="keyword">if</span>(m_q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="type">int</span> msg = m_q.<span class="built_in">front</span>();</span><br><span class="line">		<span class="keyword">return</span> msg;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">messageQueue</span>(<span class="type">const</span> messageQueue&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">	messageQueue&amp; <span class="keyword">operator</span>=(<span class="type">const</span> messageQueue&amp;) = <span class="keyword">delete</span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="built_in">messageQueue</span>() &#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;message queue created. &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">	&#125;;</span><br><span class="line">	~<span class="built_in">messageQueue</span>() &#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;message queue deleted. &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">	&#125;;</span><br><span class="line">	std::queue&lt;<span class="type">int</span>&gt; m_q;</span><br><span class="line">	std::mutex m_m;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	messageQueue* mq1 = messageQueue::<span class="built_in">getInstance</span>();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上面的代码中，我们通过模板类<code>lock_guard</code>来完成加锁的操作，同时，在这个作用域结束后，开头使用该类声明的对象<code>locker</code>就会被自动回收掉，从而完成解锁的操作。<br>下面我们在使用多线程来测试一下代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mutex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">messageQueue</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> messageQueue* <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="type">static</span> messageQueue mq;</span><br><span class="line">        <span class="keyword">return</span> &amp;mq;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">locker</span><span class="params">(m_m)</span></span>;</span><br><span class="line">        <span class="type">bool</span> flag = m_q.<span class="built_in">empty</span>();</span><br><span class="line">        <span class="keyword">return</span> flag;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">pushMsg</span><span class="params">(<span class="type">int</span> msg)</span> </span>&#123;</span><br><span class="line">        <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">locker</span><span class="params">(m_m)</span></span>;</span><br><span class="line">        m_q.<span class="built_in">push</span>(msg);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">popMsg</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">locker</span><span class="params">(m_m)</span></span>;</span><br><span class="line">        <span class="keyword">if</span>(m_q.<span class="built_in">empty</span>()) </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        m_q.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">topMsg</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">locker</span><span class="params">(m_m)</span></span>;</span><br><span class="line">        <span class="keyword">if</span>(m_q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> msg = m_q.<span class="built_in">front</span>();</span><br><span class="line">        <span class="keyword">return</span> msg;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">messageQueue</span>(<span class="type">const</span> messageQueue&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">    messageQueue&amp; <span class="keyword">operator</span>=(<span class="type">const</span> messageQueue&amp;) = <span class="keyword">delete</span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">messageQueue</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;message queue created. &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;;</span><br><span class="line">    ~<span class="built_in">messageQueue</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;message queue deleted. &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;;</span><br><span class="line">    std::queue&lt;<span class="type">int</span>&gt; m_q;</span><br><span class="line">    std::mutex m_m;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    messageQueue* mq = messageQueue::<span class="built_in">getInstance</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="function">std::thread <span class="title">producer</span><span class="params">([=] &#123;</span></span></span><br><span class="line"><span class="params"><span class="function">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i) &#123;</span></span></span><br><span class="line"><span class="params"><span class="function">            mq-&gt;pushMsg(i);</span></span></span><br><span class="line"><span class="params"><span class="function">            std::cout &lt;&lt; <span class="string">&quot;+++producer pushMsg: &quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot;, threadID: &quot;</span></span></span></span><br><span class="line"><span class="params"><span class="function">                    &lt;&lt; std::this_thread::get_id() &lt;&lt; std::endl;</span></span></span><br><span class="line"><span class="params"><span class="function">            std::this_thread::sleep_for(std::chrono::milliseconds(<span class="number">500</span>));</span></span></span><br><span class="line"><span class="params"><span class="function">        &#125;</span></span></span><br><span class="line"><span class="params"><span class="function">    &#125;)</span></span>;    </span><br><span class="line">    </span><br><span class="line">    <span class="function">std::thread <span class="title">consumer</span><span class="params">([=]() &#123;</span></span></span><br><span class="line"><span class="params"><span class="function">        std::this_thread::sleep_for(std::chrono::milliseconds(<span class="number">100</span>));</span></span></span><br><span class="line"><span class="params"><span class="function">        <span class="keyword">while</span>(!mq-&gt;isEmpty()) &#123;</span></span></span><br><span class="line"><span class="params"><span class="function">            <span class="type">int</span> msg = mq-&gt;topMsg();</span></span></span><br><span class="line"><span class="params"><span class="function">            mq-&gt;popMsg();</span></span></span><br><span class="line"><span class="params"><span class="function">            std::cout &lt;&lt; <span class="string">&quot;---consumer getMsg: &quot;</span> &lt;&lt; msg &lt;&lt; <span class="string">&quot;, threadID: &quot;</span></span></span></span><br><span class="line"><span class="params"><span class="function">                    &lt;&lt; std::this_thread::get_id() &lt;&lt; std::endl;</span></span></span><br><span class="line"><span class="params"><span class="function">            std::this_thread::sleep_for(std::chrono::milliseconds(<span class="number">1000</span>));</span></span></span><br><span class="line"><span class="params"><span class="function">        &#125;</span></span></span><br><span class="line"><span class="params"><span class="function">    &#125;)</span></span>;</span><br><span class="line">    </span><br><span class="line">    producer.<span class="built_in">join</span>();</span><br><span class="line">    consumer.<span class="built_in">join</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">output:</span></span><br><span class="line"><span class="comment">message queue created.</span></span><br><span class="line"><span class="comment">+++producer pushMsg: 0, threadID: 2</span></span><br><span class="line"><span class="comment">---consumer getMsg: 0, threadID: 3</span></span><br><span class="line"><span class="comment">+++producer pushMsg: 1, threadID: 2</span></span><br><span class="line"><span class="comment">+++producer pushMsg: 2, threadID: 2</span></span><br><span class="line"><span class="comment">---consumer getMsg: 1, threadID: 3</span></span><br><span class="line"><span class="comment">+++producer pushMsg: 3, threadID: 2</span></span><br><span class="line"><span class="comment">+++producer pushMsg: 4, threadID: 2</span></span><br><span class="line"><span class="comment">---consumer getMsg: 2, threadID: 3</span></span><br><span class="line"><span class="comment">+++producer pushMsg: 5, threadID: 2</span></span><br><span class="line"><span class="comment">+++producer pushMsg: 6, threadID: 2</span></span><br><span class="line"><span class="comment">---consumer getMsg: 3, threadID: 3</span></span><br><span class="line"><span class="comment">+++producer pushMsg: 7, threadID: 2</span></span><br><span class="line"><span class="comment">+++producer pushMsg: 8, threadID: 2</span></span><br><span class="line"><span class="comment">---consumer getMsg: 4, threadID: 3</span></span><br><span class="line"><span class="comment">+++producer pushMsg: 9, threadID: 2</span></span><br><span class="line"><span class="comment">---consumer getMsg: 5, threadID: 3</span></span><br><span class="line"><span class="comment">---consumer getMsg: 6, threadID: 3</span></span><br><span class="line"><span class="comment">---consumer getMsg: 7, threadID: 3</span></span><br><span class="line"><span class="comment">---consumer getMsg: 8, threadID: 3</span></span><br><span class="line"><span class="comment">---consumer getMsg: 9, threadID: 3</span></span><br><span class="line"><span class="comment">message queue deleted.</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>在上述代码中，我们使用了<code>producer</code>和<code>consumer</code>两个线程来测试代码，其中<code>producer</code>作为生产者，向消息队列中添加消息，<code>consumer</code>作为消费者，从消息队列中获取消息。观察最后的输出，可以发现，消费者获取消息的顺序与生产者添加消息的顺序符合队列的特征。同时，由于我们故意设置消费者在每次获取消息后休眠 1 秒，所以最后输出了一系列连续的消费信息，这些也是符合预期的。</p>
+<hr>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>bachzart
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://bachzart.github.io/2025/07/04/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0/" title="单例模式笔记">http://bachzart.github.io/2025/07/04/单例模式笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C-C/" rel="tag"># C/C++</a>
+              <a href="/tags/singleton/" rel="tag"># singleton</a>
+              <a href="/tags/Design-Patterns/" rel="tag"># Design_Patterns</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/07/02/C-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E7%AC%94%E8%AE%B0/" rel="prev" title="C++_类型转换笔记">
+      <i class="fa fa-chevron-left"></i> C++_类型转换笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/07/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%88%99/" rel="next" title="设计模式中的原则">
+      设计模式中的原则 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-11-%E4%B9%8B%E5%89%8D"><span class="nav-number">2.</span> <span class="nav-text">C++11 之前</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A5%BF%E6%B1%89%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">饿汉式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%87%92%E6%B1%89%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">懒汉式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-11"><span class="nav-number">3.</span> <span class="nav-text">C++11</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A5%BF%E6%B1%89%E5%BC%8F-1"><span class="nav-number">3.1.</span> <span class="nav-text">饿汉式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%87%92%E6%B1%89%E5%BC%8F-1"><span class="nav-number">3.2.</span> <span class="nav-text">懒汉式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">简单应用</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bachzart"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">bachzart</p>
+  <div class="site-description" itemprop="description">我即世界，世界即我</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bachzart" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bachzart" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bachzart@163.com" title="E-Mail → mailto:bachzart@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="/about/" title="&#x2F;about&#x2F;">About This Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/Book-List/" title="&#x2F;Book-List&#x2F;">Book List</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.sudoku.name/index.php?ln=cn&ref=44355" title="https:&#x2F;&#x2F;www.sudoku.name&#x2F;index.php?ln&#x3D;cn&amp;ref&#x3D;44355" rel="noopener" target="_blank">Soduku Game</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://2048game.com/" title="https:&#x2F;&#x2F;2048game.com&#x2F;" rel="noopener" target="_blank">2048 Game</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bachzart</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

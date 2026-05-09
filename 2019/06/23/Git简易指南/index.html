@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/acoustic_guitar_128px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/acoustic_guitar_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/acoustic_guitar_16px.png">
+  <link rel="mask-icon" href="/uploads/acoustic_guitar.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https:/fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bachzart.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="IntroGit 是一个开源的分布式版本控制系统，而 Github 则是目前全球最大的开源社区，那么何谓**“版本控制”？版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统，使用Git可以对任何类型**的文件进行版本控制。 不同于本地版本控制系统和集中式版本控制系统，分布式版本控制系统的优点在于其对文件丢失风险的规避能力。简而言之，分布式版本控制系统中的每个客户端，都具有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git简易指南">
+<meta property="og:url" content="http://bachzart.github.io/2019/06/23/Git%E7%AE%80%E6%98%93%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="bachzart&#39;s Blog">
+<meta property="og:description" content="IntroGit 是一个开源的分布式版本控制系统，而 Github 则是目前全球最大的开源社区，那么何谓**“版本控制”？版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统，使用Git可以对任何类型**的文件进行版本控制。 不同于本地版本控制系统和集中式版本控制系统，分布式版本控制系统的优点在于其对文件丢失风险的规避能力。简而言之，分布式版本控制系统中的每个客户端，都具有">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/Git_Working_Area.png">
+<meta property="article:published_time" content="2019-06-23T14:57:49.000Z">
+<meta property="article:modified_time" content="2026-05-09T09:26:52.752Z">
+<meta property="article:author" content="bachzart">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://bachzart.github.io/my_photo_gallery/Git_Working_Area.png">
+
+<link rel="canonical" href="http://bachzart.github.io/2019/06/23/Git%E7%AE%80%E6%98%93%E6%8C%87%E5%8D%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Git简易指南 | bachzart's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">bachzart's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">133</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/bachzart" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2019/06/23/Git%E7%AE%80%E6%98%93%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="我即世界，世界即我">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Git简易指南
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-06-23 22:57:49" itemprop="dateCreated datePublished" datetime="2019-06-23T22:57:49+08:00">2019-06-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-05-09 17:26:52" itemprop="dateModified" datetime="2026-05-09T17:26:52+08:00">2026-05-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index"><span itemprop="name">Tools</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><p><strong>Git</strong> 是一个开源的分布式版本控制系统，而 <strong>Github</strong> 则是目前全球最大的开源社区，那么何谓**“版本控制”<strong>？<br><strong>版本控制</strong>是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统，使用<code>Git</code>可以对</strong>任何类型**的文件进行版本控制。</p>
+<p>不同于<strong>本地版本控制系统</strong>和<strong>集中式版本控制系统</strong>，<strong>分布式版本控制系统</strong>的优点在于其对文件丢失风险的规避能力。简而言之，分布式版本控制系统中的每个客户端，都具有完整的文件，即原始仓库的<strong>镜像</strong>。</p>
+<span id="more"></span>
+
+<h1 id="Basic-Conception"><a href="#Basic-Conception" class="headerlink" title="Basic Conception"></a>Basic Conception</h1><p>在开始直接使用 Git 之前，得先了解一下 Git 内的基本概念🧐，了解这些概念会更好的理解 Git 的工作方式和原理。</p>
+<h2 id="Snapshots-Not-Differences"><a href="#Snapshots-Not-Differences" class="headerlink" title="Snapshots, Not Differences"></a>Snapshots, Not Differences</h2><p>如标题所言，（记录）快照，而不是差异。不同于其他版本控制系统的差异比较，Git 会将文件视作“快照”，每次提交更新后，Git 会对之前的文件制作一个快照并保存这个快照的索引，也就是说，Git 会将更新后的文件替换掉之前文件，同时，Git 不再重新存储该文件，而是只保留一个链接指向之前存储的文件（快照）。</p>
+<h2 id="Nearly-Every-Operation-Is-Local"><a href="#Nearly-Every-Operation-Is-Local" class="headerlink" title="Nearly Every Operation Is Local"></a>Nearly Every Operation Is Local</h2><p>在 Git 中的绝大多数操作都只需要访问本地文件和资源，一般不需要来自网络上其他计算机的信息。因为，在本地保存着这个项目文件的镜像，你可以离线进行提交，并在网络状态良好的时候，在推送到主服务器上。</p>
+<h2 id="The-Three-States"><a href="#The-Three-States" class="headerlink" title="The Three States"></a>The Three States</h2><p>Git 有三种状态，本地仓库内的文件可能处于其中之一：<strong>已提交（committed）、已修改（modified）和已暂存（staged）。</strong></p>
+<div class="tabs" id="three-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#three-unique-name-1">已提交</a></li><li class="tab"><a href="#three-unique-name-2">已修改</a></li><li class="tab"><a href="#three-unique-name-3">已暂存</a></li></ul><div class="tab-content"><div class="tab-pane active" id="three-unique-name-1"><p>数据已经安全的保存在本地数据库中。</p></div><div class="tab-pane" id="three-unique-name-2"><p>修改了文件，但还没保存到数据库中。</p></div><div class="tab-pane" id="three-unique-name-3"><p>对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。</p></div></div></div>
+
+<p>由此引入 Git 项目的三个工作区域的概念：Git 仓库、工作目录及暂存区域。<br><img src="/my_photo_gallery/Git_Working_Area.png" alt="Working Area" title="Working Area"></p>
+<div class="tabs" id="four-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#four-unique-name-1">Git 仓库</a></li><li class="tab"><a href="#four-unique-name-2">工作目录</a></li><li class="tab"><a href="#four-unique-name-3">暂存区域</a></li></ul><div class="tab-content"><div class="tab-pane active" id="four-unique-name-1"><p>Git 用来保存项目的元数据和对象数据库的地方，从其他计算机克隆仓库时，拷贝的就是这里的数据。</p></div><div class="tab-pane" id="four-unique-name-2"><p>对项目的某个版本独立提取出来的内容，这些从 Git 仓库的压缩数据中提取出来的文件，放在磁盘上供用户使用或修改。</p></div><div class="tab-pane" id="four-unique-name-3"><p>暂存区域是一个文件，保存了下次将提交的文件列表信息，一般在 Git 仓库目录中，有时也被称作“索引”。</p></div></div></div>
+
+<p>基本的 Git 工作流程如下：</p>
+<ol>
+<li>在工作目录中修改文件</li>
+<li>暂存文件，将文件的快照放入暂存区域</li>
+<li>提交更新，找到暂存区域的文件，将快照永久性存储到 Git 仓库内</li>
+</ol>
+<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use"></a>How to use</h2><p>Git 有多种使用方式，可以使用原生的<strong>命令行模式</strong>（推荐），也可以使用 <strong>GUI 模式</strong>，但只有在<strong>命令行模式</strong>下，才可以执行 Git 的<strong>所有</strong>命令。</p>
+<h2 id="Installing-Git"><a href="#Installing-Git" class="headerlink" title="Installing Git"></a>Installing Git</h2><p>针对不同的操作系统，Git 的安装方法也不相同，对于现在比较成熟的 Git 而言，不同安装方式所带来的功能上的差异已经不是那么明显。对于<strong>Windows</strong>用户而言，在 <a target="_blank" rel="noopener" href="https://git-scm.com/download/win">Git 官网</a>上下载后安装即可。<br>其他方式这里不再做过多介绍。</p>
+<h1 id="First-Time-Git-Setup"><a href="#First-Time-Git-Setup" class="headerlink" title="First-Time Git Setup"></a>First-Time Git Setup</h1><p>安装好了 Git 之后，需要对 Git 环境做定量的定制化操作，每台计算机上只用配置一次，程序升级时会保留配置信息，也<strong>可以在任何时候再次通过运行命令来修改它们。</strong></p>
+<h2 id="User-Identity"><a href="#User-Identity" class="headerlink" title="User Identity"></a>User Identity</h2><p>当安装完 Git 后应该做的第一件事就是设置你的用户名称与邮件地址，后面的每一次提交都会使用这些信息，并且它会写入到你的每一次提交中，不可更改。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">&quot;Bachzart&quot;</span></span><br><span class="line">$ git config --global user.email <span class="string">&quot;whistlesilp@gmail.com&quot;</span></span><br></pre></td></tr></table></figure>
+<p>如果使用了<code>--global</code>选项，那么该命令只需要运行一次，因为之后无论做任何事情，Git 都会使用那些信息。若像针对特定项目使用不同的用户名称与邮件地址时，可以在那个项目目录下运行没有<code>--global</code>选项的命令来配置。</p>
+<h2 id="User-Editor"><a href="#User-Editor" class="headerlink" title="User Editor"></a>User Editor</h2><p>用户信息设置完毕后，可以配置默认文本编辑器，当 Git 需要你输入信息时会调用它。如果未配置，Git 会使用操作系统默认的文本编辑器。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config --gloabl core.editor emacs</span><br></pre></td></tr></table></figure>
+
+<h2 id="Checking"><a href="#Checking" class="headerlink" title="Checking"></a>Checking</h2><p>如何检查 Git 配置信息呢？可以使用如下命令来列出在当前目录下 Git 能找到的所有配置信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config --list</span><br></pre></td></tr></table></figure>
+<p>可以得到如下所示结果：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">core.symlinks=false</span><br><span class="line">core.autocrlf=true</span><br><span class="line">core.fscache=true</span><br><span class="line"><span class="built_in">color</span>.diff=auto</span><br><span class="line"><span class="built_in">color</span>.status=auto</span><br><span class="line"><span class="built_in">color</span>.branch=auto</span><br><span class="line"><span class="built_in">color</span>.interactive=true</span><br><span class="line"><span class="built_in">help</span>.<span class="built_in">format</span>=html</span><br><span class="line">rebase.autosquash=true</span><br><span class="line">http.sslcainfo=D:/Git/Git/mingw64/ssl/certs/ca-bundle.crt</span><br><span class="line">http.sslbackend=openssl</span><br><span class="line">diff.astextplain.textconv=astextplain</span><br><span class="line">filter.lfs.clean=git-lfs clean -- %f</span><br><span class="line">filter.lfs.smudge=git-lfs smudge -- %f</span><br><span class="line">filter.lfs.process=git-lfs filter-process</span><br><span class="line">filter.lfs.required=true</span><br><span class="line">credential.helper=manager</span><br><span class="line">user.name=Bachzart</span><br><span class="line">user.email=whistlesilp@gmail.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="Getting-Help"><a href="#Getting-Help" class="headerlink" title="Getting Help"></a>Getting Help</h2><p>Git 自带有说明文档，可以直接使用以下三个命令查找指定命令的使用说明，或百度、google。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">help</span> &lt;verb&gt;</span><br><span class="line">$ git &lt;verb&gt; --<span class="built_in">help</span></span><br><span class="line">$ man git-&lt;verb&gt;</span><br></pre></td></tr></table></figure>
+<p>若想获得<code>config</code>命令的手册，执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">help</span> config</span><br></pre></td></tr></table></figure>
+
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>上面的内容介绍了 Git 是什么，Git 和其他版本控制系统的区别和基本用法等，接下来就开始使用吧~</p>
+<h1 id="Basic-Usage"><a href="#Basic-Usage" class="headerlink" title="Basic Usage"></a>Basic Usage</h1><p>在熟悉了 Git 的基本概念和用法后，就可以开始使用了。</p>
+<h2 id="Getting-a-Git-Repository"><a href="#Getting-a-Git-Repository" class="headerlink" title="Getting a Git Repository"></a>Getting a Git Repository</h2><p>获取 Git 项目仓库的方法有两种：</p>
+<ol>
+<li>在现有项目或目录下导入所有文件到 Git 中</li>
+<li>从一个服务器克隆现有的 Git 仓库</li>
+</ol>
+<h3 id="Initializing-a-Repository-in-an-Existing-Directory"><a href="#Initializing-a-Repository-in-an-Existing-Directory" class="headerlink" title="Initializing a Repository in an Existing Directory"></a>Initializing a Repository in an Existing Directory</h3><p>如果只想在本地通过 Git 来进行版本控制，那么在<code>bash</code>内进入到想要建立仓库的目录，通过以下命令就可以建立一个仓库了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git init</span><br></pre></td></tr></table></figure>
+<p>此时，在这个<strong>本地目录</strong>下会自动产生一个**“.git”**的目录，这个就是 Git 管理信息的目录，在 Windows 下默认隐藏。</p>
+<h3 id="Cloning-an-Existing-Repository"><a href="#Cloning-an-Existing-Repository" class="headerlink" title="Cloning an Existing Repository"></a>Cloning an Existing Repository</h3><p>如果只是想获取一份网络上（或局域网服务器）已存在的 Git 仓库的拷贝，那么可以使用以下命令来将仓库克隆到本地。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/example</span><br></pre></td></tr></table></figure>
+<p>上述命令的格式为<code>git clone [url]</code>，<code>https://github.com/example</code>这个<code>url</code>并不是真正的存在，这里只做说明使用。</p>
+<p>此时在当前目录下会创建一个“example”的目录，并在这个目录下初始化一个<code>.git</code>目录，从远程仓库拉取下所有数据放入<code>.git</code>目录，然后从中读取最新版本的文件拷贝。如果想重命名克隆下来的本地仓库的名字，可以使用如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/example myexample</span><br></pre></td></tr></table></figure>
+
+<h2 id="Local-Repository"><a href="#Local-Repository" class="headerlink" title="Local Repository"></a>Local Repository</h2><p>前面已经提到了如何在本地创建 Git 仓库，现在来使用一下 Git 的部分功能。</p>
+<h3 id="Checking-the-Status-of-Local-Reposity"><a href="#Checking-the-Status-of-Local-Reposity" class="headerlink" title="Checking the Status of Local Reposity"></a>Checking the Status of Local Reposity</h3><p>要查看当前目录下哪些文件处于什么状态，可以使用<code>git status</code>。以在本地新建的仓库为例，当使用<code>git status</code>命令时，会出现如下结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">No commits yet</span><br><span class="line">nothing to commit (create/copy files and use <span class="string">&quot;git add&quot;</span> to track)</span><br></pre></td></tr></table></figure>
+<p>根据显示的英文的含义，可以得知当前目录下，没有文件，也无法进行提交，可以使用<code>git add</code>命令来跟踪文件。</p>
+<h3 id="Tracking-a-new-file"><a href="#Tracking-a-new-file" class="headerlink" title="Tracking a new file"></a>Tracking a new file</h3><p>现在，在仓库内创建一个新的<code>test.c</code>文件，在使用<code>git status</code>命令来查看当前目录的状态。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">No commits yet</span><br><span class="line">Untracked files:</span><br><span class="line">  (use <span class="string">&quot;git add &lt;file&gt;...&quot;</span> to include <span class="keyword">in</span> what will be committed)</span><br><span class="line"></span><br><span class="line">        test.c</span><br><span class="line"></span><br><span class="line">nothing added to commit but untracked files present (use <span class="string">&quot;git add&quot;</span> to track)</span><br></pre></td></tr></table></figure>
+<p>此时，在<code>Untracked files</code>下面，出现了<code>test.c</code>文件，这意味着 Git 在之前的快照（提交）中没有这些文件（实际上，目前还没有一次提交）。Git不会自动将文件纳入跟踪范围，所以需要使用<code>git add [file name]</code>命令来跟踪指定文件，如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git add test.c</span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">No commits yet</span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use <span class="string">&quot;git rm --cached &lt;file&gt;...&quot;</span> to unstage)</span><br><span class="line"></span><br><span class="line">        new file:   test.c</span><br></pre></td></tr></table></figure>
+<p>此时，可以看到<code>Changes to be committed</code>这行下，存在<code>new file: test.c</code>，就说明<code>test.c</code>文件是已暂存状态（staged）了。另外，<code>git add</code>命令使用文件或目录的路径作为参数；如果参数是目录的路径，该命令将递归地跟踪该目录下的所有文件。</p>
+<h3 id="Staging-Modified-Files"><a href="#Staging-Modified-Files" class="headerlink" title="Staging Modified Files"></a>Staging Modified Files</h3><p>紧接上面的步骤，若此时，修改了已暂存的<code>test.c</code>文件，此时使用<code>git status</code>命令，会看到如下结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">On branch master</span><br><span class="line">No commits yet</span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use <span class="string">&quot;git rm --cached &lt;file&gt;...&quot;</span> to unstage)</span><br><span class="line"></span><br><span class="line">        new file:   test.c</span><br><span class="line"></span><br><span class="line">Changes not staged <span class="keyword">for</span> commit:</span><br><span class="line">  (use <span class="string">&quot;git add &lt;file&gt;...&quot;</span> to update what will be committed)</span><br><span class="line">  (use <span class="string">&quot;git checkout -- &lt;file&gt;...&quot;</span> to discard changes <span class="keyword">in</span> working directory)</span><br><span class="line"></span><br><span class="line">        modified:   test.c</span><br></pre></td></tr></table></figure>
+<p>这实际上就是 Git 的版本控制机制的特点—保存文件的快照而不是差异。也即是说，现在 Git 暂存区域内存储的文件是仍未修改的<code>test.c</code>，要暂存这次更新，需要再次使用<code>git add</code>命令来完成暂存，如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git add test.c</span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">No commits yet</span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use <span class="string">&quot;git rm --cached &lt;file&gt;...&quot;</span> to unstage)</span><br><span class="line"></span><br><span class="line">        new file:   test.c</span><br></pre></td></tr></table></figure>
+<p><code>git status</code>命令的输出十分详细，使用<code>git status -s</code>或<code>git status --short</code>可以得到更加紧凑的信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git status -s</span><br><span class="line">A  change.c</span><br><span class="line">AM test.c</span><br><span class="line">?? test.exe</span><br></pre></td></tr></table></figure>
+<p>新添加的未跟踪文件前面有<code>??</code>标记，新添加到暂存区域的文件前面有<code>A</code>标记，修改过的文件前面有<code>M</code>标记；当然，<code>M</code>的有两个可能的出现位置，出现在右边的<code>M</code>表示该文件被修改了但是还没放入暂存区，出现在左边的<code>M</code>表示该文件被修改并放入了暂存区。例如，上面的状态显示<code>test.c</code>文件在工作区被修改了，还未放入暂存区。</p>
+<h3 id="Ignoring-Files"><a href="#Ignoring-Files" class="headerlink" title="Ignoring Files"></a>Ignoring Files</h3><p>一般总会有些文件无需纳入 Git 的管理，也不希望它们总出现在未跟踪文件列表，通常这类文件都是些自动生成的文件，比如日志文件，或者编译过程中创建的临时文件等。此时，可以创建一个名为<code>.gitignore</code>的文件，列出要忽略的文件模式。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ vim .gitignore</span><br><span class="line">*.[oa]</span><br><span class="line">*~</span><br><span class="line">*.exe</span><br><span class="line">*.txt</span><br></pre></td></tr></table></figure>
+<p><code>.gitignore</code>文件的格式规范如下：</p>
+<ul>
+<li>所有空行或者以<code>#</code>开头的行都会被 Git 忽略</li>
+<li>可以使用标准的 glob 模式匹配</li>
+<li>匹配模式可以以<code>/</code>开头防止递归</li>
+<li>匹配模式可以以<code>/</code>结尾指定目录</li>
+<li>要忽略指定模式以外的文件或目录，可以在模式前加上惊叹号<code>!</code>取反</li>
+</ul>
+<p>所谓的 glob 模式是指 shell 所使用的简化了的正则表达式，比如<code>*</code>就可以匹配零个或多个任意字符。</p>
+<div class="note success">
+            <p>TIPS：GitHub有一个十分详细的针对数十种项目及语言的<code>.gitignore</code>文件列表，可以访问 <a target="_blank" rel="noopener" href="https://github.com/github/gitignore">https://github.com/github/gitignore</a> 获取更多帮助。</p>
+          </div>
+
+<h3 id="Viewing-Changes"><a href="#Viewing-Changes" class="headerlink" title="Viewing Changes"></a>Viewing Changes</h3><p><code>git status</code>命令输出的信息只对文件所处的状态进行了展示，可能觉得模糊，如果想知道具体改了什么地方，可以使用<code>git diff</code>命令。<code>git diff</code>命令会回答两个问题：</p>
+<ol>
+<li>当前做的那些更新还没有暂存？</li>
+<li>有哪些更新已经暂存起来准备好了下次提交？</li>
+</ol>
+<p><code>git diff</code>会通过文件补丁的格式在相应栏下显示具体哪些行发生了改变。<br>现在修改<code>test.c</code>文件，在文件中加入如下一行：</p>
+<figure class="highlight diff"><figcaption><span>test.c</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc, char const *argv[]) &#123;</span><br><span class="line">	printf(&quot;Hello Git!\n&quot;);</span><br><span class="line">	printf(&quot;I want to change this file.\n&quot;);</span><br><span class="line"><span class="addition">+	printf(&quot;Test git diff!\n&quot;);</span></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来，使用<code>git diff</code>命令查看修改的部分：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ git diff</span><br><span class="line">diff --git a/test.c b/test.c</span><br><span class="line">index e0e5171..8642431 100644</span><br><span class="line">--- a/test.c</span><br><span class="line">+++ b/test.c</span><br><span class="line">@@ -3,5 +3,6 @@</span><br><span class="line"> int main(int argc, char const *argv[]) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Hello Git!\n&quot;</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;I want to change this file.\n&quot;</span>);</span><br><span class="line">+       <span class="built_in">printf</span>(<span class="string">&quot;Test git diff!\n&quot;</span>);</span><br><span class="line">        <span class="built_in">return</span> 0;</span><br><span class="line"> &#125;</span><br><span class="line">\ No newline at end of file</span><br></pre></td></tr></table></figure>
+<p>可以看到，Git 回显了文件更新区域的信息以及对应的更新内容，而此时，<code>git diff</code>比较的是工作目录中当前文件（未暂存）和暂存区域快照（已暂存）之间的差异，也就是修改之后还没暂存起来的变化内容。</p>
+<p>使用<code>git diff --cached/git diff --staged</code>可以查看已暂存的将要添加到下次提交里的内容。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ git diff --cached</span><br><span class="line">diff --git a/test.c b/test.c</span><br><span class="line">new file mode 100644</span><br><span class="line">index 0000000..e0e5171</span><br><span class="line">--- /dev/null</span><br><span class="line">+++ b/test.c</span><br><span class="line">@@ -0,0 +1,7 @@</span><br><span class="line">+#include &lt;stdio.h&gt;</span><br><span class="line">+</span><br><span class="line">+int main(int argc, char const *argv[]) &#123;</span><br><span class="line">+       <span class="built_in">printf</span>(<span class="string">&quot;Hello Git!\n&quot;</span>);</span><br><span class="line">+       <span class="built_in">printf</span>(<span class="string">&quot;I want to change this file.\n&quot;</span>);</span><br><span class="line">+       <span class="built_in">return</span> 0;</span><br><span class="line">+&#125;</span><br><span class="line">\ No newline at end of file</span><br></pre></td></tr></table></figure>
+<p>注意到上面并没有<code>printf(&quot;Test git diff!\n&quot;);</code>，那是因为，更新后的<code>test.c</code>文件并没有暂存。另外，<code>git diff</code>只能显示尚未暂存的改动，而不是自上次**提交（commit）**以来所作的所有改动。</p>
+<h3 id="Committing-Changes"><a href="#Committing-Changes" class="headerlink" title="Committing Changes"></a>Committing Changes</h3><p>现在的暂存区与已经摸熟了，可以来愉快的提交了😊，不过正式使用仓库的时候，提交之前最好看看有没有什么记录没有暂存起来，可以先用<code>git status</code>命令看下，是不是都已暂存起来了，然后运行提交命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit</span><br></pre></td></tr></table></figure>
+<p>提交后，会跳入到 <strong>vi&#x2F;vim</strong> 编辑器界面（不同系统可能不一致），基本上都是默认的提交消息，保存在<code>.git</code>目录下的<code>COMMIT_EDITMSG</code>文件内，开头的空行用来键入提交说明，其他<code>#</code>开头的都是注释，去掉与否取决于个人，也可以使用如下命令来简化提交：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -m <span class="string">&quot;Test Commit&quot;</span></span><br><span class="line">[master (root-commit) 88ba107] Test Commit</span><br><span class="line"> 3 files changed, 18 insertions(+)</span><br><span class="line"> create mode 100644 .gitignore</span><br><span class="line"> create mode 100644 change.c</span><br><span class="line"> create mode 100644 test.c</span><br></pre></td></tr></table></figure>
+<p>注意，<code>master</code>表示当前提交是在<code>master</code>分支进行的提交，<code>88ba107</code>就是本次提交的完整 SHA-1 校验和，下面的信息表示本次提交中，有多少文件修订过，多少行添加和修改过。</p>
+<p>使用<code>git commit -a</code>可以跳过提交之前先使用<code>git add</code>暂存文件（这些文件必须已经被暂存过）的步骤而直接提交。</p>
+<h3 id="Removing-Files"><a href="#Removing-Files" class="headerlink" title="Removing Files"></a>Removing Files</h3><p>要从 Git 中移除某个文件，就必须要从已跟踪文件清单中移除（确切地说，是从暂存区域），然后提交。可以使用<code>git rm</code>命令完成此项工作，并连带的从工作目录中删除指定的文件，这样以后就不会出现在未跟踪文件清单中了。</p>
+<p>如果只是简单地从工作目录中手工删除文件，运行<code>git status</code>时就会在“Changes not staged for commit”部分（也就是<em>未暂存清单</em>）看到该文件的删除记录了。例如，在<code>Test</code>目录下，删除<code>change.c</code>文件，使用<code>git status</code>命令可以看到：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Changes not staged <span class="keyword">for</span> commit:</span><br><span class="line">  (use <span class="string">&quot;git add/rm &lt;file&gt;...&quot;</span> to update what will be committed)</span><br><span class="line">  (use <span class="string">&quot;git checkout -- &lt;file&gt;...&quot;</span> to discard changes <span class="keyword">in</span> working directory)</span><br><span class="line"></span><br><span class="line">        deleted:    change.c</span><br><span class="line"></span><br><span class="line">no changes added to commit (use <span class="string">&quot;git add&quot;</span> and/or <span class="string">&quot;git commit -a&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>然后还需在运行<code>git rm</code>记录此次移除文件的操作：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">rm</span> change.c</span><br><span class="line"><span class="built_in">rm</span> <span class="string">&#x27;change.c&#x27;</span></span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use <span class="string">&quot;git reset HEAD &lt;file&gt;...&quot;</span> to unstage)</span><br><span class="line"></span><br><span class="line">        deleted:    change.c</span><br></pre></td></tr></table></figure>
+<p>这样下一次提交时，该文件就不再纳入版本管理了。</p>
+<p>如果将文件保留在磁盘内，但是并不想让 Git 继续跟踪，可以使用<code>--cached</code>选项，如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">rm</span> --cached update.c</span><br><span class="line"><span class="built_in">rm</span> <span class="string">&#x27;update.c&#x27;</span></span><br><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use <span class="string">&quot;git reset HEAD &lt;file&gt;...&quot;</span> to unstage)</span><br><span class="line"></span><br><span class="line">        deleted:    update.c</span><br><span class="line"></span><br><span class="line">Untracked files:</span><br><span class="line">  (use <span class="string">&quot;git add &lt;file&gt;...&quot;</span> to include <span class="keyword">in</span> what will be committed)</span><br><span class="line"></span><br><span class="line">        update.c</span><br></pre></td></tr></table></figure>
+<p>接着使用<code>git commit</code>命令提交后<code>update.c</code>文件就不在仓库内，但仍在磁盘上了。</p>
+<h3 id="Moving-Files"><a href="#Moving-Files" class="headerlink" title="Moving Files"></a>Moving Files</h3><p>Git 很聪明，一条移动文件的命令就能重命名文件并保留相同异名文件的状态，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">mv</span> file_from file_to</span><br></pre></td></tr></table></figure>
+<p>上述命令与下面三条命令类似：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">mv</span> file_from file_to</span><br><span class="line">$ git <span class="built_in">rm</span> file_from</span><br><span class="line">$ git add file_from</span><br></pre></td></tr></table></figure>
+<p>使用一条命令干三件事，很棒吧~</p>
+<!-- ## Viewing the Commit History -->
+
+
+<hr>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>bachzart
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://bachzart.github.io/2019/06/23/Git%E7%AE%80%E6%98%93%E6%8C%87%E5%8D%97/" title="Git简易指南">http://bachzart.github.io/2019/06/23/Git简易指南/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Git/" rel="tag"># Git</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/06/21/%E7%B4%A0%E6%95%B0%E7%9A%84%E6%B1%82%E6%B3%95/" rel="prev" title="素数的求法">
+      <i class="fa fa-chevron-left"></i> 素数的求法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/06/30/PAT-Advanced-Level-Practice/" rel="next" title="PAT (Advanced Level) Practice">
+      PAT (Advanced Level) Practice <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Intro"><span class="nav-number">1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic-Conception"><span class="nav-number">2.</span> <span class="nav-text">Basic Conception</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Snapshots-Not-Differences"><span class="nav-number">2.1.</span> <span class="nav-text">Snapshots, Not Differences</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nearly-Every-Operation-Is-Local"><span class="nav-number">2.2.</span> <span class="nav-text">Nearly Every Operation Is Local</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Three-States"><span class="nav-number">2.3.</span> <span class="nav-text">The Three States</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-use"><span class="nav-number">2.4.</span> <span class="nav-text">How to use</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installing-Git"><span class="nav-number">2.5.</span> <span class="nav-text">Installing Git</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#First-Time-Git-Setup"><span class="nav-number">3.</span> <span class="nav-text">First-Time Git Setup</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#User-Identity"><span class="nav-number">3.1.</span> <span class="nav-text">User Identity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#User-Editor"><span class="nav-number">3.2.</span> <span class="nav-text">User Editor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Checking"><span class="nav-number">3.3.</span> <span class="nav-text">Checking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Getting-Help"><span class="nav-number">3.4.</span> <span class="nav-text">Getting Help</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">3.5.</span> <span class="nav-text">Summary</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic-Usage"><span class="nav-number">4.</span> <span class="nav-text">Basic Usage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Getting-a-Git-Repository"><span class="nav-number">4.1.</span> <span class="nav-text">Getting a Git Repository</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Initializing-a-Repository-in-an-Existing-Directory"><span class="nav-number">4.1.1.</span> <span class="nav-text">Initializing a Repository in an Existing Directory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cloning-an-Existing-Repository"><span class="nav-number">4.1.2.</span> <span class="nav-text">Cloning an Existing Repository</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Local-Repository"><span class="nav-number">4.2.</span> <span class="nav-text">Local Repository</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Checking-the-Status-of-Local-Reposity"><span class="nav-number">4.2.1.</span> <span class="nav-text">Checking the Status of Local Reposity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tracking-a-new-file"><span class="nav-number">4.2.2.</span> <span class="nav-text">Tracking a new file</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Staging-Modified-Files"><span class="nav-number">4.2.3.</span> <span class="nav-text">Staging Modified Files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ignoring-Files"><span class="nav-number">4.2.4.</span> <span class="nav-text">Ignoring Files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Viewing-Changes"><span class="nav-number">4.2.5.</span> <span class="nav-text">Viewing Changes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Committing-Changes"><span class="nav-number">4.2.6.</span> <span class="nav-text">Committing Changes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Removing-Files"><span class="nav-number">4.2.7.</span> <span class="nav-text">Removing Files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Moving-Files"><span class="nav-number">4.2.8.</span> <span class="nav-text">Moving Files</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bachzart"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">bachzart</p>
+  <div class="site-description" itemprop="description">我即世界，世界即我</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bachzart" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bachzart" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bachzart@163.com" title="E-Mail → mailto:bachzart@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="/about/" title="&#x2F;about&#x2F;">About This Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/Book-List/" title="&#x2F;Book-List&#x2F;">Book List</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.sudoku.name/index.php?ln=cn&ref=44355" title="https:&#x2F;&#x2F;www.sudoku.name&#x2F;index.php?ln&#x3D;cn&amp;ref&#x3D;44355" rel="noopener" target="_blank">Soduku Game</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://2048game.com/" title="https:&#x2F;&#x2F;2048game.com&#x2F;" rel="noopener" target="_blank">2048 Game</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bachzart</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

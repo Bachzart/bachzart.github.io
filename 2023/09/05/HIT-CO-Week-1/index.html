@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/acoustic_guitar_128px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/acoustic_guitar_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/acoustic_guitar_16px.png">
+  <link rel="mask-icon" href="/uploads/acoustic_guitar.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https:/fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bachzart.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="从今天开始更新笔者在 MOOC 上自学哈工大计算机组成原理时的笔记，按照每一周的课程进行记录，每周对应一篇 Blog，算上上下两门课程，这个系列大概有个十来篇吧。🧐">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HIT_CO_Week_1">
+<meta property="og:url" content="http://bachzart.github.io/2023/09/05/HIT-CO-Week-1/index.html">
+<meta property="og:site_name" content="bachzart&#39;s Blog">
+<meta property="og:description" content="从今天开始更新笔者在 MOOC 上自学哈工大计算机组成原理时的笔记，按照每一周的课程进行记录，每周对应一篇 Blog，算上上下两门课程，这个系列大概有个十来篇吧。🧐">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_1/1_1.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_1/1_2.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_1/1_4.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_1/1_3.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_1/1_5.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_1/1_6.png">
+<meta property="og:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_1/1_7.png">
+<meta property="article:published_time" content="2023-09-05T13:13:37.000Z">
+<meta property="article:modified_time" content="2026-05-09T09:26:52.753Z">
+<meta property="article:author" content="bachzart">
+<meta property="article:tag" content="HIT_CO">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://bachzart.github.io/my_photo_gallery/HIT_CO_Week_1/1_1.png">
+
+<link rel="canonical" href="http://bachzart.github.io/2023/09/05/HIT-CO-Week-1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>HIT_CO_Week_1 | bachzart's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">bachzart's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">133</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/bachzart" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2023/09/05/HIT-CO-Week-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="我即世界，世界即我">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HIT_CO_Week_1
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-09-05 21:13:37" itemprop="dateCreated datePublished" datetime="2023-09-05T21:13:37+08:00">2023-09-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-05-09 17:26:52" itemprop="dateModified" datetime="2026-05-09T17:26:52+08:00">2026-05-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/Computer-Architecture/" itemprop="url" rel="index"><span itemprop="name">Computer Architecture</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>从今天开始更新笔者在 MOOC 上自学哈工大计算机组成原理时的笔记，按照每一周的课程进行记录，每周对应一篇 Blog，算上上下两门课程，这个系列大概有个十来篇吧。🧐</p>
+<span id="more"></span>
+
+<h1 id="课程概貌"><a href="#课程概貌" class="headerlink" title="课程概貌"></a>课程概貌</h1><p>这门课主要讲解三个方面的内容：计算机、组成和原理，主要从三个角度入手：</p>
+<ol>
+<li>基本部件的结构和组织方法</li>
+<li>基本运算的操作原理</li>
+<li>基本部件和单元的设计思想</li>
+</ol>
+<p>这门课程对应的交材是<strong>唐朔飞老师编的那本《计算机组成原理》（第二版）</strong>，由高等教育出版社出版。另外，老师推荐了两本参考教材：</p>
+<ul>
+<li><strong><span class="label warning">Computer Organization & Design: A Hardware/Software Interface, David A.Patterson. John L.Hennessy</span></strong></li>
+<li><strong><span class="label warning">Digital Design and Computer Architecture. Morgan Kaufmann, 2007, David Harris, Sarah Harris</span></strong></li>
+</ul>
+<p>这门课总共有十章内容，上半部分课程会讲解前五章，主要内容为计算机组成原理中与机器相关的部分；下半部分课程会讲解后五章，主要内容为计算机组成原理中数据的存储、表示和运算以及 CPU 的设计思想。</p>
+<p>第一周的课程有点 boring🥱，主要讲解<em>计算机系统概论</em>，算是基本概念知识。</p>
+<h1 id="计算机系统概论"><a href="#计算机系统概论" class="headerlink" title="计算机系统概论"></a>计算机系统概论</h1><h2 id="计算机的软硬件概念"><a href="#计算机的软硬件概念" class="headerlink" title="计算机的软硬件概念"></a>计算机的软硬件概念</h2><p>这个地方其实没什么好说的，算是常识性的内容。</p>
+<h2 id="计算机系统的层次结构"><a href="#计算机系统的层次结构" class="headerlink" title="计算机系统的层次结构"></a>计算机系统的层次结构</h2><p>这里要提到了<strong>两个系统复杂性管理方法：<span class="label info">抽象</span>和<span class="label info">3Y（Hierachy、Modularity 和 Regularity）</span></strong>。如果熟悉一门 OOP 语言的话，这些概念也都是基本常识了。</p>
+<p>另外，下面这张图可以注意一下：<br><img src="/my_photo_gallery/HIT_CO_Week_1/1_1.png" alt="计算机层次结构" title="计算机层次结构"></p>
+<h2 id="计算机体系结构和计算机组成"><a href="#计算机体系结构和计算机组成" class="headerlink" title="计算机体系结构和计算机组成"></a>计算机体系结构和计算机组成</h2><p>注意区分这两个概念：</p>
+<ul>
+<li>计算机体系结构：程序员所见到的计算机系统的属性，概念性的结构和功能特性（指令系统、数据类型、寻址技术、I&#x2F;O 原理等）</li>
+<li>计算机组成：实现计算机体系结构所体现的属性（具体指令的实现）</li>
+</ul>
+<h1 id="计算机的基本组成"><a href="#计算机的基本组成" class="headerlink" title="计算机的基本组成"></a>计算机的基本组成</h1><h2 id="冯·诺依曼计算机的特点"><a href="#冯·诺依曼计算机的特点" class="headerlink" title="冯·诺依曼计算机的特点"></a>冯·诺依曼计算机的特点</h2><ol>
+<li>计算机由五大部件组成</li>
+<li>指令和数据以同等地位存于存储器，可按地址寻访</li>
+<li>指令和数据用二进制表示</li>
+<li>指令由操作码和地址码组成</li>
+<li>存储程序</li>
+<li>以运算器为中心</li>
+</ol>
+<p><img src="/my_photo_gallery/HIT_CO_Week_1/1_2.png" alt="冯·诺依曼计算机硬件框图" title="冯·诺依曼计算机硬件框图"></p>
+<p>冯·诺依曼计算机存在一个缺陷，那就是运算器承担了很多工作，大部分事情都是亲力亲为，这就导致了运算器的速度直接成了整台电脑的速度（实际上就是木桶效应）。</p>
+<h2 id="计算机硬件框图"><a href="#计算机硬件框图" class="headerlink" title="计算机硬件框图"></a>计算机硬件框图</h2><p>针对冯·诺依曼计算机的改良措施就是将整个体系的中心从运算器换成了存储器。</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_1/1_4.png" alt="改良后的冯·诺依曼计算机硬件框图" title="改良后的冯·诺依曼计算机硬件框图"></p>
+<p>现代计算机也是按照上图中的结构搭建起来的，此时各部分硬件设备都有了自己的名字，从这里体现的设计思想就是前面提到的 3Y——层次化（Hierachy）、模块化（Modularity）和规则性（Regularity）。</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_1/1_3.png" alt="现代计算机硬件框图" title="现代计算机硬件框图"></p>
+<h2 id="存储器的基本组成"><a href="#存储器的基本组成" class="headerlink" title="存储器的基本组成"></a>存储器的基本组成</h2><p>存储器由<strong>主存储器（主存，内存条）<strong>和</strong>辅存储器（辅存，硬盘）</strong>。<br>主存储器由许多<strong>存储单元</strong>组成，每个存储单元包含若干个存储元件（也就是在 Nand2tetris 这门课中接触到的 Bit 芯片，可以用来存储一位二进制信息）。<br>这里还有一个存储字长的概念，也就是指存储单元中二进制代码的位数。</p>
+<p>除了存储单元外，主存储器还包括了<strong>地址寄存器（MAR）</strong>、**数据寄存器（MDR）**和一些逻辑电路。<br>地址寄存器（MAR）存放访存地址，经过地址译码后找到所选的存储单元，从而拿到数据（类比一下指针的概念）。MAR 用于寻址，故其位数对应着存储单元的个数<br>数据寄存器（MDR）是主存和其他部件的中介机构，用于暂存要从存储器中读或写的信息（类比临时变量）。MDR 的位数和存储字长相等。</p>
+<div class="note info">
+            <p>现代 CPU 中的缓存（Cache）在概念上也是主存。</p>
+          </div>
+
+<h2 id="运算器的基本组成"><a href="#运算器的基本组成" class="headerlink" title="运算器的基本组成"></a>运算器的基本组成</h2><p>运算器的<strong>基本</strong>组成包括：算术逻辑单元（ALU）、累加器（ACC）、乘商寄存器（MQ）和操作数寄存器（X），各寄存器运算后存储的内容见下图：</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_1/1_5.png" alt="运算器中的寄存器" title="运算器中的寄存器"></p>
+<h2 id="控制器的基本组成"><a href="#控制器的基本组成" class="headerlink" title="控制器的基本组成"></a>控制器的基本组成</h2><p>控制器的<strong>基本</strong>组成包括：控制单元（CU）、程序计数器（IR）和指令寄存器（PC），各部分功能见下图：</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_1/1_6.png" alt="控制器" title="控制器"></p>
+<h1 id="计算机的性能指标"><a href="#计算机的性能指标" class="headerlink" title="计算机的性能指标"></a>计算机的性能指标</h1><p>这一部分又是一堆概念性的内容🤐：</p>
+<ol>
+<li>机器字长：CPU 一次能处理数据的位数与 CPU 中的寄存器位数有关</li>
+<li>CPU 主频、核心数、CPI（执行一条指令所需时钟周期数）、MIPS（每秒执行百万条指令）、FLOPS（每秒浮点运算次数）</li>
+<li>存储容量，包括主存容量和辅存容量</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>做了张思维导图：</p>
+<p><img src="/my_photo_gallery/HIT_CO_Week_1/1_7.png" alt="计算机系统概述" title="计算机系统概述"></p>
+<p>之前一直在听 Nand2tetris 的课，现在一时换回国内老师的课，听的还有点不习惯。哎，听完一周，这种为了应试而听课、学习的感觉又回来了。<br>相比之下，感觉国外课程往往把复杂的理论讲的很简单，在你理解的差不多了之后，会给你一个任务，让你通过实践来继续加深理解。但国内课程为了应试，在理论上的讲解往往就比较复杂...😓<br>仔细想了一下，国内的课程真的很容易打消学生的兴趣，当然如果能坚持下来，确实能获得不错的理论能力，但是没有实践还是不行啊，哎，原本之前在自学 Nand2tetris 时，就已经感慨过国外学生的实践能力很强，现在这种体会又加深了。</p>
+<p>不扯这些闲篇了...回过头来谈一谈这门课的感受，在学习《组成原理》之前一定要把 C 语言的指针、地址这两个概念玩明白个大概，不然，这些硬件的设计思想会非常难以理解。只要能理解硬件中地址的设计思想理解透彻，应该就不会有太大的问题了。</p>
+<p>另外，从国内应试（期末考、408 之类）的角度来讲，哈工大开的这门课讲的还是很清晰的，推荐学习，如果你听的过程中感觉很吃力，那说明可能对一些基础概念还不熟悉，还是先把基础打扎实。</p>
+<p>好了，这周还有一件事情，那就是把书上的题做完😑，卧槽，突然想起来，好久没写过作业了...🤣</p>
+<hr>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>bachzart
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://bachzart.github.io/2023/09/05/HIT-CO-Week-1/" title="HIT_CO_Week_1">http://bachzart.github.io/2023/09/05/HIT-CO-Week-1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/HIT-CO/" rel="tag"># HIT_CO</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/08/27/2023-08-%E6%9C%88%E6%80%BB%E7%BB%93/" rel="prev" title="2023_08_月总结">
+      <i class="fa fa-chevron-left"></i> 2023_08_月总结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/09/08/HIT-CO-Week-2/" rel="next" title="HIT_CO_Week_2">
+      HIT_CO_Week_2 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%BE%E7%A8%8B%E6%A6%82%E8%B2%8C"><span class="nav-number">1.</span> <span class="nav-text">课程概貌</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA"><span class="nav-number">2.</span> <span class="nav-text">计算机系统概论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E8%BD%AF%E7%A1%AC%E4%BB%B6%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">计算机的软硬件概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="nav-number">2.2.</span> <span class="nav-text">计算机系统的层次结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E5%92%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90"><span class="nav-number">2.3.</span> <span class="nav-text">计算机体系结构和计算机组成</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90"><span class="nav-number">3.</span> <span class="nav-text">计算机的基本组成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%AF%C2%B7%E8%AF%BA%E4%BE%9D%E6%9B%BC%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">3.1.</span> <span class="nav-text">冯·诺依曼计算机的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E6%A1%86%E5%9B%BE"><span class="nav-number">3.2.</span> <span class="nav-text">计算机硬件框图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90"><span class="nav-number">3.3.</span> <span class="nav-text">存储器的基本组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90"><span class="nav-number">3.4.</span> <span class="nav-text">运算器的基本组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90"><span class="nav-number">3.5.</span> <span class="nav-text">控制器的基本组成</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="nav-number">4.</span> <span class="nav-text">计算机的性能指标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bachzart"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">bachzart</p>
+  <div class="site-description" itemprop="description">我即世界，世界即我</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bachzart" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bachzart" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bachzart@163.com" title="E-Mail → mailto:bachzart@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="/about/" title="&#x2F;about&#x2F;">About This Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/Book-List/" title="&#x2F;Book-List&#x2F;">Book List</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.sudoku.name/index.php?ln=cn&ref=44355" title="https:&#x2F;&#x2F;www.sudoku.name&#x2F;index.php?ln&#x3D;cn&amp;ref&#x3D;44355" rel="noopener" target="_blank">Soduku Game</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://2048game.com/" title="https:&#x2F;&#x2F;2048game.com&#x2F;" rel="noopener" target="_blank">2048 Game</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bachzart</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

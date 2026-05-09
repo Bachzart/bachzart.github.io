@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/acoustic_guitar_128px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/acoustic_guitar_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/acoustic_guitar_16px.png">
+  <link rel="mask-icon" href="/uploads/acoustic_guitar.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https:/fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bachzart.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="有时候，函数模板类型推导是个让人困惑的玩意儿~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数模板类型推导笔记">
+<meta property="og:url" content="http://bachzart.github.io/2025/07/28/%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="bachzart&#39;s Blog">
+<meta property="og:description" content="有时候，函数模板类型推导是个让人困惑的玩意儿~">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-28T03:50:50.000Z">
+<meta property="article:modified_time" content="2026-05-09T09:26:52.792Z">
+<meta property="article:author" content="bachzart">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="function_template">
+<meta property="article:tag" content="template">
+<meta property="article:tag" content="template_argument_deduction">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://bachzart.github.io/2025/07/28/%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>函数模板类型推导笔记 | bachzart's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">bachzart's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">133</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/bachzart" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2025/07/28/%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="我即世界，世界即我">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          函数模板类型推导笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-07-28 11:50:50" itemprop="dateCreated datePublished" datetime="2025-07-28T11:50:50+08:00">2025-07-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-05-09 17:26:52" itemprop="dateModified" datetime="2026-05-09T17:26:52+08:00">2026-05-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>有时候，函数模板类型推导是个让人困惑的玩意儿~</p>
+<span id="more"></span>
+
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>顾名思义，这篇文章的主题是函数模板类型推导，所以不会涉及过多的理论，主要研究的内容是编译器的推导行为。那么如何研究呢？实际上就是引入一些实验代码，来观察编译器的行为，所以这个过程略微有点无聊。<br>好了，废话不多说，直接进入主题了。</p>
+<p>我们以函数模板中的参数传递方式为差异点来进行讨论，对应的我们可以得到四种传递方式。需要注意的是，这只是我们的分类方法，这与普通函数中的四种参数传递方式是不同的。尽管可能存在相似的地方，但本质还是不一样的。<br><strong>同时还需要注意的是，函数模板类型推导是在<em>编译期</em>完成的。</strong></p>
+<div class="note info">
+            <p>❗ 注意：本文所使用的编译器是 MSVC2019 自带的编译器，不同编译器的推导结果可能会存在差异。</p>
+          </div>
+
+<h1 id="值传递"><a href="#值传递" class="headerlink" title="值传递"></a>值传递</h1><p>第一种方式就是值传递，对应的模板形式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f1</span><span class="params">(T t)</span> </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
+<p>然后我们针对常见的参数类型，进行测试：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">int</span>)</span> </span>&#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f1</span><span class="params">(T t)</span> </span>&#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> ci = i;</span><br><span class="line">    <span class="type">int</span>&amp; ri = i;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>&amp; cri = i;</span><br><span class="line">    <span class="type">int</span>&amp;&amp; rri = <span class="number">20</span>;</span><br><span class="line">    <span class="type">int</span>* pi = &amp;i;</span><br><span class="line">    <span class="type">int</span>* <span class="type">const</span> cpi = &amp;i;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>* ptci = &amp;i;</span><br><span class="line">    <span class="type">int</span> a[<span class="number">5</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">f1</span>(i); <span class="comment">// T 被推导为 int</span></span><br><span class="line">    <span class="built_in">f1</span>(ci); <span class="comment">// T 被推导为 int</span></span><br><span class="line">    <span class="built_in">f1</span>(ri); <span class="comment">// T 被推导为 int</span></span><br><span class="line">    <span class="built_in">f1</span>(cri); <span class="comment">// T 被推导为 int</span></span><br><span class="line">    <span class="built_in">f1</span>(rri); <span class="comment">// T 被推导为 int</span></span><br><span class="line">    <span class="built_in">f1</span>(pi); <span class="comment">// T 被推导为 int*</span></span><br><span class="line">    <span class="built_in">f1</span>(cpi); <span class="comment">// T 被推导为 int*</span></span><br><span class="line">    <span class="built_in">f1</span>(ptci); <span class="comment">// T 被推导为 const int*</span></span><br><span class="line">    <span class="built_in">f1</span>(a); <span class="comment">// T 被推导为 int*</span></span><br><span class="line">    <span class="built_in">f1</span>(f); <span class="comment">// T 被推导为 void(*)(int)</span></span><br><span class="line">    <span class="built_in">f1</span>(<span class="number">50</span>); <span class="comment">// T 被推导为 int</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>观察上面的结果，可以发现在值传递方式推导模板实参的一些特点：</p>
+<ol>
+<li>可以传递左值，也可以传递右值，但无法推导出引用，只能推导出原始类型。因为模板实例化生成的函数是值传递的，函数形参是函数实参的拷贝。</li>
+<li>对于指针和引用，顶层 const 会被忽略掉，底层 const 不会被忽略掉。原因同上，模板实例化后的函数是值传递的，函数形参是函数实参的拷贝，在函数内直接修改函数形参，不会对函数实参有任何改变；对应的，底层 const 不能忽略，不能在函数内通过函数形参修改其所指对象的值。</li>
+<li>如果数组和函数名被传递给模板，则推导出来的模板实参是对应的指针。</li>
+</ol>
+<h1 id="左值引用传递"><a href="#左值引用传递" class="headerlink" title="左值引用传递"></a>左值引用传递</h1><p>第二种方式是左值引用传递，对应的模板形式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f2</span><span class="params">(T&amp; t)</span> </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
+<p>同样可以进行测试：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f2</span><span class="params">(T&amp; t)</span> </span>&#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> ci = i;</span><br><span class="line">    <span class="type">int</span>&amp; ri = i;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>&amp; cri = i;</span><br><span class="line">    <span class="type">int</span>&amp;&amp; rri = <span class="number">20</span>;</span><br><span class="line">    <span class="type">int</span>* pi = &amp;i;</span><br><span class="line">    <span class="type">int</span>* <span class="type">const</span> cpi = &amp;i;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>* ptci = &amp;i;</span><br><span class="line">    <span class="type">int</span> a[<span class="number">5</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">f2</span>(i); <span class="comment">// T 被推导为 int</span></span><br><span class="line">    <span class="built_in">f2</span>(ci); <span class="comment">// T 被推导为 const int</span></span><br><span class="line">    <span class="built_in">f2</span>(ri); <span class="comment">// T 被推导为 int</span></span><br><span class="line">    <span class="built_in">f2</span>(cri); <span class="comment">// T 被推导为 const int</span></span><br><span class="line">    <span class="built_in">f2</span>(pi); <span class="comment">// T 被推导为 int*</span></span><br><span class="line">    <span class="built_in">f2</span>(cpi); <span class="comment">// T 被推导为 int* const</span></span><br><span class="line">    <span class="built_in">f2</span>(ptci); <span class="comment">// T 被推导为 const int*</span></span><br><span class="line">    <span class="built_in">f2</span>(a); <span class="comment">// T 被推导为 int [5]</span></span><br><span class="line">    <span class="built_in">f2</span>(f); <span class="comment">// T 被推导为 void (int)</span></span><br><span class="line">    <span class="built_in">f2</span>(<span class="number">50</span>); <span class="comment">// 错误，无法传递右值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>观察上面的结果，我们也可以得到左值引用传递方式推导模板实参的一些特点：</p>
+<ol>
+<li>可以传递左值，无法传递右值，也无法推导出引用，但本身就是<code>T&amp;</code>，最终<code>t</code>的类型可能是左值引用。</li>
+<li>顶层 const 和底层 const 都不会被忽略，且与实参基本一致，如果实参是 const 的，那么<code>T</code>就是 const 的。</li>
+<li>传递数组和函数名时，推导出来的是对应的类型，不是指针。</li>
+</ol>
+<h1 id="常量左值引用传递"><a href="#常量左值引用传递" class="headerlink" title="常量左值引用传递"></a>常量左值引用传递</h1><p>第三种方式是常量左值引用传递，对应的模板形式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f3</span><span class="params">(<span class="type">const</span> T&amp; t)</span> </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
+<p>同样进行测试：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">int</span>)</span> </span>&#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f3</span><span class="params">(<span class="type">const</span> T&amp; t)</span> </span>&#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f4</span><span class="params">(T&amp;&amp; t)</span> </span>&#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> ci = i;</span><br><span class="line">    <span class="type">int</span>&amp; ri = i;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>&amp; cri = i;</span><br><span class="line">    <span class="type">int</span>&amp;&amp; rri = <span class="number">20</span>;</span><br><span class="line">    <span class="type">int</span>* pi = &amp;i;</span><br><span class="line">    <span class="type">int</span>* <span class="type">const</span> cpi = &amp;i;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>* ptci = &amp;i;</span><br><span class="line">    <span class="type">int</span> a[<span class="number">5</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">f3</span>(i); <span class="comment">// T 被推导为 int</span></span><br><span class="line">    <span class="built_in">f3</span>(ci); <span class="comment">// T 被推导为 int</span></span><br><span class="line">    <span class="built_in">f3</span>(ri); <span class="comment">// T 被推导为 int</span></span><br><span class="line">    <span class="built_in">f3</span>(cri); <span class="comment">// T 被推导为 int</span></span><br><span class="line">    <span class="built_in">f3</span>(pi); <span class="comment">// T 被推导为 int*</span></span><br><span class="line">    <span class="built_in">f3</span>(cpi); <span class="comment">// T 被推导为 int*</span></span><br><span class="line">    <span class="built_in">f3</span>(ptci); <span class="comment">// T 被推导为 const int*</span></span><br><span class="line">    <span class="built_in">f3</span>(a); <span class="comment">// T 被推导为 int [5]</span></span><br><span class="line">    <span class="built_in">f3</span>(f); <span class="comment">// T 被推导为 void (int)</span></span><br><span class="line">    <span class="built_in">f3</span>(<span class="number">50</span>); <span class="comment">// T 被推导为 int</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>观察上面的结果，我们也可以得到常量左值引用传递方式推导模板实参的一些特点：</p>
+<ol>
+<li>可以传递左值，也可以传递右值，也无法推导出引用，但本身就是<code>T&amp;</code>，最终<code>t</code>的类型可能是左值引用。从语义上讲，这与常量左值引用的语义也是符合的。</li>
+<li>顶层 const 会被忽略掉，因为本身就是<code>const T&amp;</code>形式，所以即便推导<code>T</code>时，忽略了顶层 const，但最终又加上了顶层 const；对应的，底层 const 会被保留。</li>
+<li>传递数组和函数名时，推导出来的是对应的类型，不再是指针。</li>
+</ol>
+<h1 id="右值引用传递"><a href="#右值引用传递" class="headerlink" title="右值引用传递"></a>右值引用传递</h1><p>第四种方式是右值引用传递，对应的模板形式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f4</span><span class="params">(T&amp;&amp; t)</span> </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
+<p>同样进行测试：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">int</span>)</span> </span>&#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f4</span><span class="params">(T&amp;&amp; t)</span> </span>&#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> ci = i;</span><br><span class="line">    <span class="type">int</span>&amp; ri = i;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>&amp; cri = i;</span><br><span class="line">    <span class="type">int</span>&amp;&amp; rri = <span class="number">20</span>;</span><br><span class="line">    <span class="type">int</span>* pi = &amp;i;</span><br><span class="line">    <span class="type">int</span>* <span class="type">const</span> cpi = &amp;i;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>* ptci = &amp;i;</span><br><span class="line">    <span class="type">int</span> a[<span class="number">5</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">f4</span>(i); <span class="comment">// T 被推导为 int&amp;</span></span><br><span class="line">    <span class="built_in">f4</span>(ci); <span class="comment">// T 被推导为 const int&amp;</span></span><br><span class="line">    <span class="built_in">f4</span>(ri); <span class="comment">// T 被推导为 int&amp;</span></span><br><span class="line">    <span class="built_in">f4</span>(cri); <span class="comment">// T 被推导为 const int&amp;</span></span><br><span class="line">    <span class="built_in">f4</span>(pi); <span class="comment">// T 被推导为 int*&amp;</span></span><br><span class="line">    <span class="built_in">f4</span>(cpi); <span class="comment">// T 被推导为 int* const&amp;</span></span><br><span class="line">    <span class="built_in">f4</span>(ptci); <span class="comment">// T 被推导为 const int*&amp;</span></span><br><span class="line">    <span class="built_in">f4</span>(a); <span class="comment">// T 被推导为 int(&amp;)[5]</span></span><br><span class="line">    <span class="built_in">f4</span>(f); <span class="comment">// T 被推导为 void (&amp;)(int)</span></span><br><span class="line">    <span class="built_in">f4</span>(<span class="number">50</span>); <span class="comment">// T 被推导为 int</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>观察上面的结果，我们也可以得到右值引用传递方式推导模板实参的一些特点：</p>
+<ol>
+<li>可以传递左值，也可以传递右值，且会被推导为原始类型的引用。</li>
+<li>顶层 const 和底层 const 都会被保留，且会被推导为原始类型的引用。</li>
+<li>传递数组和函数名时，推导出来的是对应的类型，不再是指针，且会被推导为原始类型的引用。</li>
+<li>为了避免出现引用的引用，对应<code>t</code>的类型会发生引用折叠。</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>我们根据函数模板的参数传递方式，讨论了四种不同传递方式的特点。可以发现：</p>
+<ol>
+<li><strong>右值引用可以最大限度的保留所传递参数的类型和值类别，且会发生引用折叠现象。</strong></li>
+<li>值传递方式下，顶层 const 会被忽略，底层 const 不会被忽略；数组和函数名会被传递为指针。</li>
+<li><strong>模板根据实参推导类型时，不会对实参进行隐式类型转换，只会按照模板实例化出不同函数。</strong></li>
+</ol>
+<p>还需要额外说明的是，本文的内容不需要刻意记忆，遇到了查一下就可以了。<br>另外，本文也可以作为<a href="https://bachzart.github.io/2025/07/14/%E7%90%86%E8%A7%A3%E5%AE%8C%E7%BE%8E%E8%BD%AC%E5%8F%91/#more">理解完美转发</a>这篇文章的补充内容。</p>
+<hr>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>bachzart
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://bachzart.github.io/2025/07/28/%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC%E7%AC%94%E8%AE%B0/" title="函数模板类型推导笔记">http://bachzart.github.io/2025/07/28/函数模板类型推导笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C-C/" rel="tag"># C/C++</a>
+              <a href="/tags/template/" rel="tag"># template</a>
+              <a href="/tags/function-template/" rel="tag"># function_template</a>
+              <a href="/tags/template-argument-deduction/" rel="tag"># template_argument_deduction</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/07/22/%E6%9C%89%E5%85%B3-pthread-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AC%94%E8%AE%B0/" rel="prev" title="有关 pthread 的一些笔记">
+      <i class="fa fa-chevron-left"></i> 有关 pthread 的一些笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/07/28/%E7%90%86%E8%A7%A3-std-move/" rel="next" title="理解 std::move">
+      理解 std::move <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%80%BC%E4%BC%A0%E9%80%92"><span class="nav-number">2.</span> <span class="nav-text">值传递</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92"><span class="nav-number">3.</span> <span class="nav-text">左值引用传递</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92"><span class="nav-number">4.</span> <span class="nav-text">常量左值引用传递</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92"><span class="nav-number">5.</span> <span class="nav-text">右值引用传递</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bachzart"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">bachzart</p>
+  <div class="site-description" itemprop="description">我即世界，世界即我</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bachzart" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bachzart" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bachzart@163.com" title="E-Mail → mailto:bachzart@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="/about/" title="&#x2F;about&#x2F;">About This Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/Book-List/" title="&#x2F;Book-List&#x2F;">Book List</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.sudoku.name/index.php?ln=cn&ref=44355" title="https:&#x2F;&#x2F;www.sudoku.name&#x2F;index.php?ln&#x3D;cn&amp;ref&#x3D;44355" rel="noopener" target="_blank">Soduku Game</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://2048game.com/" title="https:&#x2F;&#x2F;2048game.com&#x2F;" rel="noopener" target="_blank">2048 Game</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bachzart</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

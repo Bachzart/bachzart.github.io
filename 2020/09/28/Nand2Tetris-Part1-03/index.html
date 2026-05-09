@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/acoustic_guitar_128px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/acoustic_guitar_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/acoustic_guitar_16px.png">
+  <link rel="mask-icon" href="/uploads/acoustic_guitar.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https:/fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bachzart.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本周的主题是 Memory，先把做好的 ALU 放一边，我们来研究一下和内存（RAM）有关的问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nand2Tetris_Part1_03">
+<meta property="og:url" content="http://bachzart.github.io/2020/09/28/Nand2Tetris-Part1-03/index.html">
+<meta property="og:site_name" content="bachzart&#39;s Blog">
+<meta property="og:description" content="本周的主题是 Memory，先把做好的 ALU 放一边，我们来研究一下和内存（RAM）有关的问题。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-28T09:06:46.000Z">
+<meta property="article:modified_time" content="2026-05-09T09:26:52.765Z">
+<meta property="article:author" content="bachzart">
+<meta property="article:tag" content="Nand2Tetris">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://bachzart.github.io/2020/09/28/Nand2Tetris-Part1-03/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Nand2Tetris_Part1_03 | bachzart's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">bachzart's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">133</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/bachzart" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2020/09/28/Nand2Tetris-Part1-03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="我即世界，世界即我">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Nand2Tetris_Part1_03
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-09-28 17:06:46" itemprop="dateCreated datePublished" datetime="2020-09-28T17:06:46+08:00">2020-09-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-05-09 17:26:52" itemprop="dateModified" datetime="2026-05-09T17:26:52+08:00">2026-05-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/Computer-Architecture/" itemprop="url" rel="index"><span itemprop="name">Computer Architecture</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本周的主题是 Memory，先把做好的 ALU 放一边，我们来研究一下和内存（RAM）有关的问题。</p>
+<span id="more"></span>
+
+<h1 id="Unit-3-1-Sequential-Logic"><a href="#Unit-3-1-Sequential-Logic" class="headerlink" title="Unit 3.1 Sequential Logic"></a>Unit 3.1 Sequential Logic</h1><p>本小节主要在引出新的概念：顺序逻辑（Sequential Logic）、时间等，另外也指出了顺序逻辑与前两周所学的组合逻辑（Combinational Logic）的不同。换句话来讲，这周考虑的问题会更加贴近现实生活一点。</p>
+<h1 id="Unit-3-2-Filp-Flops"><a href="#Unit-3-2-Filp-Flops" class="headerlink" title="Unit 3.2 Filp Flops"></a>Unit 3.2 Filp Flops</h1><p>本小节介绍了本周内容所使用的最基本单元：Data Flip Flops（DFF），并说明了它的功能；接着继续讲解了内存的基本单元 1-Bit Registers，着重在说明它的运行过程。</p>
+<h1 id="Unit-3-3-Memory-Units"><a href="#Unit-3-3-Memory-Units" class="headerlink" title="Unit 3.3 Memory Units"></a>Unit 3.3 Memory Units</h1><p>本小节介绍了内存单元（Memory units）的一些特点，并通过软件模拟了 RAM8 的运行过程。需要注意内存是一个具有时间属性的硬件单元，这个课程提到的内存单元是通过上面提到的 DFF 来“展现”时间功能的（实际不清楚，但是 DFF 确实是有这个功能的）。也就是说，在某个时刻，内存单元上的寄存器的电信号改变后，内存单元的输出依然不变，下一个时刻后，内存单元的输出才会改变。</p>
+<p>同时，老师还提到了寄存器的地址和寄存器数量的关系，也就是 2 的对数关系。比如，RAM8 内部有 8 个 Register，那么就可以用 3 个 bit 来表示这 8 个 Register 的序号，也即：000、001、010、011、100、110、101 和 111，这个数字其实也就是内存的地址，这应该就是内存地址概念的由来了。</p>
+<h1 id="Unit-3-4-Counters"><a href="#Unit-3-4-Counters" class="headerlink" title="Unit 3.4 Counters"></a>Unit 3.4 Counters</h1><p>本小节介绍了计数器（Counters）的一些功能和机制，包含 3 个方面：</p>
+<ol>
+<li>能将值重置为 0。</li>
+<li>能将值随着时间递增，且每 1s 增加 1。</li>
+<li>能输出上一个时刻设置的值。</li>
+</ol>
+<h1 id="Unit-3-5-Project-3-Overview"><a href="#Unit-3-5-Project-3-Overview" class="headerlink" title="Unit 3.5 Project 3 Overview"></a>Unit 3.5 Project 3 Overview</h1><p>本周作业需要实现 7 个与内存相关的芯片和 1 个计数器，针对各个芯片的实现，老师给出了若干提示，而我们将会以 DFF 为 primitive chip 来构建另外 8 个芯片。</p>
+<h2 id="Bit"><a href="#Bit" class="headerlink" title="Bit"></a>Bit</h2><p>这个老师已经讲过了，直接用 1 个 Mux 和 1 个 DFF 就可以实现，但是还额外需要一个 Mux 来帮助输出（不用 Mux，用其他的也可以）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CHIP Bit &#123;</span><br><span class="line">    IN in, load;</span><br><span class="line">    OUT out;</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    Mux(a=t2, b=in, sel=load, out=t1);</span><br><span class="line">    DFF(in=t1, out=t2);</span><br><span class="line">    Mux(a=t2, b=true, sel=false, out=out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Register"><a href="#Register" class="headerlink" title="Register"></a>Register</h2><p>按照提示，直接用 16 个 Bit 叠加在一起就可以了。但是要注意一下时间的概念，也即这 16 个 Bit 是都处于工作状态的，尽管有些 Bit 的值可能并没有改变。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">CHIP Register &#123;</span><br><span class="line">    IN in[16], load;</span><br><span class="line">    OUT out[16];</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    Bit(in=in[0], load=load, out=out[0]);</span><br><span class="line">    Bit(in=in[1], load=load, out=out[1]);</span><br><span class="line">    Bit(in=in[2], load=load, out=out[2]);</span><br><span class="line">    Bit(in=in[3], load=load, out=out[3]);</span><br><span class="line">    Bit(in=in[4], load=load, out=out[4]);</span><br><span class="line">    Bit(in=in[5], load=load, out=out[5]);</span><br><span class="line">    Bit(in=in[6], load=load, out=out[6]);</span><br><span class="line">    Bit(in=in[7], load=load, out=out[7]);</span><br><span class="line">    Bit(in=in[8], load=load, out=out[8]);</span><br><span class="line">    Bit(in=in[9], load=load, out=out[9]);</span><br><span class="line">    Bit(in=in[10], load=load, out=out[10]);</span><br><span class="line">    Bit(in=in[11], load=load, out=out[11]);</span><br><span class="line">    Bit(in=in[12], load=load, out=out[12]);</span><br><span class="line">    Bit(in=in[13], load=load, out=out[13]);</span><br><span class="line">    Bit(in=in[14], load=load, out=out[14]);</span><br><span class="line">    Bit(in=in[15], load=load, out=out[15]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="RAM8"><a href="#RAM8" class="headerlink" title="RAM8"></a>RAM8</h2><p>根据讲解，RAM8 内部包含了 8 个 Register，每个 Register 都可以存储数字，根据特定的地址（address）进行控制（包括写入值、清除值）。<br>设计这个芯片的难点在于如何根据地址来操作 Register，这与第二单元设计 ALU 是一样的难点。第二单元，解决这个问题的方式是用 Mux 来选择不同的寄存器进行输出。而这里，涉及到选址和输入，需要使用 DMux 来进行选址和输入，通过 Register 后，再用 Mux 进行输出。<br>因为 RAM8 内部包含了 8 个 Register，所以选用 DMux8Way 来处理选址和输入，再用 Mux8Way16 来输出指定地址的 Register 的值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">CHIP RAM8 &#123;</span><br><span class="line">    IN in[16], load, address[3];</span><br><span class="line">    OUT out[16];</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    DMux8Way(in=load, sel=address, a=load0, b=load1, c=load2, d=load3, e=load4, f=load5, g=load6, h=load7);</span><br><span class="line"></span><br><span class="line">    Register(in=in, load=load0, out=u0);</span><br><span class="line">    Register(in=in, load=load1, out=u1);</span><br><span class="line">    Register(in=in, load=load2, out=u2);</span><br><span class="line">    Register(in=in, load=load3, out=u3);</span><br><span class="line">    Register(in=in, load=load4, out=u4);</span><br><span class="line">    Register(in=in, load=load5, out=u5);</span><br><span class="line">    Register(in=in, load=load6, out=u6);</span><br><span class="line">    Register(in=in, load=load7, out=u7);</span><br><span class="line"></span><br><span class="line">    Mux8Way16(a=u0, b=u1, c=u2, d=u3, e=u4, f=u5, g=u6, h=u7, sel=address, out=out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="RAM64"><a href="#RAM64" class="headerlink" title="RAM64"></a>RAM64</h2><p>有了前面的思路后，RAM64 实际上就是 8 个 RAM8 堆叠在一起。<br>不过此时的地址需要用 6 位二进制数来表示，其中前 3 位用来表示是那一块 RAM8，后 3 位用来表示是这块 RAM8 上的哪一个 Register（实际上也就是总线宽度从 3 升级到了 6）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">CHIP RAM64 &#123;</span><br><span class="line">    IN in[16], load, address[6];</span><br><span class="line">    OUT out[16];</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    DMux8Way(in=load, sel=address[0..2], a=load0, b=load1, c=load2, d=load3, e=load4, f=load5, g=load6, h=load7);</span><br><span class="line"></span><br><span class="line">    RAM8(in=in, load=load0, address=address[3..5], out=u0);</span><br><span class="line">    RAM8(in=in, load=load1, address=address[3..5], out=u1);</span><br><span class="line">    RAM8(in=in, load=load2, address=address[3..5], out=u2);</span><br><span class="line">    RAM8(in=in, load=load3, address=address[3..5], out=u3);</span><br><span class="line">    RAM8(in=in, load=load4, address=address[3..5], out=u4);</span><br><span class="line">    RAM8(in=in, load=load5, address=address[3..5], out=u5);</span><br><span class="line">    RAM8(in=in, load=load6, address=address[3..5], out=u6);</span><br><span class="line">    RAM8(in=in, load=load7, address=address[3..5], out=u7);</span><br><span class="line"></span><br><span class="line">    Mux8Way16(a=u0, b=u1, c=u2, d=u3, e=u4, f=u5, g=u6, h=u7, sel=address[0..2], out=out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="RAM512"><a href="#RAM512" class="headerlink" title="RAM512"></a>RAM512</h2><p>同理，RAM512 实际上就是 8 个 RAM64 堆叠在一起。<br>对应的，现在需要 9 位二进制数来表示地址了，也就是总线宽度扩展到了 9。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">CHIP RAM512 &#123;</span><br><span class="line">    IN in[16], load, address[9];</span><br><span class="line">    OUT out[16];</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    DMux8Way(in=load, sel=address[0..2], a=load0, b=load1, c=load2, d=load3, e=load4, f=load5, g=load6, h=load7);</span><br><span class="line"></span><br><span class="line">    RAM64(in=in, load=load0, address=address[3..8], out=u0);</span><br><span class="line">    RAM64(in=in, load=load1, address=address[3..8], out=u1);</span><br><span class="line">    RAM64(in=in, load=load2, address=address[3..8], out=u2);</span><br><span class="line">    RAM64(in=in, load=load3, address=address[3..8], out=u3);</span><br><span class="line">    RAM64(in=in, load=load4, address=address[3..8], out=u4);</span><br><span class="line">    RAM64(in=in, load=load5, address=address[3..8], out=u5);</span><br><span class="line">    RAM64(in=in, load=load6, address=address[3..8], out=u6);</span><br><span class="line">    RAM64(in=in, load=load7, address=address[3..8], out=u7);</span><br><span class="line"></span><br><span class="line">    Mux8Way16(a=u0, b=u1, c=u2, d=u3, e=u4, f=u5, g=u6, h=u7, sel=address[0..2], out=out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="RAM4K"><a href="#RAM4K" class="headerlink" title="RAM4K"></a>RAM4K</h2><p>同理，RAM4k 实际上就是 8 个 RAM512 堆叠在一起。<br>对应的，现在需要 12 位二进制数来表示地址了，也就是总线宽度扩展到了 12。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">CHIP RAM4K &#123;</span><br><span class="line">    IN in[16], load, address[12];</span><br><span class="line">    OUT out[16];</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    DMux8Way(in=load, sel=address[0..2], a=load0, b=load1, c=load2, d=load3, e=load4, f=load5, g=load6, h=load7);</span><br><span class="line"></span><br><span class="line">    RAM512(in=in, load=load0, address=address[3..11], out=u0);</span><br><span class="line">    RAM512(in=in, load=load1, address=address[3..11], out=u1);</span><br><span class="line">    RAM512(in=in, load=load2, address=address[3..11], out=u2);</span><br><span class="line">    RAM512(in=in, load=load3, address=address[3..11], out=u3);</span><br><span class="line">    RAM512(in=in, load=load4, address=address[3..11], out=u4);</span><br><span class="line">    RAM512(in=in, load=load5, address=address[3..11], out=u5);</span><br><span class="line">    RAM512(in=in, load=load6, address=address[3..11], out=u6);</span><br><span class="line">    RAM512(in=in, load=load7, address=address[3..11], out=u7);</span><br><span class="line"></span><br><span class="line">    Mux8Way16(a=u0, b=u1, c=u2, d=u3, e=u4, f=u5, g=u6, h=u7, sel=address[0..2], out=out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="RAM16K"><a href="#RAM16K" class="headerlink" title="RAM16K"></a>RAM16K</h2><p>同理，RAM16k 实际上就是 4 个 RAM4K 堆叠在一起。<br>对应的，现在需要 14 位二进制数来表示地址了，也就是总线宽度扩展到了 14。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">CHIP RAM16K &#123;</span><br><span class="line">    IN in[16], load, address[14];</span><br><span class="line">    OUT out[16];</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    DMux4Way(in=load, sel=address[0..1], a=load0, b=load1, c=load2, d=load3);</span><br><span class="line"></span><br><span class="line">    RAM4K(in=in, load=load0, address=address[2..13], out=u0);</span><br><span class="line">    RAM4K(in=in, load=load1, address=address[2..13], out=u1);</span><br><span class="line">    RAM4K(in=in, load=load2, address=address[2..13], out=u2);</span><br><span class="line">    RAM4K(in=in, load=load3, address=address[2..13], out=u3);</span><br><span class="line"></span><br><span class="line">    Mux4Way16(a=u0, b=u1, c=u2, d=u3, sel=address[0..1], out=out);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="PC"><a href="#PC" class="headerlink" title="PC"></a>PC</h2><p>Program Counter，简称 PC，直译就是程序计数器。<br>这个小芯片真的想了很久都没有什么思路…<br>准确来讲，不是没有构造的思路，而是不知道怎么用 HDL 语言来描述。没办法，只好阅读一下别人写的代码了，结果发现，大家好像在这里都有点问题，hha~🤣。<br>回过头来，一开始不知道怎么写，只能翻老师给的资料，看看能不能找到点思路。没想到还整的找到了，就是书上第写的：</p>
+<blockquote>
+<p>Counter A w-bit counter consists of two main elements: a regular w-bit register, and<br>combinational logic. The combinational logic is designed to (a) compute the counting function, and (b) put the counter in the right operating mode, as mandated by the values of its three control bits. Tip: Most of this logic was already built in chapter 2.</p>
+</blockquote>
+<p>仔细看最后一行：<code>Tip: Most of this logic was already built in chapter 2.</code>，原来第二章就做过了。再仔细一想，在做 ALU 的时候面对的也是类似的问题，那时是通过 Mux 来挑选出来合适的值进行输出的，那么用到这里应该也是可以的。</p>
+<p>可是又该如何实现循环计数的功能呢？<br>回想一下循环的过程，即上一次的结果作为这一次的初始值。那么在 HDL 里面是不是也可以这样写呢？答案是可以的（总觉得这样写有语法错误😂）。<br>那么正常输出的值与循环递增的值又该如何保存呢？难道保存在一个 Register 里面？<br>然后又开始没有思路了，直到又看到了别人文章里面的：</p>
+<blockquote>
+<p>Multiple Outputs<br>Sometimes you need more than one sub-bus connected to the output of a chip-part. Simply add more than one out&#x3D; connection to the chip-part definition.<br>CHIP Foo { IN in[16]; OUT out[8]; PARTS: Not16 (in&#x3D;in, out[0..7]&#x3D;low8, out[8..15]&#x3D;high8); Something8 (a&#x3D;low8, b&#x3D;high8, out&#x3D;out); }<br>This also works if you want to use an output of a chip in further computations.<br>CHIP Foo { IN a, b, c; OUT out1, out2; PARTS: Something (a&#x3D;a, b&#x3D;b, out&#x3D;x, out&#x3D;out1); Whatever (a&#x3D;x, b&#x3D;c, out&#x3D;out2); }</p>
+</blockquote>
+<p>原来单独的某个芯片是可以有两个输出的（out）的…<br>最终，费了一番功夫后得到的通过代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CHIP PC &#123;</span><br><span class="line">    IN in[16],load,inc,reset;</span><br><span class="line">    OUT out[16];</span><br><span class="line"></span><br><span class="line">    PARTS:</span><br><span class="line">    Inc16(in=prevalue, out=u1);</span><br><span class="line">    Mux16(a=prevalue, b=u1, sel=inc, out=u2);</span><br><span class="line">    Mux16(a=u2, b=in, sel=load, out=u3);</span><br><span class="line">    Mux16(a=u3, b=false, sel=reset, out=u4);</span><br><span class="line">    Register(in=u4, load=true, out=out, out=prevalue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Unit-3-6-Perspective"><a href="#Unit-3-6-Perspective" class="headerlink" title="Unit 3.6 Perspective"></a>Unit 3.6 Perspective</h1><p>这周的问题：</p>
+<ol>
+<li>这周用 DFF 构建了其他的芯片，把 DFF 当作了拥有某种功能的黑盒子，那么它实际上是怎么构成的呢？</li>
+</ol>
+<ul>
+<li>大胡子老师解释说这不是我们这门课要教的内容（笑死😂），因为通过构造其他的芯片就可以学习到组合逻辑电路与时序逻辑电路的差别，所以要把重点放在构造其他的芯片上。不过，大胡子老师还是回答了这个问题，用两个 NAND 构造了一个 DFF。另外，NAND 也不是唯一用来构建内存系统的基础理论。</li>
+</ul>
+<ol start="2">
+<li>电脑只使用 RAM 作为内存设备吗？</li>
+</ol>
+<ul>
+<li>显然不是，还有 ROM、Flash Memory 和 Cache Memory。ROM 全称 Read Only Memory，是一种断电后也不会损失信息的存储设备（比如硬盘）；而 Flash Memory 则是介于 RAM 和 ROM 之间的存储设备，它的速度快于 ROM，慢于 RAM，但它的容量大于 RAM，小于 ROM，算是存储速度和空间的折中产物（比如 Mac 的闪存，手机的闪存）；最后是 Cache Memory，这个东西就是 CPU 的缓存。</li>
+</ul>
+<p>这周的难点跟上周类似，用“电子语言”来构造循环、条件等复杂逻辑是真的难。第一个想到这些想法的人，真的是神来之笔，创造性太强了，估计这些发明家当时也没有想到曾经的逻辑电路能演变成现在的电脑吧。</p>
+<hr>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>bachzart
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://bachzart.github.io/2020/09/28/Nand2Tetris-Part1-03/" title="Nand2Tetris_Part1_03">http://bachzart.github.io/2020/09/28/Nand2Tetris-Part1-03/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Nand2Tetris/" rel="tag"># Nand2Tetris</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/26/%E6%89%92%E8%B0%B1%E8%AE%B0%E5%BD%95-Homesteaders/" rel="prev" title="扒谱记录 - Homesteaders">
+      <i class="fa fa-chevron-left"></i> 扒谱记录 - Homesteaders
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/09/07/%E6%96%99%E7%90%86%E9%9A%8F%E8%AE%B0/" rel="next" title="料理随记">
+      料理随记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Unit-3-1-Sequential-Logic"><span class="nav-number">1.</span> <span class="nav-text">Unit 3.1 Sequential Logic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unit-3-2-Filp-Flops"><span class="nav-number">2.</span> <span class="nav-text">Unit 3.2 Filp Flops</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unit-3-3-Memory-Units"><span class="nav-number">3.</span> <span class="nav-text">Unit 3.3 Memory Units</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unit-3-4-Counters"><span class="nav-number">4.</span> <span class="nav-text">Unit 3.4 Counters</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unit-3-5-Project-3-Overview"><span class="nav-number">5.</span> <span class="nav-text">Unit 3.5 Project 3 Overview</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bit"><span class="nav-number">5.1.</span> <span class="nav-text">Bit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Register"><span class="nav-number">5.2.</span> <span class="nav-text">Register</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RAM8"><span class="nav-number">5.3.</span> <span class="nav-text">RAM8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RAM64"><span class="nav-number">5.4.</span> <span class="nav-text">RAM64</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RAM512"><span class="nav-number">5.5.</span> <span class="nav-text">RAM512</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RAM4K"><span class="nav-number">5.6.</span> <span class="nav-text">RAM4K</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RAM16K"><span class="nav-number">5.7.</span> <span class="nav-text">RAM16K</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PC"><span class="nav-number">5.8.</span> <span class="nav-text">PC</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unit-3-6-Perspective"><span class="nav-number">6.</span> <span class="nav-text">Unit 3.6 Perspective</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bachzart"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">bachzart</p>
+  <div class="site-description" itemprop="description">我即世界，世界即我</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bachzart" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bachzart" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bachzart@163.com" title="E-Mail → mailto:bachzart@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="/about/" title="&#x2F;about&#x2F;">About This Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/Book-List/" title="&#x2F;Book-List&#x2F;">Book List</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.sudoku.name/index.php?ln=cn&ref=44355" title="https:&#x2F;&#x2F;www.sudoku.name&#x2F;index.php?ln&#x3D;cn&amp;ref&#x3D;44355" rel="noopener" target="_blank">Soduku Game</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://2048game.com/" title="https:&#x2F;&#x2F;2048game.com&#x2F;" rel="noopener" target="_blank">2048 Game</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bachzart</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

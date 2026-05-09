@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/acoustic_guitar_128px.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/acoustic_guitar_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/acoustic_guitar_16px.png">
+  <link rel="mask-icon" href="/uploads/acoustic_guitar.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https:/fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bachzart.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="有几天没有更新了，来点轻松的内容~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="有关 pthread 的一些笔记">
+<meta property="og:url" content="http://bachzart.github.io/2025/07/22/%E6%9C%89%E5%85%B3-pthread-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="bachzart&#39;s Blog">
+<meta property="og:description" content="有几天没有更新了，来点轻松的内容~">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-22T13:51:59.000Z">
+<meta property="article:modified_time" content="2026-05-09T09:26:52.799Z">
+<meta property="article:author" content="bachzart">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="pthread">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://bachzart.github.io/2025/07/22/%E6%9C%89%E5%85%B3-pthread-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>有关 pthread 的一些笔记 | bachzart's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">bachzart's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">133</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">65</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/bachzart" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://bachzart.github.io/2025/07/22/%E6%9C%89%E5%85%B3-pthread-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.png">
+      <meta itemprop="name" content="bachzart">
+      <meta itemprop="description" content="我即世界，世界即我">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bachzart's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          有关 pthread 的一些笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2025-07-22 21:51:59" itemprop="dateCreated datePublished" datetime="2025-07-22T21:51:59+08:00">2025-07-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2026-05-09 17:26:52" itemprop="dateModified" datetime="2026-05-09T17:26:52+08:00">2026-05-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>有几天没有更新了，来点轻松的内容~</p>
+<span id="more"></span>
+
+<blockquote>
+<p>本篇文章是自己原来记录的笔记，关于 Linux 原生线程库 pthread 的一些用法。当初，记得比较零散，现在整理一下。</p>
+</blockquote>
+<h1 id="intro"><a href="#intro" class="headerlink" title="intro"></a>intro</h1><p>pthread（也叫做 POSIX 线程）库是 Linux 中最常用的原生线程库，各大 Linux 发行版基本都默认安装了该库，并且 pthread 的 API 是基于 C 语言来设计的，所以在 Linux 下 C&#x2F;C++ 的工程中使用起来十分方便，现在有很多项目也仍然在使用 pthread。<br>不过，C++ 从 C++11 开始有了自己的跨平台线程库 thread（之前好像用的是 boost？C++ 的线程库估计选择很多），若是支持 C++11 及以上的工程，还是推荐使用 C++ 自带的线程库；C 语言从 C11 开始也有了自己的跨平台线程库 threads.h，但据说好像各大编译器支持的不是很好？</p>
+<p>好了，闲话少说，直入主题吧。</p>
+<h1 id="thread"><a href="#thread" class="headerlink" title="thread"></a>thread</h1><p>首先从线程开始，<code>pthread_t</code>是线程类型标识符，使用时需要在源代码文件中引入头文件<code>pthread.h</code>，同时在编译时需要加上链接库<code>-lpthread</code>。<br>比如，源代码文件：</p>
+<figure class="highlight c"><figcaption><span>test.c</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 创建线程标识符 t</span></span><br><span class="line">    <span class="type">pthread_t</span> t;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译时：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gcc test.c -o -pthread <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<p>下面，我们再来看看相关的 API。</p>
+<div class="note info">
+            <p><strong>使用下列 API 需要引入头文件<code>pthread.h</code>。</strong></p>
+          </div>
+
+<h2 id="pthread-create："><a href="#pthread-create：" class="headerlink" title="pthread_create："></a>pthread_create：</h2><p>功能：创建新线程。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_create</span><span class="params">(<span class="type">pthread_t</span> *thread, <span class="type">const</span> <span class="type">pthread_attr_t</span> *attr, </span></span><br><span class="line"><span class="params">                   <span class="type">void</span> *(*callback)(<span class="type">void</span> *), <span class="type">void</span> *arg)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>thread</code>：用于接收新线程的 id，通过<code>pthread_t</code>创建（注意这里是个指针）。<br><code>attr</code>：线程属性，默认为<code>NULL</code>。<br><code>callback</code>：回调函数，由线程来执行。<br><code>arg</code>：传给回调函数的参数，也可以为<code>NULL</code>。</p>
+<h2 id="pthread-exit"><a href="#pthread-exit" class="headerlink" title="pthread_exit"></a>pthread_exit</h2><p>功能：终止当前线程。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">pthread_exit</span><span class="params">(<span class="type">void</span> *retval)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>retval</code>：线程退出时的返回值，可由<code>pthread_join</code>捕获。</p>
+<h2 id="pthread-join"><a href="#pthread-join" class="headerlink" title="pthread_join"></a>pthread_join</h2><p>功能：阻塞主线程等待目标线程结束并回收资源。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_join</span><span class="params">(<span class="type">pthread_t</span> thread, <span class="type">void</span> **retval)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>thread</code>：目标线程。<br><code>retval</code>：线程退出时的返回值的指针。</p>
+<h2 id="pthread-detach"><a href="#pthread-detach" class="headerlink" title="pthread_detach"></a>pthread_detach</h2><p>功能：分离线程（线程终止时自动回收资源）。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_detach</span><span class="params">(<span class="type">pthread_t</span> thread)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>thread</code>：目标线程。</p>
+<h2 id="pthread-cancel"><a href="#pthread-cancel" class="headerlink" title="pthread_cancel"></a>pthread_cancel</h2><p>功能：取消指定线程。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_cancel</span><span class="params">(<span class="type">pthread_t</span> thread)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>thread</code>：目标线程。</p>
+<h2 id="pthread-equal"><a href="#pthread-equal" class="headerlink" title="pthread_equal"></a>pthread_equal</h2><p>功能：比较两个线程ID是否相同。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_equal</span><span class="params">(<span class="type">pthread_t</span> t1, <span class="type">pthread_t</span> t2)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>t1</code>：线程 1.<br><code>t2</code>：线程 2。</p>
+<h1 id="mutex"><a href="#mutex" class="headerlink" title="mutex"></a>mutex</h1><p>接着介绍互斥锁，<code>pthread_mutex_t</code>是互斥锁类型标识符，使用时需要在源代码文件中引入头文件<code>pthread.h</code>，同时在编译时需要加上链接库<code>-lpthread</code>，创建方法与<code>pthread_t</code>类似，不再赘述。</p>
+<div class="note info">
+            <p><strong>使用下列 API 需要引入头文件<code>pthread.h</code>。</strong></p>
+          </div>
+
+<h2 id="pthread-mutex-init"><a href="#pthread-mutex-init" class="headerlink" title="pthread_mutex_init"></a>pthread_mutex_init</h2><p>功能：初始化互斥锁。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_mutex_init</span><span class="params">(<span class="type">pthread_mutex_t</span> *mutex, <span class="type">const</span> <span class="type">pthread_mutexattr_t</span> *attr)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>mutex</code>：互斥锁变量的指针，用于接收新创建的互斥锁 id。<br><code>attr</code>：互斥锁属性，默认为<code>NULL</code>。</p>
+<h2 id="pthread-mutex-destroy"><a href="#pthread-mutex-destroy" class="headerlink" title="pthread_mutex_destroy"></a>pthread_mutex_destroy</h2><p>功能：销毁互斥锁。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_mutex_destroy</span><span class="params">(<span class="type">pthread_mutex_t</span> *mutex)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>mutex</code>：目标互斥锁变量的指针。</p>
+<h2 id="pthread-mutex-lock"><a href="#pthread-mutex-lock" class="headerlink" title="pthread_mutex_lock"></a>pthread_mutex_lock</h2><p>功能：加锁（阻塞直到获得锁）。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_mutex_lock</span><span class="params">(<span class="type">pthread_mutex_t</span> *mutex)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>mutex</code>：目标互斥锁变量的指针。</p>
+<h2 id="pthread-mutex-unlock"><a href="#pthread-mutex-unlock" class="headerlink" title="pthread_mutex_unlock"></a>pthread_mutex_unlock</h2><p>功能：解锁<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_mutex_unlock</span><span class="params">(<span class="type">pthread_mutex_t</span> *mutex)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>mutex</code>：目标互斥锁变量的指针。</p>
+<h2 id="pthread-mutex-trylock"><a href="#pthread-mutex-trylock" class="headerlink" title="pthread_mutex_trylock"></a>pthread_mutex_trylock</h2><p>功能：尝试加锁（非阻塞，失败返回错误码）。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_mutex_trylock</span><span class="params">(<span class="type">pthread_mutex_t</span> *mutex)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>mutex</code>：目标互斥锁变量的指针。</p>
+<h1 id="rwlock"><a href="#rwlock" class="headerlink" title="rwlock"></a>rwlock</h1><p>然后是读写锁，<code>pthread_rwlock_t</code>是读写锁类型标识符，使用时需要在源代码文件中引入头文件<code>pthread.h</code>，同时在编译时需要加上链接库<code>-lpthread</code>，创建方法与<code>pthread_t</code>类似，不再赘述。</p>
+<div class="note info">
+            <p><strong>使用下列 API 需要引入头文件<code>pthread.h</code>。</strong></p>
+          </div>
+
+<h2 id="pthread-rwlock-init"><a href="#pthread-rwlock-init" class="headerlink" title="pthread_rwlock_init"></a>pthread_rwlock_init</h2><p>功能：初始化读写锁。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_rwlock_init</span><span class="params">(<span class="type">pthread_rwlock_t</span> *rwlock, <span class="type">const</span> <span class="type">pthread_rwlockattr_t</span> *attr)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>rwlock</code>：读写锁变量的指针，用于接收新创建的读写锁 id。<br><code>attr</code>：读写锁属性，默认为<code>NULL</code>。</p>
+<h2 id="pthread-rwlock-destroy"><a href="#pthread-rwlock-destroy" class="headerlink" title="pthread_rwlock_destroy"></a>pthread_rwlock_destroy</h2><p>功能：销毁读写锁。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_rwlock_destroy</span><span class="params">(<span class="type">pthread_rwlock_t</span> *rwlock)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>rwlock</code>：目标读写锁变量的指针。</p>
+<h2 id="pthread-rwlock-rdlock"><a href="#pthread-rwlock-rdlock" class="headerlink" title="pthread_rwlock_rdlock"></a>pthread_rwlock_rdlock</h2><p>功能：读模式加锁。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_rwlock_rdlock</span><span class="params">(<span class="type">pthread_rwlock_t</span> *rwlock)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>rwlock</code>：目标读写锁变量的指针。</p>
+<h2 id="pthread-rwlock-wrlock"><a href="#pthread-rwlock-wrlock" class="headerlink" title="pthread_rwlock_wrlock"></a>pthread_rwlock_wrlock</h2><p>功能：写模式加锁。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_rwlock_wrlock</span><span class="params">(<span class="type">pthread_rwlock_t</span> *rwlock)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>rwlock</code>：目标读写锁变量的指针。</p>
+<h2 id="pthread-rwlock-unlock"><a href="#pthread-rwlock-unlock" class="headerlink" title="pthread_rwlock_unlock"></a>pthread_rwlock_unlock</h2><p>功能：解锁。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_rwlock_unlock</span><span class="params">(<span class="type">pthread_rwlock_t</span> *rwlock)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>rwlock</code>：目标读写锁变量的指针。</p>
+<h2 id="pthread-rwlock-tryrdlock"><a href="#pthread-rwlock-tryrdlock" class="headerlink" title="pthread_rwlock_tryrdlock"></a>pthread_rwlock_tryrdlock</h2><p>功能：尝试读模式加锁（非阻塞）。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_rwlock_tryrdlock</span><span class="params">(<span class="type">pthread_rwlock_t</span> *rwlock)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>rwlock</code>：目标读写锁变量的指针。</p>
+<h2 id="pthread-rwlock-trywrlock"><a href="#pthread-rwlock-trywrlock" class="headerlink" title="pthread_rwlock_trywrlock"></a>pthread_rwlock_trywrlock</h2><p>功能：尝试写模式加锁（非阻塞）。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_rwlock_trywrlock</span><span class="params">(<span class="type">pthread_rwlock_t</span> *rwlock)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>rwlock</code>：目标读写锁变量的指针。</p>
+<h1 id="condition-variable"><a href="#condition-variable" class="headerlink" title="condition variable"></a>condition variable</h1><p>然后就是条件变量，<code>pthread_cond_t</code>是条件变量类型标识符，使用时需要在源代码文件中引入头文件<code>pthread.h</code>，同时在编译时需要加上链接库<code>-lpthread</code>，创建方法与<code>pthread_t</code>类似，不再赘述。</p>
+<div class="note info">
+            <p><strong>使用下列 API 需要引入头文件<code>pthread.h</code>。</strong></p>
+          </div>
+
+<h2 id="pthread-cond-init"><a href="#pthread-cond-init" class="headerlink" title="pthread_cond_init"></a>pthread_cond_init</h2><p>功能：初始化条件变量。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_cond_init</span><span class="params">(<span class="type">pthread_cond_t</span> *cond, <span class="type">const</span> <span class="type">pthread_condattr_t</span> *attr)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>rwlock</code>：条件变量的指针，用于接收新创建的条件变量。<br><code>attr</code>：条件变量属性，默认为<code>NULL</code>。</p>
+<h2 id="pthread-cond-destroy"><a href="#pthread-cond-destroy" class="headerlink" title="pthread_cond_destroy"></a>pthread_cond_destroy</h2><p>功能：销毁条件变量。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_cond_destroy</span><span class="params">(<span class="type">pthread_cond_t</span> *cond)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>cond</code>：目标条件变量的指针。</p>
+<h2 id="pthread-cond-wait"><a href="#pthread-cond-wait" class="headerlink" title="pthread_cond_wait"></a>pthread_cond_wait</h2><p>功能：阻塞等待条件成立（需与互斥锁配合）。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_cond_wait</span><span class="params">(<span class="type">pthread_cond_t</span> *cond, <span class="type">pthread_mutex_t</span> *mutex)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>cond</code>：目标条件变量的指针。<br><code>mutex</code>：目标互斥锁的指针。</p>
+<h2 id="pthread-cond-timedwait"><a href="#pthread-cond-timedwait" class="headerlink" title="pthread_cond_timedwait"></a>pthread_cond_timedwait</h2><p>功能：限时等待条件成立。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_cond_timedwait</span><span class="params">(<span class="type">pthread_cond_t</span> *cond, <span class="type">pthread_mutex_t</span> *mutex, </span></span><br><span class="line"><span class="params">                          <span class="type">const</span> <span class="keyword">struct</span> timespec *abstime)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>cond</code>：目标条件变量的指针。<br><code>mutex</code>：目标互斥锁的指针。<br><code>abstime</code>：绝对时间戳，从 1970-1-1 开始计算。</p>
+<h2 id="pthread-cond-signal"><a href="#pthread-cond-signal" class="headerlink" title="pthread_cond_signal"></a>pthread_cond_signal</h2><p>功能：唤醒至少一个等待线程。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_cond_signal</span><span class="params">(<span class="type">pthread_cond_t</span> *cond)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>cond</code>：目标条件变量的指针。</p>
+<h2 id="pthread-cond-broadcast"><a href="#pthread-cond-broadcast" class="headerlink" title="pthread_cond_broadcast"></a>pthread_cond_broadcast</h2><p>功能：唤醒所有等待线程。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_cond_broadcast</span><span class="params">(<span class="type">pthread_cond_t</span> *cond)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>cond</code>：目标条件变量的指针。</p>
+<h1 id="semaphore"><a href="#semaphore" class="headerlink" title="semaphore"></a>semaphore</h1><p>最后是信号量，<code>sem_t</code>是信号量类型标识符，使用时需要在源代码文件中引入头文件<code>semaphore.h</code>，一般配合线程使用，创建方法与<code>pthread_t</code>类似，不再赘述。</p>
+<div class="note info">
+            <p><strong>使用下列 API 需要引入头文件<code>semaphore.h</code>。</strong></p>
+          </div>
+
+<h2 id="sem-init"><a href="#sem-init" class="headerlink" title="sem_init"></a>sem_init</h2><p>功能：初始化信号量。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">sem_init</span><span class="params">(<span class="type">sem_t</span> *sem, <span class="type">int</span> pshared, <span class="type">unsigned</span> <span class="type">int</span> value)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>sem</code>：信号量的指针，用于接收新创建的信号量。<br><code>pshared</code>：0 为进程内线程共享，非 0 为进程间共享。<br><code>value</code>：信号量的初始值。</p>
+<h2 id="sem-destroy"><a href="#sem-destroy" class="headerlink" title="sem_destroy"></a>sem_destroy</h2><p>功能：销毁信号量。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">sem_destroy</span><span class="params">(<span class="type">sem_t</span> *sem)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>sem</code>：目标信号量的指针。</p>
+<h2 id="sem-wait"><a href="#sem-wait" class="headerlink" title="sem_wait"></a>sem_wait</h2><p>功能：资源减 1（资源为 0 时阻塞）。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">sem_wait</span><span class="params">(<span class="type">sem_t</span> *sem)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>sem</code>：目标信号量的指针。</p>
+<h2 id="sem-trywait"><a href="#sem-trywait" class="headerlink" title="sem_trywait"></a>sem_trywait</h2><p>功能：信号量资源数尝试减 1（资源为 0 时直接返回）。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">sem_trywait</span><span class="params">(<span class="type">sem_t</span> *sem)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>sem</code>：目标信号量的指针。</p>
+<h2 id="sem-post"><a href="#sem-post" class="headerlink" title="sem_post"></a>sem_post</h2><p>功能：信号量资源加 1（唤醒等待线程）。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">sem_post</span><span class="params">(<span class="type">sem_t</span> *sem)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>sem</code>：目标信号量的指针。</p>
+<h2 id="sem-getvalue"><a href="#sem-getvalue" class="headerlink" title="sem_getvalue"></a>sem_getvalue</h2><p>功能：获取当前资源数量。<br>函数原型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">sem_getvalue</span><span class="params">(<span class="type">sem_t</span> *sem, <span class="type">int</span> *sval)</span>;</span><br></pre></td></tr></table></figure>
+<p><code>sem</code>：目标信号量的指针。<br><code>sval</code>：信号量资源个数的指针。</p>
+<h1 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h1><p>没什么营养的一篇流水文章，也没什么好说的，忘记了就回来看一看。</p>
+<hr>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>bachzart
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://bachzart.github.io/2025/07/22/%E6%9C%89%E5%85%B3-pthread-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AC%94%E8%AE%B0/" title="有关 pthread 的一些笔记">http://bachzart.github.io/2025/07/22/有关-pthread-的一些笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C-C/" rel="tag"># C/C++</a>
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/pthread/" rel="tag"># pthread</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/07/14/%E7%90%86%E8%A7%A3%E5%AE%8C%E7%BE%8E%E8%BD%AC%E5%8F%91/" rel="prev" title="理解完美转发">
+      <i class="fa fa-chevron-left"></i> 理解完美转发
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/07/28/%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC%E7%AC%94%E8%AE%B0/" rel="next" title="函数模板类型推导笔记">
+      函数模板类型推导笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#intro"><span class="nav-number">1.</span> <span class="nav-text">intro</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#thread"><span class="nav-number">2.</span> <span class="nav-text">thread</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-create%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">pthread_create：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-exit"><span class="nav-number">2.2.</span> <span class="nav-text">pthread_exit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-join"><span class="nav-number">2.3.</span> <span class="nav-text">pthread_join</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-detach"><span class="nav-number">2.4.</span> <span class="nav-text">pthread_detach</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-cancel"><span class="nav-number">2.5.</span> <span class="nav-text">pthread_cancel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-equal"><span class="nav-number">2.6.</span> <span class="nav-text">pthread_equal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mutex"><span class="nav-number">3.</span> <span class="nav-text">mutex</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-mutex-init"><span class="nav-number">3.1.</span> <span class="nav-text">pthread_mutex_init</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-mutex-destroy"><span class="nav-number">3.2.</span> <span class="nav-text">pthread_mutex_destroy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-mutex-lock"><span class="nav-number">3.3.</span> <span class="nav-text">pthread_mutex_lock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-mutex-unlock"><span class="nav-number">3.4.</span> <span class="nav-text">pthread_mutex_unlock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-mutex-trylock"><span class="nav-number">3.5.</span> <span class="nav-text">pthread_mutex_trylock</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#rwlock"><span class="nav-number">4.</span> <span class="nav-text">rwlock</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-rwlock-init"><span class="nav-number">4.1.</span> <span class="nav-text">pthread_rwlock_init</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-rwlock-destroy"><span class="nav-number">4.2.</span> <span class="nav-text">pthread_rwlock_destroy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-rwlock-rdlock"><span class="nav-number">4.3.</span> <span class="nav-text">pthread_rwlock_rdlock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-rwlock-wrlock"><span class="nav-number">4.4.</span> <span class="nav-text">pthread_rwlock_wrlock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-rwlock-unlock"><span class="nav-number">4.5.</span> <span class="nav-text">pthread_rwlock_unlock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-rwlock-tryrdlock"><span class="nav-number">4.6.</span> <span class="nav-text">pthread_rwlock_tryrdlock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-rwlock-trywrlock"><span class="nav-number">4.7.</span> <span class="nav-text">pthread_rwlock_trywrlock</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#condition-variable"><span class="nav-number">5.</span> <span class="nav-text">condition variable</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-cond-init"><span class="nav-number">5.1.</span> <span class="nav-text">pthread_cond_init</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-cond-destroy"><span class="nav-number">5.2.</span> <span class="nav-text">pthread_cond_destroy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-cond-wait"><span class="nav-number">5.3.</span> <span class="nav-text">pthread_cond_wait</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-cond-timedwait"><span class="nav-number">5.4.</span> <span class="nav-text">pthread_cond_timedwait</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-cond-signal"><span class="nav-number">5.5.</span> <span class="nav-text">pthread_cond_signal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread-cond-broadcast"><span class="nav-number">5.6.</span> <span class="nav-text">pthread_cond_broadcast</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#semaphore"><span class="nav-number">6.</span> <span class="nav-text">semaphore</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sem-init"><span class="nav-number">6.1.</span> <span class="nav-text">sem_init</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sem-destroy"><span class="nav-number">6.2.</span> <span class="nav-text">sem_destroy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sem-wait"><span class="nav-number">6.3.</span> <span class="nav-text">sem_wait</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sem-trywait"><span class="nav-number">6.4.</span> <span class="nav-text">sem_trywait</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sem-post"><span class="nav-number">6.5.</span> <span class="nav-text">sem_post</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sem-getvalue"><span class="nav-number">6.6.</span> <span class="nav-text">sem_getvalue</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#summary"><span class="nav-number">7.</span> <span class="nav-text">summary</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="bachzart"
+      src="/uploads/avatar.png">
+  <p class="site-author-name" itemprop="name">bachzart</p>
+  <div class="site-description" itemprop="description">我即世界，世界即我</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/bachzart" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;bachzart" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:bachzart@163.com" title="E-Mail → mailto:bachzart@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="/about/" title="&#x2F;about&#x2F;">About This Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/Book-List/" title="&#x2F;Book-List&#x2F;">Book List</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.sudoku.name/index.php?ln=cn&ref=44355" title="https:&#x2F;&#x2F;www.sudoku.name&#x2F;index.php?ln&#x3D;cn&amp;ref&#x3D;44355" rel="noopener" target="_blank">Soduku Game</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://2048game.com/" title="https:&#x2F;&#x2F;2048game.com&#x2F;" rel="noopener" target="_blank">2048 Game</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bachzart</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
